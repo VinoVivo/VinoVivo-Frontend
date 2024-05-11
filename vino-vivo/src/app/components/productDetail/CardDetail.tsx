@@ -22,7 +22,7 @@ interface WineProps {
 export default function CardDetail() {
 
     return (            
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-center mb-10 mt-40">
             <Card className="flex flex-row items-center w-full max-w-4xl px-6 py-4">
                 <CardContent className="w-1/2 flex justify-center items-center">
                     <Image src="/vino1.jpg" alt={"vino rivero gonzalez"} width='300' height='100' />
