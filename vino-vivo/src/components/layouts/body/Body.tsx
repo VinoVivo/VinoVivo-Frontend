@@ -1,5 +1,7 @@
 'use client'
-import Carousel from "../../Carousel";
+
+import Carousel from "@/components/carrousel/Carrousel";
+
 
 const Body = () => {
 
@@ -24,7 +26,7 @@ const Body = () => {
                     <p className="text-sm text-black">Tipo de Vino</p>
                     <p className="text-lg font-semibold text-black mt-2">$10.000</p>
                 </div>
-                <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
+                <button className="bg-gray-800 hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
             </div>
         ));
     };
