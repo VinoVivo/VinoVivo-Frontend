@@ -1,6 +1,6 @@
 'use client'
 
-import Carousel from "@/components/Carrousel/Carrousel";
+import Carousel from "@/components/carrousel/Carrousel";
 
 
 const Body = () => {
