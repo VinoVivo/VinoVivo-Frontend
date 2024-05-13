@@ -16,17 +16,19 @@ const Body = () => {
 
     const generateCards = (wines: string[]) => {
         return wines.map((wine, index) => (
-            <div key={index} className="m-4 bg-white rounded-lg border border-gray-200 p-6 w-64">
+            <div key={index} className="m-4 bg-violeta-foreground
+             rounded-lg border border-gray-200 p-6 w-64">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#5c284e" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                 </svg>
                 <img src={wine} alt={"Producto " + (index + 1)} className="transform transition-transform duration-300 hover:cursor-pointer" />
                 <div className="flex flex-col items-center mt-2">
-                    <p className="text-md font-bold text-black">Nombre del Vino</p>
-                    <p className="text-sm text-black">Tipo de Vino</p>
-                    <p className="text-lg font-semibold text-black mt-2">$10.000</p>
+                    <p className="text-md font-bold text-foreground">Nombre del Vino</p>
+                    <p className="text-sm text-foreground">Tipo de Vino</p>
+                    <p className="text-lg font-semibold text-foreground mt-2">$10.000</p>
                 </div>
-                <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
+                <button className="bg-violeta hover:bg-fuchsia-950 text-violeta-foreground
+                 font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
             </div>
         ));
     };
@@ -43,11 +45,12 @@ const Body = () => {
                 </div>
             </div>
 
-            <p className="text-fuchsia-900 text-center text-2xl font-semibold">NUESTRA PROPUESTA</p>
+            <p className="text-violeta text-center text-2xl font-semibold">NUESTRA PROPUESTA</p>
 
             <div className="flex flex-wrap justify-center mt-4 space-x-16">
                 {/* Card 1 */}
-                <div className="m-4 bg-white rounded-lg border border-gray-200 p-6 w-64">
+                <div className="m-4 bg-card
+                 rounded-lg border border-gray-200 p-6 w-64">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5c284e" className="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
@@ -55,14 +58,16 @@ const Body = () => {
                     </button>
                     <img src="/vino1.jpg" alt="Producto 1" className="transform transition-transform duration-300 hover:cursor-pointer" />
                     <div className="flex flex-col items-center mt-2">
-                        <p className="text-md font-bold text-black">Saint Felicien</p>
-                        <p className="text-sm text-black">Malbec</p>
-                        <p className="text-lg font-semibold text-black mt-2">$11.300</p>
+                        <p className="text-md font-bold text-foreground">Saint Felicien</p>
+                        <p className="text-sm text-foreground">Malbec</p>
+                        <p className="text-lg font-semibold text-foreground mt-2">$11.300</p>
                     </div>
-                    <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
+                    <button className="bg-violeta hover:bg-fuchsia-950 text-violeta-foreground
+                     font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
                 </div>
                 {/* Card 2 */}
-                <div className="m-4 bg-white rounded-lg border border-gray-200 p-6 w-64">
+                <div className="m-4 bg-card
+                 rounded-lg border border-gray-200 p-6 w-64">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5c284e" className="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
@@ -70,14 +75,16 @@ const Body = () => {
                     </button>
                     <div className="flex flex-col items-center mt-2">
                         <img src="/vino2.jpg" alt="Producto 1" className="transform transition-transform duration-300 hover:cursor-pointer" />
-                        <p className="text-md font-bold text-black">Catalpa</p>
-                        <p className="text-sm text-black">Blend</p>
-                        <p className="text-lg font-semibold text-black mt-2">$13.650</p>
+                        <p className="text-md font-bold text-foreground">Catalpa</p>
+                        <p className="text-sm text-foreground">Blend</p>
+                        <p className="text-lg font-semibold text-foreground mt-2">$13.650</p>
                     </div>
-                    <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
+                    <button className="bg-violeta hover:bg-fuchsia-950 text-violeta-foreground
+                     font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
                 </div>
                 {/* Card 3 */}
-                <div className="m-4 bg-white rounded-lg border border-gray-200 p-6 w-64">
+                <div className="m-4 bg-card
+                 rounded-lg border border-gray-200 p-6 w-64">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5c284e" className="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
@@ -85,14 +92,16 @@ const Body = () => {
                     </button>
                     <img src="/vino3.jpg" alt="Producto 1" className="transform transition-transform duration-300 hover:cursor-pointer" />
                     <div className="flex flex-col items-center mt-2">
-                        <p className="text-md font-bold text-black">Marraso</p>
-                        <p className="text-sm text-black">Blend</p>
-                        <p className="text-lg font-semibold text-black mt-2">$15.600</p>
+                        <p className="text-md font-bold text-foreground">Marraso</p>
+                        <p className="text-sm text-foreground">Blend</p>
+                        <p className="text-lg font-semibold text-foreground mt-2">$15.600</p>
                     </div>
-                    <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
+                    <button className="bg-violeta hover:bg-fuchsia-950 text-violeta-foreground
+                     font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
                 </div>
                 {/* Card 4 */}
-                <div className="m-4 bg-white rounded-lg border border-gray-200 p-6 w-64">
+                <div className="m-4 bg-card
+                 rounded-lg border border-gray-200 p-6 w-64">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5c284e" className="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
@@ -100,16 +109,18 @@ const Body = () => {
                     </button>
                     <img src="/vino4.jpg" alt="Producto 1" className="transform transition-transform duration-300 hover:cursor-pointer" />
                     <div className="flex flex-col items-center mt-2">
-                        <p className="text-md font-bold text-black">Gran Enemigo</p>
-                        <p className="text-sm text-black">Cabernet Franc</p>
-                        <p className="text-lg font-semibold text-black mt-2">$37.740</p>
+                        <p className="text-md font-bold text-foreground">Gran Enemigo</p>
+                        <p className="text-sm text-foreground">Cabernet Franc</p>
+                        <p className="text-lg font-semibold text-foreground mt-2">$37.740</p>
                     </div>
-                    <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
+                    <button className="bg-violeta hover:bg-fuchsia-950 text-violeta-foreground
+                     font-bold mt-6 py-1.5 px-4 rounded w-full">COMPRAR</button>
                 </div>
             </div>
 
             <div className="flex justify-center mb-5">
-                <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded">MÁS PRODUCTOS</button>
+                <button className="bg-violeta hover:bg-fuchsia-950 text-violeta-foreground
+                 font-bold mt-6 py-1.5 px-4 rounded">MÁS PRODUCTOS</button>
             </div>
         </main>
     );

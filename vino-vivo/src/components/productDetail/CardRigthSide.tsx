@@ -26,8 +26,8 @@ export default function CardRigthSide() {
                     {/* <p className="text-sm">{wine.stock ? 'Disponible' : 'Agotado'}</p> */}
                     <p className="text-sm"><span className="font-bold">Stock: </span>Disponible</p>
                     <div className="flex flex-row justify-evenly mt-4">
-                        <Button> <Link href={"/"}>Comprar</Link></Button>
-                        <Button><Link href={"/"}>Agregar al carrito</Link> </Button>
+                        <Button  className="bg-violeta hover:bg-fuchsia-950"> <Link href={"/"}>Comprar</Link></Button>
+                        <Button className="bg-violeta hover:bg-fuchsia-950"><Link href={"/"}>Agregar al carrito</Link> </Button>
                     </div>
                 </CardContent>
     )
