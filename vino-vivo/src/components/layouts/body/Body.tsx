@@ -48,13 +48,17 @@ const Body = () => {
             });
     }, []);
     if (loading) {
-        return <div>Cargando...</div>;
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="loader"></div>
+            </div>
+        );
     }
 
     return (
         <main className="mt-40">
 
-            <div className="border-b border-gray-999 mb-5">
+            <div className="border-b border-[#E1E1E1] mb-5">
                 <div className="flex items-center justify-center space-x-10">
                     <Carousel images={images} />
                     <Carousel images={images2} />
@@ -66,17 +70,17 @@ const Body = () => {
 
             <p className="text-fuchsia-900 text-center text-2xl font-semibold">NUESTRA PROPUESTA</p>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-5">
                 <div className="grid grid-cols-4 gap-6">
                     {visibleProducts.map(product => (
                         <div key={product.id} className="bg-white rounded-lg border border-gray-200 p-6 w-64">
                             <img src={product.image} alt={product.name} className="transform transition-transform duration-300 hover:cursor-pointer" />
                             <div className="flex flex-col items-center mt-2">
-                                <p className="text-md font-bold text-black h-12">{product.name}</p>
+                                <p className="text-sm font-bold text-black h-12">{product.name}</p>
                                 <p className="text-sm text-black">{product.idVariety}</p>
-                                <p className="text-lg font-semibold text-black mt-2">${product.price}</p>
+                                <p className="text-sm font-semibold text-black mt-1">${product.price}</p>
                             </div>
-                            <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">
+                            <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-3 py-1.5 px-4 rounded w-full">
                                 COMPRAR
                             </button>
                         </div>

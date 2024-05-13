@@ -4,7 +4,7 @@
 
   @layer base {
     :root {
-      --background:  0, 0%, 100%;
+      --background:  29, 21%, 98%;
       --foreground: 0, 0%, 19%;
 
       --card: 0, 0%, 100%;
@@ -72,7 +72,7 @@
       --success:  96, 35%, 91%; 
       --success-foreground: 96, 19%, 56%;
 
-      --violeta:  38, 20%, 92% ;
+      --violeta:  38, 20%, 92%;
       --violeta-foreground: 316, 39%, 26%;
 
       --beige:220, 39,10; 
