@@ -1,45 +1,94 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
+  @tailwind components;
+  @tailwind utilities;
 
-:root {
-  --foreground-rgb: 250, 250, 250;
-  --background-start-rgb: 250, 250, 250;
-  --background-end-rgb: 250, 250, 250;
-}
+  @layer base {
+    :root {
+      --background:  0, 0%, 100%;
+      --foreground: 0, 0%, 19%;
 
-.bg-violeta {
-  background-color: #5c284e;
-}
+      --card: 0, 0%, 100%;
+      --card-foreground: 0, 0%, 19%;
 
-.violeta {
-  color: #5c284e
-}
+      --popover: 38, 20%, 92% ;
+      --popover-foreground: 0, 0%, 19%;
 
-.theme-light {
-  --foreground-rgb: 250, 250, 250;
-  --background-start-rgb: 250, 250, 250;
-  --background-end-rgb: 250, 250, 250;
-}
+      --primary:  351, 61%, 28%; 
+      --primary-foreground: 38, 20%, 92%;
 
-.theme-dark {
-  --foreground-rgb: 250, 250, 250;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
-}
+      --secondary: 220, 39%, 10%;
+      --secondary-foreground: 216, 12%, 83%;
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+      --accent: 38, 20%, 92%, 1;
+      --accent-foreground: 220, 39,10;
+
+      --destructive:354, 32.6%, 61%, ;
+      --destructive-foreground: 8, 38%, 87 ;
+      
+
+      --success: 96, 19%, 56%;
+      --success-foreground: 96, 35%, 91%;
+
+      --violeta:  316, 39%, 26%;
+      --violeta-foreground: 38, 20%, 92% ;
+
+      --beige: 29, 17%, 60% ;
+      --beige-foreground: 220, 39,10;
+
+      --border: 220,14%,95%;
+      --input: 220,14%,95%;
+      --ring: 354, 32.6%, 61%;
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --background: hsl(0, 0%, 19%);
+      --foreground: hsl( 0, 0%, 100%);
+
+      --card: hsl(0, 0%, 19%);
+      --card-foreground: hsl(0, 0%, 100%);
+
+      --popover: hsl(0, 0%, 19%);
+      --popover-foreground: hsl(38, 20%, 92% );
+
+      --primary: hsl(38, 20%, 92% );
+      --primary-foreground: hsl(351, 61%, 28%); 
+
+      --secondary: hsl(216, 12%, 83%);;
+      --secondary-foreground: hsl(220, 39,10);
+
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+
+      --accent: hsl(220, 39,10);
+      --accent-foreground: hsl(38, 20%, 92%, 1);
+
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 210 40% 98%;
+
+      --success:  hsla(96, 35%, 91%); 
+      --success-foreground: hsl(96, 19%, 56%);
+
+      --violeta:  hsl(38, 20%, 92% );
+      --violeta-foreground:  hsl(316, 39%, 26%);
+
+      --beige:hsl(220, 39,10); 
+      --beige-foreground: hsl(29, 17%, 60% );
+
+      --border: hsl(220,14%,95%);
+      --input: hsl(220,14%,95%);
+      --ring: hsl(354, 32.6%, 61%);
+    }
   }
-}
+
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
+  }
