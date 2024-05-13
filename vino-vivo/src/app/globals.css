@@ -1,4 +1,4 @@
-@tailwind base;
+ @tailwind base;
   @tailwind components;
   @tailwind utilities;
 
@@ -45,42 +45,42 @@
     }
 
     .dark {
-      --background: hsl(0, 0%, 19%);
-      --foreground: hsl( 0, 0%, 100%);
+      --background: 0, 0%, 19%;
+      --foreground: 0, 0%, 100%;
 
-      --card: hsl(0, 0%, 19%);
-      --card-foreground: hsl(0, 0%, 100%);
+      --card:0, 0%, 19%;
+      --card-foreground: 0, 0%, 100%;
 
-      --popover: hsl(0, 0%, 19%);
-      --popover-foreground: hsl(38, 20%, 92% );
+      --popover: 0, 0%, 19%;
+      --popover-foreground: 38, 20%, 92%;
 
-      --primary: hsl(38, 20%, 92% );
-      --primary-foreground: hsl(351, 61%, 28%); 
+      --primary: 38, 20%, 92% ;
+      --primary-foreground: 351, 61%, 28%; 
 
-      --secondary: hsl(216, 12%, 83%);;
-      --secondary-foreground: hsl(220, 39,10);
+      --secondary: 216, 12%, 83%;
+      --secondary-foreground: 220, 39,10;
 
       --muted: 217.2 32.6% 17.5%;
       --muted-foreground: 215 20.2% 65.1%;
 
-      --accent: hsl(220, 39,10);
-      --accent-foreground: hsl(38, 20%, 92%, 1);
+      --accent: 220, 39,10;
+      --accent-foreground: 38, 20%, 92%, 1;
 
       --destructive: 0 62.8% 30.6%;
       --destructive-foreground: 210 40% 98%;
 
-      --success:  hsla(96, 35%, 91%); 
-      --success-foreground: hsl(96, 19%, 56%);
+      --success:  96, 35%, 91%; 
+      --success-foreground: 96, 19%, 56%;
 
-      --violeta:  hsl(38, 20%, 92% );
-      --violeta-foreground:  hsl(316, 39%, 26%);
+      --violeta:  38, 20%, 92% ;
+      --violeta-foreground: 316, 39%, 26%;
 
-      --beige:hsl(220, 39,10); 
-      --beige-foreground: hsl(29, 17%, 60% );
+      --beige:220, 39,10; 
+      --beige-foreground: 29, 17%, 60% ;
 
-      --border: hsl(220,14%,95%);
-      --input: hsl(220,14%,95%);
-      --ring: hsl(354, 32.6%, 61%);
+      --border: 220,14%,95%;
+      --input: 220,14%,95%;
+      --ring: 354, 32.6%, 61%;
     }
   }
 
