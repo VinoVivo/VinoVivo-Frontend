@@ -1,4 +1,5 @@
 import { Location } from "@/components/contact/Location";
+import { DataContact } from "@/components/contact/form/FormUser";
 
 export const Contact = () => {
   return (
@@ -13,6 +14,7 @@ export const Contact = () => {
         <h2 className="text-fuchsia-900 text-center text-2xl font-semibold">
           Contactanos
         </h2>
+        <DataContact />
       </div>
     </main>
   );
