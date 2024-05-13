@@ -4,14 +4,15 @@ import Image from 'next/image';
 import CardRigthSide from "./CardRigthSide";
 
 
-interface IwineDetail {
+export interface IwineDetail {
     image: string,
     title: string,
     type: string,
-    year: string, 
+    year: number, 
     winery: string,
+    variety: string,
     price: number,
-    stock: boolean,
+    stock: number,
     temperature: string,
     description: string
 }
@@ -26,6 +27,7 @@ export default function CardDetail() {
             <Card className="flex flex-row items-center w-full max-w-4xl px-6 py-4">
                 <CardContent className="w-1/2 flex justify-center items-center">
                     <Image src="/vino1.jpg" alt={"vino rivero gonzalez"} width='300' height='100' />
+                    {/* <Image src={wine.image} alt={wine.title} width='300' height='100' /> */}
                 </CardContent>
                 <CardRigthSide/>
             </Card>
