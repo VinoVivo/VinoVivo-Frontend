@@ -1,4 +1,3 @@
-
 import Body from '@/components/layouts/body/Body';
 import RootLayout from './layout';
 import Footer from '@/components/layouts/footer/Footer';
@@ -8,7 +7,7 @@ export default function Home() {
   return (
     <RootLayout>
       <Header />
-      <Body />
+      <Body/>
       <Footer />
     </RootLayout>
   );
