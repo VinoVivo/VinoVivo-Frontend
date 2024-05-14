@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 export default function detailPage() {
     
-    const [wine, setWine] = useState<WineProps | null>(null);
+    const [wine, setWine] = useState<IwineDetail | null>(null);
     const router = useRouter();
     const { id } = router.query;
     
@@ -22,11 +22,11 @@ export default function detailPage() {
                     const wineDetail: IwineDetail = {
                         id: productData.id,
                         image: productData.image,
-                        title: productData.name,
-                        type: productData.type.name, 
+                        name: productData.name,
+                        type: productData.type, 
                         year: productData.year,
-                        winery: productData.winery.name, 
-                        variety: productData.variety.name, 
+                        winery: productData.winery, 
+                        variety: productData.variety, 
                         price: productData.price,
                         stock: productData.stock,
                         description: productData.description,
@@ -43,7 +43,7 @@ export default function detailPage() {
     return(
         <>        
         <Header/>
-        {/* {wine && <CardDetail wine={wine} />} */}
+        {wine && <CardDetail wine={wine} />}
         <Footer/>
         </>
     )

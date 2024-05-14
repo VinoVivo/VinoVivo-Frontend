@@ -6,11 +6,11 @@ import CardRigthSide from "./CardRigthSide";
 export interface IwineDetail {
     id: number,
     image: string,
-    title: string,
-    type: string,
+    name: string,
+    type: number,
     year: number, 
-    winery: string,
-    variety: string,
+    winery: number,
+    variety: number,
     price: number,
     stock: number,
     description: string
