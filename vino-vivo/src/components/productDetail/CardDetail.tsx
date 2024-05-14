@@ -1,33 +1,34 @@
-'use client'
+'use client';
 import {Card, CardContent,} from "@/components/ui/card";
 import Image from 'next/image';
 import CardRigthSide from "./CardRigthSide";
 
-
-interface IwineDetail {
+export interface IwineDetail {
+    id: number,
     image: string,
-    title: string,
-    type: string,
-    year: string, 
-    winery: string,
+    name: string,
+    type: number,
+    year: number, 
+    winery: number,
+    variety: number,
     price: number,
-    stock: boolean,
-    temperature: string,
+    stock: number,
     description: string
 }
-interface WineProps {
+export interface WineProps {
     wine: IwineDetail;
 };
-// {wine }: WineProps
-export default function CardDetail() {
 
+export default function CardDetail({wine }: Readonly<WineProps>) {
+    
+    
     return (            
-            <div className="flex justify-center mb-10 mt-40">
-            <Card className="flex flex-row items-center w-full max-w-4xl px-6 py-4">
-                <CardContent className="w-1/2 flex justify-center items-center">
-                    <Image src="/vino1.jpg" alt={"vino rivero gonzalez"} width='300' height='100' />
-                </CardContent>
-                <CardRigthSide/>
+            <div className=" grid flex justify-center mb-10 mt-40">
+            <Card className=" grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl px-6 py-4">
+                <CardContent className=" flex justify-center items-center">
+                    <Image src={wine.image} alt={wine.name} width='300' height='500' />
+                    </CardContent>
+                <CardRigthSide wine={wine}/>
             </Card>
         </div>
     );
