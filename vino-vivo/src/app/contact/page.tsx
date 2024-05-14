@@ -12,9 +12,25 @@ export const Contact = () => {
           <DataContact />
         </div>
         <div>
-          <h2 className="text-fuchsia-900 text-center text-2xl font-semibold">
-            Donde estamos
-          </h2>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <div className="border-b-4 border-b-beige w-[341px]" />
+            <h2
+              style={{
+                color: "rgba(92, 40, 78, 1)",
+              }}
+              className=" text-center text-2xl font-semibold w-full text-center"
+            >
+              Donde estamos
+            </h2>
+
+            <div className="border-b-4 border-b-beige w-[341px]" />
+          </div>
           <Location />
         </div>
         {/* <img
