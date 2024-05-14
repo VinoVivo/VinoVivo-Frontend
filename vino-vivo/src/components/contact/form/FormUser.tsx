@@ -1,14 +1,14 @@
 export const DataContact = () => {
   return (
     <>
-      <form className="shadow-lg rounded-md bg-white  p-4">
+      <form className="shadow-lg rounded-md bg-white p-4">
         <div className="grid grid-rows-4 ">
           <div>
             <label
               aria-details="name"
               className="block text-sm font-semibold leading-6 text-gray-600"
             >
-              Name
+              Nombre
             </label>
             <input
               type="tel"
@@ -29,7 +29,7 @@ export const DataContact = () => {
             <input
               type="tel"
               name="number"
-              placeholder="54 3 8956452"
+              placeholder="54 9 3456895"
               id="number"
               className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
@@ -56,7 +56,7 @@ export const DataContact = () => {
               aria-details="message-user"
               className="block text-sm font-semibold leading-6 text-gray-600"
             >
-              Message user
+              Dejanos tu mensaje
             </label>
             <textarea
               name="message-user"
@@ -70,7 +70,7 @@ export const DataContact = () => {
               type="submit"
               className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Save
+              Enviar
             </button>
           </div>
         </div>
