@@ -1,14 +1,8 @@
 export const Location = () => {
   return (
     <div className="grid grid-cols-1 items-center w-full p-4 sm:grid-cols-2">
-      <div
-        style={{
-          backgroundColor: "rgba(239, 236, 231, 0.95)",
-          height: "100%",
-          textAlign: "center",
-        }}
-      >
-        <p className="border-t border-b border-black pt-4 pb-4 text-pink-400 text-3xl m-4 font-semibold">
+      <div className="text-center h-full bg-[#EFECE7F2]">
+        <p className="border-t border-b border-black pt-4 pb-4 text-pink-800 text-3xl m-4 font-semibold">
           MA
           <br />
           PA
