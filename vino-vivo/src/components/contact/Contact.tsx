@@ -1,32 +1,21 @@
+import { Title } from "../Title/Title";
 import { Location } from "./Location";
 import { DataContact } from "./form/FormUser";
 
 export const Contact = () => {
   return (
     <main className="mt-40 mx-auto">
-      <div className="grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-8  lg:max-w-7xl lg:grid-cols-2 ">
-        <div>
-          <h2 className="text-fuchsia-900 text-center text-2xl font-semibold">
+      <div className="grid grid-cols-1 content-center items-center m-auto w-4/5 gap-x-8 gap-y-16 px-4 py-8  lg:grid-cols-2 ">
+        <div className="p-4 border-solid border-2 border-[#5C284E]">
+          <h2 className=" text-center text-2xl font-semibold w-full text-[#5C284E]">
             Contactanos
           </h2>
           <DataContact />
         </div>
         <div>
-          <h2
-            style={{
-              color: "rgba(92, 40, 78, 1)",
-            }}
-            className=" text-center text-2xl font-semibold w-full text-center"
-          >
-            Donde estamos
-          </h2>
+          <Title title="Donde estamos" />
           <Location />
         </div>
-        {/* <img
-          src="https://img.freepik.com/free-photo/vertical-shot-glass-red-wine-grapes-table_181624-57960.jpg?t=st=1715634198~exp=1715637798~hmac=5bef9633af8405521f6aa62646237ee3708f750212b746bc0dccc39bdddd01b8&w=360"
-          alt=""
-          className="aspect-h-1 aspect-w-1  overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 sm:none"
-        /> */}
       </div>
     </main>
   );
