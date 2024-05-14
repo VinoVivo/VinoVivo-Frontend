@@ -4,21 +4,16 @@ import {
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import { IwineDetail } from "./CardDetail";
-import { useRouter } from "next/router";
 
 interface CardRigthSideProps {
     wine: Omit<IwineDetail, 'image'>;
 }
 
 export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
-    
-    const router = useRouter();
-    const productId = router.query.id;
-    console.log({productId});
 
     return(
         <CardContent className="flex flex-col w-1/2 ml-6">
-                    <h1 className="text-xl font-bold mb-1">{wine.title}</h1>
+                    <h1 className="text-xl font-bold mb-1">{wine.name}</h1>
                     <h2 className="text-lg mb-1"><span className="font-bold">Tipo: </span>{wine.type}</h2>
                     <p className="text-sm mb-1">
                     <span className="font-bold">Descripción: </span> {wine.description}</p>

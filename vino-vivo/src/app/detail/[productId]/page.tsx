@@ -1,17 +1,17 @@
-'use client'
+'use client';
 import Footer from "@/components/layouts/footer/Footer";
 import Header from "@/components/layouts/header/Header";
-import CardDetail, { IwineDetail, WineProps } from "@/components/productDetail/CardDetail";
+import CardDetail, { IwineDetail } from "@/components/productDetail/CardDetail";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
 export default function detailPage() {
     
     const [wine, setWine] = useState<IwineDetail | null>(null);
-    const router = useRouter();
-    const { id } = router.query;
+    const path = usePathname()
+    const id = path.match(/\d+$/)?.[0]; 
     
 
     useEffect(() => {
@@ -23,16 +23,15 @@ export default function detailPage() {
                         id: productData.id,
                         image: productData.image,
                         name: productData.name,
-                        type: productData.type, 
+                        type: productData.idType, 
                         year: productData.year,
-                        winery: productData.winery, 
-                        variety: productData.variety, 
+                        winery: productData.idWinery, 
+                        variety: productData.idVariety, 
                         price: productData.price,
                         stock: productData.stock,
                         description: productData.description,
                     };
-                    setWine(response.data); 
-                    console.log({response});
+                    setWine(wineDetail); 
                 })
                 .catch(error => {
                     console.error('Error al obtener los detalles del producto:', error);
