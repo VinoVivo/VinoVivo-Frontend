@@ -2,25 +2,25 @@ import React from 'react'
 
 function Footer() {
     return (
-        <footer className="bg-secondary">
+        <footer className="bg-card">
 
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 py-7">
 
                     <div className="m-2 space-y-2 flex flex-col justify-center items-center sm:col-start-1 sm:col-span-2">
-                        <p className="text-secondary-foreground">Virtual Trends @Copyright</p>
-                        <p className=" text-secondary-foreground ">Desarrollo por Día365</p>
-                        <p className="text-secondary-foreground">Diseño gráfico por CA</p>
+                        <p className="text-secondary">Virtual Trends @Copyright</p>
+                        <p className=" text-secondary">Desarrollo por Día365</p>
+                        <p className="text-secondary">Diseño gráfico por CA</p>
                     </div>
 
                     <div className="m-2 sm:col-span-2  items-center flex flex-col justify-center">
-                        <h1 className="max-w-lg text-xl font-semibold tracking-tight text-secondary-foreground xl:text-2x1">
+                        <h1 className="max-w-lg text-xl font-semibold tracking-tight text-secondary xl:text-2x1">
                             NEWSLETTER
                         </h1>
                         <div className="flex flex-col mx-auto mt-6 space-y-3 md:space-y-0 md:flex-row">
                             <input id="email"
                                 type="text"
-                                className="px-4 py-2 bg-background border rounded-md text-secondary-foreground  focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+                                className="px-4 py-2 bg-background border rounded-md text-secondary  focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
                                 placeholder="Ingresá aquí tu Email"
                             />
 
@@ -30,7 +30,7 @@ function Footer() {
                         </div>
                         <div className="flex items-center justify-between">
                             <div className="flex -mx-2">
-                                <a href="#" className="mx-2 text-secondary-foreground transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400" aria-label="Reddit">
+                                <a href="#" className="mx-2 text-secondary transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400" aria-label="Reddit">
                                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -39,7 +39,7 @@ function Footer() {
                                     </svg>
                                 </a>
 
-                                <a href="#" className="mx-2 text-secondary-foreground transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400" aria-label="Facebook">
+                                <a href="#" className="mx-2 text-secondary transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400" aria-label="Facebook">
                                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -48,7 +48,7 @@ function Footer() {
                                     </svg>
                                 </a>
 
-                                <a href="#" className="mx-2 text-secondary-foreground transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400" aria-label="Github">
+                                <a href="#" className="mx-2 text-secondary transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400" aria-label="Github">
                                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -61,9 +61,9 @@ function Footer() {
                     </div>
 
                     <div className="m-2 flex flex-col justify-center items-center space-y-2 h-full sm:col-start-5 sm:col-span-2">
-                        <a href="#" className="text-secondary-foreground transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Políticas de privacidad</a>
-                        <a href="#" className="text-secondary-foreground transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Términos y condiciones</a>
-                        <a href="#" className="text-secondary-foreground transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Prensa</a>
+                        <a href="#" className="text-secondary transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Políticas de privacidad</a>
+                        <a href="#" className="text-secondary transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Términos y condiciones</a>
+                        <a href="#" className="text-secondary transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Prensa</a>
                     </div>
 
                 </div>
