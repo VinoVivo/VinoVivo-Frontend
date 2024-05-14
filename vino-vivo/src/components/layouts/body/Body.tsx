@@ -1,6 +1,7 @@
 'use client'
 import Carousel from "@/components/carrousel/Carrousel";
 import axios from 'axios';
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface Product {
@@ -70,7 +71,9 @@ const Body = () => {
                 <div className="grid grid-cols-4 gap-6">
                     {visibleProducts.map(product => (
                         <div key={product.id} className="bg-white rounded-lg border border-gray-200 p-6 w-64">
+                            <Link href={`/detail/${product.id}`}>
                             <img src={product.image} alt={product.name} className="transform transition-transform duration-300 hover:cursor-pointer" />
+                            </Link>
                             <div className="flex flex-col items-center mt-2">
                                 <p className="text-md font-bold text-black h-12">{product.name}</p>
                                 <p className="text-sm text-black">{product.idVariety}</p>
