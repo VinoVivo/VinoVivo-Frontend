@@ -1,16 +1,15 @@
-import Concept from '@/components/concept/Concept'
-import Footer from '@/components/layouts/footer/Footer'
-import Header from '@/components/layouts/header/Header'
-import React from 'react'
+import Concept from "@/components/concept/Concept";
+import Footer from "@/components/layouts/footer/Footer";
+import Header from "@/components/layouts/header/Header";
+import CardDetail from "@/components/productDetail/CardDetail";
 
-const conceptPage = () => {
-  return (
-    <div className='flex flex-col'>
-    <Header/>
-    <Concept/>
-    <Footer/>
-    </div>
-  )
+
+export default function detailPage() {
+    return(
+        <>        
+        <Header/>
+        <Concept/>
+        <Footer/>
+        </>
+    )
 }
-
-export default conceptPage
