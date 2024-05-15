@@ -1,5 +1,6 @@
 'use client'
 import Carousel from "@/components/carrousel/Carrousel";
+import Loader from "@/components/loader/page";
 import axios from 'axios';
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -48,9 +49,6 @@ const Body = () => {
                 console.error('Error fetching products:', error);
             });
     }, []);
-    if (loading) {
-        return <div>Cargando...</div>;
-    }
 
     return (
         <main className="mt-40">
@@ -65,7 +63,11 @@ const Body = () => {
                 </div>
             </div>
 
-            <p className="text-fuchsia-900 text-center text-2xl font-semibold">NUESTRA PROPUESTA</p>
+            <p className="text-fuchsia-900 text-center text-2xl font-semibold mb-2">NUESTRA PROPUESTA</p>
+
+            {loading && (
+                <Loader />
+            )}
 
             <div className="flex justify-center">
                 <div className="grid grid-cols-4 gap-6">
@@ -76,10 +78,10 @@ const Body = () => {
                             </Link>
                             <div className="flex flex-col items-center mt-2">
                                 <p className="text-md font-bold text-black h-12">{product.name}</p>
-                                <p className="text-sm text-black">{product.idVariety}</p>
-                                <p className="text-lg font-semibold text-black mt-2">${product.price}</p>
+                                <p className="text-sm text-black mt-2">{product.idVariety}</p>
+                                <p className="text-md font-semibold text-black">${product.price}</p>
                             </div>
-                            <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">
+                            <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-2 py-1.5 px-4 rounded w-full">
                                 COMPRAR
                             </button>
                         </div>
