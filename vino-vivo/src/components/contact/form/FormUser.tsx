@@ -1,7 +1,7 @@
 export const DataContact = () => {
   return (
     <>
-      <form className="shadow-lg rounded-md bg-white p-4">
+      <form className="shadow-lg rounded-md bg-background p-4">
         <div className="grid grid-rows-4 ">
           <div>
             <label
@@ -67,12 +67,8 @@ export const DataContact = () => {
           </div>
           <div className="mt-6">
             <button
-              style={{
-                border: "2px solid rgba(92, 40, 78, 1)",
-                backgroundColor: "rgba(92, 40, 78, 1)",
-              }}
               type="submit"
-              className="block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="border-solid border-violeta bg-violeta border-2 block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Enviar
             </button>
