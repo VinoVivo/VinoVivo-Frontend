@@ -10,9 +10,9 @@ export default function RegisterProductForm() {
     };
 
     return (
-        <div className="max-w-md mx-auto my-40">
+        <div className="max-w-lg mx-auto my-40">
             <h1 className="text-2xl font-bold my-4">Registro de Producto</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className="shadow-md rounded px-8 pt-6 pb-8 mb-4 grid gap-4 sm:grid-cols-2">
+            <form onSubmit={handleSubmit(onSubmit)} className=" shadow-md rounded px-8 pt-6 pb-8 mb-4 grid gap-4 sm:grid-cols-2 ">
                 {/* name */}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
@@ -53,7 +53,7 @@ export default function RegisterProductForm() {
                         <option value="espumoso">Espumoso</option>
                         <option value="rosado">Rosado</option>
                     </select>
-                    {errors.type && <p className="text-red-500 text-xs italic">{errors.type.message}</p>}
+                    {/* {errors.type && <p className="text-red-500 text-xs italic">{errors.type.message}</p>} */}
                 </div>
                 {/* wine winnery */}
                 <div className="mb-4">
@@ -133,9 +133,9 @@ export default function RegisterProductForm() {
                     {/* {errors.image && <p className="text-red-500 text-xs italic">{errors.image.message}</p>} */}
                 </div>
                 {/* botón */}
-                <div className="flex items-center justify-between col-span-2">
+                <div className="flex items-center justify-end  ">
                     <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
                         type="submit"
                     >
                         Crear
