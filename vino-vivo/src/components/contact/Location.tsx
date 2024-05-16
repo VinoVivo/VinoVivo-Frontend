@@ -1,8 +1,8 @@
 export const Location = () => {
   return (
     <div className="grid grid-cols-1 items-center w-full p-4 sm:grid-cols-2">
-      <div className="text-center h-full bg-[#EFECE7F2]">
-        <p className="border-t border-b border-black pt-4 pb-4 text-pink-800 text-3xl m-4 font-semibold">
+      <div className="text-center h-full bg-popover">
+        <p className="border-t border-b border-black pt-4 pb-4 text-violeta text-3xl m-4 font-semibold">
           MA
           <br />
           PA

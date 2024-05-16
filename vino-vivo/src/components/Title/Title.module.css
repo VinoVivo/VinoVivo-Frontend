@@ -6,7 +6,6 @@
     text-align: center;
     width: 100%;
     margin: 0;
-    color: "hsl(var(--violeta))"
 }
 
 .typography_title::before {
@@ -27,5 +26,4 @@
     position: relative;
     vertical-align: middle;
     width: 20%;
-    background-color: "hsl(var(--violeta))"
 }
