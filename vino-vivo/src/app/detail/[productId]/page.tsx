@@ -1,5 +1,5 @@
 'use client';
-import CardDetail, { IwineDetail } from "@/components/productDetail/CardDetail";
+import CardDetail, { IwineDetail } from "@/components/product/detail/CardDetail";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ export default function DetailPage() {
     
     const [wine, setWine] = useState<IwineDetail | null>(null);
     const path = usePathname()
-    const id = path.match(/\d+$/)?.[0]; 
+    const id = RegExp(/\d+$/).exec(path)?.[0]; 
     
 
     useEffect(() => {
@@ -39,7 +39,7 @@ export default function DetailPage() {
 
     return(
         <>        
-        {wine && <CardDetail wine={wine} />}
+            {wine && <CardDetail wine={wine} />}
         </>
     )
 }

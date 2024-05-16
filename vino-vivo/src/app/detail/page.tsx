@@ -1,14 +1,9 @@
-import Footer from "@/components/layouts/footer/Footer";
-import Header from "@/components/layouts/header/Header";
-import CardDetail from "@/components/product/detail/CardDetail";
+
+import CardDetail, {WineProps } from "@/components/product/detail/CardDetail";
 
 
-export default function detailPage() {
+export default function detailPage({wine}: WineProps) {
     return(
-        <>        
-        <Header/>
-        <CardDetail/>
-        <Footer/>
-        </>
+        <CardDetail wine={wine}/>
     )
 }
