@@ -1,13 +1,9 @@
 import { Contact } from "@/components/contact/Contact";
-import Footer from "@/components/layouts/footer/Footer";
-import Header from "@/components/layouts/header/Header";
 
-export default function detailPage() {
+export default function ContactPage() {
   return (
     <>
-      <Header />
       <Contact />
-      <Footer />
     </>
   );
 }

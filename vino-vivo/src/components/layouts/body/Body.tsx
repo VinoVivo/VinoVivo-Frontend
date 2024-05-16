@@ -59,7 +59,7 @@ const Body = () => {
     }, []);
 
     return (
-        <main className="mt-40">
+        <div className="mt-40">
             <div className="border-b border-gray-999 mb-5">
                 <div className="flex flex-col md:flex-row items-center justify-center space-y-5 md:space-y-0 md:space-x-10">
                     {isMobile ? (
@@ -114,7 +114,7 @@ const Body = () => {
                     {showMore ? 'MOSTRAR MENOS' : 'MOSTRAR MÁS'}
                 </button>
             </div>
-        </main>
+        </div>
     );
 };
 
