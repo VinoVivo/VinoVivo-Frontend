@@ -1,7 +1,7 @@
 'use client';
 import Footer from "@/components/layouts/footer/Footer";
 import Header from "@/components/layouts/header/Header";
-import CardDetail, { IwineDetail } from "@/components/productDetail/CardDetail";
+import CardDetail, { IwineDetail } from "@/components/product/detail/CardDetail";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
