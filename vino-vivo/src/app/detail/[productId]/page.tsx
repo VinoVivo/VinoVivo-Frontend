@@ -1,13 +1,11 @@
 'use client';
-import Footer from "@/components/layouts/footer/Footer";
-import Header from "@/components/layouts/header/Header";
-import CardDetail, { IwineDetail } from "@/components/product/detail/CardDetail";
+import CardDetail, { IwineDetail } from "@/components/productDetail/CardDetail";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
-export default function detailPage() {
+export default function DetailPage() {
     
     const [wine, setWine] = useState<IwineDetail | null>(null);
     const path = usePathname()
@@ -41,9 +39,7 @@ export default function detailPage() {
 
     return(
         <>        
-        <Header/>
         {wine && <CardDetail wine={wine} />}
-        <Footer/>
         </>
     )
 }
