@@ -15,30 +15,34 @@ const Header = () => {
             <div className="container mx-auto flex justify-between items-center h-full py-4 px-4 md:px-28">
                 <div className="flex items-center">
                     <Link href="/">
-                        <img src="/logo-vinovivo.png" alt="logo" className="h-24" />
-                    </Link>  
+                        <img src="/logo-vinovivo.png" alt="logo" className="h-12 md:h-24" />
+                    </Link>
                 </div>
-                <div className="hidden md:flex items-center space-x-12">
+                <div className="hidden md:flex items-center space-x-8">
                     <Link href="/">
-                        <span className="text-beige">PRODUCTOS</span>
+                        <span className="text-beige hover:text-gray-300">PRODUCTOS</span>
                     </Link>
                     <Link href="/concept">
-                        <span className="text-beige">CONCEPTO</span>
+                        <span className="text-beige hover:text-gray-300">CONCEPTO</span>
                     </Link>
                     <Link href="/contact">
-                        <span className="text-beige">CONTACTO</span>
+                        <span className="text-beige hover:text-gray-300">CONTACTO</span>
                     </Link>
-                    <input
-                        type="text"
-                        placeholder="Buscar"
-                        className="text-violeta px-2 border border-gray-300 rounded-lg"
-                    />
-                    <FaSearch className="text-white text-xl cursor-pointer hover:text-gray-500" />
-                    <FaUser className="text-white text-xl cursor-pointer hover:text-gray-500" />
-                    <FaShoppingCart className="text-white text-xl cursor-pointer hover:text-gray-500" />
+                    <div className="flex space-x-1 items-center">
+                        <input
+                            type="text"
+                            placeholder="Buscar"
+                            className="text-violeta px-2 py-1 border border-gray-300 rounded-lg"
+                        />
+                        <FaSearch className="text-white text-xl" />
+                    </div>
+                    <div className="flex space-x-4 items-center">
+                        <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                        <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                    </div>
                 </div>
                 <div className="md:hidden flex items-center">
-                    <button onClick={toggleMenu} className="text-white text-xl cursor-pointer hover:text-gray-500">
+                    <button onClick={toggleMenu} className="text-white text-2xl cursor-pointer hover:text-gray-300">
                         <FaBars />
                     </button>
                 </div>
@@ -49,22 +53,26 @@ const Header = () => {
                 <div className="md:hidden bg-violeta py-4">
                     <div className="flex flex-col items-center space-y-4">
                         <Link href="/products">
-                            <span className="text-beige">PRODUCTOS</span>
+                            <span className="text-beige hover:text-gray-300">PRODUCTOS</span>
                         </Link>
                         <Link href="/concept">
-                            <span className="text-beige">CONCEPTO</span>
+                            <span className="text-beige hover:text-gray-300">CONCEPTO</span>
                         </Link>
                         <Link href="/contact">
-                            <span className="text-beige">CONTACTO</span>
+                            <span className="text-beige hover:text-gray-300">CONTACTO</span>
                         </Link>
-                        <input
-                            type="text"
-                            placeholder="Buscar"
-                            className="text-violeta px-2 border border-gray-300 rounded-lg"
-                        />
-                        <FaSearch className="text-white text-xl" />
-                        <FaUser className="text-white text-xl" />
-                        <FaShoppingCart className="text-white text-xl" />
+                        <div className="flex space-x-1 items-center">
+                            <input
+                                type="text"
+                                placeholder="Buscar"
+                                className="text-violeta px-2 py-1 border border-gray-300 rounded-lg"
+                            />
+                            <FaSearch className="text-white text-xl" />
+                        </div>
+                        <div className="flex space-x-4 items-center">
+                            <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                            <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                        </div>
                     </div>
                 </div>
             )}
