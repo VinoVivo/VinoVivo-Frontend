@@ -7,10 +7,10 @@ export interface IwineDetail {
     id: number,
     image: string,
     name: string,
-    type: number,
+    type: string,
     year: number, 
-    winery: number,
-    variety: number,
+    winery: string,
+    variety: string,
     price: number,
     stock: number,
     description: string
