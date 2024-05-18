@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
-export default function DetailPage() {
+export default function DetailPageId() {
     
     const [wine, setWine] = useState<IwineDetail | null>(null);
     const path = usePathname()
@@ -19,15 +19,15 @@ export default function DetailPage() {
                     const productData = response.data; 
                     const wineDetail: IwineDetail = {
                         id: productData.id,
-                        image: productData.image,
                         name: productData.name,
-                        type: productData.nameType, 
+                        description: productData.description,
+                        image: productData.image,         
                         year: productData.year,
+                        price: productData.price,
+                        stock: productData.stock,                               
                         winery: productData.nameWinery, 
                         variety: productData.nameVariety, 
-                        price: productData.price,
-                        stock: productData.stock,
-                        description: productData.description,
+                        type: productData.nameType,                         
                     };
                     setWine(wineDetail); 
                 })
