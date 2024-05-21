@@ -6,7 +6,6 @@
     text-align: center;
     width: 100%;
     margin: 0;
-    color: rgba(92, 40, 78, 1);
 }
 
 .typography_title::before {
@@ -27,5 +26,4 @@
     position: relative;
     vertical-align: middle;
     width: 20%;
-    background-color: rgba(92, 40, 78, 1);
 }

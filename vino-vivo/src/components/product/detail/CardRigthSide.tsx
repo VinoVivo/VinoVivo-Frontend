@@ -1,18 +1,15 @@
-import {
-    CardContent,
-} from "@/components/ui/card";
+import {  CardContent} from "@/components/ui/card";
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
-
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { FaCartPlus } from "react-icons/fa";
-import { IwineDetail } from "../product/detail/CardDetail";
+import { IwineDetail } from "./CardDetail";
+
 
 interface CardRigthSideProps {
-    wine: Omit<IwineDetail, 'image'>;
+    wine: IwineDetail;
 }
-
 export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
     
     const {back} = useRouter();
