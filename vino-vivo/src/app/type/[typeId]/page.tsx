@@ -33,10 +33,7 @@ export default function TypePage() {
                         }
                         return product;
                     }));
-
                     setProducts(productData)
-                    console.log("productos filtrados en esta categoria");
-                    console.log(productData);
                 })
                 .catch(error => {
                     console.error('Error al obtener los productos de este tipo:', error);
@@ -48,10 +45,7 @@ export default function TypePage() {
         axios.get(`http://localhost:8082/type/all`)
             .then(response => {
                 const productData = response.data;
-
                 setWineType(productData)
-                console.log("tipos de vino");
-                console.log(wineTypes);
             })
             .catch(error => {
                 console.error('Error al obtener el listado de los tipos de vino:', error);
@@ -63,7 +57,7 @@ export default function TypePage() {
         const item = wineTypes.find(item => item.id === id);
         return item ? item.name : undefined;
     }
-    const nameType = getTypeNameById(id ? parseInt(id) : 0);
+    const nameType = "Vino " + getTypeNameById(id ? parseInt(id) : 0);
     console.log("el titulo es:");
     console.log(nameType);
 
