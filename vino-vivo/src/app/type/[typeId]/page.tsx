@@ -1,12 +1,12 @@
 'use client';
 import Footer from "@/components/layouts/footer/Footer";
 import Header from "@/components/layouts/header/Header";
-import CardDetail, { IwineDetail } from "@/components/productDetail/CardDetail";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Title } from "@/components/Title/Title";
 import Link from "next/link";
+import { IwineDetail } from "@/components/product/detail/CardDetail";
 
 
 interface WineType {
