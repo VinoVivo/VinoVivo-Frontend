@@ -2,6 +2,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { FaSearch, FaUser, FaShoppingCart, FaBars } from "react-icons/fa";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,9 +27,25 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className="hidden md:flex items-center space-x-8">
-                    <Link href="/">
-                        <span className="text-beige hover:text-gray-300">PRODUCTOS</span>
-                    </Link>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className="text-beige hover:text-gray-300">PRODUCTOS</DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel>Categorias</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="text-secondary hover:text-beige">
+                                <Link href="/" className="text-secondary hover:text-beige">Vino Tinto</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="text-secondary hover:text-black">
+                                <Link href="/" className="text-secondary hover:text-beige">Vino Blanco</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="text-secondary hover:text-black">
+                                <Link href="/" className="text-secondary hover:text-beige">Vino Rosado</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <Link href="/" className="text-secondary hover:text-beige">Vino Espumoso</Link>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                     <Link href="/concept">
                         <span className="text-beige hover:text-gray-300">CONCEPTO</span>
                     </Link>
