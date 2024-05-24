@@ -29,14 +29,6 @@ export default function RegisterProductForm() {
             console.error('Error al crear el producto:', error);
         }
     };
-    // const onSubmit: SubmitHandler<ProductFormValues> = async (data) => {
-    //     try {
-    //         const response = await axios.post('/api/product/create', data);
-    //         console.log('Producto creado:', response.data);
-    //     } catch (error) {
-    //         console.error('Error al crear el producto:', error);
-    //     }
-    // };
     
     const handleTextInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!/^[A-Za-z\s]*$/.test(e.key) && e.key !== 'Backspace') {
