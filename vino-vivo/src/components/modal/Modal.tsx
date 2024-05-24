@@ -1,10 +1,11 @@
 import React, { Dispatch, FC, SetStateAction } from "react";
 type modalProps = {
-  valid: boolean;
   setValid: Dispatch<SetStateAction<boolean>>;
+  title: string;
+  description: string;
 };
 
-export const Modal: FC<modalProps> = ({ valid, setValid }) => {
+export const Modal: FC<modalProps> = ({ setValid, title, description }) => {
   return (
     <div>
       <div
@@ -40,12 +41,10 @@ export const Modal: FC<modalProps> = ({ valid, setValid }) => {
                       className="text-base font-semibold leading-6 text-gray-900"
                       id="modal-title"
                     >
-                      Formulario Enviado
+                      {title}
                     </h3>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Pronto nos pondremos en contacto!
-                      </p>
+                      <p className="text-sm text-gray-500">{description}</p>
                     </div>
                   </div>
                 </div>
@@ -53,7 +52,7 @@ export const Modal: FC<modalProps> = ({ valid, setValid }) => {
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
                   type="button"
-                  onClick={() => setValid(!valid)}
+                  onClick={() => setValid(false)}
                   className="inline-flex w-full justify-center rounded-md bg-violeta px-3 py-2 text-sm font-semibold text-background shadow-sm hover:bg-violeta sm:ml-3 sm:w-auto"
                 >
                   Aceptar
