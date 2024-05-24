@@ -12,11 +12,11 @@ interface ProductFormValues {
     nameWinery: string;
     nameVariety: string;    
     nameType: string;
-}
+};
 
 export default function RegisterProductForm() {
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm<ProductFormValues>();
+    const { register, handleSubmit, formState: { errors } } = useForm<ProductFormValues>();
 
     const onSubmit: SubmitHandler<ProductFormValues> = async (data) => {
         try {
@@ -29,12 +29,12 @@ export default function RegisterProductForm() {
             console.error('Error al crear el producto:', error);
         }
     };
-
+    
     const handleTextInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!/^[A-Za-z\s]*$/.test(e.key) && e.key !== 'Backspace') {
             e.preventDefault();
         }
-    }
+    };
     
     const handleNumberInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!/^\d*\.?\d*$/.test(e.key) && e.key !== 'Backspace') {

@@ -6,15 +6,6 @@ import axios from 'axios';
 import Link from "next/link";
 import { useMediaQuery } from "@react-hook/media-query";
 
-interface Product {
-    id: number;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    idVariety: string;
-}
-
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
