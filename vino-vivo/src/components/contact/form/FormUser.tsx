@@ -14,7 +14,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { Modal } from "../modal/Modal";
+import { Modal } from "@/components/modal/Modal";
 
 export const DataContact = () => {
   const [isValid, setisValid] = useState(false);
@@ -138,7 +138,13 @@ export const DataContact = () => {
           </div>
         </div>
       </form>
-      {isValid && <Modal setValid={setisValid} valid={isValid} />}
+      {isValid && (
+        <Modal
+          setValid={setisValid}
+          title="Formulario enviado"
+          description="Pronto nos pondremos en contacto!"
+        />
+      )}
     </Form>
   );
 };
