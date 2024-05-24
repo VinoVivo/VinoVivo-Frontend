@@ -9,20 +9,30 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { FormSchema, onSubmit } from "./Data";
-import { useForm } from "react-hook-form";
+import { FormSchema, FormValues } from "./Data";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { Modal } from "../modal/Modal";
 
 export const DataContact = () => {
+  const [isValid, setisValid] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       username: "",
       useremail: "",
+      usercellphone: "",
       message: "",
     },
   });
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    form.reset();
+    setisValid(true);
+  };
+
   return (
     <Form {...form}>
       <form
@@ -43,6 +53,7 @@ export const DataContact = () => {
                     type="tel"
                     {...field}
                     id="name"
+                    maxLength={50}
                     placeholder="Carlos Retamoso"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -108,6 +119,7 @@ export const DataContact = () => {
                   <textarea
                     {...field}
                     id="message-user"
+                    maxLength={50}
                     placeholder="Me gustaria..."
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -126,6 +138,7 @@ export const DataContact = () => {
           </div>
         </div>
       </form>
+      {isValid && <Modal setValid={setisValid} valid={isValid} />}
     </Form>
   );
 };
