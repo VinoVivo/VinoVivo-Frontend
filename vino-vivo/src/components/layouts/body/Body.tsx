@@ -6,15 +6,6 @@ import axios from 'axios';
 import Link from "next/link";
 import { useMediaQuery } from "@react-hook/media-query";
 
-interface Product {
-    id: number;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    idVariety: string;
-}
-
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -38,7 +29,7 @@ const Body = () => {
     const isMobile = useMediaQuery("(max-width: 768px)");
 
     useEffect(() => {
-        axios.get('http://localhost:8082/product/all')
+        axios.get('http://localhost:8082/product/type/all')
             .then(async (response) => {
                 console.log('Data from API:', response.data);
                 const productData = await Promise.all(response.data.map(async (product: Product) => {

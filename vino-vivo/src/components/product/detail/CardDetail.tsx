@@ -18,7 +18,6 @@ export interface WineProps {
     wine: IwineDetail;
 };
 
-
 export default function CardDetail({wine }: Readonly<WineProps>) {    
     
     return (            
