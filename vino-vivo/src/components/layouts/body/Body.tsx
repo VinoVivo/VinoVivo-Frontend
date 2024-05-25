@@ -29,7 +29,7 @@ const Body = () => {
     const isMobile = useMediaQuery("(max-width: 768px)");
 
     useEffect(() => {
-        axios.get('http://localhost:8082/product/all')
+        axios.get('http://localhost:8082/product/type/all')
             .then(async (response) => {
                 console.log('Data from API:', response.data);
                 const productData = await Promise.all(response.data.map(async (product: Product) => {

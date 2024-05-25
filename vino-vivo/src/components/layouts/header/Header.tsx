@@ -33,13 +33,13 @@ const Header = () => {
                             <DropdownMenuLabel>Categorias</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem className="text-secondary hover:text-beige">
-                                <Link href="/" className="text-secondary hover:text-beige">Vino Tinto</Link>
+                                <Link href="/type/3" className="text-secondary hover:text-beige">Vino Tinto</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-secondary hover:text-black">
-                                <Link href="/" className="text-secondary hover:text-beige">Vino Blanco</Link>
+                                <Link href="/type/2" className="text-secondary hover:text-beige">Vino Blanco</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-secondary hover:text-black">
-                                <Link href="/" className="text-secondary hover:text-beige">Vino Rosado</Link>
+                                <Link href="/type/1" className="text-secondary hover:text-beige">Vino Rosado</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <Link href="/" className="text-secondary hover:text-beige">Vino Espumoso</Link>
