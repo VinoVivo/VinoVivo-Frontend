@@ -4,17 +4,8 @@ import { Button } from '../ui/button';
 
 
 
-interface ProductCard {
-    id: number;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    idVariety: string;
-}
 
-
-const cardProduct = ({product}:{product:ProductCard}) => {
+const cardProduct = ({product}:{product:Product}) => {
   return (
    <Card>
     <CardHeader>
@@ -24,14 +15,12 @@ const cardProduct = ({product}:{product:ProductCard}) => {
        
     </CardHeader>
     <CardContent>
+    {product.image}
     {product.description}
     </CardContent>
     <CardFooter>
         <Button>
-           
-
-
-           
+           Editar
         </Button>
     </CardFooter>
 
