@@ -5,7 +5,9 @@ import ContextProvider from '@/context/page';
 export default function Home() {
   return (
     <>
+    <ContextProvider>
       <Body/>
+      </ContextProvider>
     </>
   );
 }
