@@ -1,11 +1,12 @@
 import React from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
+import Image from 'next/image';
 
 
 
 
-const cardProduct = ({product}:{product:Product}) => {
+const CardProduct = ({product}:{product:Product}) => {
   return (
    <Card>
     <CardHeader>
@@ -15,7 +16,12 @@ const cardProduct = ({product}:{product:Product}) => {
        
     </CardHeader>
     <CardContent>
-    {product.image}
+        
+    <Image
+    src={product.image} 
+    width={500}
+      height={500}
+      alt="Picture of the author"></Image> 
     {product.description}
     </CardContent>
     <CardFooter>
@@ -28,4 +34,4 @@ const cardProduct = ({product}:{product:Product}) => {
   )
 }
 
-export default cardProduct
+export default CardProduct
