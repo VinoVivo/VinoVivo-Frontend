@@ -1,6 +1,7 @@
 'use client'
 import Body from '@/components/layouts/body/Body';
-import ContextProvider from '@/context/page';
+import ContextProvider from '@/context';
+
 
 export default function Home() {
   return (
