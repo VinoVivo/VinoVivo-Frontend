@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 
 export interface ProductState {
-    productList: Product | Product[];
+    productList: Product[];
     productDetail: {};
   }
   

@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+
 
 const CardProduct = ({product}:{product:Product}) => {
    
