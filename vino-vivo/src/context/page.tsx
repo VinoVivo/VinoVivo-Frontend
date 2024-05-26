@@ -27,7 +27,12 @@ const ContextProvider = ({ children}:{children:ReactNode}) => {
       .then(data => productListDispatch({ type: 'GET_PRODUCTS', payload: data }))
       .catch(error => console.error('Error fetching products:', error));
   };
-
+  const getProduct = (url:string) => {
+      fetch(url)
+      .then(response => response.json())
+      .then(data => productListDispatch({ type: 'GET_PRODUCTS', payload: data }))
+      .catch(error => console.error('Error fetching products:', error));
+  };
   return (
     <ContextGlobal.Provider value={{ productListState, productListDispatch, getProductList }}>
       {children}
