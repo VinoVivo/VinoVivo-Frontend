@@ -11,20 +11,47 @@ interface ProductFormValues {
     stock: number;   
     nameWinery: string;
     nameVariety: string;    
-    nameType: string;
+    nameType: string;                   
 };
 
 export default function RegisterProductForm() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<ProductFormValues>();
 
+    // const onSubmit: SubmitHandler<ProductFormValues> = async (data) => {
+    //     try {
+    //         const response = await axios.post('http://localhost:8082/product/create', {
+    //             id: 0,
+    //             ...data,
+    //             idWinery: 4,
+    //             idVariety: 4,   
+    //             idType: 3,
+    //         });
+    //         console.log('Producto creado:', response.data);
+    //     } catch (error) {
+    //         console.error('Error al crear el producto:', error);
+    //     }
+    // };
     const onSubmit: SubmitHandler<ProductFormValues> = async (data) => {
         try {
-            const response = await axios.post('http://localhost:8082/product/create', {
-                id: 0,
-                ...data
+            const payload = {
+                ...data,
+            };
+
+            const response = await fetch('http://localhost:8082/product/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 0, ...payload })
             });
-            console.log('Producto creado:', response.data);
+
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+            }
+
+            const responseData = await response.json();
+            console.log('Producto creado:', responseData);
         } catch (error) {
             console.error('Error al crear el producto:', error);
         }
