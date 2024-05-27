@@ -7,7 +7,6 @@ import { FaCartPlus } from "react-icons/fa";
 import { IwineDetail } from "@/types/detail/detail.types";
 import { useRouter } from "next/navigation";
 
-
 interface CardRigthSideProps {
     wine: IwineDetail;
 }

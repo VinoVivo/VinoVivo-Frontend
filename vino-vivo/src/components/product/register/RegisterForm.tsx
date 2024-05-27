@@ -1,37 +1,11 @@
 'use client'
+import { ProductFormValues } from '@/types/products/products.types';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import axios from 'axios';
-
-interface ProductFormValues {
-    name: string;
-    description: string;    
-    image: string;
-    year: number;
-    price: number; 
-    stock: number;   
-    nameWinery: string;
-    nameVariety: string;    
-    nameType: string;                   
-};
 
 export default function RegisterProductForm() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<ProductFormValues>();
 
-    // const onSubmit: SubmitHandler<ProductFormValues> = async (data) => {
-    //     try {
-    //         const response = await axios.post('http://localhost:8082/product/create', {
-    //             id: 0,
-    //             ...data,
-    //             idWinery: 4,
-    //             idVariety: 4,   
-    //             idType: 3,
-    //         });
-    //         console.log('Producto creado:', response.data);
-    //     } catch (error) {
-    //         console.error('Error al crear el producto:', error);
-    //     }
-    // };
     const onSubmit: SubmitHandler<ProductFormValues> = async (data) => {
         try {
             const payload = {
