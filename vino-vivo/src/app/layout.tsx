@@ -22,19 +22,10 @@ export default function RootLayout({
     <ContextProvider>
     <html lang="es">
       <body className={inter.className}>
-        <header>
-          <meta
-            name="descripción"
-            content= "En Vino Vivo, podrás encontrar además de una gran variedad de exquisitos vinos, la posibilidad de contactarnos para visitar el establecimiento físico y disfrutar de las catas que tenemos para ti" 
-          >            
-          </meta>
-          <Header />
-        </header>
-        {children}
-        <footer>
-          <Footer />
-        </footer>
-      </body>
+        <Header />
+          {children} 
+        <Footer />       
+     </body>
     </html>
     </ContextProvider>
   );
