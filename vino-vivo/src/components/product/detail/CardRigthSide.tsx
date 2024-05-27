@@ -1,16 +1,18 @@
+'use client'
 import {  CardContent} from "@/components/ui/card";
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaCartPlus } from "react-icons/fa";
-import { IwineDetail } from "./CardDetail";
+import { IwineDetail } from "@/types/detail/detail.types";
+import { useRouter } from "next/navigation";
 
 
 interface CardRigthSideProps {
     wine: IwineDetail;
 }
 export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
-    
+    const {back} = useRouter();
     return(
         <CardContent className="flex flex-col  ml-6 justify-between">
             <h1 className="text-xl font-bold mb-1">{wine.name}</h1>
@@ -30,7 +32,9 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
                                 </div>
                             </Link>
                         </Button>
-                        <Link className={  buttonVariants({ variant: "outline", size:"icon" }) } href={'./'}><IoIosArrowBack className="h-4 w-4" /></Link>
+                        <Button variant="outline" size="icon" onClick={back}>
+                            <IoIosArrowBack className="h-4 w-4" />
+                        </Button>
             </div>
         </CardContent>
     )
