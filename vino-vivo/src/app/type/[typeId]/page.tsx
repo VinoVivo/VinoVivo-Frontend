@@ -1,13 +1,19 @@
 'use client';
-import Footer from "@/components/layouts/footer/Footer";
-import Header from "@/components/layouts/header/Header";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Title } from "@/components/Title/Title";
 import Link from "next/link";
 import { IwineDetail } from "@/components/product/detail/CardDetail";
-
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination";
 
 interface WineType {
     id: number;
@@ -17,13 +23,23 @@ interface WineType {
 export default function TypePage() {
     const [products, setProducts] = useState<IwineDetail[]>([]);
     const [wineTypes, setWineType] = useState<WineType[]>([]);
-    const path = usePathname()
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize] = useState(8); // Cambia el tamaño de la página según sea necesario
+    const path = usePathname();
+    const isAllPath = path.endsWith('/all');
     const id = path.match(/\d+$/)?.[0];
 
     useEffect(() => {
-        if (id) {
-            axios.get(`http://localhost:8082/product/type/${id}`)
-                .then(async (response) => {
+        const fetchProducts = async () => {
+            try {
+                let response;
+                if (isAllPath) {
+                    response = await axios.get(`http://localhost:8082/product/type/all`);
+                } else if (id) {
+                    response = await axios.get(`http://localhost:8082/product/type/${id}`);
+                }
+
+                if (response) {
                     const productData = await Promise.all(response.data.map(async (product: IwineDetail) => {
                         try {
                             const varietyResponse = await axios.get(`http://localhost:8082/variety/id/${product.variety}`);
@@ -33,19 +49,21 @@ export default function TypePage() {
                         }
                         return product;
                     }));
-                    setProducts(productData)
-                })
-                .catch(error => {
-                    console.error('Error al obtener los productos de este tipo:', error);
-                });
-        }
-    }, [id]);
+                    setProducts(productData);
+                }
+            } catch (error) {
+                console.error('Error al obtener los productos de este tipo:', error);
+            }
+        };
+
+        fetchProducts();
+    }, [id, isAllPath]);
 
     useEffect(() => {
         axios.get(`http://localhost:8082/type/all`)
             .then(response => {
                 const productData = response.data;
-                setWineType(productData)
+                setWineType(productData);
             })
             .catch(error => {
                 console.error('Error al obtener el listado de los tipos de vino:', error);
@@ -57,21 +75,24 @@ export default function TypePage() {
         const item = wineTypes.find(item => item.id === id);
         return item ? item.name : undefined;
     }
-    const nameType = "Vino " + getTypeNameById(id ? parseInt(id) : 0);
-    console.log("el titulo es:");
-    console.log(nameType);
 
+    const nameType = isAllPath ? "Todos los vinos" : "Vino " + getTypeNameById(id ? parseInt(id) : 0);
+
+    // Calcular los productos a mostrar en la página actual
+    const startIndex = (currentPage - 1) * pageSize;
+    const currentProducts = products.slice(startIndex, startIndex + pageSize);
+
+    const totalPages = Math.ceil(products.length / pageSize);
 
     return (
         <>
-            <Header />
-            <div className=" grid justify-center mb-10 mt-40">
+            <div className="grid justify-center mb-10 mt-40">
                 <div className="grid justify-center mb-10 mt-5">
                     <Title title={nameType}></Title>
                 </div>
                 <div className="flex justify-center">
                     <div className="grid grid-cols-4 gap-6">
-                        {products.map(product => (
+                        {currentProducts.map(product => (
                             <div key={product.id} className="bg-white rounded-lg border border-gray-200 p-6 w-64">
                                 <Link href={`/detail/${product.id}`}>
                                     <img src={product.image} alt={product.name} className="transform transition-transform duration-300 hover:cursor-pointer" />
@@ -88,10 +109,24 @@ export default function TypePage() {
                         ))}
                     </div>
                 </div>
-
+                <Pagination className="mt-2">
+                    <PaginationContent>
+                        <PaginationItem>
+                            <PaginationPrevious href="#" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} />
+                        </PaginationItem>
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <PaginationItem key={index}>
+                                <PaginationLink href="#" onClick={() => setCurrentPage(index + 1)}>
+                                    {index + 1}
+                                </PaginationLink>
+                            </PaginationItem>
+                        ))}
+                        <PaginationItem>
+                            <PaginationNext href="#" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} />
+                        </PaginationItem>
+                    </PaginationContent>
+                </Pagination>
             </div>
-
-            <Footer />
         </>
     );
 };

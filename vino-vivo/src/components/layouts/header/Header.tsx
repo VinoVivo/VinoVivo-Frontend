@@ -28,18 +28,18 @@ const Header = () => {
                 </div>
                 <div className="hidden md:flex items-center space-x-8">
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="text-beige hover:text-gray-300">PRODUCTOS</DropdownMenuTrigger>
+                        <DropdownMenuTrigger className="text-primary-foreground hover:text-gray-300">PRODUCTOS</DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuLabel>Categorias</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem className="text-secondary hover:text-beige">
-                                <Link href="/" className="text-secondary hover:text-beige">Vino Tinto</Link>
+                                <Link href="/type/3" className="text-secondary hover:text-beige">Vino Tinto</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-secondary hover:text-black">
-                                <Link href="/" className="text-secondary hover:text-beige">Vino Blanco</Link>
+                                <Link href="/type/2" className="text-secondary hover:text-beige">Vino Blanco</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-secondary hover:text-black">
-                                <Link href="/" className="text-secondary hover:text-beige">Vino Rosado</Link>
+                                <Link href="/type/1" className="text-secondary hover:text-beige">Vino Rosado</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <Link href="/" className="text-secondary hover:text-beige">Vino Espumoso</Link>
@@ -47,10 +47,10 @@ const Header = () => {
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <Link href="/concept">
-                        <span className="text-beige hover:text-gray-300">CONCEPTO</span>
+                        <span className="text-primary-foreground hover:text-gray-300">CONCEPTO</span>
                     </Link>
                     <Link href="/contact">
-                        <span className="text-beige hover:text-gray-300">CONTACTO</span>
+                        <span className="text-primary-foreground hover:text-gray-300">CONTACTO</span>
                     </Link>
                     <div className="flex space-x-1 items-center">
                         <input
@@ -61,7 +61,20 @@ const Header = () => {
                         <FaSearch className="text-white text-xl" />
                     </div>
                     <div className="flex space-x-4 items-center">
-                        <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className="text-beige hover:text-gray-300"><FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" /></DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="text-secondary hover:text-beige">
+                                <Link href="/" className="text-secondary hover:text-beige">Ingresar</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="text-secondary hover:text-black">
+                                <Link href="/" className="text-secondary hover:text-beige">Crear cuenta</Link>
+                            </DropdownMenuItem>
+            
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                           
                         <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
                     </div>
                 </div>
