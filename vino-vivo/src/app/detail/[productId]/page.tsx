@@ -1,7 +1,5 @@
-import CardDetail, { IwineDetail } from "@/components/product/detail/CardDetail";
-// import axios from "axios";
-// import { usePathname } from "next/navigation";
-// import { useEffect, useState } from "react";
+import CardDetail from "@/components/product/detail/CardDetail";
+import { IwineDetail } from "@/types/detail/detail.types";
 import { notFound } from 'next/navigation';
 
 interface DetailPageProps {

@@ -11,7 +11,6 @@ interface CardRigthSideProps {
 }
 export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
     
-   
     return(
         <CardContent className="flex flex-col  ml-6 justify-between">
             <h1 className="text-xl font-bold mb-1">{wine.name}</h1>
