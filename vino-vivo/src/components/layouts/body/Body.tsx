@@ -2,15 +2,38 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "@/components/carrousel/Carrousel";
 import Loader from "@/components/loader/page";
-import axios from 'axios';
+// import axios from 'axios';
 import Link from "next/link";
 import { useMediaQuery } from "@react-hook/media-query";
+import { getProductList } from "@/lib/utils";
+
+
+
 
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
+    const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
     const [showMore, setShowMore] = useState(false);
-    const visibleProducts = showMore ? products : products.slice(0, 4);
+  
+    useEffect(() => {
+        setLoading(true)
+        const fetchProducts = async () => {
+          const productList = await getProductList();
+          setProducts(productList);
+          showMore ? setVisibleProducts(productList.slice(0, 4)) : setVisibleProducts(productList.slice(0, 3))
+        };
+    
+        fetchProducts();
+       
+        setLoading(false)
+      }, [showMore]);
+    
+  
+   
+
+
+    // const visibleProducts = showMore ? products : products.slice(0, 4);
     const images: string[] = [
         '/maridaje.jpg',
         '/bodega.jpg',
@@ -27,27 +50,28 @@ const Body = () => {
     ]
 
     const isMobile = useMediaQuery("(max-width: 768px)");
+      
 
-    useEffect(() => {
-        axios.get('http://localhost:8082/product/type/all')
-            .then(async (response) => {
-                console.log('Data from API:', response.data);
-                const productData = await Promise.all(response.data.map(async (product: Product) => {
-                    try {
-                        const varietyResponse = await axios.get(`http://localhost:8082/variety/id/${product.idVariety}`);
-                        product.idVariety = varietyResponse.data.name;
-                    } catch (error) {
-                        console.error('Error fetching variety:', error);
-                    }
-                    return product;
-                }));
-                setProducts(productData);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching products:', error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios.get('http://localhost:8082/product/type/all')
+    //         .then(async (response) => {
+    //             console.log('Data from API:', response.data);
+    //             const productData = await Promise.all(response.data.map(async (product: Product) => {
+    //                 try {
+    //                     const varietyResponse = await axios.get(`http://localhost:8082/variety/id/${product.idVariety}`);
+    //                     product.idVariety = varietyResponse.data.name;
+    //                 } catch (error) {
+    //                     console.error('Error fetching variety:', error);
+    //                 }
+    //                 return product;
+    //             }));
+    //             setProducts(productData);
+    //             setLoading(false);
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching products:', error);
+    //         });
+    // }, []);
 
     return (
         <div className="mt-40">
@@ -62,6 +86,7 @@ const Body = () => {
                         </>
                     )}
                 </div>
+               
                 <div className="flex justify-center items-center mb-6">
                     <p className="font-light italic mt-5 text-neutral-500 text-center text-lg">
                         <a className="font-bold italic text-xl">"</a>
@@ -79,7 +104,7 @@ const Body = () => {
 
             <div className="flex justify-center">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {visibleProducts.map(product => (
+                    { visibleProducts.map(product => (
                         <div key={product.id} className="bg-white rounded-lg border border-gray-200 p-6 w-full sm:w-64">
                             <Link href={`/detail/${product.id}`}>
                                 <img src={product.image} alt={product.name} className="w-full h-auto transform transition-transform duration-300 hover:scale-105" />
@@ -93,19 +118,28 @@ const Body = () => {
                                 COMPRAR
                             </button>
                         </div>
-                    ))}
+                    ))
+                    
+                    
+                }
+              
                 </div>
             </div>
 
-            <div className="flex justify-center mb-5">
-                <button
-                    className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded"
-                    onClick={() => setShowMore(!showMore)}
-                >
-                    {showMore ? 'MOSTRAR MENOS' : 'MOSTRAR MÁS'}
-                </button>
-            </div>
-        </div>
+            <div className="flex justify-center mb-5 gap-4">
+      
+        <button
+          className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded"
+          onClick={() => setShowMore(!showMore)}
+        >
+        {showMore ? 'MOSTRAR MENOS': 'MOSTRAR MÁS'} 
+        </button>
+      </div>
+   
+
+    </div>
+           
+         
     );
 };
 
