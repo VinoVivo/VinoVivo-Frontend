@@ -4,5 +4,7 @@ interface Product {
     description: string;
     image: string;
     price: number;
-    idVariety: string;
+    nameWinery: string,
+    nameVariety: string,
+    nameType: string
 }
