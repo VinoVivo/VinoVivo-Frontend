@@ -30,11 +30,6 @@ const handlers = [
     }
   },
   {
-    method: 'string',
-    url: 'string',
-    response: (req: any, res: any, ctx: any) => any,
-  },
-  {
     method: 'get', 
     url: 'http://localhost:8082/variety/id/2',
     response: (req: any, res: any, ctx: any) => {
