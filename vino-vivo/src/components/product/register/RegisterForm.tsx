@@ -1,38 +1,63 @@
 'use client'
 import { Title } from '@/components/Title/Title';
+import BackButton from '@/components/ui/BackButton';
+import { AlertDialogAction, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { ProductFormValues } from '@/types/products/products.types';
+import { AlertDialog, AlertDialogContent } from '@radix-ui/react-alert-dialog';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { FaRegCircleCheck } from "react-icons/fa6";
+import { MdReportGmailerrorred } from "react-icons/md";
 
 export default function RegisterProductForm() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<ProductFormValues>();
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogMessage, setDialogMessage] = useState("");
+    const [dialogType, setDialogType] = useState<"success" | "error">("success");
 
     const onSubmit: SubmitHandler<ProductFormValues> = async (data) => {
-        // try {
-        //     const payload = {
-        //         ...data,
-        //     };
+        try {
+            const payload = { ...data };
 
-        //     const response = await fetch('http://localhost:8082/product/create', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({ id: 0, ...payload })
-        //     });
+            const response = await fetch('http://localhost:8082/product/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: 0, ...payload })
+            });
 
-        //     if (!response.ok) {
-        //         throw new Error('Error en la respuesta del servidor');
-        //     }
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+            }
 
-        //     const responseData = await response.json();
-        //     console.log('Producto creado:', responseData);
-        // } catch (error) {
-        //     console.error('Error al crear el producto:', error);
-        // }
-        console.log({data});
-        
+            const responseData = await response.json();
+            console.log('Producto creado:', responseData);
+            setDialogType("success");
+            setDialogMessage('Su producto ha sido creado exitosamente');
+        } catch (error) {
+            console.error('Error al crear el producto:', error);
+            setDialogType("error");
+            setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
+        } finally {
+            setDialogOpen(true);
+        }
+
+        // para probar unicamente los cuadros de dialogo sin crear un producto: 
+
+    //     const simulateSuccess = false; // Cambia esto a false para probar el caso de error
+    //     if (simulateSuccess) {
+    //         console.log('Producto creado:', data);
+    //         setDialogType("success");
+    //         setDialogMessage('Su producto ha sido creado exitosamente');
+    //     } else {
+    //         console.error('Error al crear el producto');
+    //         setDialogType("error");
+    //         setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
+    //     }        
+    //     setDialogOpen(true);
     };
     
     const handleTextInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -49,7 +74,10 @@ export default function RegisterProductForm() {
 
     return (
         <div className="max-w-4xl mx-auto mx-4 my-40 sm:mx-auto">
-            <Title title="Registro de Producto" color="beige"/>
+            <div className='flex direction-row'>
+                <Title title="Registro de Producto" color="beige"/>
+                <span className="ml-2"><BackButton/></span>
+            </div>            
             <form onSubmit={handleSubmit(onSubmit)} className=" shadow-md rounded px-8 pt-6 pb-8 my-6 grid gap-4 sm:grid-cols-2 border-primary border-2">
                 {/* name */}
                 <div className="mb-4">
@@ -98,7 +126,7 @@ export default function RegisterProductForm() {
                         <option value="1">Rosado</option>
                         <option value="2">Blanco</option>
                         <option value="3">Tinto</option>                        
-                        <option value="4">Espumoso</option>                        
+                        <option value="4" className="hover:bg-violeta">Espumoso</option>                        
                     </select>
                     {errors.idType && <p className="text-red-500 text-xs italic">{errors.idType.message}</p>}
                 </div>
@@ -203,20 +231,6 @@ export default function RegisterProductForm() {
                     {errors.year && <p className="text-red-500 text-xs italic">{errors.year.message}</p>}
                 </div>
                 {/* description */}
-                {/* <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                        Descripción
-                    </label>
-                    <textarea
-                        {...register('description', {
-                            required: 'Este campo es requerido',
-                            minLength: { value: 20, message: 'Debe tener al menos 20 caracteres' },
-                        })}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Descripción"
-                    />
-                    {errors.description && <p className="text-red-500 text-xs italic">{errors.description.message}</p>}
-                </div> */}
                 <div className="mb-4 col-span-full">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
                         Descripción
@@ -224,9 +238,10 @@ export default function RegisterProductForm() {
                     <textarea
                         {...register('description', {
                             required: 'Este campo es requerido',
-                            minLength: { value: 20, message: 'Debe tener al menos 20 caracteres' },
+                            minLength: { value: 30, message: 'Debe tener al menos 20 caracteres' },
+                            maxLength: { value: 400, message: 'Debe tener hasta 200 caracteres' },
                         })}
-                        className=" h-40 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className=" h-30 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Descripción"
                     />
                     {errors.description && <p className="text-red-500 text-xs italic">{errors.description.message}</p>}
@@ -248,6 +263,30 @@ export default function RegisterProductForm() {
                     </Button>
                 </div>
             </form>
+            <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <AlertDialogContent className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-10 shadow-lg justify-between border-primary border-2">
+                    <AlertDialogHeader className="flex flex-col items-center">                        
+                            <AlertDialogTitle className='mt-2 mb-2 text-3xl'>
+                                {dialogType === "success" ? "Éxito" : "Error"}                                
+                            </AlertDialogTitle>
+                            {dialogType === "success" ? (
+                                    <FaRegCircleCheck className="h-12 w-12 text-green-500 mb-2" />
+                                ) : (
+                                    <MdReportGmailerrorred className="h-12 w-12 text-red-500 mb-2" />
+                                )}
+                            <AlertDialogDescription className='text-base'>
+                                {dialogMessage}
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter className='mt-4'>
+                            <AlertDialogAction onClick={() => setDialogOpen(false)}>
+                                Cerrar
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </div>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     );
 }
