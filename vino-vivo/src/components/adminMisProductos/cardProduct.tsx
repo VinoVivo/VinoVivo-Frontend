@@ -1,15 +1,18 @@
 import React from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
+import { Button, buttonVariants } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { IoMdTrash } from 'react-icons/io';
+
 
 const CardProduct = ({product}:{product:Product}) => {
    
   return (
    <Card className=' bg-background  rounded-lg border border-gray-200 p-6 w-full sm:w-64'>
-    
+    <CardTitle className='text-right'>
+    <Link className={  buttonVariants({ variant: "outline",  className:'border-none text-destructive hover:text-primary'}) } href={'./'}><IoMdTrash className="h-6 w-6" /></Link>
+    </CardTitle>
     <CardContent>
     <Link href={`/product/register`}>
     <Image
