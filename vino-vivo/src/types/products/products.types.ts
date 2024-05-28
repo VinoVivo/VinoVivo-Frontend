@@ -14,7 +14,7 @@ export interface ProductFormValues {
     year: number;
     price: number; 
     stock: number;   
-    nameWinery: string;
-    nameVariety: string;    
-    nameType: string;                   
+    idWinery: number;
+    idVariety: number;    
+    idType: number;                   
 };
