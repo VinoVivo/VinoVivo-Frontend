@@ -1,5 +1,6 @@
 'use client'
 import { Title } from '@/components/Title/Title';
+import { Button } from '@/components/ui/button';
 import { ProductFormValues } from '@/types/products/products.types';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -47,7 +48,7 @@ export default function RegisterProductForm() {
     return (
         <div className="max-w-lg mx-auto my-40">
             <Title title="Registro de Producto" color="beige"/>
-            <form onSubmit={handleSubmit(onSubmit)} className=" shadow-md rounded px-8 pt-6 pb-8 my-6 grid gap-4 sm:grid-cols-2 ">
+            <form onSubmit={handleSubmit(onSubmit)} className=" shadow-md rounded px-8 pt-6 pb-8 my-6 grid gap-4 sm:grid-cols-2 border-primary border-2">
                 {/* name */}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
@@ -66,21 +67,23 @@ export default function RegisterProductForm() {
                     />
                     {errors.name && <p className="text-red-500 text-xs italic">{errors.name.message}</p>}
                 </div>
-                {/* description */}
+                {/* image */}               
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                        Descripción
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
+                        Imagen del producto
                     </label>
-                    <textarea
-                        {...register('description', {
+                    <input
+                        {...register('image', {
                             required: 'Este campo es requerido',
-                            minLength: { value: 20, message: 'Debe tener al menos 20 caracteres' },
+                            minLength: { value: 5, message: 'Debe tener al menos 5 caracteres' },
                         })}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Descripción"
+                        type="text"
+                        placeholder="Imagen del producto"
                     />
-                    {errors.description && <p className="text-red-500 text-xs italic">{errors.description.message}</p>}
+                    {errors.image && <p className="text-red-500 text-xs italic">{errors.image.message}</p>}
                 </div>
+                
                 {/* wine type */}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nameType">
@@ -192,30 +195,56 @@ export default function RegisterProductForm() {
                     />
                     {errors.year && <p className="text-red-500 text-xs italic">{errors.year.message}</p>}
                 </div>
-                {/* image */}               
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
-                        Imagen del producto
+                {/* description */}
+                {/* <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                        Descripción
                     </label>
-                    <input
-                        {...register('image', {
+                    <textarea
+                        {...register('description', {
                             required: 'Este campo es requerido',
-                            minLength: { value: 5, message: 'Debe tener al menos 5 caracteres' },
+                            minLength: { value: 20, message: 'Debe tener al menos 20 caracteres' },
                         })}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text"
-                        placeholder="Imagen del producto"
+                        placeholder="Descripción"
                     />
-                    {errors.image && <p className="text-red-500 text-xs italic">{errors.image.message}</p>}
+                    {errors.description && <p className="text-red-500 text-xs italic">{errors.description.message}</p>}
+                </div> */}
+                <div className="mb-4 col-span-full">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                        Descripción
+                    </label>
+                    <textarea
+                        {...register('description', {
+                            required: 'Este campo es requerido',
+                            minLength: { value: 20, message: 'Debe tener al menos 20 caracteres' },
+                        })}
+                        className=" h-40 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Descripción"
+                    />
+                    {errors.description && <p className="text-red-500 text-xs italic">{errors.description.message}</p>}
                 </div>
                 {/* botón */}
-                <div className="flex items-center justify-end  ">
-                    <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
-                        type="submit"
+                <div className="flex justify-end col-span-full ">
+                    <Button
+                        className=" 
+                            bg-primary 
+                            text-white
+                            hover: hover:bg-white 
+                            hover:text-primary 
+                            hover:border-primary    
+                            border-2                   
+                            font-bold 
+                            py-2 
+                            px-4 
+                            rounded 
+                            w-full
+                            focus:outline-none 
+                            focus:shadow-outline "
+                        type="submit"                        
                     >
                         Crear
-                    </button>
+                    </Button>
                 </div>
             </form>
         </div>
