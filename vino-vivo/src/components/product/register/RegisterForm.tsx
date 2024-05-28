@@ -1,4 +1,5 @@
 'use client'
+import { Title } from '@/components/Title/Title';
 import { ProductFormValues } from '@/types/products/products.types';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -45,8 +46,8 @@ export default function RegisterProductForm() {
 
     return (
         <div className="max-w-lg mx-auto my-40">
-            <h1 className="text-2xl font-bold my-4">Registro de Producto</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className=" shadow-md rounded px-8 pt-6 pb-8 mb-4 grid gap-4 sm:grid-cols-2 ">
+            <Title title="Registro de Producto" color="beige"/>
+            <form onSubmit={handleSubmit(onSubmit)} className=" shadow-md rounded px-8 pt-6 pb-8 my-6 grid gap-4 sm:grid-cols-2 ">
                 {/* name */}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
