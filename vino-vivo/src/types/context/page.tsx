@@ -1,4 +1,5 @@
 import { Dispatch } from "react";
+import { Product } from "../products/products.types";
 
 export interface ProductState {
     productList: Product | Product[];
@@ -13,6 +14,4 @@ export interface ProductState {
  export interface ContextProps {
     productListState: ProductState;
     productListDispatch: Dispatch<Action>;
-    getProductList: () => void;
-    getProduct: (url: string) => void;
-  }
+     }
