@@ -83,7 +83,9 @@
       --ring: 354, 32.6%, 61%;
     }
   }
-
+  /* select option:hover  { 
+    background-color:var(--primary); 
+  } */
   @layer base {
     * {
       @apply border-border;

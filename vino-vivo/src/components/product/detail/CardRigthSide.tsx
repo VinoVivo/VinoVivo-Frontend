@@ -20,11 +20,11 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
             </div>            
             <div className="grid grid-cols-[30%_70%] mb-4">
                 <div className="text-left font-bold">
-                <p className="mb-1">Tipo: </p>                
+                <p className="mb-1">Tipo de vino: </p>                
                 <p className="mb-1">Año: </p>
                 <p className="mb-1">Bodega: </p>
-                <p className="mb-1">Variedad: </p>
-                <p className="mb-1">Stock: </p>
+                <p className="mb-1">Variedad de uva: </p>
+                <p className="mb-1">Stock disponible: </p>
                 <p className="mb-1">Precio: </p>
                 <p className="mb-1">Descripción: </p>
                 </div>
@@ -35,7 +35,7 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
                     <p className="mb-1">{wine.variety}</p>
                     <p className="mb-1">{wine.stock}</p>
                     <p className="mb-1 font-bold">{wine.price}</p>
-                    <p className="mb-1">{wine.description}</p>
+                    <p className="mb-1 text-justify">{wine.description}</p>
                 </div>                
             </div>
             <div className="flex flex-row justify-between mt-4">
