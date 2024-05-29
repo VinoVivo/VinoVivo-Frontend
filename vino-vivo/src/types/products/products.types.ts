@@ -7,9 +7,11 @@ export interface Product {
     price: number;
     nameWinery: string,
     nameVariety: string,
-    nameType: string
-    idVariety: number;  
-}
+    nameType: string,
+    idVariety: number; 
+    stock?:number
+  }
+
 
 export interface ProductFormValues {
   name: string;
@@ -24,3 +26,13 @@ export interface ProductFormValues {
 }
 
 
+
+export interface ICardProduct {
+  product: Product, 
+  textButton: string, 
+  icon: React.ReactNode, 
+  href: string, 
+  deleteProduct: (id: number) => Promise<void>
+
+
+}
