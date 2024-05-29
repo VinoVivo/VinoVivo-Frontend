@@ -143,6 +143,7 @@ export const DataContact = () => {
           setValid={setisValid}
           title="Formulario enviado"
           description="Pronto nos pondremos en contacto!"
+          condicion="success"
         />
       )}
     </Form>
