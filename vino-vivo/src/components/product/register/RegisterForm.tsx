@@ -73,7 +73,7 @@ export default function RegisterProductForm() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto mx-4 my-40 sm:mx-auto">
+        <div className="max-w-4xl mx-4 my-40 sm:mx-auto">
             <div className='flex direction-row'>
                 <Title title="Registro de Producto" color="beige"/>
                 <span className="ml-2"><BackButton/></span>
@@ -120,13 +120,13 @@ export default function RegisterProductForm() {
                     </label>
                     <select
                         {...register('idType', { required: 'Este campo es requerido' })}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline "
                     >
                         <option value="">Selecciona el tipo de vino</option>
                         <option value="1">Rosado</option>
                         <option value="2">Blanco</option>
                         <option value="3">Tinto</option>                        
-                        <option value="4" className="hover:bg-violeta">Espumoso</option>                        
+                        <option value="4">Espumoso</option>                        
                     </select>
                     {errors.idType && <p className="text-red-500 text-xs italic">{errors.idType.message}</p>}
                 </div>
