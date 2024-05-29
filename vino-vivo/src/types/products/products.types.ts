@@ -1,15 +1,20 @@
+import { ReactNode } from "react";
+
 export interface Product {
-    id: number;
+    id: string;
     name: string;
     description: string;
     image: string;
     price: number;
-    nameWinery?: string,
-    nameVariety?: string,
-    nameType?: string
+    stock?:number;
+    nameWinery: string,
+    nameVariety: string,
+    nameType: string 
+    year?: number
 }
 
 export interface ProductFormValues {
+    id?: string,
     name: string;
     description: string;    
     image: string;
@@ -20,3 +25,11 @@ export interface ProductFormValues {
     idVariety: number;    
     idType: number;                   
 };
+
+export interface ICardProduct{
+    product: Product;
+    textButton: string;
+    icon?: ReactNode;
+    onclick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    href: string
+}

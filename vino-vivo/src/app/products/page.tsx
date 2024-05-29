@@ -6,6 +6,7 @@ import Loader from '@/components/loader/page';
 import { FaSearch } from 'react-icons/fa';
 import { Title } from '@/components/Title/Title';
 import Accordion from '@/components/accordion/page';
+import { Product } from '@/types/products/products.types';
 
 const ProductsPage = () => {
     const [products, setProducts] = useState<Product[]>([]);
