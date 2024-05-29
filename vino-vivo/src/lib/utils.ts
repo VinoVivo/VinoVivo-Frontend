@@ -20,8 +20,6 @@ export const getProductList = async (): Promise<Product[]> => {
 
     const data: Product[] = await response.json();
 
-    console.log("dataPagination", data);
-
     return data;
   } catch (error) {
     console.error("Error:", error);
