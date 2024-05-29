@@ -50,3 +50,36 @@ export const deleteProduct = async (id: number) => {
 
 
 };
+
+export const getVariety = async () => {
+  const url: string = `${baseUrl}/variety/all`
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Error fetching products');
+  }
+  const variety = await response.json();
+  return variety;
+};
+
+export const getType = async () => {
+  const url: string = `${baseUrl}type/all`
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Error fetching products');
+  }
+  const type = await response.json();
+  return type;
+};
+
+export const getWinery = async () => {
+  const url: string = `${baseUrl}type/all`
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Error fetching products');
+  }
+  const winery = await response.json();
+  return winery;
+};

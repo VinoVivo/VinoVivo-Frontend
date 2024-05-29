@@ -5,8 +5,12 @@ import { deleteProduct, getProductList } from '@/lib/utils';
 import {  Product } from '@/types/products/products.types';
 import { IoMdTrash } from 'react-icons/io';
 
+interface Props {
+  deleteProduct: (id: number) => Promise<void>; // Función para eliminar un producto
+}
 
-const ProductGrid  = () => {
+
+const ProductGrid: React.FC<Props> = ({ deleteProduct })  => {
   interface DetailPageProps {
     params: {
         id: string;
@@ -35,7 +39,7 @@ useEffect(() => {
 
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[150px]">
       {products.map((product: Product,  index: number) => (
-        <CardProduct key={index} product={product} textButton="Editar" href='product/update'  icon={<IoMdTrash className='text-desctructive '/>} />
+        <CardProduct key={index} product={product} textButton="Editar" href='product/update' deleteProduct={ deleteProduct} icon={<IoMdTrash className='text-desctructive '/>} />
       ))}
     </div>
   );

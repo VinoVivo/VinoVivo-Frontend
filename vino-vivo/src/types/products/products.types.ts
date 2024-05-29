@@ -32,6 +32,7 @@ export interface ICardProduct {
     textButton: string, 
     icon: React.ReactNode, 
     href: string, 
+    deleteProduct: (id: number) => Promise<void>
   
 
 }
