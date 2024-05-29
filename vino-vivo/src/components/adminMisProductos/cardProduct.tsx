@@ -4,6 +4,7 @@ import { Button, buttonVariants } from '../ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IoMdTrash } from 'react-icons/io';
+import { Product } from '@/types/products/products.types';
 
 
 const CardProduct = ({product}:{product:Product}) => {

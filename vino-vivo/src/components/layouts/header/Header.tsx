@@ -26,7 +26,7 @@ const Header = () => {
     const user = {
         isLogged: false,
         isAdmin: false,
-        inicials: "EZ" 
+        inicials: "EZ"
     }
 
     return (
@@ -39,16 +39,19 @@ const Header = () => {
                 </div>
                 <div className="hidden md:flex items-center space-x-8">
                     <DropdownMenu>
-                        <DropdownMenuTrigger><span className={`relative
+                        <DropdownMenuTrigger>
+                            <span className={`relative
                             text-primary-foreground hover:text-gray-300
                             before:content-[''] before:absolute before:w-full before:scale-x-0 
                             before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left
                             ${activeLink === '/type/?' ? 'before:scale-x-100 before:origin-bottom-left' : ''}`}
-                             >PRODUCTOS</span></DropdownMenuTrigger>
+                            >PRODUCTOS
+                            </span>
+                        </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                            <DropdownMenuLabel>Categorias</DropdownMenuLabel>
+                            <DropdownMenuLabel>Categorías</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem className="text-secondary hover:text-beige">
                                 <Link href="/type/3" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/?')}>Vino Tinto</span></Link>
@@ -62,10 +65,13 @@ const Header = () => {
                             <DropdownMenuItem>
                                 <Link href="/" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/?')}>Vino Espumoso</span></Link>
                             </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <Link href="/products" className="text-secondary hover:text-beige">Ver Todos</Link>
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <Link href="/concept">
-                    <span
+                        <span
                             className={`relative
                             text-primary-foreground hover:text-gray-300
                             before:content-[''] before:absolute before:w-full before:scale-x-0 
@@ -77,7 +83,7 @@ const Header = () => {
                         >CONCEPTO</span>
                     </Link>
                     <Link href="/contact">
-                    <span
+                        <span
                             className={`relative 
                             text-primary-foreground hover:text-gray-300
                             before:content-[''] before:absolute before:w-full before:scale-x-0 
@@ -90,46 +96,46 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className="hidden md:flex space-x-4 items-center">
-                        {user.isLogged && (
-                            <DropdownMenu>
+                    {user.isLogged && (
+                        <DropdownMenu>
                             <DropdownMenuTrigger className="text-beige hover:text-gray-300">{user.isLogged ? user.inicials : (<FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />)}</DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                            <DropdownMenuContent>
 
-                                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                                        {user.isAdmin ?
+                                <DropdownMenuItem className="text-secondary hover:text-beige">
+                                    {user.isAdmin ?
                                         <Link href="/" className="text-secondary hover:text-beige">Mis productos</Link>
                                         : <Link href="/" className="text-secondary hover:text-beige">Mis compras</Link>
-                                        }        
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className="text-secondary hover:text-black">
-                                        <Link href="/" className="text-secondary hover:text-beige">Otra </Link>
-                                    </DropdownMenuItem>
+                                    }
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className="text-secondary hover:text-black">
+                                    <Link href="/" className="text-secondary hover:text-beige">Otra </Link>
+                                </DropdownMenuItem>
 
 
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        )
-                        }
-                        {!user.isLogged && (
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    )
+                    }
+                    {!user.isLogged && (
 
-                            <DropdownMenu>
-                                <DropdownMenuTrigger className="text-beige hover:text-gray-300"><FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" /></DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger className="text-beige hover:text-gray-300"><FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" /></DropdownMenuTrigger>
+                            <DropdownMenuContent>
 
-                                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                                        <Link href="/" className="text-secondary hover:text-beige">Ingresar</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className="text-secondary hover:text-black">
-                                        <Link href="/" className="text-secondary hover:text-beige">Crear cuenta</Link>
-                                    </DropdownMenuItem>
+                                <DropdownMenuItem className="text-secondary hover:text-beige">
+                                    <Link href="/" className="text-secondary hover:text-beige">Ingresar</Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className="text-secondary hover:text-black">
+                                    <Link href="/" className="text-secondary hover:text-beige">Crear cuenta</Link>
+                                </DropdownMenuItem>
 
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        )
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    )
 
-                        }
-                        <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                    </div>
+                    }
+                    <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                </div>
                 <div className="md:hidden flex items-center">
                     <button onClick={toggleMenu} className="text-white text-2xl cursor-pointer hover:text-gray-300">
                         <FaBars />
@@ -150,46 +156,46 @@ const Header = () => {
                         <Link href="/contact">
                             <span className="text-beige hover:text-gray-300">CONTACTO</span>
                         </Link>
-                        
+
                         <div className="flex space-x-4 items-center">
-                        {user.isLogged && (
-                            <DropdownMenu>
-                            <DropdownMenuTrigger className="text-beige hover:text-gray-300">{user.isLogged ? user.inicials : (<FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />)}</DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                            {user.isLogged && (
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger className="text-beige hover:text-gray-300">{user.isLogged ? user.inicials : (<FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />)}</DropdownMenuTrigger>
+                                    <DropdownMenuContent>
 
-                                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                                        {user.isAdmin ?
-                                        <Link href="/" className="text-secondary hover:text-beige">Mis productos</Link>
-                                        : <Link href="/" className="text-secondary hover:text-beige">Mis compras</Link>
-                                        }        
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className="text-secondary hover:text-black">
-                                        <Link href="/" className="text-secondary hover:text-beige">Otra </Link>
-                                    </DropdownMenuItem>
+                                        <DropdownMenuItem className="text-secondary hover:text-beige">
+                                            {user.isAdmin ?
+                                                <Link href="/" className="text-secondary hover:text-beige">Mis productos</Link>
+                                                : <Link href="/" className="text-secondary hover:text-beige">Mis compras</Link>
+                                            }
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="text-secondary hover:text-black">
+                                            <Link href="/" className="text-secondary hover:text-beige">Otra </Link>
+                                        </DropdownMenuItem>
 
 
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        )
-                        }
-                        {!user.isLogged && (
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            )
+                            }
+                            {!user.isLogged && (
 
-                            <DropdownMenu>
-                                <DropdownMenuTrigger className="text-beige hover:text-gray-300"><FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" /></DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger className="text-beige hover:text-gray-300"><FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" /></DropdownMenuTrigger>
+                                    <DropdownMenuContent>
 
-                                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                                        <Link href="/" className="text-secondary hover:text-beige">Ingresar</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className="text-secondary hover:text-black">
-                                        <Link href="/" className="text-secondary hover:text-beige">Crear cuenta</Link>
-                                    </DropdownMenuItem>
+                                        <DropdownMenuItem className="text-secondary hover:text-beige">
+                                            <Link href="/" className="text-secondary hover:text-beige">Ingresar</Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="text-secondary hover:text-black">
+                                            <Link href="/" className="text-secondary hover:text-beige">Crear cuenta</Link>
+                                        </DropdownMenuItem>
 
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        )
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            )
 
-                        }
+                            }
                             <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
                         </div>
                     </div>

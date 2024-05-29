@@ -1,23 +1,24 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { getProductList } from "@/lib/utils";
-import Link from "next/link";
-import Loader from "@/components/loader/page";
-import { FaSearch } from "react-icons/fa";
-import { Title } from "@/components/Title/Title";
-import Accordion from "@/components/accordion/page";
-import { Product } from "@/types/products/products.types";
+'use client'
+import React, { useState, useEffect } from 'react';
+import { getProductList } from '@/lib/utils';
+import Link from 'next/link';
+import Loader from '@/components/loader/page';
+import { FaSearch } from 'react-icons/fa';
+import { Title } from '@/components/Title/Title';
+import Accordion from '@/components/accordion/page';
+import { Product } from '@/types/products/products.types';
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedVarieties, setSelectedVarieties] = useState<string[]>([]);
-  const [selectedWineries, setSelectedWineries] = useState<string[]>([]);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [minPrice, setMinPrice] = useState<number | null>(null);
-  const [maxPrice, setMaxPrice] = useState<number | null>(null);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedVarieties, setSelectedVarieties] = useState<string[]>([]);
+    const [selectedWineries, setSelectedWineries] = useState<string[]>([]);
+    const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+    const [selectedYears, setSelectedYears] = useState<string[]>([]);
+    const [minPrice, setMinPrice] = useState<number | null>(null);
+    const [maxPrice, setMaxPrice] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -33,50 +34,33 @@ const ProductsPage = () => {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    let filtered = products.filter((product) => {
-      if (
-        searchTerm &&
-        !product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ) {
-        return false;
-      }
-      if (
-        selectedTypes.length > 0 &&
-        !selectedTypes.includes(product.nameType)
-      ) {
-        return false;
-      }
-      if (
-        selectedVarieties.length > 0 &&
-        !selectedVarieties.includes(product.nameVariety)
-      ) {
-        return false;
-      }
-      if (
-        selectedWineries.length > 0 &&
-        !selectedWineries.includes(product.nameWinery)
-      ) {
-        return false;
-      }
-      if (minPrice !== null && product.price < minPrice) {
-        return false;
-      }
-      if (maxPrice !== null && product.price > maxPrice) {
-        return false;
-      }
-      return true;
-    });
-    setFilteredProducts(filtered);
-  }, [
-    products,
-    searchTerm,
-    selectedTypes,
-    selectedVarieties,
-    selectedWineries,
-    minPrice,
-    maxPrice,
-  ]);
+    useEffect(() => {
+        let filtered = products.filter(product => {
+            if (searchTerm && !product.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return false;
+            }
+            if (selectedTypes.length > 0 && !selectedTypes.includes(product.nameType)) {
+                return false;
+            }
+            if (selectedVarieties.length > 0 && !selectedVarieties.includes(product.nameVariety)) {
+                return false;
+            }
+            if (selectedWineries.length > 0 && !selectedWineries.includes(product.nameWinery)) {
+                return false;
+            }
+            if (selectedYears.length > 0 && !selectedYears.includes(product.year)) {
+                return false;
+            }
+            if (minPrice !== null && product.price < minPrice) {
+                return false;
+            }
+            if (maxPrice !== null && product.price > maxPrice) {
+                return false;
+            }
+            return true;
+        });
+        setFilteredProducts(filtered);
+    }, [products, searchTerm, selectedTypes, selectedVarieties, selectedWineries, selectedYears, minPrice, maxPrice]);
 
   const handleVarietyChange = (variety: string) => {
     if (selectedVarieties.includes(variety)) {
@@ -94,13 +78,21 @@ const ProductsPage = () => {
     }
   };
 
-  const handleWineryChange = (winery: string) => {
-    if (selectedWineries.includes(winery)) {
-      setSelectedWineries(selectedWineries.filter((v) => v !== winery));
-    } else {
-      setSelectedWineries([...selectedWineries, winery]);
-    }
-  };
+    const handleWineryChange = (winery: string) => {
+        if (selectedWineries.includes(winery)) {
+            setSelectedWineries(selectedWineries.filter(w => w !== winery));
+        } else {
+            setSelectedWineries([...selectedWineries, winery]);
+        }
+    };
+
+    const handleYearChange = (year: string) => {
+        if (selectedYears.includes(year)) {
+            setSelectedYears(selectedYears.filter(y => y !== year));
+        } else {
+            setSelectedYears([...selectedYears, year]);
+        }
+    };
 
   return (
     <div className="mt-20 sm:mt-40 mb-6 flex flex-col sm:flex-row">
@@ -148,25 +140,41 @@ const ProductsPage = () => {
             </ul>
           </Accordion>
 
-          <Accordion title="Bodega">
-            <ul>
-              {Array.from(
-                new Set(products.map((product) => product.nameWinery))
-              ).map((winery) => (
-                <li key={winery} className="mb-2">
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={selectedWineries.includes(winery)}
-                      onChange={() => handleWineryChange(winery)}
-                      className="mr-2 accent-violeta"
-                    />
-                    <span>{winery === "Todas" ? "Todas" : winery}</span>
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </Accordion>
+                    <Accordion title="Bodega">
+                        <ul>
+                            {Array.from(new Set(products.map(product => product.nameWinery))).map(winery => (
+                                <li key={winery} className="mb-2">
+                                    <label className="flex items-center">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedWineries.includes(winery)}
+                                            onChange={() => handleWineryChange(winery)}
+                                            className="mr-2 accent-violeta"
+                                        />
+                                        <span>{winery === 'Todas' ? 'Todas' : winery}</span>
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+                    </Accordion>
+
+                    <Accordion title="Año">
+                        <ul>
+                            {Array.from(new Set(products.map(product => product.year))).map(year => (
+                                <li key={year} className="mb-2">
+                                    <label className="flex items-center">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedYears.includes(year)}
+                                            onChange={() => handleYearChange(year)}
+                                            className="mr-2 accent-violeta"
+                                        />
+                                        <span>{year === 'Todas' ? 'Todas' : year}</span>
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+                    </Accordion>
 
           <Accordion title="Precio">
             <div>
