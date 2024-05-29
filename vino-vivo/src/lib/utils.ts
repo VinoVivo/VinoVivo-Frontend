@@ -13,7 +13,7 @@ export const getProductList = async (): Promise<Product[]> => {
   const url: string = `${baseUrl}/product/type/all`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: 'no-store' });
     
     if (!response.ok) {
       throw new Error("Error fetching products"); // Lanzar un error si la solicitud no es exitosa
@@ -28,7 +28,8 @@ export const getProductList = async (): Promise<Product[]> => {
   }
 };
 
-export const getProduct = async (url:string) => {
+export const getProduct = async (id:number) => {
+  const url: string = `${baseUrl}/product/id/${id}`
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -38,3 +39,14 @@ export const getProduct = async (url:string) => {
   return products;
 };
 
+export const deleteProduct = async (id: number) => {
+  const url: string = `http://localhost:8082/product/delete/${id}`;
+
+
+    const response = await fetch(url, {
+      method: 'DELETE',
+      
+    });
+
+
+};

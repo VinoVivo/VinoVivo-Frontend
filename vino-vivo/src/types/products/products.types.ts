@@ -1,16 +1,17 @@
-import { ReactNode } from "react";
-
 export interface Product {
-    id: string;
+    id: number;
     name: string;
     description: string;
-    year: string;
+    year: string,
     image: string;
     price: number;
     nameWinery: string,
     nameVariety: string,
-    nameType: string
-    idVariety: number;  
+    nameType: string,
+    idVariety?: number,  
+    idWinery?: number;
+    idType?: number;
+    stock?:number
 }
 
 export interface ProductFormValues {
@@ -23,4 +24,14 @@ export interface ProductFormValues {
   idWinery: number;
   idVariety: number;
   idType: number;
+}
+
+
+export interface ICardProduct {
+    product: Product, 
+    textButton: string, 
+    icon: React.ReactNode, 
+    href: string, 
+  
+
 }

@@ -3,15 +3,15 @@ import { Title } from '@/components/Title/Title';
 import BackButton from '@/components/ui/BackButton';
 import { AlertDialogAction, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { getProduct, getTypeList, getVarietyList, getWineryList, updateProduct } from '@/lib/utils';
-import { Product, ProductFormValues } from '@/types/products/products.types';
+import { getProduct} from '@/lib/utils';
+import {  ProductFormValues } from '@/types/products/products.types';
 import { AlertDialog, AlertDialogContent } from '@radix-ui/react-alert-dialog';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { MdReportGmailerrorred } from "react-icons/md";
 
-export default function UpdateProductForm({ id }: { id: string }) {
+export default function UpdateProductForm({ id }: { id: number }) {
     const [product, setProduct] = useState<ProductFormValues>()
     const { register, handleSubmit, formState: { errors } } = useForm<ProductFormValues>();
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -53,12 +53,12 @@ export default function UpdateProductForm({ id }: { id: string }) {
         try {
             const payload = { ...data };
 
-            const response = await fetch(`http://localhost:8082/product/updat/${id}`, {
-                method: 'POST',
+            const response = await fetch('http://localhost:8082/product/update', {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({...payload })
+                body: JSON.stringify({id, ...payload })
             });
 
             if (!response.ok) {
