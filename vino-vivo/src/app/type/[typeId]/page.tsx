@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Title } from "@/components/Title/Title";
 import Link from "next/link";
-import { IwineDetail } from "@/types/detail/detail.types";
 import {
   Pagination,
   PaginationContent,
@@ -14,6 +13,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { IwineDetail } from "@/types/detail/detail.types";
 
 interface WineType {
   id: number;

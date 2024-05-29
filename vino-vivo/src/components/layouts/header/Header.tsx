@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaUser, FaShoppingCart, FaBars } from "react-icons/fa";
 import {
@@ -12,9 +13,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState<string | null>(null);
-
+  const [activeLink, setActiveLink] = useState<string | null>(pathname);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -38,11 +39,29 @@ const Header = () => {
               src="/logo-vinovivo.png"
               alt="logo"
               className="h-12 md:h-24"
-              onClick={() => handleLinkClick("/home")}
+              onClick={() => handleLinkClick("/")}
             ></img>
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-8">
+          <Link href="/">
+            <span
+              className={`relative
+                            text-primary-foreground hover:text-gray-300
+                            before:content-[''] before:absolute before:w-full before:scale-x-0 
+                            before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
+                            before:origin-bottom-right before:transition-transform before:duration-300 
+                            hover:before:scale-x-100 hover:before:origin-bottom-left
+                            ${
+                              activeLink === "/"
+                                ? "before:scale-x-100 before:origin-bottom-left"
+                                : ""
+                            }`}
+              onClick={() => handleLinkClick("/")}
+            >
+              INICIO
+            </span>
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger>
               <span
@@ -53,7 +72,8 @@ const Header = () => {
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left
                             ${
-                              activeLink === "/type/?"
+                              activeLink?.includes("/type/") ||
+                              activeLink === "/products"
                                 ? "before:scale-x-100 before:origin-bottom-left"
                                 : ""
                             }`}
@@ -62,14 +82,14 @@ const Header = () => {
               </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>Categorias</DropdownMenuLabel>
+              <DropdownMenuLabel>Categorías</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-secondary hover:text-beige">
                 <Link
                   href="/type/3"
                   className="text-secondary hover:text-beige"
                 >
-                  <span onClick={() => handleLinkClick("/type/?")}>
+                  <span onClick={() => handleLinkClick("/type/3")}>
                     Vino Tinto
                   </span>
                 </Link>
@@ -79,7 +99,7 @@ const Header = () => {
                   href="/type/2"
                   className="text-secondary hover:text-beige"
                 >
-                  <span onClick={() => handleLinkClick("/type/?")}>
+                  <span onClick={() => handleLinkClick("/type/2")}>
                     Vino Blanco
                   </span>
                 </Link>
@@ -89,7 +109,7 @@ const Header = () => {
                   href="/type/1"
                   className="text-secondary hover:text-beige"
                 >
-                  <span onClick={() => handleLinkClick("/type/?")}>
+                  <span onClick={() => handleLinkClick("/type/1")}>
                     Vino Rosado
                   </span>
                 </Link>
@@ -98,6 +118,16 @@ const Header = () => {
                 <Link href="/" className="text-secondary hover:text-beige">
                   <span onClick={() => handleLinkClick("/type/?")}>
                     Vino Espumoso
+                  </span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  href="/products"
+                  className="text-secondary hover:text-beige"
+                >
+                  <span onClick={() => handleLinkClick("/products")}>
+                    Ver Todos
                   </span>
                 </Link>
               </DropdownMenuItem>

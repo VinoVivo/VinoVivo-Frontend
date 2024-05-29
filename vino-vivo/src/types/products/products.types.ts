@@ -1,12 +1,14 @@
 export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-  nameWinery?: string;
-  nameVariety?: string;
-  nameType?: string;
+    id: number;
+    name: string;
+    description: string;
+    year: string;
+    image: string;
+    price: number;
+    nameWinery: string,
+    nameVariety: string,
+    nameType: string
+    idVariety: number;  
 }
 
 export interface ProductFormValues {
@@ -20,3 +22,5 @@ export interface ProductFormValues {
   idVariety: number;
   idType: number;
 }
+
+
