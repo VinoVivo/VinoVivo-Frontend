@@ -1,21 +1,8 @@
 'use client'
+import { Action, ContextProps, ProductState } from '@/types/context/page';
 import React, { createContext, useContext, useReducer, ReactNode, Dispatch } from 'react';
 
-interface ProductState {
-  productList: any[];
-  productDetail: any;
-}
 
-interface Action {
-  type: 'GET_PRODUCTS' | 'GET_PRODUCT';
-  payload: any;
-}
-
-interface ContextProps {
-  productListState: ProductState;
-  productListDispatch: Dispatch<Action>;
-
-}
 
 const ContextGlobal = createContext<ContextProps | undefined>(undefined);
 

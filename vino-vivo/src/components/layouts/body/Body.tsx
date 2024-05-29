@@ -5,6 +5,7 @@ import Loader from "@/components/loader/page";
 import Link from "next/link";
 import { useMediaQuery } from "@react-hook/media-query";
 import { getProductList } from "@/lib/utils";
+import { Product } from "@/types/products/products.types";
 
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
