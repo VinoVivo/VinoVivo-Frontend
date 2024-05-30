@@ -11,11 +11,7 @@ const MisProductos= () => {
       const url: string = `http://localhost:8082/product/delete/${id}`; 
       const response = await fetch(`http://localhost:8082/product/delete/${id}`, {
         method: 'DELETE',
-        headers: {
-          'Content-type': 'application/json'
-
-        }
-      });
+              });
   
       if (!response.ok) {
         throw new Error('Failed to delete product');
