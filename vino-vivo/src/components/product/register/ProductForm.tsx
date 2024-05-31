@@ -10,9 +10,9 @@ interface ProductFormProps {
 };
 
 const ProductForm: React.FC<ProductFormProps> = ({ onSubmit, wineries, types, varieties}) => {
+    
     const { register, handleSubmit, formState: { errors } } = useForm<ProductFormValues>();
     
-
     const handleTextInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!/^[A-Za-z\s]*$/.test(e.key) && e.key !== 'Backspace') {
             e.preventDefault();
