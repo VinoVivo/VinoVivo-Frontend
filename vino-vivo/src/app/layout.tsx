@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layouts/header/Header";
 import Footer from "@/components/layouts/footer/Footer";
 import ContextProvider from "@/context/page";
+import PrelineScript from "@/components/PrelineScript";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </body>
+        <PrelineScript />
       </html>
     </ContextProvider>
   );

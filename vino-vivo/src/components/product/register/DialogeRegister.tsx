@@ -1,5 +1,5 @@
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';import { ProductFormValues } from '@/types/products/products.types';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { MdReportGmailerrorred } from "react-icons/md";
 
@@ -8,10 +8,8 @@ interface DialogProps {
     onOpenChange: (open: boolean) => void;
     type: "success" | "error";
     message: string;
-}
-
-const DialogeRegister: React.FC<DialogProps> = ({ open, onOpenChange, type, message }) => {
-    // const initialValues: ProductFormValues = {
+};
+ // const initialValues: ProductFormValues = {
     //     name: '',
     //     image: '',
     //     idType: 0,
@@ -22,29 +20,11 @@ const DialogeRegister: React.FC<DialogProps> = ({ open, onOpenChange, type, mess
     //     year: 0,
     //     description: ''
     // };
-    const { reset } = useForm<ProductFormValues>();
 
-    const handleCloseDialog = () => {
-        onOpenChange(false);
-        reset();
-    };
-    // const handleResetForm = () => {
-    //     reset( 
-    //         {
-    //             name: '',
-    //             image: '',
-    //             idType: 0,
-    //             idWinery: 0,
-    //             idVariety: 0,
-    //             stock: 0,
-    //             price: 0,
-    //             year: 0,
-    //             description: ''
-    //         },
-    //         { keepDirtyValues: false }
-    //     );   
-    //     onOpenChange(false); 
-    // };
+const DialogeRegister: React.FC<DialogProps> = ({ open, onOpenChange, type, message }) => {
+
+    // const { reset } = useForm<ProductFormValues>();
+
     return (
         <AlertDialog open={open} onOpenChange={onOpenChange}>
             <AlertDialogContent className="fixed flex items-center justify-center z-50">

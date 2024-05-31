@@ -4,7 +4,7 @@ import styles from "./title.module.css";
 
 interface TitleProps {
   title: string;
-  color: string;
+  color: "violeta" | "beige";
 }
 export const Title: FC<TitleProps> = ({ title, color }) => {
   let bgColor =
