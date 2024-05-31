@@ -80,9 +80,9 @@ export default function Register() {
 
     return (
         <div className="max-w-4xl mx-4 my-40 lg:mx-auto">
-            <div className='flex direction-row'>
+            <div className="flex  flex-col sm:flex-row justify-between items-center mb-4">
                 <Title title="Registro de Producto" color="beige"/>
-                <span className="ml-2"><BackButton/></span>
+                <span className="ml-2 sm:mt-0"><BackButton/></span>
             </div>            
             <ProductForm onSubmit={onSubmit} wineries={wineries} types={types} varieties={varieties}/>
             <DialogeRegister open={dialogOpen}  onOpenChange={setDialogOpen} type={dialogType} message={dialogMessage} />

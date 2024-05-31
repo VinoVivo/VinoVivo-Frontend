@@ -1,4 +1,3 @@
-
 import {  CardContent} from "@/components/ui/card";
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
@@ -18,7 +17,8 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
                 <h1 className="text-xl font-bold mb-1">{wine.name}</h1>
                 {/* <span className="ml-2">Icon</span> */}
             </div>            
-            <div className="grid grid-cols-[30%_70%] mb-4">
+            {/* <div className="grid grid-cols-[30%_70%] mb-4"> */}
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
                 <div className="text-left font-bold">
                 <p className="mb-1">Tipo de vino: </p>                
                 <p className="mb-1">Año: </p>
