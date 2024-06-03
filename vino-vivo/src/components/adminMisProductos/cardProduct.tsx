@@ -6,26 +6,6 @@ import { ICardProduct } from '@/types/products/products.types';
 
 const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, deleteProduct}) => {
 
-  
-
-  // const deleteProduct = async (id: number) => {
-  //   try {
-  //     const url: string = `http://localhost:8082/product/delete/${id}`; // Usando una ruta relativa
-  
-  //     const response = await fetch(url, {method: 'DELETE'});
-  
-  //     if (!response.ok) {
-  //       throw new Error('Failed to delete product');
-  //     }
-  
-  //     // Si la eliminación fue exitosa, podrías realizar alguna acción adicional si es necesario, como actualizar la lista de productos.
-  
-  //   } catch (error) {
-  //     console.error('Error deleting product:', error);
-  //     // Maneja el error de acuerdo a tus necesidades, podría ser mostrar un mensaje al usuario.
-  //   }
-  // };
-  
 
 
   return (
@@ -49,5 +29,7 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
     </div>
   )
 }
+
+export default CardProduct;
 
 export default CardProduct;
