@@ -32,4 +32,3 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
 
 export default CardProduct;
 
-export default CardProduct;

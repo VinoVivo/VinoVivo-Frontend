@@ -1,4 +1,4 @@
-import { IIdName } from "@/types/idName/idName.types";
+import { IIdName} from "@/types/idName/idName.types";
 import { Product, ProductFormValues } from "@/types/products/products.types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -51,35 +51,35 @@ export const deleteProduct = async (id: number) => {
 
 };
 
-export const getVariety = async () => {
+export const getVariety = async (): Promise<IIdName[]> => {
   const url: string = `${baseUrl}/variety/all`
 
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Error fetching products');
   }
-  const variety = await response.json();
+  const variety:IIdName[] = await response.json();
   return variety;
 };
 
-export const getType = async () => {
+export const getType = async (): Promise<IIdName[]> => {
   const url: string = `${baseUrl}type/all`
 
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Error fetching products');
   }
-  const type = await response.json();
+  const type:IIdName[] = await response.json();
   return type;
 };
 
-export const getWinery = async () => {
-  const url: string = `${baseUrl}type/all`
+export const getWinery = async (): Promise<IIdName[]> => {
+  const url: string = `${baseUrl}type/all`;
 
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Error fetching products');
   }
-  const winery = await response.json();
+  const winery: IIdName[] = await response.json();
   return winery;
 };

@@ -10,7 +10,7 @@ import UpdateProductForm from '@/components/product/update/page';
 
 interface DetailPageProps {
     params: {
-id: string | undefined;
+    id: string | undefined;
     };
 }
 
@@ -37,7 +37,9 @@ async function fetchProductData(id: string | undefined): Promise<Product | null>
         nameWinery: productData.nameWinary,
         nameVariety: productData.nameVariety,
         nameType: productData.nameType,
+       
         };
+        console.log(product)
         return product;
     } catch (error) {
         console.error('Error al obtener los detalles del producto:', error);

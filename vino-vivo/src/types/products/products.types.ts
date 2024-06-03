@@ -8,7 +8,6 @@ export interface Product {
     nameWinery: string,
     nameVariety: string,
     nameType: string,
-    idVariety: number; 
     stock?:number
   }
 

@@ -26,7 +26,7 @@ const MisProductos= () => {
   
  
   return (
-   <AdminMisProductos deleteProduct={deleteProduct}/>
+   <AdminMisProductos />
   )
 }
 
