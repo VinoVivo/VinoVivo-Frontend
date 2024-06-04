@@ -20,11 +20,11 @@ export default function UpdateProductForm({ id }: { id: number }) {
     const [wineries, setWineries] = useState<IIdName[]>([]);
     const [types, setTypes] = useState<IIdName[]>([]);
     const [varieties, setVarieties] = useState<IIdName[]>([]);
-    const { register, handleSubmit, formState: { errors } } = useForm<ProductFormValues>();
+    const { register, handleSubmit,  setValue, formState: { errors } } = useForm<ProductFormValues>();
     const defaultWineryId = wineries.find(winery => winery.name === product?.nameWinery)?.id;
     const defaultTypeId = types.find(type => type.name === product?.nameType)?.id;
     const defaultVarietyId = varieties.find(variety => variety.name === product?.nameVariety)?.id;
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -38,6 +38,16 @@ export default function UpdateProductForm({ id }: { id: number }) {
                 setWineries(wineriesResponse);
                 setTypes(typesResponse);
                 setVarieties(varietiesResponse);
+
+                setValue('name', productResponse.name);
+                setValue('image', productResponse.image);
+                setValue('idType', typesResponse.find(type => type.name === productResponse.nameType)?.id || undefined as number | undefined);
+                setValue('idWinery', wineriesResponse.find(winery => winery.name === productResponse.nameWinery)?.id ||  undefined as number | undefined);
+                setValue('idVariety', varietiesResponse.find(variety => variety.name === productResponse.nameVariety)?.id || undefined as number | undefined);
+                setValue('stock', productResponse.stock);
+                setValue('price', productResponse.price);
+                setValue('year', productResponse.year);
+                setValue('description', productResponse.description);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -143,7 +153,7 @@ export default function UpdateProductForm({ id }: { id: number }) {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         defaultValue={defaultTypeId || ''}
                    >
-                        <option value={defaultTypeId}>{product?.nameType}</option>
+                        <option value=''>Seleciona un tipo</option>
                         {types.map((type) => (
                              <option key={type.id} value={type.id}>{type.name}</option>
                          ))}
@@ -164,7 +174,7 @@ export default function UpdateProductForm({ id }: { id: number }) {
                             defaultValue={defaultWineryId}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         >
-                            <option value={defaultWineryId}>{product?.nameWinery}</option>
+                            <option value=''>Seleciona una bodega</option>
                             {wineries.map((winery) => (
                                 <option key={winery.id} value={winery.id}>
                                     {winery.name}
@@ -184,7 +194,7 @@ export default function UpdateProductForm({ id }: { id: number }) {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         defaultValue={defaultVarietyId}
                    >   
-                        <option value={defaultVarietyId}>{product?.nameVariety}</option>
+                       <option value=''>Seleciona un variedad</option>
                        {varieties.map((variety) => (
                                 <option key={variety.id} value={variety.id}>{variety.name}</option>
                             ))}
