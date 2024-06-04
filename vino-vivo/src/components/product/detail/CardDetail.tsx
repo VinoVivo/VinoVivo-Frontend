@@ -1,8 +1,8 @@
 import {Card, CardContent,} from "@/components/ui/card";
 import Image from 'next/image';
 import CardRigthSide from "./CardRigthSide";
-import { IwineDetail } from "@/types/detail/detail.types";
 import { Title } from "@/components/Title/Title";
+import { IwineDetail } from "@/types/detail/detail.types";
 
 export interface WineProps {
     wine: IwineDetail;

@@ -62,77 +62,86 @@ const Header = () => {
               INICIO
             </span>
           </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <span
-                className={`relative
+          <div className="m-1 hs-dropdown [--trigger:hover] relative inline-flex">
+            <button
+              id="hs-dropdown-hover-event"
+              type="button"
+              className=" hover:text-gray-300
+                            before:content-[''] before:absolute before:w-full before:scale-x-0 
+                            before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
+                            before:origin-bottom-right before:transition-transform before:duration-300 
+                            hover:before:scale-x-100 hover:before:origin-bottom-left hs-dropdown-toggle inline-flex items-center text-md text-primary-foreground font-lg disabled:opacity-50 disabled:pointer-events-none"
+            >
+              PRODUCTOS
+            </button>
+            <div
+              className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-sm p-2 mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
+              aria-labelledby="hs-dropdown-hover-event"
+            >
+              <Link
+                href="/type/3"
+                className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-slate-700 hover:text-violeta focus:outline-none focus:bg-gray-100"
+              >
+                Tinto
+              </Link>
+              <Link
+                href="/type/2"
+                className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-slate-700 hover:text-violeta focus:outline-none focus:bg-gray-100"
+              >
+                Blanco
+              </Link>
+              <Link
+                href="/type/1"
+                className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-slate-700 hover:text-violeta focus:outline-none focus:bg-gray-100"
+              >
+                Rosado
+              </Link>
+              <Link
+                href="/type/4"
+                className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-slate-700 hover:text-violeta focus:outline-none focus:bg-gray-100"
+              >
+                Espumantes
+              </Link>
+              <Link
+                href="/products"
+                className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-violeta hover:text-violeta focus:outline-none focus:bg-gray-100"
+              >
+                Todos
+              </Link>
+            </div>
+          </div>
+          {/* <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <span className={`relative
                             text-primary-foreground hover:text-gray-300
                             before:content-[''] before:absolute before:w-full before:scale-x-0 
                             before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left
-                            ${
-                              activeLink?.includes("/type/") ||
-                              activeLink === "/products"
-                                ? "before:scale-x-100 before:origin-bottom-left"
-                                : ""
-                            }`}
-              >
-                PRODUCTOS
-              </span>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Categorías</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-secondary hover:text-beige">
-                <Link
-                  href="/type/3"
-                  className="text-secondary hover:text-beige"
-                >
-                  <span onClick={() => handleLinkClick("/type/3")}>
-                    Vino Tinto
-                  </span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-secondary hover:text-black">
-                <Link
-                  href="/type/2"
-                  className="text-secondary hover:text-beige"
-                >
-                  <span onClick={() => handleLinkClick("/type/2")}>
-                    Vino Blanco
-                  </span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-secondary hover:text-black">
-                <Link
-                  href="/type/1"
-                  className="text-secondary hover:text-beige"
-                >
-                  <span onClick={() => handleLinkClick("/type/1")}>
-                    Vino Rosado
-                  </span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/" className="text-secondary hover:text-beige">
-                  <span onClick={() => handleLinkClick("/type/?")}>
-                    Vino Espumoso
-                  </span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link
-                  href="/products"
-                  className="text-secondary hover:text-beige"
-                >
-                  <span onClick={() => handleLinkClick("/products")}>
-                    Ver Todos
-                  </span>
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                            ${activeLink?.includes('/type/') || activeLink === '/products' ? 'before:scale-x-100 before:origin-bottom-left' : ''}`}
+                            >PRODUCTOS
+                            </span>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel>Categorías</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="text-secondary hover:text-beige">
+                                <Link href="/type/3" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/3')}>Vino Tinto</span></Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="text-secondary hover:text-black">
+                                <Link href="/type/2" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/2')}>Vino Blanco</span></Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="text-secondary hover:text-black">
+                                <Link href="/type/1" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/1')}>Vino Rosado</span></Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <Link href="/" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/?')}>Vino Espumoso</span></Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <Link href="/products" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/products')}>Ver Todos</span></Link>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu> */}
           <Link href="/concept">
             <span
               className={`relative

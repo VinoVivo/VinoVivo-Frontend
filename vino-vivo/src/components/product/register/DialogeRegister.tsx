@@ -1,4 +1,4 @@
-import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';;
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { MdReportGmailerrorred } from "react-icons/md";
 
@@ -7,9 +7,23 @@ interface DialogProps {
     onOpenChange: (open: boolean) => void;
     type: "success" | "error";
     message: string;
-}
+};
+ // const initialValues: ProductFormValues = {
+    //     name: '',
+    //     image: '',
+    //     idType: 0,
+    //     idWinery: 0,
+    //     idVariety: 0,
+    //     stock: 0,
+    //     price: 0,
+    //     year: 0,
+    //     description: ''
+    // };
 
 const DialogeRegister: React.FC<DialogProps> = ({ open, onOpenChange, type, message }) => {
+
+    // const { reset } = useForm<ProductFormValues>();
+
     return (
         <AlertDialog open={open} onOpenChange={onOpenChange}>
             <AlertDialogContent className="fixed flex items-center justify-center z-50">
@@ -29,7 +43,7 @@ const DialogeRegister: React.FC<DialogProps> = ({ open, onOpenChange, type, mess
                     </AlertDialogHeader>
                     <AlertDialogFooter className='mt-6'>
                         <AlertDialogAction 
-                            onClick={() => onOpenChange(false)} 
+                            onClick={()=>onOpenChange}
                             className='hover: hover:bg-white hover:text-primary  hover:border-primary  border-2 '
                         >
                             Cerrar

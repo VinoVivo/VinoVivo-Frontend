@@ -7,14 +7,15 @@ import DialogeRegister from './DialogeRegister';
 import ProductForm from './ProductForm';
 import { SubmitHandler } from 'react-hook-form';
 
-export default function RegisterProductForm() {
+export default function Register() {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
     const [dialogType, setDialogType] = useState<"success" | "error">("success");
     const [wineries, setWineries] = useState<{ id: number, name: string }[]>([]);
     const [types, setTypes] = useState<{ id: number, name: string }[]>([]);
     const [varieties, setVarieties] = useState<{ id: number, name: string }[]>([]);
-
+    
+        
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -67,22 +68,23 @@ export default function RegisterProductForm() {
         //     console.log('Producto creado:', data);
         //     setDialogType("success");
         //     setDialogMessage('Su producto ha sido creado exitosamente');
+            
         // } else {
         //     console.error('Error al crear el producto');
         //     setDialogType("error");
         //     setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
         // }        
         // setDialogOpen(true);
-
     };
     
+
     return (
         <div className="max-w-4xl mx-4 my-40 lg:mx-auto">
-            <div className='flex direction-row'>
+            <div className="flex  flex-col sm:flex-row justify-between items-center mb-4">
                 <Title title="Registro de Producto" color="beige"/>
-                <span className="ml-2"><BackButton/></span>
+                <span className="ml-2 sm:mt-0"><BackButton/></span>
             </div>            
-            <ProductForm onSubmit={onSubmit} wineries={wineries} types={types} varieties={varieties} />
+            <ProductForm onSubmit={onSubmit} wineries={wineries} types={types} varieties={varieties}/>
             <DialogeRegister open={dialogOpen}  onOpenChange={setDialogOpen} type={dialogType} message={dialogMessage} />
         </div>
     );

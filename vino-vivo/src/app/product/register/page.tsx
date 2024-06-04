@@ -1,8 +1,8 @@
-import RegisterProductForm from "@/components/product/register/RegisterForm";
+import Register from "@/components/product/register/Register";
 
 
 export default function ProductRegister() {
     return (     
-            <RegisterProductForm/>      
+            <Register/>      
     )
 }
