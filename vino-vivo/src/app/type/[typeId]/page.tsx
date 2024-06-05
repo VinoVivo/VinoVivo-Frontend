@@ -34,10 +34,10 @@ export default function TypePage() {
       try {
         let response;
         if (isAllPath) {
-          response = await axios.get(`http://localhost:8082/product/type/all`);
+          response = await axios.get(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/product/type/all`);
         } else if (id) {
           response = await axios.get(
-            `http://localhost:8082/product/type/${id}`
+            `${process.env.NEXT_PUBLIC_GET_BASE_URL}/product/type/${id}`
           );
         }
 

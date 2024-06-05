@@ -6,10 +6,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const baseUrl: string = "http://localhost:8082";
+
 
 export const getProductList = async (): Promise<Product[]> => {
-  const url: string = `${baseUrl}/product/type/all`;
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/product/type/all`;
 
   try {
     const response = await fetch(url);
