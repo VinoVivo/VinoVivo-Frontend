@@ -174,7 +174,7 @@ const Header = () => {
                     )
 
                     }
-                    <Button onClick={openCart}>
+                    <Button className="bg-transparent" onClick={openCart}>
                         <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
                     </Button> 
                 </div>
@@ -204,7 +204,6 @@ const Header = () => {
                                 <DropdownMenu>
                                     <DropdownMenuTrigger className="text-beige hover:text-gray-300">{user.isLogged ? user.inicials : (<FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />)}</DropdownMenuTrigger>
                                     <DropdownMenuContent>
-
                                         <DropdownMenuItem className="text-secondary hover:text-beige">
                                             {user.isAdmin ?
                                                 <Link href="/" className="text-secondary hover:text-beige">Mis productos</Link>
@@ -233,7 +232,7 @@ const Header = () => {
                                 </DropdownMenu>
                             )
                             }
-                            <Button onClick={openCart}>
+                            <Button className="bg-transparent" onClick={openCart}>
                                 <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
                             </Button>                           
                         </div>
