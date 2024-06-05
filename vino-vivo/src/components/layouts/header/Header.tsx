@@ -11,11 +11,14 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useCart } from "@/context/CartContext";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeLink, setActiveLink] = useState<string | null>(pathname);
+    const {openCart} = useCart();
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     }
@@ -133,7 +136,7 @@ const Header = () => {
                             ${activeLink === '/contact' ? 'before:scale-x-100 before:origin-bottom-left' : ''}`}
                             onClick={() => handleLinkClick('/contact')}
                         >CONTACTO</span>
-                    </Link>
+                    </Link> 
                 </div>
                 <div className="hidden md:flex space-x-4 items-center">
                     {user.isLogged && (
@@ -150,8 +153,6 @@ const Header = () => {
                                 <DropdownMenuItem className="text-secondary hover:text-black">
                                     <Link href="/" className="text-secondary hover:text-beige">Otra </Link>
                                 </DropdownMenuItem>
-
-
                             </DropdownMenuContent>
                         </DropdownMenu>
                     )
@@ -168,13 +169,14 @@ const Header = () => {
                                 <DropdownMenuItem className="text-secondary hover:text-black">
                                     <Link href="/" className="text-secondary hover:text-beige">Crear cuenta</Link>
                                 </DropdownMenuItem>
-
                             </DropdownMenuContent>
                         </DropdownMenu>
                     )
 
                     }
-                    <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                    <Button onClick={openCart}>
+                        <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                    </Button> 
                 </div>
                 <div className="md:hidden flex items-center">
                     <button onClick={toggleMenu} className="text-white text-2xl cursor-pointer hover:text-gray-300">
@@ -212,8 +214,6 @@ const Header = () => {
                                         <DropdownMenuItem className="text-secondary hover:text-black">
                                             <Link href="/" className="text-secondary hover:text-beige">Otra </Link>
                                         </DropdownMenuItem>
-
-
                                     </DropdownMenuContent>
                                 </DropdownMenu>
                             )
@@ -223,22 +223,21 @@ const Header = () => {
                                 <DropdownMenu>
                                     <DropdownMenuTrigger className="text-beige hover:text-gray-300"><FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" /></DropdownMenuTrigger>
                                     <DropdownMenuContent>
-
                                         <DropdownMenuItem className="text-secondary hover:text-beige">
                                             <Link href="/" className="text-secondary hover:text-beige">Ingresar</Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className="text-secondary hover:text-black">
                                             <Link href="/" className="text-secondary hover:text-beige">Crear cuenta</Link>
                                         </DropdownMenuItem>
-
                                     </DropdownMenuContent>
                                 </DropdownMenu>
                             )
-
                             }
-                            <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                            <Button onClick={openCart}>
+                                <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                            </Button>                           
                         </div>
-                    </div>
+                    </div>                     
                 </div>
             )}
         </header>

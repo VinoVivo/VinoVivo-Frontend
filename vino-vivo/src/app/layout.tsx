@@ -5,6 +5,7 @@ import Header from "@/components/layouts/header/Header";
 import Footer from "@/components/layouts/footer/Footer";
 import ContextProvider from "@/context/page";
 import PrelineScript from "@/components/PrelineScript";
+import { CartProvider } from "@/context/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <ContextProvider>
-      <html lang="es">
+      <CartProvider>
+        <html lang="es">
         <body className={inter.className}>
           <Header />
           {children}
@@ -29,6 +31,8 @@ export default function RootLayout({
         </body>
         <PrelineScript />
       </html>
+      </CartProvider>
+      
     </ContextProvider>
   );
 }
