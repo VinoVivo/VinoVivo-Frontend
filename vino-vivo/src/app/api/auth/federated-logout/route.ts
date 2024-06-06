@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 function logoutParams(token: JWT): Record<string, string> {
   return {
     id_token_hint: token.idToken as string,
-    post_logout_redirect_uri: process.env.NEXTAUTH_URL,
+    post_logout_redirect_uri: `${process.env.NEXTAUTH_URL}`,
   };
 }
 
