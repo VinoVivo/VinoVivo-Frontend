@@ -7,6 +7,7 @@ import { FaSearch } from 'react-icons/fa';
 import { Title } from '@/components/Title/Title';
 import Accordion from '@/components/accordion/page';
 import { Product } from '@/types/products/products.types';
+import { useCart } from '@/context/CartContext';
 
 const ProductsPage = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -19,6 +20,7 @@ const ProductsPage = () => {
     const [selectedYears, setSelectedYears] = useState<string[]>([]);
     const [minPrice, setMinPrice] = useState<number | null>(null);
     const [maxPrice, setMaxPrice] = useState<number | null>(null);
+    const { openCart, addToCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -93,7 +95,18 @@ const ProductsPage = () => {
             setSelectedYears([...selectedYears, year]);
         }
     };
-
+    const handleBuyButtonClick = (product: Product) => {
+      const item = {
+          id: product.id,
+          name: product.name,
+          variety: product.nameVariety,
+          price: product.price,
+          image: product.image,
+          quantity: 1,
+      };
+      addToCart(item);
+      openCart();
+  };
   return (
     <div className="mt-20 sm:mt-40 mb-6 flex flex-col sm:flex-row">
       {/* Filtros */}
@@ -251,7 +264,7 @@ const ProductsPage = () => {
                       ${product.price}
                     </p>
                   </div>
-                  <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-2 py-1.5 px-4 rounded w-full">
+                  <button onClick={()=>handleBuyButtonClick(product)} className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-2 py-1.5 px-4 rounded w-full">
                     COMPRAR
                   </button>
                 </div>

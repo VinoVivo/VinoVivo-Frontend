@@ -1,12 +1,10 @@
 'use client';
 import {  CardContent} from "@/components/ui/card";
-import { Button } from "@/components/ui/button"
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { FaCartPlus } from "react-icons/fa";
 import { IwineDetail } from "@/types/detail/detail.types";
 import BackButton from "@/components/ui/BackButton";
 import { useCart } from "@/context/CartContext";
-
 
 interface CardRigthSideProps {
     wine: IwineDetail;
@@ -18,7 +16,7 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
         const item = {
             id: wine.id,
             name: wine.name.split(' ').slice(0, 2).join(' '), 
-            type: wine.type,
+            variety: wine.variety,
             price: wine.price,
             image: wine.image, 
             quantity: 1,
@@ -34,7 +32,6 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
                 <h1 className="text-xl font-bold mb-1">{wine.name}</h1>
                 {/* <span className="ml-2">Icon</span> */}
             </div>            
-            {/* <div className="grid grid-cols-[30%_70%] mb-4"> */}
             <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
                 <div className="text-left font-bold">
                 <p className="mb-1">Tipo de vino: </p>                
