@@ -71,7 +71,7 @@ const Body = () => {
                 </div>
             </div>
             <div>
-            <DrawerCart/>
+              <DrawerCart/>
             </div>
             <p className="text-fuchsia-900 text-center text-2xl font-semibold mb-2">NUESTRA PROPUESTA</p>
 

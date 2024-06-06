@@ -10,7 +10,7 @@ const Line: React.FC<LineProps> = ({
     color = 'bg-line',
     width = 'w-full',
     thickness = 'border-2',
-    margin= 'mt-2'
+    margin= 'mt-0'
 }) => {
     return (
         <div className={`flex`}>

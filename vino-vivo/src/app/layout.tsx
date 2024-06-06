@@ -24,15 +24,21 @@ export default function RootLayout({
     <ContextProvider>
       <CartProvider>
         <html lang="es">
+        <meta
+            name="description"
+            content="En vino vivo podrás encontrar además de una gran variedad de exquisitos vinos, la posibilidad de contactarnos para visitar el establecimiento físico y disfrutar de las experiencias que ofrecemos, como cata personalizada, entre otras."
+          >
+          </meta>
         <body className={inter.className}>
-          <Header />
-          {children}
-          <Footer />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </div>
         </body>
         <PrelineScript />
       </html>
-      </CartProvider>
-      
+      </CartProvider>      
     </ContextProvider>
   );
 }
