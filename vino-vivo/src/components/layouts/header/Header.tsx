@@ -11,6 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Login from "@/components/Login";
+import Logout from "@/components/Logout";
 
 const Header = () => {
   const pathname = usePathname();
@@ -216,18 +218,13 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Link
-                    href="/auth/signin"
-                    className="text-secondary hover:text-beige"
-                  >
-                    Ingresar
-                  </Link>
+                  <Login />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-secondary hover:text-beige">
+                  <Logout />
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link
-                    href="/auth/signout"
-                    className="text-secondary hover:text-beige"
-                  >
+                  <Link href="/" className="text-secondary hover:text-beige">
                     Crear cuenta
                   </Link>
                 </DropdownMenuItem>
@@ -306,12 +303,7 @@ const Header = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link
-                        href="/"
-                        className="text-secondary hover:text-beige"
-                      >
-                        Ingresar
-                      </Link>
+                      <Login />
                     </DropdownMenuItem>
                     <DropdownMenuItem className="text-secondary hover:text-black">
                       <Link
