@@ -14,6 +14,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { IwineDetail } from "@/types/detail/detail.types";
+import { useCart } from "@/context/CartContext";
 
 interface WineType {
   id: number;
@@ -28,6 +29,7 @@ export default function TypePage() {
   const path = usePathname();
   const isAllPath = path.endsWith("/all");
   const id = path.match(/\d+$/)?.[0];
+  const {addToCart, openCart} = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -96,6 +98,18 @@ export default function TypePage() {
 
   const totalPages = Math.ceil(products.length / pageSize);
 
+  const handleBuyButtonClick = (product: IwineDetail) => {
+    const item = {
+      id: product.id,
+      name: product.name,
+      variety: product.variety,
+      price: product.price,
+      image: product.image,
+      quantity: 1,
+    };
+    addToCart(item);
+    openCart();
+  };
   return (
     <>
       <div className="grid  mb-10 mt-40">
@@ -125,7 +139,7 @@ export default function TypePage() {
                     ${product.price}
                   </p>
                 </div>
-                <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">
+                <button onClick={()=>handleBuyButtonClick(product)} className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">
                   COMPRAR
                 </button>
               </div>
