@@ -1,4 +1,5 @@
-import {Card, CardContent,} from "@/components/ui/card";
+'use client';
+import {Card, CardContent} from "@/components/ui/card";
 import Image from 'next/image';
 import CardRigthSide from "./CardRigthSide";
 import { Title } from "@/components/Title/Title";
@@ -12,6 +13,7 @@ function getFirstWord(phrase: string): string {
 }
 
 export default function CardDetail({wine }: Readonly<WineProps>) {    
+    
     const firstWord = getFirstWord(wine.name); 
 
     return (            

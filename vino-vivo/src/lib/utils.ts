@@ -7,8 +7,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-
-
 export const getProductList = async (): Promise<Product[]> => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/product/type/all`;
 
