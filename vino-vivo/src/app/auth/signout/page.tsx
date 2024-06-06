@@ -8,8 +8,8 @@ export default async function SignoutPage() {
   if (session) {
     return (
       <div className="flex flex-col space-y-3 justify-center items-center h-screen">
-        <div className="text-xl font-bold">Signout</div>
-        <div>Are you sure you want to sign out?</div>
+        <div className="text-xl font-bold">Cerrar sesion</div>
+        <div>Seguro que desea cerra sesion?</div>
         <div>
           <Logout />
         </div>
