@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useCart } from "@/context/CartContext";
+import Line from "./Line";
 
 export default function DrawerCart() {
     const { isOpen, closeCart } = useCart();
@@ -36,59 +37,64 @@ export default function DrawerCart() {
                                 <IoMdClose />
                             </button>
                         </DrawerClose>
-                        <DrawerTitle>Carrito</DrawerTitle>
+                        <DrawerTitle>Carrito</DrawerTitle>                        
                     </div>
+                    <Line/>
                 </DrawerHeader>
                 <div className="flex-grow mx-auto w-full max-w-sm">
-                    <div className="flex flex-row p-4 pb-0 justify-between">
-                        <div className=" flex flex-row justify-between border-b border-textTyphogra w-full pb-4 mb-4">
+                    <div className="flex flex-col px-4 pb-0 justify-between place-content-center">                        
+                        <div className=" flex flex-row justify-between w-full ">
                             <h2 className="text-lg font-semibold">PRODUCTOS</h2>
                             <h2 className="text-lg font-semibold">SUBTOTAL</h2>
                         </div>
-                    </div>
-                    <div className="flex flex-row p-4 mx-2 justify-between border border-textTypograph rounded-sm">
-                        <div className="flex items-center justify-around space-x-1">
-                            <div>
-                                <Image
-                                    src="https://imagenes-proyecto-vino.s3.amazonaws.com/Vino_Tinto/Legaris_Roble_Ribera_del_Duero+Tempranillo+Codorniu_Raventos.jpeg"
-                                    alt="producto"
-                                    width={60}
-                                    height={100}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-center">
-                                <p className="font-bold text-sm">nombre vino</p>
-                                <p className="font-bold text-xs">tipo vino</p>
-                                <div className="flex flex-row my-4 items-center">
-                                    <Button
-                                        variant="outline"
-                                        size="icon"
-                                        className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
-                                        onClick={decrement}
-                                        disabled={quantity <= 0}
-                                    >
-                                        <MinusIcon className="h-4 w-4" />
-                                        <span className="sr-only ">Decrease</span>
-                                    </Button>
-                                    <div className="border border-textTypograph rounded-sm flex items-center justify-center h-5 w-5 mx-2">
-                                        <p className="font-bold">{quantity}</p>
+                        <Line/>
+                    </div> 
+                    <div className="flex flex-col px-4 justify-between bg-backgroundCart">
+                        <div className="flex flex-row p-4 mx-2 justify-between bg-backgroundCart">
+                            <div className="flex items-center justify-around space-x-1">
+                                <div>
+                                        <Image
+                                            src="https://imagenes-proyecto-vino.s3.amazonaws.com/Vino_Tinto/Legaris_Roble_Ribera_del_Duero+Tempranillo+Codorniu_Raventos.jpeg"
+                                            alt="producto"
+                                            width={60}
+                                            height={100}
+                                        />
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                    <p className="font-bold text-sm">nombre vino</p>
+                                    <p className="font-bold text-xs">tipo vino</p>
+                                    <div className="flex flex-row my-4 items-center">
+                                            <Button
+                                                variant="outline"
+                                                size="icon"
+                                                className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
+                                                onClick={decrement}
+                                                disabled={quantity <= 0}
+                                            >
+                                                <MinusIcon className="h-4 w-4" />
+                                                <span className="sr-only ">Decrease</span>
+                                            </Button>
+                                            <div className="border border-textTypograph rounded-sm flex items-center justify-center h-5 w-5 mx-2">
+                                                <p className="font-bold">{quantity}</p>
+                                            </div>
+                                            <Button
+                                                variant="outline"
+                                                size="icon"
+                                                className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
+                                                onClick={increment}
+                                            >
+                                                <PlusIcon className="h-4 w-4" />
+                                                <span className="sr-only">Increase</span>
+                                            </Button>
                                     </div>
-                                    <Button
-                                        variant="outline"
-                                        size="icon"
-                                        className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
-                                        onClick={increment}
-                                    >
-                                        <PlusIcon className="h-4 w-4" />
-                                        <span className="sr-only">Increase</span>
-                                    </Button>
                                 </div>
                             </div>
+                            <div>
+                                <p className="text-primary font-bold">$ 200</p>
+                            </div>     
                         </div>
-                        <div>
-                            <p className="text-primary font-bold">$ 105555</p>
-                        </div>
-                    </div>
+                        <Line/>
+                    </div>                        
                 </div>
                 <DrawerFooter className="flex flex-col space-y-4">
                     <div className="font-bold flex justify-end ">
