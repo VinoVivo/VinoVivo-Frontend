@@ -52,7 +52,7 @@ const Body = () => {
         const item = {
             id: product.id,
             name: product.name,
-            type: product.nameVariety, // Puedes cambiar esto según necesites
+            variety: product.nameVariety, 
             price: product.price,
             image: product.image,
             quantity: 1,
