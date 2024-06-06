@@ -6,6 +6,7 @@ import DrawerCartHeader from "./DrawerCartHeader";
 import DrawerCartFooter from "./DrawerCartFooter";
 import ProductCard from "./ProductCard";
 import TitleSection from "./TitleSection";
+import CartDisplay from "./ViewProducts";
 
 export default function DrawerCart() {
     const { isOpen, closeCart, cartItems  } = useCart();
@@ -20,6 +21,7 @@ export default function DrawerCart() {
                         <ProductCard key={item.id} item={item} />
                     ))}
                 </div>
+                {/* <CartDisplay/> */}
                 <DrawerCartFooter />
             </DrawerContent>
         </Drawer>
