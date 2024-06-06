@@ -21,6 +21,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(pathname);
   const { openCart } = useCart();
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };

@@ -6,6 +6,7 @@ import Footer from "@/components/layouts/footer/Footer";
 import ContextProvider from "@/context/page";
 import PrelineScript from "@/components/PrelineScript";
 import { CartProvider } from "@/context/CartContext";
+import DrawerCart from "@/components/shopping/shoppingCart/DrawerCart";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <Header />
             <main className="flex-grow">{children}</main>
+            <DrawerCart/>
             <Footer />
           </div>
         </body>

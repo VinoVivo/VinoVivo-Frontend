@@ -9,7 +9,7 @@ interface ProductCardProps {
     item: {
         id: number;
         name: string;
-        type: string;
+        variety: string;
         price: number;
         image: string;
         quantity: number;
@@ -29,7 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
                     </div>
                 <div className="flex flex-col justify-center">
                     <p className="font-bold text-sm">{item.name}</p>
-                    <p className="font-bold text-xs">{item.type}</p>
+                    <p className="font-bold text-xs">{item.variety}</p>
                     <div className="flex flex-row my-4 items-center">
                     <Button
                         variant="outline"

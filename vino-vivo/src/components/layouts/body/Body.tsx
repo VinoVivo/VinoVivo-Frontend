@@ -70,9 +70,6 @@ const Body = () => {
                     </p>
                 </div>
             </div>
-            <div>
-              <DrawerCart/>
-            </div>
             <p className="text-fuchsia-900 text-center text-2xl font-semibold mb-2">NUESTRA PROPUESTA</p>
 
             {loading && <Loader />}
