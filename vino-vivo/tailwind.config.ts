@@ -23,6 +23,12 @@ const config = {
       },
     },
     extend: {
+      borderWidth: {
+        '1': '1px',
+        '2': '2px',
+        '4': '4px',
+        '8': '8px',
+      },
       screens: {
         '3xl': '1700px',
       },
@@ -72,6 +78,9 @@ const config = {
           DEFAULT: "hsl(var(--beige))",
           foreground: "hsl(var(--beige-foreground))",
         },
+        textTypograph: "hsl(var(--textTypograph))", // Color de texto de tipografía
+        backgroundCart: "hsl(var(--backgroundCart))",
+        line:"hsl(var(--line))",
       },
       borderRadius: {
         lg: "var(--radius)",

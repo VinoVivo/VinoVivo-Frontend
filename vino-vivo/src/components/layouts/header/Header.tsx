@@ -11,6 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useCart } from "@/context/CartContext";
+import { Button } from "@/components/ui/button";
 import Login from "@/components/Login";
 import Logout from "@/components/Logout";
 
@@ -18,6 +20,7 @@ const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(pathname);
+  const { openCart } = useCart();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -231,7 +234,9 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
-          <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+          <Button className="bg-transparent" onClick={openCart}>
+            <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+          </Button>
         </div>
         <div className="md:hidden flex items-center">
           <button
@@ -303,7 +308,12 @@ const Header = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Login />
+                      <Link
+                        href="/"
+                        className="text-secondary hover:text-beige"
+                      >
+                        Ingresar
+                      </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="text-secondary hover:text-black">
                       <Link
@@ -316,7 +326,9 @@ const Header = () => {
                   </DropdownMenuContent>
                 </DropdownMenu>
               )}
-              <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+              <Button className="bg-transparent" onClick={openCart}>
+                <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+              </Button>
             </div>
           </div>
         </div>
