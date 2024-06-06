@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useMediaQuery } from "@react-hook/media-query";
 import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
-import DrawerCart from "@/components/shopping/shoppingCart/DrawerCart";
 import { useCart } from "@/context/CartContext";
 
 const Body = () => {
@@ -14,7 +13,7 @@ const Body = () => {
     const [loading, setLoading] = useState(true);
     const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
     const [showMore, setShowMore] = useState(false);
-    const { addToCart, openCart } = useCart();
+    const { addToCart, openCart} = useCart();
 
     useEffect(() => {
         setLoading(true);
@@ -63,7 +62,7 @@ const Body = () => {
 
     return (
         <div className="mt-40">
-            <div className="border-b border-gray-999 mb-5">
+            <div className="border-b border-gray-300 mb-5">
                 <div className="flex flex-col md:flex-row items-center justify-center space-y-5 md:space-y-0 md:space-x-10">
                     {isMobile ? (
                         <Carousel images={images3} />
