@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useMediaQuery } from "@react-hook/media-query";
 import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
+import DrawerCart from "@/components/shopping/shoppingCart/DrawerCart";
 
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -69,7 +70,9 @@ const Body = () => {
                     </p>
                 </div>
             </div>
-
+            <div>
+            <DrawerCart/>
+            </div>
             <p className="text-fuchsia-900 text-center text-2xl font-semibold mb-2">NUESTRA PROPUESTA</p>
 
             {loading && <Loader />}

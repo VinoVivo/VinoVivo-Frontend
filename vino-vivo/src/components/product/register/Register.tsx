@@ -20,9 +20,9 @@ export default function Register() {
         const fetchData = async () => {
             try {
                 const [wineriesResponse, typesResponse, varietiesResponse] = await Promise.all([
-                    fetch('http://localhost:8082/winery/all').then(res => res.json()),
-                    fetch('http://localhost:8082/type/all').then(res => res.json()),
-                    fetch('http://localhost:8082/variety/all').then(res => res.json())
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/winery/all`).then(res => res.json()),
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/type/all`).then(res => res.json()),
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/variety/all`).then(res => res.json())
                 ]);
                 setWineries(wineriesResponse);
                 setTypes(typesResponse);
