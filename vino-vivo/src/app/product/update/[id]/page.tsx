@@ -16,7 +16,7 @@ interface DetailPageProps {
 
 async function fetchProductData(id: string | undefined): Promise<Product | null> {
     try {
-    const response = await fetch(`http://localhost:8082/product/id/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${id}`, {
       cache: 'no-store', // Esto asegura que se obtengan datos frescos en cada solicitud.
     });
 

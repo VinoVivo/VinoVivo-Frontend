@@ -29,10 +29,10 @@ export default function UpdateProductForm({ id }: { id: number }) {
         const fetchData = async () => {
             try {
                 const [productResponse, wineriesResponse, typesResponse, varietiesResponse] = await Promise.all([
-                    fetch(`http://localhost:8082/product/id/${id}`).then(res => res.json()),
-                    fetch('http://localhost:8082/winery/all').then(res => res.json()),
-                    fetch('http://localhost:8082/type/all').then(res => res.json()),
-                    fetch('http://localhost:8082/variety/all').then(res => res.json())
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${id}`).then(res => res.json()),
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/winery/all`).then(res => res.json()),
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/type/all`).then(res => res.json()),
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/all`).then(res => res.json())
                 ]);
                 setProduct(productResponse);
                 setWineries(wineriesResponse);
@@ -64,7 +64,7 @@ export default function UpdateProductForm({ id }: { id: number }) {
         try {
             const payload = { ...data };
 
-            const response = await fetch('http://localhost:8082/product/update', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
