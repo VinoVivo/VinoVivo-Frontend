@@ -3,7 +3,6 @@ import { Title } from '@/components/Title/Title';
 import BackButton from '@/components/ui/BackButton';
 import { AlertDialogAction, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { getProduct, getType, getVariety, getWinery} from '@/lib/utils';
 import { IIdName } from '@/types/idName/idName.types';
 import {  Product, ProductFormValues } from '@/types/products/products.types';
 import { AlertDialog, AlertDialogContent } from '@radix-ui/react-alert-dialog';

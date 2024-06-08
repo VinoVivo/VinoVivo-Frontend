@@ -4,10 +4,14 @@ import CardProduct from "./cardProduct";
 import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
 import { IoMdTrash } from "react-icons/io";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const ProductGrid = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+
+
 
   const deleteProduct = async (id: number) => {
     try {
@@ -28,6 +32,7 @@ const ProductGrid = () => {
   };
 
   useEffect(() => {
+   
     const fetchProducts = async () => {
       try {
         const productList = await getProductList();
@@ -38,7 +43,7 @@ const ProductGrid = () => {
       setLoading(false);
     };
     fetchProducts();
-  }, [products, loading]);
+  }, [products]);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[150px]">
