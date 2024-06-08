@@ -20,9 +20,9 @@ export default function Register() {
         const fetchData = async () => {
             try {
                 const [wineriesResponse, typesResponse, varietiesResponse] = await Promise.all([
-                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/winery/all`).then(res => res.json()),
-                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/type/all`).then(res => res.json()),
-                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/variety/all`).then(res => res.json())
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/winery/all`).then(res => res.json()),
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/type/all`).then(res => res.json()),
+                    fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/all`).then(res => res.json())
                 ]);
                 setWineries(wineriesResponse);
                 setTypes(typesResponse);
@@ -38,7 +38,7 @@ export default function Register() {
         try {
             const payload = { ...data };
 
-            const response = await fetch('http://localhost:8082/product/create', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

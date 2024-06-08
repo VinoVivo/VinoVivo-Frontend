@@ -11,7 +11,7 @@ const ProductGrid = () => {
 
   const deleteProduct = async (id: number) => {
     try {
-      const url: string = `http://localhost:8082/product/delete/${id}`; // Usando una ruta relativa
+      const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/delete/${id}`; 
 
       const response = await fetch(url, { method: "DELETE" });
 
@@ -20,10 +20,10 @@ const ProductGrid = () => {
       }
       setLoading(true);
 
-      // Si la eliminación fue exitosa, podrías realizar alguna acción adicional si es necesario, como actualizar la lista de productos.
+
     } catch (error) {
       console.error("Error deleting product:", error);
-      // Maneja el error de acuerdo a tus necesidades, podría ser mostrar un mensaje al usuario.
+     
     }
   };
 
