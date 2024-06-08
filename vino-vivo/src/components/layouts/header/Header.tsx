@@ -227,11 +227,6 @@ const Header = () => {
                 <DropdownMenuItem className="text-secondary hover:text-beige">
                   <Logout />
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/" className="text-secondary hover:text-beige">
-                    Crear cuenta
-                  </Link>
-                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           )}
@@ -314,14 +309,6 @@ const Header = () => {
                         className="text-secondary hover:text-beige"
                       >
                         Ingresar
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-secondary hover:text-black">
-                      <Link
-                        href="/"
-                        className="text-secondary hover:text-beige"
-                      >
-                        Crear cuenta
                       </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
