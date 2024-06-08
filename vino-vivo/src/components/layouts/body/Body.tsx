@@ -6,12 +6,14 @@ import Link from "next/link";
 import { useMediaQuery } from "@react-hook/media-query";
 import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
+import { useCart } from "@/context/CartContext";
 
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
     const [showMore, setShowMore] = useState(false);
+    const { addToCart, openCart} = useCart();
 
     useEffect(() => {
         setLoading(true);
@@ -45,9 +47,22 @@ const Body = () => {
 
     const isMobile = useMediaQuery("(max-width: 768px)");
 
+    const handleBuyButtonClick = (product: Product) => {
+        const item = {
+            id: product.id,
+            name: product.name,
+            variety: product.nameVariety, 
+            price: product.price,
+            image: product.image,
+            quantity: 1,
+        };
+        addToCart(item);
+        openCart();
+    };
+
     return (
         <div className="mt-40">
-            <div className="border-b border-gray-999 mb-5">
+            <div className="border-b border-gray-300 mb-5">
                 <div className="flex flex-col md:flex-row items-center justify-center space-y-5 md:space-y-0 md:space-x-10">
                     {isMobile ? (
                         <Carousel images={images3} />
@@ -69,7 +84,6 @@ const Body = () => {
                     </p>
                 </div>
             </div>
-
             <p className="text-fuchsia-900 text-center text-2xl font-semibold mb-2">NUESTRA PROPUESTA</p>
 
             {loading && <Loader />}
@@ -86,7 +100,7 @@ const Body = () => {
                                 <p className="text-sm text-black mt-2">{product.nameVariety}</p>
                                 <p className="text-md font-semibold text-black">${product.price}</p>
                             </div>
-                            <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-2 py-1.5 px-4 rounded w-full">
+                            <button onClick={() => handleBuyButtonClick(product)} className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-2 py-1.5 px-4 rounded w-full">
                                 COMPRAR
                             </button>
                         </div>
