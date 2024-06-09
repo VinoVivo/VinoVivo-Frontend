@@ -7,6 +7,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+
+
 export const getProductList = async (): Promise<Product[]> => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/type/all`;
 
@@ -27,7 +29,7 @@ export const getProductList = async (): Promise<Product[]> => {
 };
 
 export const getProduct = async (id:number) => {
-  const url: string = `${baseUrl}/product/id/${id}`
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${id}`
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -37,20 +39,10 @@ export const getProduct = async (id:number) => {
   return products;
 };
 
-export const deleteProduct = async (id: number) => {
-  const url: string = `http://localhost:8082/product/delete/${id}`;
 
-
-    const response = await fetch(url, {
-      method: 'DELETE',
-      
-    });
-
-
-};
 
 export const getVariety = async (): Promise<IIdName[]> => {
-  const url: string = `${baseUrl}/variety/all`
+  const url: string = `$${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/all`
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -61,7 +53,7 @@ export const getVariety = async (): Promise<IIdName[]> => {
 };
 
 export const getType = async (): Promise<IIdName[]> => {
-  const url: string = `${baseUrl}type/all`
+  const url: string = `$${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commercetype/all`
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -72,7 +64,7 @@ export const getType = async (): Promise<IIdName[]> => {
 };
 
 export const getWinery = async (): Promise<IIdName[]> => {
-  const url: string = `${baseUrl}type/all`;
+  const url: string = `$${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commercetype/all`;
 
   const response = await fetch(url);
   if (!response.ok) {
