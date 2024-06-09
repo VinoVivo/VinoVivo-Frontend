@@ -4,9 +4,6 @@ import Link from 'next/link';
 import { ICardProduct } from '@/types/products/products.types';
 
 
-
-
-
 const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, deleteProduct}) => {
 
   const handleDelete = async () => {
@@ -17,7 +14,7 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
       console.error('Failed to delete product:', error);
     }
   };
-  
+
   return (
     <div key={product.id} className="bg-card rounded-lg border border-gray-200 p-6 w-full sm:w-64">
       <div className="min-h-[40px] min-w-[40px]  flex justify-end">
