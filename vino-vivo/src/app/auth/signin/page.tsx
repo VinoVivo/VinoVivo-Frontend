@@ -28,6 +28,7 @@ export default async function Signin({
   searchParams: { callbackUrl, error },
 }: SignInPageProp) {
   const session = await getServerSession(authOptions);
+  console.log(session)
   if (session) {
     redirect(callbackUrl || "/");
   }

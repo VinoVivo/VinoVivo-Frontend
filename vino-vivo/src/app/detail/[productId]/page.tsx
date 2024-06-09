@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 
 interface DetailPageProps {
     params: {
-        productId: string;
+       productId: string;
     };
 }
 

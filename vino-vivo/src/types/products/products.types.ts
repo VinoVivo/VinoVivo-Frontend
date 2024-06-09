@@ -1,14 +1,15 @@
+import { deleteProduct } from "@/lib/utils";
+
 export interface Product {
     id: number;
     name: string;
     description: string;
-    year: string;
+    year: string,
     image: string;
     price: number;
     nameWinery: string,
     nameVariety: string,
     nameType: string,
-    idVariety: number; 
     stock?:number
   }
 
@@ -32,7 +33,8 @@ export interface ICardProduct {
   textButton: string, 
   icon: React.ReactNode, 
   href: string, 
-  deleteProduct: (id: number) => Promise<void>
+  deleteProduct: (id: number) => Promise<void>;
+ 
 
 
 }
