@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getProductsType, getTypes } from '@/lib/utils';
 import Loader from '@/components/loader/page';
 import { usePathname } from "next/navigation";
 import { Title } from "@/components/Title/Title";
@@ -16,6 +15,33 @@ import {
 } from "@/components/ui/pagination";
 import { IwineDetail, WineType } from "@/types/detail/detail.types";
 import { OrderDetailType, OrderType } from "@/types/orders/orders.types";
+import * as React from "react"
+import {
+    ColumnDef,
+    ColumnFiltersState,
+    SortingState,
+    VisibilityState,
+    flexRender,
+    getCoreRowModel,
+    getFilteredRowModel,
+    getPaginationRowModel,
+    getSortedRowModel,
+    useReactTable,
+} from "@tanstack/react-table"
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+
+import { Input } from "@/components/ui/input"
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+
 
 // -------------------- Estructura final requerida --------------------
 
@@ -47,8 +73,9 @@ import { OrderDetailType, OrderType } from "@/types/orders/orders.types";
 //   }
 // -------------------- ------------------------- --------------------
 
+// ++++++++++++++++++++++ Data de Prueba +++++++++++++++++++++++++++
 
-const orderDetails = [
+const orderDetailsArray = [
     {
         "id": 61,
         "idOrder": 42,
@@ -93,7 +120,7 @@ const orderDetails = [
     }
 ]
 
-const productList = [
+const productListArray = [
     {
         "id": 1,
         "name": "Salentein Reserva Malbec",
@@ -240,7 +267,7 @@ const productList = [
     }
 ]
 
-const orders = [
+const ordersArray: OrderType[] = [
     {
         "id": 42,
         "idCustomer": "11dec824-1959-40b5-ab64-5d436c601614",
@@ -299,6 +326,73 @@ const orders = [
     }
 ]
 
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+export const columns: ColumnDef<OrderType>[] = [
+    {
+        accessorKey: "id",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    IdPedido
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => <div className="lowercase">{row.getValue("id")}</div>,
+    },
+    // {
+    //     accessorKey: "idCustomer",
+    //     header: "idCustomer",
+    //     cell: ({ row }) => (
+    //         <div className="capitalize">{row.getValue("idCustomer")}</div>
+    //     ),
+    // },
+    {
+        accessorKey: "orderEmail",
+        header: "Email",
+        cell: ({ row }) => (
+            <div className="capitalize">{row.getValue("orderEmail")}</div>
+        ),
+    },
+    {
+        accessorKey: "totalPrice",
+        header: () => <div className="text-right">Valor</div>,
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("totalPrice"))
+
+            // Format the amount as a dollar amount
+            const formatted = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+            }).format(amount)
+
+            return <div className="text-right font-medium">{formatted}</div>
+        },
+    },
+    {
+        accessorKey: "shippingAddress",
+        header: "shippingAddress",
+        cell: ({ row }) => (
+            <div className="capitalize">{row.getValue("shippingAddress")}</div>
+        ),
+    },
+    {
+        id: "actions",
+        cell: ({ row }) => (
+            <>
+                <Button className='bg-violeta hover:bg-primary w-full '>Ver Pedido</Button>
+                <Button className='bg-violeta hover:bg-primary w-full '>Volver a Comprar</Button>
+            </>
+        ),
+    }
+]
+
+
+
 type OrderWithProductsType = OrderType & {
     products: (OrderDetailType & { product: IwineDetail })[];
 };
@@ -311,15 +405,37 @@ export default function TypePage() {
     const [orderWithProducts, setOrderWithProducts] = useState<OrderWithProductsType[]>([]);
 
     const [loading, setLoading] = useState(true);
+    // const path = usePathname();
+    // const id = path.match(/\d+$/)?.[0];
+
+
+
+    const [sorting, setSorting] = React.useState<SortingState>([])
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize] = useState(8); // Cambia el tamaño de la página según sea necesario
-    const path = usePathname();
-    const id = path.match(/\d+$/)?.[0];
+    const [pageSize, setPageSize] = useState(4);
+
+    const table = useReactTable<OrderType>({
+        data: orders,
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        onSortingChange: setSorting,
+        state: {
+            sorting,
+            pagination: {
+                pageIndex: currentPage - 1,
+                pageSize: pageSize,
+            },
+        },
+    });
 
 
-// ----------------------------- Esta parte seria el fetch para traer mis ordenes ------------------------------------
+    // ----------------------------- Esta parte seria el fetch para traer mis ordenes ------------------------------------
 
     useEffect(() => {
+
         // const fetchOrders = async () => {
         //     try {
         //         const productList = await getProductsType(id);
@@ -331,16 +447,14 @@ export default function TypePage() {
         // };
         // fetchOrders();
 
-        
-        setOrders(orders)
-        console.log(orders);
-        
-        setOrderDetail(orderDetails)
-        setProducts(productList)
+
+        setOrders(ordersArray)
+        setOrderDetail(orderDetailsArray)
+        setProducts(productListArray)
 
     }, []);
 
-// --------------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------------
 
     const combineOrderData = (
         orders: OrderType[],
@@ -364,35 +478,106 @@ export default function TypePage() {
     };
 
     useEffect(() => {
+        if (orders.length && orderDetail.length && products.length) {
+            combineOrderData(orders, orderDetail, products, setOrderWithProducts);
+        }
 
-        combineOrderData(orders, orderDetails, productList, setOrderWithProducts);
-        console.log("a continuacion la data resultante");
-        console.log(orderWithProducts);
-        
-        
+        setLoading(false);
 
-    }, []);
+    }, [orders, orderDetail, products]);
 
-// ---------------------------------------------------------------------------------------------
+    useEffect(() => {
+        console.log("Estado actualizado:", orderWithProducts);
+    }, [orderWithProducts]);
+
+    // ---------------------------------------------------------------------------------------------
 
 
-    // Calcular los productos a mostrar en la página actual
-    const startIndex = (currentPage - 1) * pageSize;
-    const currentProducts = orders.slice(startIndex, startIndex + pageSize);
+    // // Calcular los productos a mostrar en la página actual
+    // const startIndex = (currentPage - 1) * pageSize;
+    // const currentProducts = orders.slice(startIndex, startIndex + pageSize);
 
-    const totalPages = Math.ceil(orders.length / pageSize);
+    // const totalPages = Math.ceil(orders.length / pageSize);
 
     return (
         <>
             <div className="grid mb-10 mt-40">
                 <div className="mb-10 mt-5">
-                    <Title title="Mis Ordenes" color="beige" />
+                    <Title title="Mis Pedidos" color="beige" />
                 </div>
                 {loading && <Loader />}
-                <div>
+
+                
+                <div className="rounded-md border">
+                    <Table>
+                        <TableHeader>
+                            {table.getHeaderGroups().map((headerGroup) => (
+                                <TableRow key={headerGroup.id}>
+                                    {headerGroup.headers.map((header) => {
+                                        return (
+                                            <TableHead key={header.id}>
+                                                {header.isPlaceholder
+                                                    ? null
+                                                    : flexRender(
+                                                        header.column.columnDef.header,
+                                                        header.getContext()
+                                                    )}
+                                            </TableHead>
+                                        )
+                                    })}
+                                </TableRow>
+                            ))}
+                        </TableHeader>
+                        <TableBody>
+                            {table.getRowModel().rows?.length ? (
+                                table.getRowModel().rows.map((row) => (
+                                    <TableRow
+                                        key={row.id}
+                                        data-state={row.getIsSelected() && "selected"}
+                                    >
+                                        {row.getVisibleCells().map((cell) => (
+                                            <TableCell key={cell.id}>
+                                                {flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext()
+                                                )}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell
+                                        colSpan={columns.length}
+                                        className="h-24 text-center"
+                                    >
+                                        No results.
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
                     
                 </div>
-                
+                <Pagination>
+                    <PaginationPrevious
+                        onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : currentPage)}
+                    />
+                    {Array.from({ length: table.getPageCount() }, (_, i) => (
+                        <PaginationItem key={i}>
+                            <PaginationLink
+                                onClick={() => setCurrentPage(i + 1)}
+                                isActive={i + 1 === currentPage}
+                            >
+                                {i + 1}
+                            </PaginationLink>
+                        </PaginationItem>
+                    ))}
+                    <PaginationNext
+                        onClick={() => setCurrentPage(currentPage < table.getPageCount() ? currentPage + 1 : currentPage)}
+                    />
+                </Pagination>
+
             </div>
         </>
     );

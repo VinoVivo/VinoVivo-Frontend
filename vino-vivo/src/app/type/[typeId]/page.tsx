@@ -54,7 +54,7 @@ export default function TypePage() {
         if (wineTypes.length > 0 && id !== undefined) {
             const item = wineTypes.find((item) => item.id === parseInt(id));
             if (item) {
-                setNameType("Vinos " + item.name);
+                setNameType("Vino " + item.name);
             }
         }
     }, [wineTypes, id]);
