@@ -1,38 +1,18 @@
-"use client";
+'use client'
 import React, { useEffect, useState } from "react";
 import CardProduct from "./cardProduct";
 import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
 import { IoMdTrash } from "react-icons/io";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+
+
 
 const ProductGrid = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-
-
-  const deleteProduct = async (id: number) => {
-    try {
-      const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/delete/${id}`; 
-
-      const response = await fetch(url, { method: "DELETE" });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete product");
-      }
-      setLoading(true);
-
-
-    } catch (error) {
-      console.error("Error deleting product:", error);
-     
-    }
-  };
-
   useEffect(() => {
-   
     const fetchProducts = async () => {
       try {
         const productList = await getProductList();
@@ -43,7 +23,7 @@ const ProductGrid = () => {
       setLoading(false);
     };
     fetchProducts();
-  }, [products]);
+  }, []);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[150px]">
@@ -53,7 +33,7 @@ const ProductGrid = () => {
           product={product}
           textButton="Editar"
           href="product/update"
-          deleteProduct={deleteProduct}
+   
           icon={<IoMdTrash className="text-desctructive " />}
         />
       ))}

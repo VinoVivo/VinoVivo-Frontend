@@ -2,16 +2,24 @@
 import React, { FC } from 'react'
 import Link from 'next/link';
 import { ICardProduct } from '@/types/products/products.types';
-
-
-const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, deleteProduct}) => {
+import { deleteProducto } from '@/app/admin/productos/page';
 
 
 
+const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href}) => {
+
+  const handleDelete = async () => {
+    try {
+      await deleteProducto(product.id);
+      // Manejar el estado después de eliminar el producto, por ejemplo, actualizando la lista de productos
+    } catch (error) {
+      console.error('Failed to delete product:', error);
+    }
+  };
   return (
     <div key={product.id} className="bg-card rounded-lg border border-gray-200 p-6 w-full sm:w-64">
       <div className="min-h-[40px] min-w-[40px]  flex justify-end">
-        {icon && <button onClick={()=> deleteProduct(product.id)} className='text-2xl text-destructive hover:text-primary '>{icon}</button>}
+        {icon && <button onClick={handleDelete} className='text-2xl text-destructive hover:text-primary '>{icon}</button>}
       </div>
       <Link href={`/detail/${product.id}`}>
         <img src={product.image} alt="no Image" width={200} height={200} className="w-full h-auto transform transition-transform duration-300 hover:scale-105" />
