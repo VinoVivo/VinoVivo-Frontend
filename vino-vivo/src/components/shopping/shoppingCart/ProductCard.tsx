@@ -24,35 +24,35 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
         <div className="flex flex-col px-4 justify-between bg-backgroundCart">
             <div className="flex flex-row p-4 mx-2 justify-between bg-backgroundCart">
                 <div className="flex items-center justify-around space-x-1">
-                    <div>
-                        <Image src={item.image} alt={item.name} width={60}  height={100}/>
+                    <div className="w-[60px] h-[100px] relative">
+                        <Image src={item.image} alt={item.name} layout="fill" objectFit="cover"/>
                     </div>
                 <div className="flex flex-col justify-center">
-                    <p className="font-bold text-sm">{item.name}</p>
-                    <p className="font-bold text-xs">{item.variety}</p>
+                    <p className="font-bold text-sm max-w-[120px] truncate">{item.name}</p>
+                    <p className="font-bold text-xs max-w-[120px] truncate">{item.variety}</p>
                     <div className="flex flex-row my-4 items-center">
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
-                        onClick={() => decrementQuantity(item.id)}
-                        disabled={item.quantity <= 0}
-                    >
-                        <MinusIcon className="h-4 w-4" />
-                        <span className="sr-only ">Decrease</span>
-                    </Button>
-                    <div className="border border-textTypograph rounded-sm flex items-center justify-center h-5 w-5 mx-2">
-                        <p className="font-bold">{item.quantity}</p>
-                    </div>
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
-                        onClick={() => incrementQuantity(item.id)}
-                    >
-                        <PlusIcon className="h-4 w-4" />
-                        <span className="sr-only">Increase</span>
-                    </Button>
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
+                            onClick={() => decrementQuantity(item.id)}
+                            disabled={item.quantity <= 0}
+                        >
+                            <MinusIcon className="h-4 w-4" />
+                            <span className="sr-only ">Decrease</span>
+                        </Button>
+                        <div className="border border-textTypograph rounded-sm flex items-center justify-center h-5 w-5 mx-2">
+                            <p className="font-bold">{item.quantity}</p>
+                        </div>
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
+                            onClick={() => incrementQuantity(item.id)}
+                        >
+                            <PlusIcon className="h-4 w-4" />
+                            <span className="sr-only">Increase</span>
+                        </Button>
                     </div>
                 </div>
                 </div>
