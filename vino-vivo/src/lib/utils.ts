@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getProductList = async (): Promise<Product[]> => {
-  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/product/type/all`;
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/type/all`;
 
   try {
     const response = await fetch(url);

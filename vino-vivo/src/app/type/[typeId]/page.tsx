@@ -36,10 +36,10 @@ export default function TypePage() {
       try {
         let response;
         if (isAllPath) {
-          response = await axios.get(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/product/type/all`);
+          response = await axios.get(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/type/all`);
         } else if (id) {
           response = await axios.get(
-            `${process.env.NEXT_PUBLIC_GET_BASE_URL}/product/type/${id}`
+            `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/type/${id}`
           );
         }
 
@@ -48,7 +48,7 @@ export default function TypePage() {
             response.data.map(async (product: IwineDetail) => {
               try {
                 const varietyResponse = await axios.get(
-                  `http://localhost:8082/variety/id/${product.variety}`
+                  `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/id/${product.variety}`
                 );
                 product.variety = varietyResponse.data.name;
               } catch (error) {
@@ -69,7 +69,7 @@ export default function TypePage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8082/type/all`)
+      .get(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/type/all`)
       .then((response) => {
         const productData = response.data;
         setWineType(productData);
