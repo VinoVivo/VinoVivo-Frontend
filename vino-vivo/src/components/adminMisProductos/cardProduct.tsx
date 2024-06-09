@@ -12,11 +12,12 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
   const handleDelete = async () => {
     try {
       await deleteProduct(product.id);
-      // Manejar el estado después de eliminar el producto, por ejemplo, actualizando la lista de productos
+     
     } catch (error) {
       console.error('Failed to delete product:', error);
     }
   };
+  
   return (
     <div key={product.id} className="bg-card rounded-lg border border-gray-200 p-6 w-full sm:w-64">
       <div className="min-h-[40px] min-w-[40px]  flex justify-end">
