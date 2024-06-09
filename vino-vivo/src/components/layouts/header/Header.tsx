@@ -15,13 +15,16 @@ import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import Login from "@/components/Login";
 import Logout from "@/components/Logout";
+import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import jwt_decode from "jwt-decode";
+import federatedLogout from "@/app/api/auth/federated-logout/utils";
 
 const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(pathname);
   const { openCart } = useCart();
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -29,12 +32,28 @@ const Header = () => {
   const handleLinkClick = (link: string) => {
     setActiveLink(link);
   };
+  function getInitials(name:string){
+    if (name != null && name != '' && name != undefined){
+      let nameArray = name.split(' ');
+      var initials ='';
+      nameArray.forEach((data, index) =>{
+        initials += data.slice(0,1);
+      })
+      return initials.toUpperCase();
+    }
+    return '';
+  }
 
+  const { data: session } = useSession();
+  const userSess = session?.user;
   const user = {
-    isLogged: false,
-    isAdmin: false,
-    inicials: "EZ",
-  };
+    user: userSess,
+    initials: userSess?.name ? getInitials(userSess.name) : '',
+    isLogged: userSess? true : false,
+    isAdmin: false
+  }
+  
+  console.log(user);
 
   return (
     <header className="bg-violeta fixed top-0 w-full z-50">
@@ -187,52 +206,57 @@ const Header = () => {
         </div>
         <div className="hidden md:flex space-x-4 items-center">
           {user.isLogged && (
+            <>
             <DropdownMenu>
               <DropdownMenuTrigger className="text-beige hover:text-gray-300">
                 {user.isLogged ? (
-                  user.inicials
+                  <span className="text-primary-foreground text-xl">{user.initials}</span>
                 ) : (
                   <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
                 )}
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem className="text-secondary hover:text-beige">
-                  {user.isAdmin ? (
-                    <Link href="/" className="text-secondary hover:text-beige">
-                      Mis productos
-                    </Link>
-                  ) : (
-                    <Link href="/" className="text-secondary hover:text-beige">
-                      Mis compras
-                    </Link>
-                  )}
+                <DropdownMenuItem className="text-secondary hover:text-black">
+                  <Link href="/" className="text-secondary hover:text-beige">
+                    Mi Perfil
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-secondary hover:text-black">
                   <Link href="/" className="text-secondary hover:text-beige">
-                    Otra{" "}
+                    Mis Compras
+                  </Link>
+                </DropdownMenuItem>
+                  {user.isAdmin && (
+                    <>
+                    <DropdownMenuItem className="text-secondary hover:text-beige">
+                      <Link href="/" className="text-secondary hover:text-beige">
+                        Mis productos
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-secondary hover:text-beige">
+                      <Link href="/" className="text-secondary hover:text-beige">
+                       Reportes
+                      </Link>
+                    </DropdownMenuItem>
+                  </>
+                  )}
+                
+                <DropdownMenuItem className="text-secondary hover:text-beige">
+                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
+                    Cerrar Sesión
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+              </DropdownMenu>
+                  <Button className="bg-transparent" onClick={openCart}>
+                  <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                </Button>
+            </>
           )}
           {!user.isLogged && (
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Login />
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Logout />
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <FaUser onClick={() => signIn("keycloak")} className="text-white text-2xl cursor-pointer hover:text-gray-300" />
           )}
-          <Button className="bg-transparent" onClick={openCart}>
-            <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-          </Button>
+
         </div>
         <div className="md:hidden flex items-center">
           <button
@@ -259,64 +283,65 @@ const Header = () => {
             </Link>
 
             <div className="flex space-x-4 items-center">
-              {user.isLogged && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                    {user.isLogged ? (
-                      user.inicials
-                    ) : (
-                      <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                    )}
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
+            {user.isLogged && (
+            <>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="text-beige hover:text-gray-300">
+                {user.isLogged ? (
+                  <span className="text-primary-foreground text-xl">{user.initials}</span>
+                ) : (
+                  <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                )}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem className="text-secondary hover:text-black">
+                  <Link href="/" className="text-secondary hover:text-beige">
+                    Mi Perfil
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-secondary hover:text-black">
+                  <Link href="/" className="text-secondary hover:text-beige">
+                    Mis Compras
+                  </Link>
+                </DropdownMenuItem>
+                  {user.isAdmin && (
+                    <>
                     <DropdownMenuItem className="text-secondary hover:text-beige">
-                      {user.isAdmin ? (
-                        <Link
-                          href="/"
-                          className="text-secondary hover:text-beige"
-                        >
-                          Mis productos
-                        </Link>
-                      ) : (
-                        <Link
-                          href="/"
-                          className="text-secondary hover:text-beige"
-                        >
-                          Mis compras
-                        </Link>
-                      )}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-secondary hover:text-black">
-                      <Link
-                        href="/"
-                        className="text-secondary hover:text-beige"
-                      >
-                        Otra{" "}
+                      <Link href="/" className="text-secondary hover:text-beige">
+                        Mis productos
                       </Link>
                     </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
-              {!user.isLogged && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                    <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
                     <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link
-                        href="/"
-                        className="text-secondary hover:text-beige"
-                      >
-                        Ingresar
+                      <Link href="/" className="text-secondary hover:text-beige">
+                       Reportes
                       </Link>
                     </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
-              <Button className="bg-transparent" onClick={openCart}>
-                <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-              </Button>
+                  </>
+                  )}
+                
+                <DropdownMenuItem className="text-secondary hover:text-beige">
+                  <Logout />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+              </DropdownMenu>
+                  <Button className="bg-transparent" onClick={openCart}>
+                  <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                </Button>
+            </>
+          )}
+          {!user.isLogged && (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="text-beige hover:text-gray-300">
+                <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem className="text-secondary hover:text-beige">
+                  <Login />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+
             </div>
           </div>
         </div>
