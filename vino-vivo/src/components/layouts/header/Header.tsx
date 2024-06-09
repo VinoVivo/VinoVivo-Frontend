@@ -24,7 +24,10 @@ const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(pathname);
-  const { openCart } = useCart();
+  const { openCart, clearCart } = useCart();
+  const { data: session } = useSession();
+  const userSess = session?.user;
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -44,15 +47,17 @@ const Header = () => {
     return '';
   }
 
-  const { data: session } = useSession();
-  const userSess = session?.user;
+
   const user = {
     user: userSess,
     initials: userSess?.name ? getInitials(userSess.name) : '',
     isLogged: userSess? true : false,
     isAdmin: false
   }
-  
+  const handleLogout = async () => {
+    clearCart(); 
+    await federatedLogout();
+  };
   console.log(user);
 
   return (
@@ -242,7 +247,7 @@ const Header = () => {
                   )}
                 
                 <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
+                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => handleLogout()}>
                     Cerrar Sesión
                   </Link>
                 </DropdownMenuItem>

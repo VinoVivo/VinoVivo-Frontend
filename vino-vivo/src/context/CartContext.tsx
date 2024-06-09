@@ -19,6 +19,7 @@ interface CartContextProps {
     removeFromCart: (id: number) => void;
     incrementQuantity: (id: number) => void;
     decrementQuantity: (id: number) => void;
+    clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -62,6 +63,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         );
     };
 
+    const clearCart = () => {
+        setCartItems([]);
+    };
+
     const value = useMemo(() => ({
         isOpen,
         openCart,
@@ -71,6 +76,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeFromCart,
         incrementQuantity,
         decrementQuantity,
+        clearCart,
     }), [isOpen, cartItems]);
     
     return (

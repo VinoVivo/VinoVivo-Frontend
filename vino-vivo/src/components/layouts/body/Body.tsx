@@ -7,6 +7,8 @@ import { useMediaQuery } from "@react-hook/media-query";
 import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
 import { useCart } from "@/context/CartContext";
+import { useSession } from "next-auth/react";
+import DialogeRegister from "@/components/product/register/DialogeRegister";
 
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -14,6 +16,8 @@ const Body = () => {
     const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
     const [showMore, setShowMore] = useState(false);
     const { addToCart, openCart} = useCart();
+    const { data: session } = useSession();
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -48,6 +52,10 @@ const Body = () => {
     const isMobile = useMediaQuery("(max-width: 768px)");
 
     const handleBuyButtonClick = (product: Product) => {
+        if (!session) {
+            setShowAlert(true);
+            return;
+        }
         const item = {
             id: product.id,
             name: product.name,
@@ -58,6 +66,10 @@ const Body = () => {
         };
         addToCart(item);
         openCart();
+    };
+
+    const handleCloseAlert = () => {
+        setShowAlert(false);
     };
 
     return (
@@ -123,6 +135,12 @@ const Body = () => {
                     </button>
                 </Link>
             </div>
+            <DialogeRegister
+                open={showAlert}
+                onOpenChange={handleCloseAlert}
+                type="error"
+                message="Debe estar logeado para comprar productos"
+            />
         </div>
     );
 };

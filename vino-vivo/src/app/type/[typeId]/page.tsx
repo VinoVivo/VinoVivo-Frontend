@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/pagination";
 import { IwineDetail } from "@/types/detail/detail.types";
 import { useCart } from "@/context/CartContext";
+import { useSession } from "next-auth/react";
+import DialogeRegister from "@/components/product/register/DialogeRegister";
 
 interface WineType {
   id: number;
@@ -30,6 +32,8 @@ export default function TypePage() {
   const isAllPath = path.endsWith("/all");
   const id = path.match(/\d+$/)?.[0];
   const {addToCart, openCart} = useCart();
+  const { data: session } = useSession();
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -98,7 +102,11 @@ export default function TypePage() {
 
   const totalPages = Math.ceil(products.length / pageSize);
 
-  const handleBuyButtonClick = (product: IwineDetail) => {
+const handleBuyButtonClick = (product: IwineDetail) => {
+    if (!session) {
+      setShowAlert(true);
+      return;
+    }
     const item = {
       id: product.id,
       name: product.name,
@@ -110,6 +118,11 @@ export default function TypePage() {
     addToCart(item);
     openCart();
   };
+
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
   return (
     <>
       <div className="grid  mb-10 mt-40">
@@ -175,6 +188,12 @@ export default function TypePage() {
           </PaginationContent>
         </Pagination>
       </div>
+      <DialogeRegister
+        open={showAlert}
+        onOpenChange={handleCloseAlert}
+        type="error"
+        message="Debe estar logeado para comprar productos"
+      />
     </>
   );
 }
