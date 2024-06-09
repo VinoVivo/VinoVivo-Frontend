@@ -1,9 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Loader from '@/components/loader/page';
-import { usePathname } from "next/navigation";
 import { Title } from "@/components/Title/Title";
-import Link from "next/link";
 import {
     Pagination,
     PaginationContent,
@@ -18,9 +16,7 @@ import { OrderDetailType, OrderType } from "@/types/orders/orders.types";
 import * as React from "react"
 import {
     ColumnDef,
-    ColumnFiltersState,
     SortingState,
-    VisibilityState,
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
@@ -28,11 +24,6 @@ import {
     getSortedRowModel,
     useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
-
-import { Input } from "@/components/ui/input"
 import {
     Table,
     TableBody,
@@ -41,37 +32,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { columns } from "@/components/orders/Columns";
 
 
-// -------------------- Estructura final requerida --------------------
-
-// {
-//     id: number,
-//     idCustomer: string,
-//     totalPrice: number,
-//     shippingAddress: string,
-//     orderEmail: string,
-//     products: {
-//       id: number,
-//       idOrder: number,
-//       idProduct: number,
-//       price: number,
-//       quantity: number,
-//       product: {
-//         id: number,
-//         name: string,
-//         description: string,
-//         image: string,
-//         year: number,
-//         price: number,
-//         stock: number,
-//         nameWinery: string,
-//         nameVariety: string,
-//         nameType: string
-//       }
-//     }[]
-//   }
-// -------------------- ------------------------- --------------------
 
 // ++++++++++++++++++++++ Data de Prueba +++++++++++++++++++++++++++
 
@@ -328,68 +291,7 @@ const ordersArray: OrderType[] = [
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-export const columns: ColumnDef<OrderType>[] = [
-    {
-        accessorKey: "id",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    IdPedido
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-        cell: ({ row }) => <div className="lowercase">{row.getValue("id")}</div>,
-    },
-    // {
-    //     accessorKey: "idCustomer",
-    //     header: "idCustomer",
-    //     cell: ({ row }) => (
-    //         <div className="capitalize">{row.getValue("idCustomer")}</div>
-    //     ),
-    // },
-    {
-        accessorKey: "orderEmail",
-        header: "Email",
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("orderEmail")}</div>
-        ),
-    },
-    {
-        accessorKey: "totalPrice",
-        header: () => <div className="text-right">Valor</div>,
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("totalPrice"))
 
-            // Format the amount as a dollar amount
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-            }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
-        },
-    },
-    {
-        accessorKey: "shippingAddress",
-        header: "shippingAddress",
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("shippingAddress")}</div>
-        ),
-    },
-    {
-        id: "actions",
-        cell: ({ row }) => (
-            <>
-                <Button className='bg-violeta hover:bg-primary w-full '>Ver Pedido</Button>
-                <Button className='bg-violeta hover:bg-primary w-full '>Volver a Comprar</Button>
-            </>
-        ),
-    }
-]
 
 
 
@@ -405,17 +307,13 @@ export default function TypePage() {
     const [orderWithProducts, setOrderWithProducts] = useState<OrderWithProductsType[]>([]);
 
     const [loading, setLoading] = useState(true);
-    // const path = usePathname();
-    // const id = path.match(/\d+$/)?.[0];
-
-
 
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(4);
 
-    const table = useReactTable<OrderType>({
-        data: orders,
+    const table = useReactTable<OrderWithProductsType>({
+        data: orderWithProducts,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
@@ -492,16 +390,9 @@ export default function TypePage() {
 
     // ---------------------------------------------------------------------------------------------
 
-
-    // // Calcular los productos a mostrar en la página actual
-    // const startIndex = (currentPage - 1) * pageSize;
-    // const currentProducts = orders.slice(startIndex, startIndex + pageSize);
-
-    // const totalPages = Math.ceil(orders.length / pageSize);
-
     return (
         <>
-            <div className="grid mb-10 mt-40">
+            <div className="grid mb-10 mt-40 ml-10 mr-10">
                 <div className="mb-10 mt-5">
                     <Title title="Mis Pedidos" color="beige" />
                 </div>
@@ -512,10 +403,10 @@ export default function TypePage() {
                     <Table>
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (
-                                <TableRow key={headerGroup.id}>
+                                <TableRow key={headerGroup.id} className="text-center">
                                     {headerGroup.headers.map((header) => {
                                         return (
-                                            <TableHead key={header.id}>
+                                            <TableHead key={header.id} className="text-center">
                                                 {header.isPlaceholder
                                                     ? null
                                                     : flexRender(
@@ -533,10 +424,11 @@ export default function TypePage() {
                                 table.getRowModel().rows.map((row) => (
                                     <TableRow
                                         key={row.id}
-                                        data-state={row.getIsSelected() && "selected"}
+                                        data-state={row.getIsSelected() && "selected"} 
+                                        className="text-center"
                                     >
                                         {row.getVisibleCells().map((cell) => (
-                                            <TableCell key={cell.id}>
+                                            <TableCell key={cell.id} className="text-center">
                                                 {flexRender(
                                                     cell.column.columnDef.cell,
                                                     cell.getContext()
