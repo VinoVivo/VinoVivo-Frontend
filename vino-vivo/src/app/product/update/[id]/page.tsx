@@ -1,8 +1,6 @@
 import React from 'react';
-
-import { IwineDetail } from '@/types/detail/detail.types';
 import { notFound } from 'next/navigation';
-import { Product, ProductFormValues } from '@/types/products/products.types';
+import { Product } from '@/types/products/products.types';
 import UpdateProductForm from '@/components/product/update/page';
 
 

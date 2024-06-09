@@ -2,15 +2,16 @@
 import React, { FC } from 'react'
 import Link from 'next/link';
 import { ICardProduct } from '@/types/products/products.types';
-import { deleteProducto } from '@/app/admin/productos/page';
 
 
 
-const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href}) => {
+
+
+const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, deleteProduct}) => {
 
   const handleDelete = async () => {
     try {
-      await deleteProducto(product.id);
+      await deleteProduct(product.id);
       // Manejar el estado después de eliminar el producto, por ejemplo, actualizando la lista de productos
     } catch (error) {
       console.error('Failed to delete product:', error);
