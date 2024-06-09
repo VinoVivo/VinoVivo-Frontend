@@ -10,9 +10,7 @@ import {   Pagination,
   PaginationLink,
   PaginationNext,
   PaginationPrevious, } from "../ui/pagination";
-
-
-
+import DialogeRegister from "../product/register/DialogeRegister";
 
 
 
@@ -22,6 +20,9 @@ const ProductGrid = () => {
   const [flag, setFlag] =useState(false)
   const pageSize = 8
   const [currentPage, setCurrentPage]= useState(1)
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState("");
+  const [dialogType, setDialogType] = useState<"success" | "error">("success");
 
   // Calcular los productos a mostrar en la página actual
   const startIndex = (currentPage - 1) * pageSize;
@@ -39,11 +40,15 @@ const ProductGrid = () => {
       if (!response.ok) {
         throw new Error('Failed to delete product');
       }
-  
-      console.log('Product deleted successfully');
       setFlag(true)
+      setDialogType("success");
+      setDialogMessage('Su producto ha sido creado exitosamente');
     } catch (error) {
       console.error('Error deleting product:', error);
+      setDialogType("error");
+      setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
+    }finally{
+      setDialogOpen(true);
     }
   };
 
@@ -102,6 +107,7 @@ const ProductGrid = () => {
        </PaginationItem>
      </PaginationContent>
    </Pagination>
+   <DialogeRegister open={dialogOpen}  onOpenChange={setDialogOpen} type={dialogType} message={dialogMessage}/>
    </div>
   );
  
