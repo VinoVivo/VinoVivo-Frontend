@@ -4,13 +4,13 @@ import { notFound } from 'next/navigation';
 
 interface DetailPageProps {
     params: {
-        productId: string;
+       productId: string;
     };
 }
 
 async function fetchProductData(productId: string): Promise<IwineDetail | null> {
     try {
-    const response = await fetch(`http://localhost:8082/product/id/${productId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${productId}`, {
       cache: 'no-store', // Esto asegura que se obtengan datos frescos en cada solicitud.
     });
 
