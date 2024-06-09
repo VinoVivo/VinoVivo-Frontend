@@ -32,7 +32,7 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
                 <h1 className="text-xl font-bold mb-1">{wine.name}</h1>
                 {/* <span className="ml-2">Icon</span> */}
             </div>            
-            <div className="grid grid-cols-2 gap-x-2 gap-y-2 mb-4">
+            <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 mb-4">
                 <div className="text-left font-bold max-w-xs">
                     <p className="mb-1">Tipo de vino: </p>                
                     <p className="mb-1">Año: </p>
