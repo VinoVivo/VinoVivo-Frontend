@@ -33,6 +33,7 @@ export const getProductList = async (): Promise<Product[]> => {
 
 export const getProduct = async (id:number) => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${id}`
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${id}`
 
   const response = await fetch(url);
   if (!response.ok) {
