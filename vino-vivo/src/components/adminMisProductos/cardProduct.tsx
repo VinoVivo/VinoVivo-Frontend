@@ -1,10 +1,25 @@
 'use client'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import Link from 'next/link';
 import { ICardProduct } from '@/types/products/products.types';
+import DialogeRegister from '../product/register/DialogeRegister';
 
 
 const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, deleteProduct}) => {
+  const [dialogMessage, setDialogMessage] = useState("");
+  const [dialogType, setDialogType] = useState<"Éxito" | "Error" | "Alerta">('Alerta');
+  const [alert, setAlert]=useState(false)
+ 
+  const handelAlert = ()=>{
+    setDialogType('Alerta');
+
+     setAlert(true)
+      setDialogMessage(`¿Seguro quiere eliminar ${product?.name}?`);
+ 
+   
+  
+    }
+
 
   const handleDelete = async () => {
     try {
@@ -18,7 +33,7 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
   return (
     <div key={product.id} className="bg-card rounded-lg border border-gray-200 p-6 w-full sm:w-64">
       <div className="min-h-[40px] min-w-[40px]  flex justify-end">
-        {icon && <button onClick={handleDelete} className='text-2xl text-destructive hover:text-primary '>{icon}</button>}
+        {icon && <button onClick={handelAlert} className='text-2xl text-destructive hover:text-primary '>{icon}</button>}
       </div>
       <Link href={`/detail/${product.id}`}>
         <img src={product.image} alt="no Image" width={200} height={200} className="w-full h-auto transform transition-transform duration-300 hover:scale-105" />
@@ -33,6 +48,10 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
         {textButton}
       </button>
       </Link>
+      <div className="flex w-20 gap-2">
+
+   <DialogeRegister open={alert}  onOpenChange={setAlert} type={dialogType} message={dialogMessage} textButtonOne="Cancelar" textButtonTwo="Eliminar" onClick={handleDelete} styleButton2='bg-destructive hover:bg-violeta hover:text-destructive-foreground  border-2 '/>
+   </div>
     </div>
   )
 }

@@ -1,4 +1,3 @@
-import { deleteProduct } from "@/lib/utils";
 
 export interface Product {
     id: number;
@@ -33,7 +32,7 @@ export interface ICardProduct {
   textButton: string, 
   icon: React.ReactNode, 
   href: string, 
-  deleteProduct: (id: number) => Promise<void>;
+  deleteProduct: (id:number) => void
  
 
 

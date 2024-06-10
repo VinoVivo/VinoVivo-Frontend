@@ -10,7 +10,7 @@ import { SubmitHandler } from 'react-hook-form';
 export default function Register() {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
-    const [dialogType, setDialogType] = useState<"success" | "error">("success");
+    const [dialogType, setDialogType] = useState<"Éxito" | "Error">("Éxito");
     const [wineries, setWineries] = useState<{ id: number, name: string }[]>([]);
     const [types, setTypes] = useState<{ id: number, name: string }[]>([]);
     const [varieties, setVarieties] = useState<{ id: number, name: string }[]>([]);
@@ -52,11 +52,11 @@ export default function Register() {
 
             const responseData = await response.json();
             console.log('Producto creado:', responseData);
-            setDialogType("success");
+            setDialogType("Éxito");
             setDialogMessage('Su producto ha sido creado exitosamente');
         } catch (error) {
             console.error('Error al crear el producto:', error);
-            setDialogType("error");
+            setDialogType("Error");
             setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
         } finally {
             setDialogOpen(true);
@@ -85,7 +85,7 @@ export default function Register() {
                 <span className="ml-2 sm:mt-0"><BackButton/></span>
             </div>            
             <ProductForm onSubmit={onSubmit} wineries={wineries} types={types} varieties={varieties}/>
-            <DialogeRegister open={dialogOpen}  onOpenChange={setDialogOpen} type={dialogType} message={dialogMessage} />
+            <DialogeRegister open={dialogOpen}  onOpenChange={setDialogOpen} type={dialogType} message={dialogMessage} textButtonOne={'cerrar'}/>
         </div>
     );
 }
