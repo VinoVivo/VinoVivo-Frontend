@@ -227,7 +227,7 @@ const Header = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/" className="text-secondary hover:text-beige">
+                  <Link href="/orders" className="text-secondary hover:text-beige">
                     Mis Compras
                   </Link>
                 </DropdownMenuItem>

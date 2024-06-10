@@ -193,7 +193,7 @@ const handleBuyButtonClick = (product: IwineDetail) => {
       <DialogeRegister
         open={showAlert}
         onOpenChange={handleCloseAlert}
-        type="error"
+        type="Error"
         message="Debe estar logeado para comprar productos"
       />
     </>
