@@ -1,17 +1,19 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getProductsType, getTypes } from '@/lib/utils';
+import Loader from '@/components/loader/page';
 import { usePathname } from "next/navigation";
 import { Title } from "@/components/Title/Title";
 import Link from "next/link";
 import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
 } from "@/components/ui/pagination";
 import { IwineDetail } from "@/types/detail/detail.types";
 import { useCart } from "@/context/CartContext";
@@ -52,9 +54,9 @@ export default function TypePage() {
             response.data.map(async (product: IwineDetail) => {
               try {
                 const varietyResponse = await axios.get(
-                  `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/id/${product.variety}`
+                  `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/id/${product.nameVariety}`
                 );
-                product.variety = varietyResponse.data.name;
+                product.nameVariety = varietyResponse.data.name;
               } catch (error) {
                 console.error("Error fetching variety:", error);
               }
@@ -96,11 +98,11 @@ export default function TypePage() {
     ? "Todos los vinos"
     : "Vino " + getTypeNameById(id ? parseInt(id) : 0);
 
-  // Calcular los productos a mostrar en la página actual
-  const startIndex = (currentPage - 1) * pageSize;
-  const currentProducts = products.slice(startIndex, startIndex + pageSize);
+    // Calcular los productos a mostrar en la página actual
+    const startIndex = (currentPage - 1) * pageSize;
+    const currentProducts = products.slice(startIndex, startIndex + pageSize);
 
-  const totalPages = Math.ceil(products.length / pageSize);
+    const totalPages = Math.ceil(products.length / pageSize);
 
 const handleBuyButtonClick = (product: IwineDetail) => {
     if (!session) {
@@ -110,7 +112,7 @@ const handleBuyButtonClick = (product: IwineDetail) => {
     const item = {
       id: product.id,
       name: product.name,
-      variety: product.variety,
+      variety: product.nameVariety,
       price: product.price,
       image: product.image,
       quantity: 1,
@@ -147,7 +149,7 @@ const handleBuyButtonClick = (product: IwineDetail) => {
                   <p className="text-md font-bold text-black h-12">
                     {product.name}
                   </p>
-                  <p className="text-sm text-black">{product.variety}</p>
+                  <p className="text-sm text-black">{product.nameVariety}</p>
                   <p className="text-lg font-semibold text-black mt-2">
                     ${product.price}
                   </p>

@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import React from 'react'
 
 function Footer() {
@@ -26,9 +27,7 @@ function Footer() {
                                 placeholder="Ingresá aquí tu email"
                             />
 
-                            <button className=" text-primary-foreground text-sm font-bold mt-6 py-1 px-4 rounded w-full bg-violeta hover:bg-fuchsia-950 focus:ring-gray-300 focus:ring-opacity-80" >
-                                SUSCRIBETE
-                            </button>
+                            <Button className='bg-violeta hover:bg-primary w-full '>SUSCRIBETE</Button>
                         </div>
 
                         <div className="flex items-center justify-between mt-3">

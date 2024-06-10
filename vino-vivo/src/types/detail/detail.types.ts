@@ -12,7 +12,12 @@ export interface IwineDetail {
     year: number, 
     price: number,
     stock: number,
-    winery: string,
-    variety: string,
-    type: string,        
+    nameWinery: string,
+    nameVariety: string,
+    nameType: string,        
+}
+
+export interface WineType {
+    id: number;
+    name: string;
 }

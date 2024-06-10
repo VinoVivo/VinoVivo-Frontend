@@ -2,6 +2,7 @@ import { IIdName} from "@/types/idName/idName.types";
 import { Product, ProductFormValues } from "@/types/products/products.types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { IwineDetail, WineType } from "@/types/detail/detail.types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -28,6 +29,8 @@ export const getProductList = async (): Promise<Product[]> => {
   }
 };
 
+// -----------------------------
+
 export const getProduct = async (id:number) => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${id}`
 
@@ -38,6 +41,46 @@ export const getProduct = async (id:number) => {
   const products = await response.json();
   return products;
 };
+
+export const getProductsType = async (type:any): Promise<IwineDetail[]> => {
+  const url: string = `${baseUrl}/product/type/${type}`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Error fetching products");
+    }
+
+    const data: IwineDetail[] = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
+export const getTypes = async (): Promise<WineType[]> => {
+  const url: string = `${baseUrl}/type/all`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Error fetching products");
+    }
+
+    const data: WineType[] = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
+// -------------------------------------
 
 
 
