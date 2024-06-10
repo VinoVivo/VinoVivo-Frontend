@@ -38,117 +38,7 @@ import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
 
 
-
-// ++++++++++++++++++++++ Data de Prueba +++++++++++++++++++++++++++
-
-const orderDetailsArray = [
-    {
-        "id": 61,
-        "idOrder": 42,
-        "idProduct": 6,
-        "price": 6000.0,
-        "quantity": 1
-    },
-    {
-        "id": 62,
-        "idOrder": 42,
-        "idProduct": 6,
-        "price": 6000.0,
-        "quantity": 2
-    },
-    {
-        "id": 63,
-        "idOrder": 43,
-        "idProduct": 7,
-        "price": 30000.0,
-        "quantity": 1
-    },
-    {
-        "id": 64,
-        "idOrder": 43,
-        "idProduct": 8,
-        "price": 60000.0,
-        "quantity": 2
-    },
-    {
-        "id": 71,
-        "idOrder": 55,
-        "idProduct": 1,
-        "price": 9000.0,
-        "quantity": 1
-    },
-    {
-        "id": 72,
-        "idOrder": 55,
-        "idProduct": 2,
-        "price": 10500.0,
-        "quantity": 2
-    }
-]
-
-const ordersArray: OrderType[] = [
-    {
-        "id": 42,
-        "idCustomer": "11dec824-1959-40b5-ab64-5d436c601614",
-        "totalPrice": 18000.0,
-        "shippingAddress": "12345678 Main Street, Cityville",
-        "orderEmail": "secondexample@example.com"
-    },
-    {
-        "id": 43,
-        "idCustomer": "11dec824-1959-40b5-ab64-5d436c601614",
-        "totalPrice": 150000.0,
-        "shippingAddress": "12345678 Main Street, Cityville",
-        "orderEmail": "secondexample@example.com"
-    },
-    {
-        "id": 47,
-        "idCustomer": "11dec824-1959-40b5-ab64-5d436c601614",
-        "totalPrice": 18000.0,
-        "shippingAddress": "12345678 Main Street, Cityville",
-        "orderEmail": "secondexample@example.com"
-    },
-    {
-        "id": 48,
-        "idCustomer": "11dec824-1959-40b5-ab64-5d436c601614",
-        "totalPrice": 150000.0,
-        "shippingAddress": "12345678 Main Street, Cityville",
-        "orderEmail": "secondexample@example.com"
-    },
-    {
-        "id": 49,
-        "idCustomer": "11dec824-1959-40b5-ab64-5d436c601614",
-        "totalPrice": 150000.0,
-        "shippingAddress": "12345678 Main Street, Cityville",
-        "orderEmail": "secondexample@example.com"
-    },
-    {
-        "id": 50,
-        "idCustomer": "11dec824-1959-40b5-ab64-5d436c601614",
-        "totalPrice": 150000.0,
-        "shippingAddress": "12345678 Main Street, Cityville",
-        "orderEmail": "secondexample@example.com"
-    },
-    {
-        "id": 51,
-        "idCustomer": "11dec824-1959-40b5-ab64-5d436c601614",
-        "totalPrice": 150000.0,
-        "shippingAddress": "12345678 Main Street, Cityville",
-        "orderEmail": "secondexample@example.com"
-    },
-    {
-        "id": 55,
-        "idCustomer": "11dec824-1959-40b5-ab64-5d436c601614",
-        "totalPrice": 30000.0,
-        "shippingAddress": "12345678 Main Street, Cityville",
-        "orderEmail": "secondexample@example.com"
-    }
-]
-
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
+//Type para la combinacion de "ordenes" con "orderDetail" con la info de "products"
 type OrderWithProductsType = OrderType & {
     products: (OrderDetailType & { product: Product })[];
 };
@@ -159,15 +49,14 @@ export default function TypePage() {
     const [orderDetail, setOrderDetail] = useState<OrderDetailType[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     const [orderWithProducts, setOrderWithProducts] = useState<OrderWithProductsType[]>([]);
-
     const [loading, setLoading] = useState(true);
-
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(4);
     const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
 
+    //Lo siguiente es un renderizado para ocultar columnas en formato mobile
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 768) { // Aqui se puede cambiar el tamaño que se considera como mobile
@@ -184,14 +73,63 @@ export default function TypePage() {
                 });
             }
         };
-
         window.addEventListener('resize', handleResize);                            // Escucha el evento resize
-
         handleResize();                                                             // Configuración inicial
-
         return () => window.removeEventListener('resize', handleResize);            // Limpieza del efecto
     }, []);
 
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const response = await fetch(`/api/orders/order`, {
+                    method: 'GET',
+                });
+                if (!response.ok) {
+                    throw new Error('Error al obtener las órdenes');
+                }
+                const orders = await response.json(); // Aquí transformas la respuesta a JSON
+                //console.log("ordenes está arrojando:");
+                //console.log(orders);
+                setOrders(orders);
+            } catch (error) {
+                console.error('Error getting orders:', error);
+            }
+        };
+        fetchOrders();
+
+        const fetchOrderDetails = async () => {
+            try {
+                const response = await fetch(`/api/orders/orderDetail`, {
+                    method: 'GET',
+                });
+                if (!response.ok) {
+                    throw new Error('Error al obtener detalles de las órdenes');
+                }
+                const orderDetails = await response.json(); // Aquí transformas la respuesta a JSON
+                //console.log("Detaller está arrojando:");
+                //console.log(orderDetails);
+                setOrderDetail(orderDetails);
+            } catch (error) {
+                console.error('Error getting orders:', error);
+            }
+        };
+        fetchOrderDetails();
+
+        const fetchProducts = async () => {
+            try {
+                const productList = await getProductList();
+                setProducts(productList);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+            setLoading(false);
+        };
+        fetchProducts();
+
+    }, []);
+
+    // --------------------------------------------------------------------------------------------------------------------
     const table = useReactTable<OrderWithProductsType>({
         data: orderWithProducts,
         columns,
@@ -210,59 +148,6 @@ export default function TypePage() {
             },
         },
     });
-
-
-    // ----------------------------- Esta parte seria el fetch para traer mis ordenes ------------------------------------
-
-    useEffect(() => {
-
-        // const fetchOrders = async () => {
-        //     try {
-        //         const productList = await getProductsType(id);
-        //         setProducts(productList);
-        //     } catch (error) {
-        //         console.error("Error fetching products:", error);
-        //     }
-        //     setLoading(false);
-        // };
-        // fetchOrders();
-        //----- arriba antes, intento despues
-
-        const fetchOrders = async () => {
-            try {
-                const Orders = await fetch(`/api/orders/order`, {
-                    method: 'GET',
-                });
-                console.log("responseOrders esta arrojando:")
-                console.log(Orders);
-                //setOrders(Orders)
-
-            } catch (error) {
-                console.error('Error getting orders:', error);
-            }
-        }
-        fetchOrders();
-
-        //setOrders(ordersArray)
-
-
-
-        setOrderDetail(orderDetailsArray)
-
-        const fetchProducts = async () => {
-            try {
-                const productList = await getProductList();
-                setProducts(productList);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-            setLoading(false);
-        };
-        fetchProducts();
-
-    }, []);
-
-    // --------------------------------------------------------------------------------------------------------------------
 
     const combineOrderData = (
         orders: OrderType[],
@@ -288,14 +173,8 @@ export default function TypePage() {
         if (orders.length && orderDetail.length && products.length) {
             combineOrderData(orders, orderDetail, products, setOrderWithProducts);
         }
-
         setLoading(false);
-
     }, [orders, orderDetail, products]);
-
-    useEffect(() => {
-        console.log("Estado actualizado:", orderWithProducts);
-    }, [orderWithProducts]);
 
 
     return (

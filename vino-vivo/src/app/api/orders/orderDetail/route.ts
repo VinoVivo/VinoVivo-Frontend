@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
         }
 
 
-        const url = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/order/all`;
+        const url = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/order-details/all`;
 
         const response = await fetch(url, {
             method: 'GET',
@@ -22,14 +22,14 @@ export async function GET(req: NextRequest) {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to get orders');
+            throw new Error('Failed to get orders Details');
         }
 
         const orders = await response.json(); // Aquí se obtienen las órdenes en formato JSON
 
         return NextResponse.json(orders, { status: 200 }); // Devuelve las órdenes directamente
     } catch (error) {
-        console.error('Error getting orders:', error);
+        console.error('Error getting orders details:', error);
         return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
     }
 }
