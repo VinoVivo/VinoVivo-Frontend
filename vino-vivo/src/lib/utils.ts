@@ -29,7 +29,7 @@ export const getProductList = async (): Promise<Product[]> => {
   }
 };
 
-// -----------------------------
+
 
 export const getProduct = async (id:number) => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${id}`
@@ -42,6 +42,8 @@ export const getProduct = async (id:number) => {
   const products = await response.json();
   return products;
 };
+
+// -----------------------------
 
 export const getProductsType = async (type:any): Promise<IwineDetail[]> => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/type/${type}`;
