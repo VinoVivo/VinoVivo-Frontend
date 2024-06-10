@@ -7,9 +7,10 @@ import {
 } from "@tanstack/react-table"
 import { Button } from "../ui/button";
 import { ArrowUpDown } from "lucide-react";
+import { Product } from "@/types/products/products.types";
 
 type OrderWithProductsType = OrderType & {
-    products: (OrderDetailType & { product: IwineDetail })[];
+    products: (OrderDetailType & { product: Product })[];
 };
 
 
@@ -96,7 +97,7 @@ export const columns: ColumnDef<OrderWithProductsType>[] = [
     },
     {
         accessorKey: "shippingAddress",
-        header: "shippingAddress",
+        header: "Direccion de Entrega",
         cell: ({ row }) => (
             <div className="capitalize">{row.getValue("shippingAddress")}</div>
         ),
