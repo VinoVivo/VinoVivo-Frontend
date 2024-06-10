@@ -27,6 +27,8 @@ export const getProductList = async (): Promise<Product[]> => {
   }
 };
 
+// -----------------------------
+
 export const getProduct = async (id:number) => {
   const url: string = `${baseUrl}/product/id/${id}`
 
@@ -75,6 +77,8 @@ export const getTypes = async (): Promise<WineType[]> => {
     throw error;
   }
 }
+
+// -------------------------------------
 
 export const deleteProduct = async (id: number) => {
   const url: string = `http://localhost:8082/product/delete/${id}`;

@@ -17,6 +17,7 @@ import * as React from "react"
 import {
     ColumnDef,
     SortingState,
+    VisibilityState,
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
@@ -311,6 +312,39 @@ export default function TypePage() {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(4);
+    const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({})
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) { // Cambia el tamaño según tus necesidades
+                setColumnVisibility({
+                    id: true,
+                    //product: true,
+                    //quantity: true,
+                    totalPrice: false,
+                    shippingAddress: false,
+                });
+            } else {
+                setColumnVisibility({
+                    id: true,
+                    //product: true,
+                    //quantity: true,
+                    totalPrice: true,
+                    shippingAddress: true,
+                });
+            }
+        };
+
+        // Escucha el evento resize
+        window.addEventListener('resize', handleResize);
+
+        // Configuración inicial
+        handleResize();
+
+        // Limpieza del efecto
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const table = useReactTable<OrderWithProductsType>({
         data: orderWithProducts,
@@ -320,8 +354,10 @@ export default function TypePage() {
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         onSortingChange: setSorting,
+        onColumnVisibilityChange: setColumnVisibility,
         state: {
             sorting,
+            columnVisibility,
             pagination: {
                 pageIndex: currentPage - 1,
                 pageSize: pageSize,
@@ -392,64 +428,64 @@ export default function TypePage() {
 
     return (
         <>
-            <div className="grid mb-10 mt-40 ml-10 mr-10">
+            <div className="grid mb-10 mt-40 mx-5 sm:mx-10 lg:mx-20">
                 <div className="mb-10 mt-5">
                     <Title title="Mis Pedidos" color="beige" />
                 </div>
                 {loading && <Loader />}
 
-                
-                <div className="rounded-md border">
-                    <Table>
-                        <TableHeader>
-                            {table.getHeaderGroups().map((headerGroup) => (
-                                <TableRow key={headerGroup.id} className="text-center">
-                                    {headerGroup.headers.map((header) => {
-                                        return (
-                                            <TableHead key={header.id} className="text-center">
-                                                {header.isPlaceholder
-                                                    ? null
-                                                    : flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                            </TableHead>
-                                        )
-                                    })}
-                                </TableRow>
-                            ))}
-                        </TableHeader>
-                        <TableBody>
-                            {table.getRowModel().rows?.length ? (
-                                table.getRowModel().rows.map((row) => (
-                                    <TableRow
-                                        key={row.id}
-                                        data-state={row.getIsSelected() && "selected"} 
-                                        className="text-center"
-                                    >
-                                        {row.getVisibleCells().map((cell) => (
-                                            <TableCell key={cell.id} className="text-center">
-                                                {flexRender(
-                                                    cell.column.columnDef.cell,
-                                                    cell.getContext()
-                                                )}
-                                            </TableCell>
-                                        ))}
+                <div className="flex justify-center">
+                    <div className="rounded-md border m-5 w-full max-w-6xl overflow-x-auto">
+                        <Table>
+                            <TableHeader>
+                                {table.getHeaderGroups().map((headerGroup) => (
+                                    <TableRow key={headerGroup.id} className="text-left sm:text-center">
+                                        {headerGroup.headers.map((header) => {
+                                            return (
+                                                <TableHead key={header.id} className="text-left sm:text-center">
+                                                    {header.isPlaceholder
+                                                        ? null
+                                                        : flexRender(
+                                                            header.column.columnDef.header,
+                                                            header.getContext()
+                                                        )}
+                                                </TableHead>
+                                            )
+                                        })}
                                     </TableRow>
-                                ))
-                            ) : (
-                                <TableRow>
-                                    <TableCell
-                                        colSpan={columns.length}
-                                        className="h-24 text-center"
-                                    >
-                                        No results.
-                                    </TableCell>
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                    
+                                ))}
+                            </TableHeader>
+                            <TableBody>
+                                {table.getRowModel().rows?.length ? (
+                                    table.getRowModel().rows.map((row) => (
+                                        <TableRow
+                                            key={row.id}
+                                            data-state={row.getIsSelected() && "selected"} 
+                                            className="text-left sm:text-center"
+                                        >
+                                            {row.getVisibleCells().map((cell) => (
+                                                <TableCell key={cell.id} className="text-left sm:text-center px-2 sm:px-4 py-2 sm:py-3">
+                                                    {flexRender(
+                                                        cell.column.columnDef.cell,
+                                                        cell.getContext()
+                                                    )}
+                                                </TableCell>
+                                            ))}
+                                        </TableRow>
+                                    ))
+                                ) : (
+                                    <TableRow>
+                                        <TableCell
+                                            colSpan={columns.length}
+                                            className="h-24 text-center"
+                                        >
+                                            No results.
+                                        </TableCell>
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </div>
                 </div>
                 <Pagination>
                     <PaginationPrevious
@@ -469,7 +505,6 @@ export default function TypePage() {
                         onClick={() => setCurrentPage(currentPage < table.getPageCount() ? currentPage + 1 : currentPage)}
                     />
                 </Pagination>
-
             </div>
         </>
     );

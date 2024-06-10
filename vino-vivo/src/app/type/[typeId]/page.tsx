@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { getProductsType, getTypes } from '@/lib/utils';
 import Loader from '@/components/loader/page';
@@ -53,9 +54,9 @@ export default function TypePage() {
             response.data.map(async (product: IwineDetail) => {
               try {
                 const varietyResponse = await axios.get(
-                  `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/id/${product.variety}`
+                  `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/id/${product.nameVariety}`
                 );
-                product.variety = varietyResponse.data.name;
+                product.nameVariety = varietyResponse.data.name;
               } catch (error) {
                 console.error("Error fetching variety:", error);
               }
@@ -111,7 +112,7 @@ const handleBuyButtonClick = (product: IwineDetail) => {
     const item = {
       id: product.id,
       name: product.name,
-      variety: product.variety,
+      variety: product.nameVariety,
       price: product.price,
       image: product.image,
       quantity: 1,
@@ -148,7 +149,7 @@ const handleBuyButtonClick = (product: IwineDetail) => {
                   <p className="text-md font-bold text-black h-12">
                     {product.name}
                   </p>
-                  <p className="text-sm text-black">{product.variety}</p>
+                  <p className="text-sm text-black">{product.nameVariety}</p>
                   <p className="text-lg font-semibold text-black mt-2">
                     ${product.price}
                   </p>
