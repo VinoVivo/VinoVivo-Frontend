@@ -15,7 +15,7 @@ export default function UpdateProductForm({ id }: { id: number }) {
     const [product, setProduct] = useState<Product>()
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
-    const [dialogType, setDialogType] = useState<"success" | "error">("success");
+    const [dialogType, setDialogType] = useState<"Éxito" | "Error">("Éxito");
     const [wineries, setWineries] = useState<IIdName[]>([]);
     const [types, setTypes] = useState<IIdName[]>([]);
     const [varieties, setVarieties] = useState<IIdName[]>([]);
@@ -23,6 +23,7 @@ export default function UpdateProductForm({ id }: { id: number }) {
     const defaultWineryId = wineries.find(winery => winery.name === product?.nameWinery)?.id;
     const defaultTypeId = types.find(type => type.name === product?.nameType)?.id;
     const defaultVarietyId = varieties.find(variety => variety.name === product?.nameVariety)?.id;
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,7 +38,6 @@ export default function UpdateProductForm({ id }: { id: number }) {
                 setWineries(wineriesResponse);
                 setTypes(typesResponse);
                 setVarieties(varietiesResponse);
-
                 setValue('name', productResponse.name);
                 setValue('image', productResponse.image);
                 setValue('idType', typesResponse.find(type => type.name === productResponse.nameType)?.id || undefined as number | undefined);
@@ -53,41 +53,37 @@ export default function UpdateProductForm({ id }: { id: number }) {
         };
         fetchData();
     }, [id]);
-
- 
-
-   
-
+    
 
     const onSubmit: SubmitHandler<ProductFormValues> = async (data) => {
         try {
-            const payload = { ...data };
-
-            const response = await fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/update`, {
+            const { ...payload } = data;
+    
+            const response = await fetch(`/api/products/update`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({id, ...payload })
+                body: JSON.stringify({id, ...payload }),
             });
-
+    
             if (!response.ok) {
                 throw new Error('Error en la respuesta del servidor');
             }
-
+    
             const responseData = await response.json();
             console.log('Producto actualizado:', responseData);
-            setDialogType("success");
+            setDialogType("Éxito");
             setDialogMessage('Su producto ha sido actualizado exitosamente');
         } catch (error) {
             console.error('Error al actualizar el producto:', error);
-            setDialogType("error");
+            setDialogType("Error");
             setDialogMessage('Su producto no ha podido ser actualizado, por favor revise los datos e intente nuevamente');
         } finally {
             setDialogOpen(true);
         }
+    };
     
-    }
 
     const handleTextAndNumberInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]*$/.test(e.key) && e.key !== 'Backspace') {
@@ -296,9 +292,9 @@ export default function UpdateProductForm({ id }: { id: number }) {
                     <div className="bg-white rounded-lg p-10 shadow-lg justify-between border-primary border-2">
                     <AlertDialogHeader className="flex flex-col items-center">                        
                             <AlertDialogTitle className='mt-2 mb-2 text-3xl'>
-                                {dialogType === "success" ? "Éxito" : "Error"}                                
+                                {dialogType === "Éxito" ? "Éxito" : "Error"}                                
                             </AlertDialogTitle>
-                            {dialogType === "success" ? (
+                            {dialogType === "Éxito" ? (
                                     <FaRegCircleCheck className="h-12 w-12 text-success mb-2" />
                                 ) : (
                                     <MdReportGmailerrorred className="h-12 w-12 text-destructive mb-2" />
