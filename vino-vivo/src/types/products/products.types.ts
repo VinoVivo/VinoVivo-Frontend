@@ -1,4 +1,4 @@
-import { deleteProduct } from "@/lib/utils";
+
 
 export interface Product {
     id: number;
