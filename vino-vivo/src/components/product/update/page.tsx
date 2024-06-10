@@ -24,8 +24,7 @@ export default function UpdateProductForm({ id }: { id: number }) {
     const defaultTypeId = types.find(type => type.name === product?.nameType)?.id;
     const defaultVarietyId = varieties.find(variety => variety.name === product?.nameVariety)?.id;
     
-
-    useEffect(() => {
+       useEffect(() => {
         const fetchData = async () => {
             try {
                 const [productResponse, wineriesResponse, typesResponse, varietiesResponse] = await Promise.all([
@@ -40,9 +39,9 @@ export default function UpdateProductForm({ id }: { id: number }) {
                 setVarieties(varietiesResponse);
                 setValue('name', productResponse.name);
                 setValue('image', productResponse.image);
-                setValue('idType', typesResponse.find(type => type.name === productResponse.nameType)?.id || undefined as number | undefined);
-                setValue('idWinery', wineriesResponse.find(winery => winery.name === productResponse.nameWinery)?.id ||  undefined as number | undefined);
-                setValue('idVariety', varietiesResponse.find(variety => variety.name === productResponse.nameVariety)?.id || undefined as number | undefined);
+                setValue('idType', typesResponse.find((type:IIdName) => type.name === productResponse.nameType)?.id || undefined as number | undefined);
+                setValue('idWinery', wineriesResponse.find((winery:IIdName) => winery.name === productResponse.nameWinery)?.id ||  undefined as number | undefined);
+                setValue('idVariety', varietiesResponse.find((variety:IIdName) => variety.name === productResponse.nameVariety)?.id || undefined as number | undefined);
                 setValue('stock', productResponse.stock);
                 setValue('price', productResponse.price);
                 setValue('year', productResponse.year);
