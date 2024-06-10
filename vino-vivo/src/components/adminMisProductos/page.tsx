@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import CardProduct from "./cardProduct";
-import { getProductList } from "@/lib/utils";
+import { getProduct, getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
 import { IoMdTrash } from "react-icons/io";
 import {   Pagination,
@@ -10,9 +10,7 @@ import {   Pagination,
   PaginationLink,
   PaginationNext,
   PaginationPrevious, } from "../ui/pagination";
-
-
-
+import DialogeRegister from "../product/register/DialogeRegister";
 
 
 
@@ -22,16 +20,24 @@ const ProductGrid = () => {
   const [flag, setFlag] =useState(false)
   const pageSize = 8
   const [currentPage, setCurrentPage]= useState(1)
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState("");
+  const [dialogType, setDialogType] = useState<"Éxito" | "Error" | "Alerta">("Alerta");
+  const [alert, setAlert]=useState(false)
+ 
+
 
   // Calcular los productos a mostrar en la página actual
   const startIndex = (currentPage - 1) * pageSize;
   const currentProducts = products.slice(startIndex, startIndex + pageSize);
 
   const totalPages = Math.ceil(products.length / pageSize);
+  
+
 
   const deleteProducto = async (id: number) => {
     setFlag(false)
-    try {
+       try {
       const response = await fetch(`/api/products/${id}`, {
         method: 'DELETE',
       });
@@ -39,14 +45,19 @@ const ProductGrid = () => {
       if (!response.ok) {
         throw new Error('Failed to delete product');
       }
-  
-      console.log('Product deleted successfully');
       setFlag(true)
+      setDialogType("Éxito");
+      setDialogMessage('Su producto ha sido eliminado exitosamente');
     } catch (error) {
       console.error('Error deleting product:', error);
+      setDialogType("Error");
+      setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
+    }finally{
+      setDialogOpen(true);
     }
   };
 
+   
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -102,6 +113,7 @@ const ProductGrid = () => {
        </PaginationItem>
      </PaginationContent>
    </Pagination>
+   <DialogeRegister open={dialogOpen}  onOpenChange={setDialogOpen} type={dialogType} message={dialogMessage} textButtonOne="Cerrar"/>
    </div>
   );
  

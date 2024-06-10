@@ -1,12 +1,17 @@
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { FaRegCircleCheck } from "react-icons/fa6";
-import { MdReportGmailerrorred } from "react-icons/md";
+import { MdReportGmailerrorred, MdWarning } from "react-icons/md";
 
 interface DialogProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    type: "success" | "error";
+    type: "Éxito" | "Error" | "Alerta";
     message: string;
+    styleButton1?: string;
+    styleButton2?: string;
+    textButtonOne?: string, 
+    textButtonTwo?: string
+    onClick?: (arg:any)=> Promise<void>;
 };
  // const initialValues: ProductFormValues = {
     //     name: '',
@@ -20,7 +25,7 @@ interface DialogProps {
     //     description: ''
     // };
 
-const DialogeRegister: React.FC<DialogProps> = ({ open, onOpenChange, type, message }) => {
+const DialogeRegister: React.FC<DialogProps> = ({ open, onOpenChange, type, message, textButtonOne, textButtonTwo, styleButton1, styleButton2, onClick}) => {
 
     // const { reset } = useForm<ProductFormValues>();
 
@@ -30,24 +35,41 @@ const DialogeRegister: React.FC<DialogProps> = ({ open, onOpenChange, type, mess
                 <div className="rounded-lg p-10 shadow-lg justify-between border-primary border-2">
                     <AlertDialogHeader className="flex flex-col items-center">
                         <AlertDialogTitle className='mb-2 text-3xl'>
-                            {type === "success" ? "Éxito" : "Error"}
-                        </AlertDialogTitle>
-                        {type === "success" ? (
-                            <FaRegCircleCheck className="h-12 w-12 text-green-500 mb-4" />
-                        ) : (
-                            <MdReportGmailerrorred className="h-12 w-12 text-red-500 mb-4" />
-                        )}
+                            {type}
+                       </AlertDialogTitle>
+                            {type === 'Éxito' ? (
+                                <FaRegCircleCheck className="h-12 w-12 text-green-500 mb-4" />
+                            ) : type === 'Error' ? (
+                                <MdReportGmailerrorred className="h-12 w-12 text-red-500 mb-4" />
+                            ) :  type === 'Alerta' ? (
+                                <MdWarning className="h-12 w-12 text-destructive mb-4" />)
+                                : (''
+                            )}
+                                                
                         <AlertDialogDescription className='text-base mt-6'>
                             {message}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter className='mt-6'>
+                        {textButtonOne ?
+                             <AlertDialogAction 
+                             onClick={()=>onOpenChange}
+                             className= {styleButton1 ? styleButton1 : 'w-20 hover:bg-white hover:text-primary  hover:border-primary  border-2 '}
+                         >
+                          {textButtonOne}
+                         </AlertDialogAction>
+                          : ''
+                        }
+                       
+                        {textButtonTwo ? 
                         <AlertDialogAction 
-                            onClick={()=>onOpenChange}
-                            className='hover: hover:bg-white hover:text-primary  hover:border-primary  border-2 '
-                        >
-                            Cerrar
-                        </AlertDialogAction>
+                        onClick={onClick}
+                        className= {styleButton2 ? styleButton2 : ' bg-white hover: hover:bg-primary hover:text-white   border-2 '}
+                    >
+                       {textButtonTwo}
+                    </AlertDialogAction>
+                            : ''
+                        }
                     </AlertDialogFooter>
                 </div>
             </AlertDialogContent>

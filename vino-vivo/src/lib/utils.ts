@@ -33,6 +33,7 @@ export const getProductList = async (): Promise<Product[]> => {
 
 export const getProduct = async (id:number) => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${id}`
+ 
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -45,7 +46,7 @@ export const getProduct = async (id:number) => {
 // -----------------------------
 
 export const getProductsType = async (type:any): Promise<IwineDetail[]> => {
-  const url: string = `${baseUrl}/product/type/${type}`;
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/type/${type}`;
 
   try {
     const response = await fetch(url);
@@ -64,7 +65,7 @@ export const getProductsType = async (type:any): Promise<IwineDetail[]> => {
 }
 
 export const getTypes = async (): Promise<WineType[]> => {
-  const url: string = `${baseUrl}/type/all`;
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commercetype/all`;
 
   try {
     const response = await fetch(url);
@@ -87,7 +88,7 @@ export const getTypes = async (): Promise<WineType[]> => {
 
 
 export const getVariety = async (): Promise<IIdName[]> => {
-  const url: string = `$${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/all`
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/all`
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -98,7 +99,7 @@ export const getVariety = async (): Promise<IIdName[]> => {
 };
 
 export const getType = async (): Promise<IIdName[]> => {
-  const url: string = `$${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commercetype/all`
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/type/all`
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -109,7 +110,7 @@ export const getType = async (): Promise<IIdName[]> => {
 };
 
 export const getWinery = async (): Promise<IIdName[]> => {
-  const url: string = `$${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commercetype/all`;
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/type/all`;
 
   const response = await fetch(url);
   if (!response.ok) {
