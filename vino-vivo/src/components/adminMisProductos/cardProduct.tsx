@@ -2,7 +2,7 @@
 import React, { FC, useState } from 'react'
 import Link from 'next/link';
 import { ICardProduct } from '@/types/products/products.types';
-import DialogeRegister from '../product/register/DialogeRegister';
+import DialogeMessage from '../product/register/DialogeMessage';
 
 
 const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, deleteProduct}) => {
@@ -50,7 +50,7 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
       </Link>
       <div className="flex w-20 gap-2">
 
-   <DialogeRegister open={alert}  onOpenChange={setAlert} type={dialogType} message={dialogMessage} textButtonOne="Cancelar" textButtonTwo="Eliminar" onClick={handleDelete} styleButton2='bg-destructive hover:bg-violeta   border-2 '/>
+   <DialogeMessage open={alert}  onOpenChange={setAlert} type={dialogType} message={dialogMessage} textButtonOne="Cancelar" textButtonTwo="Eliminar" onClick={handleDelete} styleButton2='bg-destructive hover:bg-violeta   border-2 '/>
    </div>
     </div>
   )

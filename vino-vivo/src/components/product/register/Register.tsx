@@ -2,7 +2,7 @@
 import { Title } from '@/components/Title/Title';
 import BackButton from '@/components/ui/BackButton';
 import { useEffect, useState } from 'react';
-import DialogeRegister from './DialogeRegister';
+import DialogeMessage from './DialogeMessage';
 import ProductForm from './ProductForm';
 
 export default function Register() {
@@ -71,7 +71,6 @@ export default function Register() {
         // setDialogOpen(true);
     };
 
-
     return (
         <div className="max-w-4xl mx-4 my-40 lg:mx-auto">
             <div className="flex  flex-col sm:flex-row justify-between items-center mb-4">
@@ -79,13 +78,14 @@ export default function Register() {
                 <span className="ml-2 sm:mt-0"><BackButton/></span>
             </div>            
             <ProductForm onSubmit={createProduct} wineries={wineries} types={types} varieties={varieties}/>
-            <DialogeRegister 
+            <DialogeMessage 
                 open={dialogOpen} 
                 onOpenChange={setDialogOpen} 
                 type={dialogType} 
                 message={dialogMessage}
                 textButtonOne="Seguir creando"
                 textButtonTwo="Volver a productos"
+                buttonTwoHref="/admin/productos"
             />
         </div>
     );

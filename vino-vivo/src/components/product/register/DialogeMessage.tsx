@@ -20,6 +20,7 @@ interface DialogProps {
     styleButton2?: string;
     textButtonOne?: string;
     textButtonTwo?: string;
+    buttonTwoHref?: string;
     onClick?: (arg: any) => Promise<void>;
 }
 // const initialValues: ProductFormValues = {
@@ -34,7 +35,7 @@ interface DialogProps {
 //     description: ''
 // };
 
-const DialogeRegister: React.FC<DialogProps> = ({
+const DialogeMessage: React.FC<DialogProps> = ({
     open,
     onOpenChange,
     type,
@@ -43,6 +44,7 @@ const DialogeRegister: React.FC<DialogProps> = ({
     textButtonTwo,
     styleButton1,
     styleButton2,
+    buttonTwoHref,
     onClick,
 }) => {
     // const { reset } = useForm<ProductFormValues>();
@@ -80,17 +82,17 @@ const DialogeRegister: React.FC<DialogProps> = ({
                         styleButton1 ?? "hover:bg-white hover:text-primary hover:border-primary border-2"
                     }
                 >
-                {textButtonOne}
+                    {textButtonOne}
                 </AlertDialogAction>
             )}
-            {textButtonTwo && (
-                <Link href="/admin/productos">
+            {textButtonTwo && buttonTwoHref &&(
+                <Link href={buttonTwoHref} passHref>
                     <AlertDialogAction
                         className={
                             styleButton2 ?? "hover:bg-white hover:text-primary hover:border-primary border-2"
                         }
                     >
-                    {textButtonTwo}
+                        {textButtonTwo}
                         </AlertDialogAction>
                 </Link>
             )}
@@ -101,4 +103,4 @@ const DialogeRegister: React.FC<DialogProps> = ({
     );
 };
 
-export default DialogeRegister;
+export default DialogeMessage;

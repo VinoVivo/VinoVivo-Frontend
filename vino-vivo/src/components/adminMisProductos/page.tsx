@@ -10,7 +10,7 @@ import {   Pagination,
   PaginationLink,
   PaginationNext,
   PaginationPrevious, } from "../ui/pagination";
-import DialogeRegister from "../product/register/DialogeRegister";
+import DialogeMessage from "../product/register/DialogeMessage";
 
 
 
@@ -113,7 +113,7 @@ const ProductGrid = () => {
        </PaginationItem>
      </PaginationContent>
    </Pagination>
-   <DialogeRegister open={dialogOpen}  onOpenChange={setDialogOpen} type={dialogType} message={dialogMessage} textButtonOne="Cerrar"/>
+   <DialogeMessage open={dialogOpen}  onOpenChange={setDialogOpen} type={dialogType} message={dialogMessage} textButtonOne="Cerrar"/>
    </div>
   );
  
