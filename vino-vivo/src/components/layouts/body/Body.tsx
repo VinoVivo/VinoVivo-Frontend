@@ -140,6 +140,7 @@ const Body = () => {
                 onOpenChange={handleCloseAlert}
                 type="Alert"
                 message="Debe estar logeado para comprar productos"
+                textButtonOne="Cerrar"
             />
         </div>
     );
