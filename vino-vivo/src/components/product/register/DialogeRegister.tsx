@@ -54,7 +54,7 @@ const DialogeRegister: React.FC<DialogProps> = ({ open, onOpenChange, type, mess
                         {textButtonOne ?
                              <AlertDialogAction 
                              onClick={()=>onOpenChange}
-                             className= {styleButton1 ? styleButton1 : 'w-20 hover:bg-white hover:text-primary  hover:border-primary  border-2 '}
+                             className= {styleButton1 ? styleButton1 : 'hover:bg-white hover:text-primary  hover:border-primary  border-2 '}
                          >
                           {textButtonOne}
                          </AlertDialogAction>

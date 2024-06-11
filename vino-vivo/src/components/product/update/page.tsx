@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { IIdName } from '@/types/idName/idName.types';
 import {  Product, ProductFormValues } from '@/types/products/products.types';
 import { AlertDialog, AlertDialogContent } from '@radix-ui/react-alert-dialog';
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaRegCircleCheck } from "react-icons/fa6";
@@ -80,6 +81,7 @@ export default function UpdateProductForm({ id }: { id: number }) {
             setDialogMessage('Su producto no ha podido ser actualizado, por favor revise los datos e intente nuevamente');
         } finally {
             setDialogOpen(true);
+     
         }
     };
     
@@ -303,7 +305,7 @@ export default function UpdateProductForm({ id }: { id: number }) {
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter className='mt-4'>
-                            <AlertDialogAction onClick={() => setDialogOpen(false)}>
+                            <AlertDialogAction className='hover:border-primary hover:border-2 hover:text-primary' onClick={() => setDialogOpen(false)}>
                                 Cerrar
                             </AlertDialogAction>
                         </AlertDialogFooter>
