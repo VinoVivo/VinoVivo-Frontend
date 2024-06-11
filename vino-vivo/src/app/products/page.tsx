@@ -319,8 +319,9 @@ const ProductsPage = () => {
       <DialogeMessage
         open={showAlert}
         onOpenChange={handleCloseAlert}
-        type="Error"
+        type="Alert"
         message="Debe estar logeado para comprar productos"
+        textButtonOne="Cerrar"
       />
     </>
   );
