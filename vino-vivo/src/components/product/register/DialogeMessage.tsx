@@ -14,12 +14,13 @@ import { MdReportGmailerrorred, MdWarning } from "react-icons/md";
 interface DialogProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    type: "Éxito" | "Error" | "Alerta";
+    type: "Success" | "Error" | "Alert";
     message: string;
     styleButton1?: string;
     styleButton2?: string;
     textButtonOne?: string;
     textButtonTwo?: string;
+    buttonTwoHref?: string;
     onClick?: (arg: any) => Promise<void>;
 }
 // const initialValues: ProductFormValues = {
@@ -34,7 +35,7 @@ interface DialogProps {
 //     description: ''
 // };
 
-const DialogeRegister: React.FC<DialogProps> = ({
+const DialogeMessage: React.FC<DialogProps> = ({
     open,
     onOpenChange,
     type,
@@ -43,16 +44,17 @@ const DialogeRegister: React.FC<DialogProps> = ({
     textButtonTwo,
     styleButton1,
     styleButton2,
+    buttonTwoHref,
     onClick,
 }) => {
     // const { reset } = useForm<ProductFormValues>();
     const getIcon = () => {
         switch (type) {
-            case "Éxito":
+            case "Success":
                 return <FaRegCircleCheck className="h-12 w-12 text-green-500 mb-4" />;
             case "Error":
                 return <MdReportGmailerrorred className="h-12 w-12 text-red-500 mb-4" />;
-            case "Alerta":
+            case "Alert":
                 return <MdWarning className="h-12 w-12 text-destructive mb-4" />;
             default:
                 return null;
@@ -80,17 +82,17 @@ const DialogeRegister: React.FC<DialogProps> = ({
                         styleButton1 ?? "hover:bg-white hover:text-primary hover:border-primary border-2"
                     }
                 >
-                {textButtonOne}
+                    {textButtonOne}
                 </AlertDialogAction>
             )}
-            {textButtonTwo && (
-                <Link href="/admin/productos">
+            {textButtonTwo && buttonTwoHref &&(
+                <Link href={buttonTwoHref} passHref>
                     <AlertDialogAction
                         className={
                             styleButton2 ?? "hover:bg-white hover:text-primary hover:border-primary border-2"
                         }
                     >
-                    {textButtonTwo}
+                        {textButtonTwo}
                         </AlertDialogAction>
                 </Link>
             )}
@@ -101,4 +103,4 @@ const DialogeRegister: React.FC<DialogProps> = ({
     );
 };
 
-export default DialogeRegister;
+export default DialogeMessage;

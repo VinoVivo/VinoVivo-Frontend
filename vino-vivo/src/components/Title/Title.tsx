@@ -12,10 +12,8 @@ export const Title: FC<TitleProps> = ({ title, color }) => {
       ? "after:bg-violeta before:bg-violeta"
       : "after:bg-beige before:bg-beige";
   return (
-    <>
       <h2 className={`${styles.typography_title} text-${color} ${bgColor}`}>
         {title}
       </h2>
-    </>
   );
 };

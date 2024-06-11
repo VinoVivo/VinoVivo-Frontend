@@ -2,13 +2,13 @@
 import { Title } from '@/components/Title/Title';
 import BackButton from '@/components/ui/BackButton';
 import { useEffect, useState } from 'react';
-import DialogeRegister from './DialogeRegister';
+import DialogeMessage from './DialogeMessage';
 import ProductForm from './ProductForm';
 
 export default function Register() {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
-    const [dialogType, setDialogType] = useState<"Éxito" | "Error">("Éxito");
+    const [dialogType, setDialogType] = useState<"Success" | "Error">("Success");
     const [wineries, setWineries] = useState<{ id: number, name: string }[]>([]);
     const [types, setTypes] = useState<{ id: number, name: string }[]>([]);
     const [varieties, setVarieties] = useState<{ id: number, name: string }[]>([]);
@@ -44,7 +44,7 @@ export default function Register() {
             if (!response.ok) {
                 throw new Error('Error en la respuesta del servidor');
             }
-            setDialogType("Éxito");
+            setDialogType("Success");
             setDialogMessage('Su producto ha sido creado exitosamente');
             const responseData = await response.json();
             return responseData;
@@ -60,7 +60,7 @@ export default function Register() {
         // const simulateSuccess = true; // Cambia esto a false para probar el caso de error
         // if (simulateSuccess) {
         //     console.log('Producto creado:', data);
-        //     setDialogType("Éxito");
+        //     setDialogType("Success");
         //     setDialogMessage('Su producto ha sido creado exitosamente');
             
         // } else {
@@ -71,7 +71,6 @@ export default function Register() {
         // setDialogOpen(true);
     };
 
-
     return (
         <div className="max-w-4xl mx-4 my-40 lg:mx-auto">
             <div className="flex  flex-col sm:flex-row justify-between items-center mb-4">
@@ -79,13 +78,14 @@ export default function Register() {
                 <span className="ml-2 sm:mt-0"><BackButton/></span>
             </div>            
             <ProductForm onSubmit={createProduct} wineries={wineries} types={types} varieties={varieties}/>
-            <DialogeRegister 
+            <DialogeMessage 
                 open={dialogOpen} 
                 onOpenChange={setDialogOpen} 
                 type={dialogType} 
                 message={dialogMessage}
                 textButtonOne="Seguir creando"
                 textButtonTwo="Volver a productos"
+                buttonTwoHref="/admin/productos"
             />
         </div>
     );

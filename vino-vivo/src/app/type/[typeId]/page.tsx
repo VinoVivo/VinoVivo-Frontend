@@ -18,7 +18,7 @@ import {
 import { IwineDetail } from "@/types/detail/detail.types";
 import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
-import DialogeRegister from "@/components/product/register/DialogeRegister";
+import DialogeMessage from "@/components/product/register/DialogeMessage";
 
 interface WineType {
   id: number;
@@ -190,7 +190,7 @@ const handleBuyButtonClick = (product: IwineDetail) => {
           </PaginationContent>
         </Pagination>
       </div>
-      <DialogeRegister
+      <DialogeMessage
         open={showAlert}
         onOpenChange={handleCloseAlert}
         type="Error"

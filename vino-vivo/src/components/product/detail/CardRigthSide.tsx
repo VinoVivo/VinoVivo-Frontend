@@ -7,7 +7,7 @@ import BackButton from "@/components/ui/BackButton";
 import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import DialogeRegister from "@/components/product/register/DialogeRegister";
+import DialogeMessage from "../register/DialogeMessage";
 
 interface CardRigthSideProps {
     wine: IwineDetail;
@@ -24,10 +24,10 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
         }
         const item = {
             id: wine.id,
-            name: wine.name.split(' ').slice(0, 2).join(' '), 
-            variety: wine.variety,
+            name: wine.name.split(' ').slice(0, 2).join(' '),
+            variety: wine.nameVariety,
             price: wine.price,
-            image: wine.image, 
+            image: wine.image,
             quantity: 1,
         };
         addToCart(item);
@@ -55,10 +55,10 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
                         <p className="mb-1">Descripción: </p>
                     </div>
                     <div className="text-left">
-                        <p className="mb-1">{wine.type}</p>                    
+                        <p className="mb-1">{wine.nameType}</p>                    
                         <p className="mb-1">{wine.year}</p>
-                        <p className="mb-1">{wine.winery}</p>
-                        <p className="mb-1">{wine.variety}</p>
+                        <p className="mb-1">{wine.nameWinery}</p>
+                        <p className="mb-1">{wine.nameVariety}</p>
                         <p className="mb-1">{wine.stock}</p>
                         <p className="mb-1 font-bold">{wine.price}</p>
                         <p className="mb-1 text-justify">{wine.description}</p>
@@ -74,10 +74,10 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
                     <BackButton/>
                 </div>
             </CardContent>
-            <DialogeRegister 
+            <DialogeMessage
                 open={showAlert} 
                 onOpenChange={handleCloseAlert} 
-                type="error" 
+                type="Error" 
                 message="Debe estar logeado para agregar productos al carrito" 
             />
         </> 

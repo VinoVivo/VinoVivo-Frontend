@@ -8,7 +8,7 @@ import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
 import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
-import DialogeRegister from "@/components/product/register/DialogeRegister";
+import DialogeMessage from "@/components/product/register/DialogeMessage";
 
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -135,10 +135,10 @@ const Body = () => {
                     </button>
                 </Link>
             </div>
-            <DialogeRegister
+            <DialogeMessage
                 open={showAlert}
                 onOpenChange={handleCloseAlert}
-                type="error"
+                type="Alert"
                 message="Debe estar logeado para comprar productos"
             />
         </div>
