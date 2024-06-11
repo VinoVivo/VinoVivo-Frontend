@@ -77,8 +77,9 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
             <DialogeMessage
                 open={showAlert} 
                 onOpenChange={handleCloseAlert} 
-                type="Error" 
+                type="Alert" 
                 message="Debe estar logeado para agregar productos al carrito" 
+                textButtonOne="Cerrar"
             />
         </> 
     );
