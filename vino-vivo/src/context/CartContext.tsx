@@ -1,7 +1,7 @@
 'use client';
 import { createContext, useContext, useState, ReactNode, useMemo } from "react";
 
-interface CartItem {
+export interface CartItem {
     id: number;
     name: string;
     variety: string;
