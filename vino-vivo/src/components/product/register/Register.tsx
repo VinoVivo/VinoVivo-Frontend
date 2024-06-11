@@ -32,43 +32,43 @@ export default function Register() {
     }, []);
 
     const createProduct = async (data: object) => {
-        // try {
-        //     const response = await fetch('/api/products/register', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify(data),
-        //     });
+        try {
+            const response = await fetch('/api/products/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
     
-        //     if (!response.ok) {
-        //         throw new Error('Error en la respuesta del servidor');
-        //     }
-        //     setDialogType("Éxito");
-        //     setDialogMessage('Su producto ha sido creado exitosamente');
-        //     const responseData = await response.json();
-        //     return responseData;
-        // } catch (error) {
-        //     setDialogType("Error");
-        //     setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
-        //     console.error('Error al crear el producto:', error);
-        //     throw error;
-        // }finally{
-        //     setDialogOpen(true);
-        // }
-        // para probar unicamente los cuadros de dialogo sin crear un producto: 
-        const simulateSuccess = true; // Cambia esto a false para probar el caso de error
-        if (simulateSuccess) {
-            console.log('Producto creado:', data);
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+            }
             setDialogType("Éxito");
             setDialogMessage('Su producto ha sido creado exitosamente');
-            
-        } else {
-            console.error('Error al crear el producto');
+            const responseData = await response.json();
+            return responseData;
+        } catch (error) {
             setDialogType("Error");
             setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
-        }        
-        setDialogOpen(true);
+            console.error('Error al crear el producto:', error);
+            throw error;
+        }finally{
+            setDialogOpen(true);
+        }
+        // para probar unicamente los cuadros de dialogo sin crear un producto: 
+        // const simulateSuccess = true; // Cambia esto a false para probar el caso de error
+        // if (simulateSuccess) {
+        //     console.log('Producto creado:', data);
+        //     setDialogType("Éxito");
+        //     setDialogMessage('Su producto ha sido creado exitosamente');
+            
+        // } else {
+        //     console.error('Error al crear el producto');
+        //     setDialogType("Error");
+        //     setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
+        // }        
+        // setDialogOpen(true);
     };
 
 
