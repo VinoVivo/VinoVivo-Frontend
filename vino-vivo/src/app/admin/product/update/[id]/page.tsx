@@ -3,9 +3,6 @@ import { notFound } from 'next/navigation';
 import { Product } from '@/types/products/products.types';
 import UpdateProductForm from '@/components/product/update/page';
 
-
-
-
 interface DetailPageProps {
     params: {
     id: string | undefined;

@@ -8,7 +8,7 @@ import ProductForm from './ProductForm';
 export default function Register() {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
-    const [dialogType, setDialogType] = useState<"Éxito" | "Error">("Éxito");
+    const [dialogType, setDialogType] = useState<"Success" | "Error">("Success");
     const [wineries, setWineries] = useState<{ id: number, name: string }[]>([]);
     const [types, setTypes] = useState<{ id: number, name: string }[]>([]);
     const [varieties, setVarieties] = useState<{ id: number, name: string }[]>([]);
@@ -44,7 +44,7 @@ export default function Register() {
             if (!response.ok) {
                 throw new Error('Error en la respuesta del servidor');
             }
-            setDialogType("Éxito");
+            setDialogType("Success");
             setDialogMessage('Su producto ha sido creado exitosamente');
             const responseData = await response.json();
             return responseData;
@@ -60,7 +60,7 @@ export default function Register() {
         // const simulateSuccess = true; // Cambia esto a false para probar el caso de error
         // if (simulateSuccess) {
         //     console.log('Producto creado:', data);
-        //     setDialogType("Éxito");
+        //     setDialogType("Success");
         //     setDialogMessage('Su producto ha sido creado exitosamente');
             
         // } else {

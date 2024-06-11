@@ -14,7 +14,7 @@ import { MdReportGmailerrorred, MdWarning } from "react-icons/md";
 interface DialogProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    type: "Éxito" | "Error" | "Alerta";
+    type: "Success" | "Error" | "Alert";
     message: string;
     styleButton1?: string;
     styleButton2?: string;
@@ -50,11 +50,11 @@ const DialogeMessage: React.FC<DialogProps> = ({
     // const { reset } = useForm<ProductFormValues>();
     const getIcon = () => {
         switch (type) {
-            case "Éxito":
+            case "Success":
                 return <FaRegCircleCheck className="h-12 w-12 text-green-500 mb-4" />;
             case "Error":
                 return <MdReportGmailerrorred className="h-12 w-12 text-red-500 mb-4" />;
-            case "Alerta":
+            case "Alert":
                 return <MdWarning className="h-12 w-12 text-destructive mb-4" />;
             default:
                 return null;

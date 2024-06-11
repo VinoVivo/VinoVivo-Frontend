@@ -7,18 +7,16 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import Login from "@/components/Login";
 import Logout from "@/components/Logout";
-import { useSession } from "next-auth/react";
-import { signIn } from "next-auth/react";
-import { jwtDecode, JwtPayload } from "jwt-decode";
+import { useSession,signIn } from "next-auth/react";
+import { jwtDecode } from "jwt-decode";
 import federatedLogout from "@/app/api/auth/federated-logout/utils";
+import Image from "next/image";
 
 interface RealmAccess {
   roles: string[];
@@ -49,7 +47,7 @@ const Header = () => {
   function getInitials(name:string){
     if (name != null && name != '' && name != undefined){
       let nameArray = name.split(' ');
-      var initials ='';
+      let initials ='';
       nameArray.forEach((data, index) =>{
         initials += data.slice(0,1);
       })
@@ -68,7 +66,7 @@ const Header = () => {
   const user = {
     user: userSess,
     initials: userSess?.name ? getInitials(userSess.name) : '',
-    isLogged: userSess? true : false,
+    isLogged: !!userSess,
     isAdmin: decodedToken?.realm_access?.roles.includes('admin')
   }
 
@@ -78,12 +76,12 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center h-full py-4 px-4 md:px-28">
         <div className="flex items-center">
           <Link href="/">
-            <img
+            <Image
               src="/logo-vinovivo.png"
               alt="logo"
               className="h-12 md:h-24"
               onClick={() => handleLinkClick("/")}
-            ></img>
+            ></Image>
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-8">

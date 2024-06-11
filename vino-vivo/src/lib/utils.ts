@@ -1,5 +1,5 @@
 import { IIdName} from "@/types/idName/idName.types";
-import { Product, ProductFormValues } from "@/types/products/products.types";
+import { Product} from "@/types/products/products.types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { IwineDetail, WineType } from "@/types/detail/detail.types";

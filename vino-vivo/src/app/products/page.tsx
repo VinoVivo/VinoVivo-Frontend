@@ -9,7 +9,7 @@ import Accordion from "@/components/accordion/page";
 import { Product } from "@/types/products/products.types";
 import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
-import DialogeRegister from "@/components/product/register/DialogeRegister";
+import DialogeMessage from "@/components/product/register/DialogeMessage";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -233,7 +233,7 @@ const ProductsPage = () => {
                 <input
                   type="number"
                   placeholder="Mínimo"
-                  value={minPrice || ""}
+                  value={minPrice ?? ""}
                   onChange={(e) =>
                     setMinPrice(
                       e.target.value !== "" ? parseFloat(e.target.value) : null
@@ -244,7 +244,7 @@ const ProductsPage = () => {
                 <input
                   type="number"
                   placeholder="Máximo"
-                  value={maxPrice || ""}
+                  value={maxPrice ?? ""}
                   onChange={(e) =>
                     setMaxPrice(
                       e.target.value !== "" ? parseFloat(e.target.value) : null
@@ -316,7 +316,7 @@ const ProductsPage = () => {
           </div>
         </div>
       </div>
-      <DialogeRegister
+      <DialogeMessage
         open={showAlert}
         onOpenChange={handleCloseAlert}
         type="Error"
