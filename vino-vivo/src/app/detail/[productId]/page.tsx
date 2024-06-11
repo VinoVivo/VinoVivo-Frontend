@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 
 interface DetailPageProps {
     params: {
-       productId: string;
+        productId: string;
     };
 }
 
@@ -28,9 +28,9 @@ async function fetchProductData(productId: string): Promise<IwineDetail | null> 
         year: productData.year,
         price: productData.price,
         stock: productData.stock,
-        winery: productData.nameWinery,
-        variety: productData.nameVariety,
-        type: productData.nameType,
+        nameWinery: productData.nameWinery,
+        nameVariety: productData.nameVariety,
+        nameType: productData.nameType,
         };
         return wineDetail;
     } catch (error) {
@@ -48,4 +48,3 @@ export default async function DetailPageId({ params }: Readonly<DetailPageProps>
 
     return <>{wine && <CardDetail wine={wine} />}</>;
 }
-

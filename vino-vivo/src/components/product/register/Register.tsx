@@ -1,11 +1,9 @@
 'use client'
 import { Title } from '@/components/Title/Title';
 import BackButton from '@/components/ui/BackButton';
-import { ProductFormValues } from '@/types/products/products.types';
 import { useEffect, useState } from 'react';
 import DialogeRegister from './DialogeRegister';
 import ProductForm from './ProductForm';
-import { SubmitHandler } from 'react-hook-form';
 
 export default function Register() {
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -14,8 +12,7 @@ export default function Register() {
     const [wineries, setWineries] = useState<{ id: number, name: string }[]>([]);
     const [types, setTypes] = useState<{ id: number, name: string }[]>([]);
     const [varieties, setVarieties] = useState<{ id: number, name: string }[]>([]);
-    
-        
+            
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -35,33 +32,44 @@ export default function Register() {
     }, []);
 
     const createProduct = async (data: object) => {
-        try {
-            const response = await fetch('/api/products/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
+        // try {
+        //     const response = await fetch('/api/products/register', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(data),
+        //     });
     
-            if (!response.ok) {
-                throw new Error('Error en la respuesta del servidor');
-            }
+        //     if (!response.ok) {
+        //         throw new Error('Error en la respuesta del servidor');
+        //     }
+        //     setDialogType("Éxito");
+        //     setDialogMessage('Su producto ha sido creado exitosamente');
+        //     const responseData = await response.json();
+        //     return responseData;
+        // } catch (error) {
+        //     setDialogType("Error");
+        //     setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
+        //     console.error('Error al crear el producto:', error);
+        //     throw error;
+        // }finally{
+        //     setDialogOpen(true);
+        // }
+        // para probar unicamente los cuadros de dialogo sin crear un producto: 
+        const simulateSuccess = true; // Cambia esto a false para probar el caso de error
+        if (simulateSuccess) {
+            console.log('Producto creado:', data);
             setDialogType("Éxito");
             setDialogMessage('Su producto ha sido creado exitosamente');
-            const responseData = await response.json();
-            return responseData;
-        } catch (error) {
+            
+        } else {
+            console.error('Error al crear el producto');
             setDialogType("Error");
             setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
-            console.error('Error al crear el producto:', error);
-            throw error;
-        }finally{
-            setDialogOpen(true);
-        }
+        }        
+        setDialogOpen(true);
     };
-
-
 
 
     return (
@@ -71,7 +79,14 @@ export default function Register() {
                 <span className="ml-2 sm:mt-0"><BackButton/></span>
             </div>            
             <ProductForm onSubmit={createProduct} wineries={wineries} types={types} varieties={varieties}/>
-            <DialogeRegister open={dialogOpen}  onOpenChange={setDialogOpen} type={dialogType} message={dialogMessage} textButtonOne={'cerrar'}/>
+            <DialogeRegister 
+                open={dialogOpen} 
+                onOpenChange={setDialogOpen} 
+                type={dialogType} 
+                message={dialogMessage}
+                textButtonOne="Seguir creando"
+                textButtonTwo="Volver a productos"
+            />
         </div>
     );
 }
