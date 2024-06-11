@@ -50,7 +50,7 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
       </Link>
       <div className="flex w-20 gap-2">
 
-   <DialogeRegister open={alert}  onOpenChange={setAlert} type={dialogType} message={dialogMessage} textButtonOne="Cancelar" textButtonTwo="Eliminar" onClick={handleDelete} styleButton2='bg-destructive hover:bg-violeta hover:text-destructive-foreground  border-2 '/>
+   <DialogeRegister open={alert}  onOpenChange={setAlert} type={dialogType} message={dialogMessage} textButtonOne="Cancelar" textButtonTwo="Eliminar" onClick={handleDelete} styleButton2='bg-destructive hover:bg-violeta   border-2 '/>
    </div>
     </div>
   )
