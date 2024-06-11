@@ -17,7 +17,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
     }, [images.length]);
 
     return (
-        <div className="relative w-full h-60 rounded-lg border overflow-hidden max-w-xl flex items-center justify-center">
+        <div className="relative w-full h-60 rounded-lg border-gray-300 overflow-hidden max-w-xl flex items-center justify-center">
             {images.map((image, index) => (
                 <img
                     key={index}

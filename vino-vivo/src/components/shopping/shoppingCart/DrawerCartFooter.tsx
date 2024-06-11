@@ -17,7 +17,7 @@ const DrawerCartFooter = () => {
         <p className="text-primary font-bold text-base">$ {total.toFixed(2)}</p>
       </div>
       <Button className="bg-violeta text-white hover:bg-white hover:border hover:border-violeta hover:text-violeta">
-        <Link href={"/"}>Comprar ahora</Link>
+        <Link href={"/checkout"}>Comprar ahora</Link>
       </Button>
       <div className="flex justify-center mt-2">
         <DrawerClose asChild>

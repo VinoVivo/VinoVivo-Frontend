@@ -234,12 +234,12 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/" className="text-secondary hover:text-beige">
+                  <Link href="/user-settings" className="text-secondary hover:text-beige">
                     Mi Perfil
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/" className="text-secondary hover:text-beige">
+                  <Link href="/orders" className="text-secondary hover:text-beige">
                     Mis Compras
                   </Link>
                 </DropdownMenuItem>
