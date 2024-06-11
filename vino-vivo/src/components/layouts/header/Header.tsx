@@ -240,7 +240,7 @@ const Header = () => {
                     </DropdownMenuItem>
                     <DropdownMenuItem className="text-secondary hover:text-beige">
                       <Link href="/" className="text-secondary hover:text-beige">
-                       Reportes
+                        Reportes
                       </Link>
                     </DropdownMenuItem>
                   </>

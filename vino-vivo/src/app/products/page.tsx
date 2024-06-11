@@ -319,7 +319,7 @@ const ProductsPage = () => {
       <DialogeRegister
         open={showAlert}
         onOpenChange={handleCloseAlert}
-        type="error"
+        type="Error"
         message="Debe estar logeado para comprar productos"
       />
     </>
