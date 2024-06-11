@@ -17,23 +17,34 @@ import Login from "@/components/Login";
 import Logout from "@/components/Logout";
 import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
-import jwt_decode from "jwt-decode";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 import federatedLogout from "@/app/api/auth/federated-logout/utils";
+
+interface RealmAccess {
+  roles: string[];
+}
+
+interface DecodedToken {
+  exp?: number;
+  iat?: number;
+  realm_access?: RealmAccess;
+  name?: string;
+  preferred_username?: string;
+  email?: string;
+}
 
 const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(pathname);
-  const { openCart, clearCart } = useCart();
-  const { data: session } = useSession();
-  const userSess = session?.user;
-
+  const { openCart } = useCart();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const handleLinkClick = (link: string) => {
     setActiveLink(link);
+    isMenuOpen && setIsMenuOpen(false);
   };
   function getInitials(name:string){
     if (name != null && name != '' && name != undefined){
@@ -47,18 +58,20 @@ const Header = () => {
     return '';
   }
 
-
+  const { data: session } = useSession();
+  let decodedToken: DecodedToken | null = null;
+  if (session?.accessToken) {
+    decodedToken = jwtDecode<DecodedToken>(session.accessToken);
+  }
+  console.log();
+  const userSess = session?.user;
   const user = {
     user: userSess,
     initials: userSess?.name ? getInitials(userSess.name) : '',
     isLogged: userSess? true : false,
-    isAdmin: false
+    isAdmin: decodedToken?.realm_access?.roles.includes('admin')
   }
-  const handleLogout = async () => {
-    clearCart(); 
-    await federatedLogout();
-  };
-  console.log(user);
+
 
   return (
     <header className="bg-violeta fixed top-0 w-full z-50">
@@ -96,11 +109,13 @@ const Header = () => {
             <button
               id="hs-dropdown-hover-event"
               type="button"
-              className=" hover:text-gray-300
+              className={`hover:text-gray-300
                             before:content-[''] before:absolute before:w-full before:scale-x-0 
                             before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                             before:origin-bottom-right before:transition-transform before:duration-300 
-                            hover:before:scale-x-100 hover:before:origin-bottom-left hs-dropdown-toggle inline-flex items-center text-md text-primary-foreground font-lg disabled:opacity-50 disabled:pointer-events-none"
+                            hover:before:scale-x-100 hover:before:origin-bottom-left hs-dropdown-toggle inline-flex items-center text-md text-primary-foreground font-lg disabled:opacity-50 disabled:pointer-events-none
+                            ${activeLink?.includes('/type/') || activeLink === '/products' ? 'before:scale-x-100 before:origin-bottom-left' : ''}`}
+                            
             >
               PRODUCTOS
             </button>
@@ -112,31 +127,31 @@ const Header = () => {
                 href="/type/3"
                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-slate-700 hover:text-violeta focus:outline-none focus:bg-gray-100"
               >
-                Tinto
+                <span onClick={() => handleLinkClick('/type/3')}>Tinto</span>
               </Link>
               <Link
                 href="/type/2"
                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-slate-700 hover:text-violeta focus:outline-none focus:bg-gray-100"
               >
-                Blanco
+                <span onClick={() => handleLinkClick('/type/2')}>Blanco</span>
               </Link>
               <Link
                 href="/type/1"
                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-slate-700 hover:text-violeta focus:outline-none focus:bg-gray-100"
               >
-                Rosado
+                <span onClick={() => handleLinkClick('/type/1')}>Rosado</span>
               </Link>
               <Link
                 href="/type/4"
                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-slate-700 hover:text-violeta focus:outline-none focus:bg-gray-100"
               >
-                Espumantes
+                <span onClick={() => handleLinkClick('/type/4')}>Espumantes</span>
               </Link>
               <Link
                 href="/products"
                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-violeta hover:text-violeta focus:outline-none focus:bg-gray-100"
               >
-                Todos
+                <span onClick={() => handleLinkClick('/products')}>Todos</span>
               </Link>
             </div>
           </div>
@@ -227,7 +242,7 @@ const Header = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/orders" className="text-secondary hover:text-beige">
+                  <Link href="/" className="text-secondary hover:text-beige">
                     Mis Compras
                   </Link>
                 </DropdownMenuItem>
@@ -247,7 +262,7 @@ const Header = () => {
                   )}
                 
                 <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => handleLogout()}>
+                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
                     Cerrar Sesión
                   </Link>
                 </DropdownMenuItem>
@@ -277,6 +292,24 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-violeta py-4">
           <div className="flex flex-col items-center space-y-4">
+            <Link href="/">
+              <span
+                className={`relative
+                              text-primary-foreground hover:text-gray-300
+                              before:content-[''] before:absolute before:w-full before:scale-x-0 
+                              before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
+                              before:origin-bottom-right before:transition-transform before:duration-300 
+                              hover:before:scale-x-100 hover:before:origin-bottom-left
+                              ${
+                                activeLink === "/"
+                                  ? "before:scale-x-100 before:origin-bottom-left"
+                                  : ""
+                              }`}
+                onClick={() => handleLinkClick("/")}
+              >
+                INICIO
+              </span>
+            </Link>
             <Link href="/products">
               <span className="text-beige hover:text-gray-300">PRODUCTOS</span>
             </Link>
