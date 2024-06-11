@@ -61,7 +61,6 @@ const Header = () => {
   if (session?.accessToken) {
     decodedToken = jwtDecode<DecodedToken>(session.accessToken);
   }
-  console.log();
   const userSess = session?.user;
   const user = {
     user: userSess,
@@ -76,12 +75,12 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center h-full py-4 px-4 md:px-28">
         <div className="flex items-center">
           <Link href="/">
-            <Image
-              src="/logo-vinovivo.png"
-              alt="logo"
-              className="h-12 md:h-24"
-              onClick={() => handleLinkClick("/")}
-            ></Image>
+            <img
+                src="/logo-vinovivo.png"
+                alt="logo"
+                className="h-12 md:h-24"
+                onClick={() => handleLinkClick("/")}
+              />
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-8">
