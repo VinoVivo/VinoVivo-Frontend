@@ -1,7 +1,11 @@
 import React from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { Product } from '@/types/products/products.types';
 import UpdateProductForm from '@/components/product/update/page';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { DecodedToken } from '@/types/user/user.type';
+import { jwtDecode } from "jwt-decode";
 
 interface DetailPageProps {
     params: {
@@ -43,12 +47,30 @@ async function fetchProductData(id: string | undefined): Promise<Product | null>
 }
 
 export default async function UpdatePageId({ params }: Readonly<DetailPageProps>) {
+    const session = await getServerSession(authOptions);
+    let decodedToken: DecodedToken | null = null;
+    if (session?.accessToken) {
+      decodedToken = await jwtDecode<DecodedToken>(session.accessToken);
+    }
+    const isAdmin = decodedToken?.realm_access?.roles.includes('admin');
     const  product = await fetchProductData(params.id);
 
     if (!product) {
         notFound;
     }
 
-    return <>{ product && <UpdateProductForm id={product.id} />}</>;
+    return (
+        isAdmin ? (
+            <>
+            { product && <UpdateProductForm id={product?.id} />}
+            </>
+            )
+            :(
+                <div>
+                {redirect("/")}
+                </div>
+            )
+    )
+ 
 }
 

@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types/user/user.type";
+import { redirect } from 'next/navigation';
 
 export default async function AdminProducts() {
   const session = await getServerSession(authOptions);
@@ -23,7 +24,7 @@ export default async function AdminProducts() {
       </div>
     ) : (
       <div>
-        {/*<p>Agregar la accion para el caso sin persmiso</p>*/}
+        {redirect("/")}
       </div>
     )
   )

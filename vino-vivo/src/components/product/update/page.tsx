@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import DialogeMessage from "../register/DialogeMessage";
 
-export default function UpdateProductForm({ id }: Readonly<{ id: number }>) {
+export default function UpdateProductForm({ id }: Readonly<{ id: number | undefined }>) {
     const [product, setProduct] = useState<Product>();
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
