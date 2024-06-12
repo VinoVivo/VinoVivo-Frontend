@@ -7,15 +7,13 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { jwtDecode } from "jwt-decode";
 import { DecodedToken } from "@/types/user/user.type";
 
-const session = await getServerSession(authOptions);
-let decodedToken: DecodedToken | null = null;
-if (session?.accessToken) {
-  decodedToken = jwtDecode<DecodedToken>(session.accessToken);
-}
-
-const isAdmin = decodedToken?.realm_access?.roles.includes('admin');
-
 export default async function AdminProducts() {
+  const session = await getServerSession(authOptions);
+  let decodedToken: DecodedToken | null = null;
+  if (session?.accessToken) {
+    decodedToken = await jwtDecode<DecodedToken>(session.accessToken);
+  }
+  const isAdmin = decodedToken?.realm_access?.roles.includes('admin');
   return (
     isAdmin ? (
       <div className="flex flex-col justify-center items-center mt-40 ">
