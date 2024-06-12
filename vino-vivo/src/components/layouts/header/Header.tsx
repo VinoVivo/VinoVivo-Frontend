@@ -14,14 +14,13 @@ import { Button } from "@/components/ui/button";
 import { useSession, signIn } from "next-auth/react";
 import { jwtDecode } from "jwt-decode";
 import federatedLogout from "@/app/api/auth/federated-logout/utils";
-import Image from "next/image";
 import { DecodedToken } from "@/types/user/user.type";
 
 const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(pathname);
-  const { openCart, cartItems, clearCart } = useCart();
+  const { openCart, cartItems } = useCart();
 
   // Contador para el número de productos en el carrito
   const [cartItemCount, setCartItemCount] = useState<number>(0);
@@ -68,10 +67,7 @@ const Header = () => {
     isLogged: !!userSess,
     isAdmin: decodedToken?.realm_access?.roles.includes('admin')
   }
-  const handleLogout = async () => {
-    clearCart(); 
-    await federatedLogout();
-  };
+
 
   // Obtener la cantidad de productos del carrito desde localStorage
   useEffect(() => {
@@ -243,7 +239,7 @@ const Header = () => {
                   )}
                 
                 <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => handleLogout()}>
+                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
                     Cerrar Sesión
                   </Link>
                 </DropdownMenuItem>
@@ -332,7 +328,7 @@ const Header = () => {
                       )}
 
                       <DropdownMenuItem className="text-secondary hover:text-beige">
-                        <Link href="/" className="text-secondary hover:text-beige" onClick={() => handleLogout()}>
+                        <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
                           Cerrar Sesión
                         </Link>
                       </DropdownMenuItem>

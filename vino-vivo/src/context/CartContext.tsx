@@ -19,7 +19,7 @@ interface CartContextProps {
     removeFromCart: (id: number) => void;
     incrementQuantity: (id: number) => void;
     decrementQuantity: (id: number) => void;
-    clearCart: () => void;
+    // clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -94,7 +94,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeFromCart,
         incrementQuantity,
         decrementQuantity,
-        clearCart,
+        // clearCart,
     }), [isOpen, cartItems]);
 
     return (
