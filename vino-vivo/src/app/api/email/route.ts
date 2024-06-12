@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
   const sendMailPromise = () =>
     new Promise<string>((resolve, reject) => {
-      transport.sendMail(mailOptions, function (err) {
+      transport.sendMail(mailOptions, function (err:any) {
         if (!err) {
            
           resolve('Email sent');
