@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import Login from "@/components/Login";
 import { getServerSession } from "next-auth";
 import { redirect, useParams } from "next/navigation";
@@ -28,7 +28,7 @@ export default async function Signin({
   searchParams: { callbackUrl, error },
 }: SignInPageProp) {
   const session = await getServerSession(authOptions);
-  console.log(session)
+  console.log(session);
   if (session) {
     redirect(callbackUrl || "/");
   }
