@@ -18,8 +18,10 @@ interface DialogProps {
     message: string;
     styleButton1?: string;
     styleButton2?: string;
+    styleButton3?: string;
     textButtonOne?: string;
     textButtonTwo?: string;
+    textButtonThree?: string;
     buttonTwoHref?: string;
     onClick?: (arg: any) => Promise<void>;
 }
@@ -42,8 +44,10 @@ const DialogeMessage: React.FC<DialogProps> = ({
     message,
     textButtonOne,
     textButtonTwo,
+    textButtonThree, 
     styleButton1,
     styleButton2,
+    styleButton3,
     buttonTwoHref,
     onClick,
 }) => {
@@ -95,6 +99,16 @@ const DialogeMessage: React.FC<DialogProps> = ({
                         {textButtonTwo}
                         </AlertDialogAction>
                 </Link>
+            )}
+             {textButtonThree && (
+                <AlertDialogAction
+                    onClick={onClick}
+                    className={
+                        styleButton3 ?? "hover:bg-white hover:text-primary hover:border-primary border-2"
+                    }
+                >
+                    {textButtonThree}
+                </AlertDialogAction>
             )}
             </AlertDialogFooter>
             </div>
