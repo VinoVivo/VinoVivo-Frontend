@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import { useSession, signIn } from "next-auth/react";
 import { jwtDecode } from "jwt-decode";
 import federatedLogout from "@/app/api/auth/federated-logout/utils";
-import Image from "next/image";
 import { DecodedToken } from "@/types/user/user.type";
 
 const Header = () => {
