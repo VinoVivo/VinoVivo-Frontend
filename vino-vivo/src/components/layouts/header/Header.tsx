@@ -35,7 +35,7 @@ const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(pathname);
-  const { openCart } = useCart();
+  const { openCart, clearCart } = useCart();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -68,7 +68,10 @@ const Header = () => {
     isLogged: !!userSess,
     isAdmin: decodedToken?.realm_access?.roles.includes('admin')
   }
-
+  const handleLogout = async () => {
+    clearCart(); 
+    await federatedLogout();
+  };
 
   return (
     <header className="bg-violeta fixed top-0 w-full z-50">
@@ -259,7 +262,7 @@ const Header = () => {
                   )}
                 
                 <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
+                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => handleLogout()}>
                     Cerrar Sesión
                   </Link>
                 </DropdownMenuItem>
