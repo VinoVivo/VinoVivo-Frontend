@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types":["node", "nodemailer"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".next/types/app/detail/page.tsx", ".next/types/app/detail/[productId]/page.tsx"],
   "exclude": ["node_modules"]
