@@ -1,27 +1,18 @@
 "use client";
 import { Title } from "@/components/Title/Title";
 import BackButton from "@/components/ui/BackButton";
-import {
-    AlertDialogAction,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { IIdName } from "@/types/idName/idName.types";
 import { Product, ProductFormValues } from "@/types/products/products.types";
-import { AlertDialog, AlertDialogContent } from "@radix-ui/react-alert-dialog";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FaRegCircleCheck } from "react-icons/fa6";
-import { MdReportGmailerrorred } from "react-icons/md";
+import DialogeMessage from "../register/DialogeMessage";
 
 export default function UpdateProductForm({ id }: Readonly<{ id: number }>) {
     const [product, setProduct] = useState<Product>();
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
-    const [dialogType, setDialogType] = useState<"Éxito" | "Error">("Éxito");
+    const [dialogType, setDialogType] = useState<"Success" | "Error" | "Alert">("Success");
     const [wineries, setWineries] = useState<IIdName[]>([]);
     const [types, setTypes] = useState<IIdName[]>([]);
     const [varieties, setVarieties] = useState<IIdName[]>([]);
@@ -116,7 +107,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number }>) {
 
         const responseData = await response.json();
         console.log("Producto actualizado:", responseData);
-        setDialogType("Éxito");
+        setDialogType("Success");
         setDialogMessage("Su producto ha sido actualizado exitosamente");
         } catch (error) {
         console.error("Error al actualizar el producto:", error);
@@ -426,7 +417,15 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number }>) {
             </Button>
             </div>
         </form>
-        <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogeMessage
+                open={dialogOpen} 
+                onOpenChange={setDialogOpen} 
+                type={dialogType} 
+                message={dialogMessage}
+                textButtonTwo="Volver a productos"
+                buttonTwoHref="/admin/productos"
+            />
+        {/* <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <AlertDialogContent className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-10 shadow-lg justify-between border-primary border-2">
                 <AlertDialogHeader className="flex flex-col items-center">
@@ -452,7 +451,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number }>) {
                 </AlertDialogFooter>
             </div>
             </AlertDialogContent>
-        </AlertDialog>
+        </AlertDialog> */}
         </div>
     );
 }

@@ -16,11 +16,20 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit, wineries, types, va
     
     const { register, handleSubmit, formState: { errors } } = useForm<ProductFormValues>();
     
-    const handleTextInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (!/^[A-Za-z\s]*$/.test(e.key) && e.key !== 'Backspace') {
-            e.preventDefault();
+    // const handleTextInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    //     if (!/^[A-Za-z\s]*$/.test(e.key) && e.key !== 'Backspace') {
+    //         e.preventDefault();
+    //     }
+    // };
+    const handleTextAndNumberInput = (
+        e: React.KeyboardEvent<HTMLInputElement>
+    ) => {
+        if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]*$/.test(e.key) && e.key !== "Backspace") {
+        e.preventDefault();
         }
     };
+
+  
 
     const handleNumberInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!/^\d*\.?\d*$/.test(e.key) && e.key !== 'Backspace') {
@@ -37,10 +46,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ onSubmit, wineries, types, va
                 register={register('name', {                
                     required: 'Este campo es requerido',
                     minLength: { value: 5, message: 'Debe tener al menos 5 caracteres' },
-                    pattern: { value: /^[A-Za-z\s]+$/, message: 'Solo se permiten letras y espacios' }
+                    pattern: { value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]*$/, message: 'Solo se permiten letras, números y espacios' }
                 })}
                 error={errors.name?.message}
-                onKeyDown={handleTextInput}
+                onKeyDown={handleTextAndNumberInput}
             />
             {/* image */}               
             <TextInput
