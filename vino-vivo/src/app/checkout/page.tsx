@@ -1,7 +1,6 @@
-// app/checkout/page.tsx
 'use client'
 import React from 'react';
-import { CartProvider, useCart } from '../../context/CartContext';
+import { useCart } from '../../context/CartContext';
 import Checkout from '@/components/checkout/Checkout';
 
 const CheckoutPage: React.FC = () => {
