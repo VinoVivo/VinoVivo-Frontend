@@ -11,25 +11,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
-import Login from "@/components/Login";
-import Logout from "@/components/Logout";
 import { useSession,signIn } from "next-auth/react";
 import { jwtDecode } from "jwt-decode";
 import federatedLogout from "@/app/api/auth/federated-logout/utils";
 import Image from "next/image";
-
-interface RealmAccess {
-  roles: string[];
-}
-
-interface DecodedToken {
-  exp?: number;
-  iat?: number;
-  realm_access?: RealmAccess;
-  name?: string;
-  preferred_username?: string;
-  email?: string;
-}
+import { DecodedToken } from "@/types/user/user.type";
 
 const Header = () => {
   const pathname = usePathname();
@@ -65,7 +51,7 @@ const Header = () => {
   const user = {
     user: userSess,
     initials: userSess?.name ? getInitials(userSess.name) : '',
-    isLogged: !!userSess,
+    isLogged: userSess? true:false,
     isAdmin: decodedToken?.realm_access?.roles.includes('admin')
   }
 
@@ -152,38 +138,6 @@ const Header = () => {
               </Link>
             </div>
           </div>
-          {/* <DropdownMenu>
-                        <DropdownMenuTrigger>
-                            <span className={`relative
-                            text-primary-foreground hover:text-gray-300
-                            before:content-[''] before:absolute before:w-full before:scale-x-0 
-                            before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
-                            before:origin-bottom-right before:transition-transform before:duration-300 
-                            hover:before:scale-x-100 hover:before:origin-bottom-left
-                            ${activeLink?.includes('/type/') || activeLink === '/products' ? 'before:scale-x-100 before:origin-bottom-left' : ''}`}
-                            >PRODUCTOS
-                            </span>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuLabel>Categorías</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-secondary hover:text-beige">
-                                <Link href="/type/3" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/3')}>Vino Tinto</span></Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="text-secondary hover:text-black">
-                                <Link href="/type/2" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/2')}>Vino Blanco</span></Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="text-secondary hover:text-black">
-                                <Link href="/type/1" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/1')}>Vino Rosado</span></Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Link href="/" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/?')}>Vino Espumoso</span></Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Link href="/products" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/products')}>Ver Todos</span></Link>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu> */}
           <Link href="/concept">
             <span
               className={`relative
@@ -226,11 +180,7 @@ const Header = () => {
             <>
             <DropdownMenu>
               <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                {user.isLogged ? (
-                  <span className="text-primary-foreground text-xl">{user.initials}</span>
-                ) : (
-                  <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                )}
+                  <div className="text-primary-foreground text-xl">{user.initials}</div>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem className="text-secondary hover:text-black">
@@ -246,8 +196,8 @@ const Header = () => {
                   {user.isAdmin && (
                     <>
                     <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/" className="text-secondary hover:text-beige">
-                        Mis productos
+                      <Link href="/admin/productos" className="text-secondary hover:text-beige">
+                        Productos
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="text-secondary hover:text-beige">
@@ -308,13 +258,13 @@ const Header = () => {
               </span>
             </Link>
             <Link href="/products">
-              <span className="text-beige hover:text-gray-300">PRODUCTOS</span>
+              <div className="text-beige hover:text-gray-300" onClick={() => handleLinkClick("/products")}>PRODUCTOS</div>
             </Link>
             <Link href="/concept">
-              <span className="text-beige hover:text-gray-300">CONCEPTO</span>
+              <div className="text-beige hover:text-gray-300" onClick={() => handleLinkClick("/concept")}>CONCEPTO</div>
             </Link>
             <Link href="/contact">
-              <span className="text-beige hover:text-gray-300">CONTACTO</span>
+              <div className="text-beige hover:text-gray-300" onClick={() => handleLinkClick("/contact")}>CONTACTO</div>
             </Link>
 
             <div className="flex space-x-4 items-center">
@@ -322,59 +272,48 @@ const Header = () => {
             <>
             <DropdownMenu>
               <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                {user.isLogged ? (
-                  <span className="text-primary-foreground text-xl">{user.initials}</span>
-                ) : (
-                  <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                )}
+                  <div className="text-primary-foreground text-xl">{user.initials}</div>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/" className="text-secondary hover:text-beige">
-                    Mi Perfil
+                  <Link href="/user-settings" className="text-secondary hover:text-beige">
+                    <div onClick={() => handleLinkClick("/user-settings")}>Mi Perfil</div>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/" className="text-secondary hover:text-beige">
-                    Mis Compras
+                  <Link href="/orders" className="text-secondary hover:text-beige">
+                    <div onClick={() => handleLinkClick("/orders")}>Mis Compras</div>
                   </Link>
                 </DropdownMenuItem>
                   {user.isAdmin && (
                     <>
                     <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/" className="text-secondary hover:text-beige">
-                        Mis productos
+                      <Link href="/admin/productos" className="text-secondary hover:text-beige">
+                        <div onClick={() => handleLinkClick("/admin/productos")}>Productos</div>
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="text-secondary hover:text-beige">
                       <Link href="/" className="text-secondary hover:text-beige">
-                       Reportes
+                       <div onClick={() => handleLinkClick("/")}>Reportes</div>
                       </Link>
                     </DropdownMenuItem>
                   </>
                   )}
                 
                 <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Logout />
+                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
+                    Cerrar Sesión
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
               </DropdownMenu>
                   <Button className="bg-transparent" onClick={openCart}>
-                  <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                </Button>
+                    <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" onClick={() => handleLinkClick("/")}/>
+                  </Button>
             </>
           )}
           {!user.isLogged && (
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Login />
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <FaUser onClick={() => signIn("keycloak")} className="text-white text-2xl cursor-pointer hover:text-gray-300" />   
           )}
 
             </div>
