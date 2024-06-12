@@ -1,6 +1,5 @@
 'use client'
 import React from 'react';
-import Shipping from '@/components/checkout/Shipping';
 import Payment from '@/components/checkout/Payment';
 
 const CheckoutPaymentPage: React.FC = () => {
