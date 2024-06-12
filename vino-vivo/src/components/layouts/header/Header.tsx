@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaUser, FaShoppingCart, FaBars } from "react-icons/fa";
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
-import { useSession,signIn } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { jwtDecode } from "jwt-decode";
 import federatedLogout from "@/app/api/auth/federated-logout/utils";
 import Image from "next/image";
@@ -21,21 +21,35 @@ const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(pathname);
-  const { openCart } = useCart();
+  const { openCart, cartItems } = useCart(); // Agregar cartItems desde el contexto
+
+  // Contador para el número de productos en el carrito
+  const [cartItemCount, setCartItemCount] = useState<number>(0);
+
+  // Actualizar el contador cuando cambie el carrito
+  useEffect(() => {
+    const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    setCartItemCount(itemCount);
+  }, [cartItems]);
+
+  const handleLinkClick = (link: string) => {
+    setActiveLink(link);
+  };
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleLinkClick = (link: string) => {
+  /* const handleLinkClick = (link: string) => {
     setActiveLink(link);
     isMenuOpen && setIsMenuOpen(false);
-  };
-  function getInitials(name:string){
-    if (name != null && name != '' && name != undefined){
+  }; */
+  function getInitials(name: string) {
+    if (name != null && name != '' && name != undefined) {
       let nameArray = name.split(' ');
-      let initials ='';
-      nameArray.forEach((data, index) =>{
-        initials += data.slice(0,1);
+      let initials = '';
+      nameArray.forEach((data, index) => {
+        initials += data.slice(0, 1);
       })
       return initials.toUpperCase();
     }
@@ -51,10 +65,17 @@ const Header = () => {
   const user = {
     user: userSess,
     initials: userSess?.name ? getInitials(userSess.name) : '',
-    isLogged: userSess? true:false,
+    isLogged: userSess ? true : false,
     isAdmin: decodedToken?.realm_access?.roles.includes('admin')
   }
 
+  // Obtener la cantidad de productos del carrito desde localStorage
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cartItems");
+    const cartItems = storedCart ? JSON.parse(storedCart) : [];
+    const itemCount = cartItems.reduce((total: any, item: { quantity: any; }) => total + item.quantity, 0);
+    setCartItemCount(itemCount);
+  }, []);
 
   return (
     <header className="bg-violeta fixed top-0 w-full z-50">
@@ -62,11 +83,11 @@ const Header = () => {
         <div className="flex items-center">
           <Link href="/">
             <img
-                src="/logo-vinovivo.png"
-                alt="logo"
-                className="h-12 md:h-24"
-                onClick={() => handleLinkClick("/")}
-              />
+              src="/logo-vinovivo.png"
+              alt="logo"
+              className="h-12 md:h-24"
+              onClick={() => handleLinkClick("/")}
+            />
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-8">
@@ -78,11 +99,10 @@ const Header = () => {
                             before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left
-                            ${
-                              activeLink === "/"
-                                ? "before:scale-x-100 before:origin-bottom-left"
-                                : ""
-                            }`}
+                            ${activeLink === "/"
+                  ? "before:scale-x-100 before:origin-bottom-left"
+                  : ""
+                }`}
               onClick={() => handleLinkClick("/")}
             >
               INICIO
@@ -98,7 +118,7 @@ const Header = () => {
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left hs-dropdown-toggle inline-flex items-center text-md text-primary-foreground font-lg disabled:opacity-50 disabled:pointer-events-none
                             ${activeLink?.includes('/type/') || activeLink === '/products' ? 'before:scale-x-100 before:origin-bottom-left' : ''}`}
-                            
+
             >
               PRODUCTOS
             </button>
@@ -146,11 +166,10 @@ const Header = () => {
                             before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left
-                            ${
-                              activeLink === "/concept"
-                                ? "before:scale-x-100 before:origin-bottom-left"
-                                : ""
-                            }`}
+                            ${activeLink === "/concept"
+                  ? "before:scale-x-100 before:origin-bottom-left"
+                  : ""
+                }`}
               onClick={() => handleLinkClick("/concept")}
             >
               CONCEPTO
@@ -164,11 +183,10 @@ const Header = () => {
                             before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left
-                            ${
-                              activeLink === "/contact"
-                                ? "before:scale-x-100 before:origin-bottom-left"
-                                : ""
-                            }`}
+                            ${activeLink === "/contact"
+                  ? "before:scale-x-100 before:origin-bottom-left"
+                  : ""
+                }`}
               onClick={() => handleLinkClick("/contact")}
             >
               CONTACTO
@@ -178,46 +196,55 @@ const Header = () => {
         <div className="hidden md:flex space-x-4 items-center">
           {user.isLogged && (
             <>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                  <div className="text-primary-foreground text-xl">{user.initials}</div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/user-settings" className="text-secondary hover:text-beige">
-                    Mi Perfil
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/orders" className="text-secondary hover:text-beige">
-                    Mis Compras
-                  </Link>
-                </DropdownMenuItem>
+            <Button className="bg-transparent" onClick={openCart}>
+                <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                {cartItemCount > 0 && (
+                  <span className="inline-flex items-center justify-center w-1 h-1 p-2.5 ml-1 text-sm font-semibold text-violeta bg-white rounded-full dark:bg-blue-900 dark:text-blue-300">{cartItemCount}</span>
+                )}
+              </Button>
+              {/* <Button className="bg-transparent" onClick={openCart}>
+                <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                {cartItemCount > 0 && (
+                  <p className="text-md text-white ml-1.5 font-semibold">{cartItemCount}</p>
+                )}
+              </Button> */}
+              <DropdownMenu>
+                <DropdownMenuTrigger className="text-beige hover:text-gray-300">
+                  <div className=" text-2xl inline-flex items-center justify-center w-6 h-6 p-6 font-normal text-violeta rounded-full bg-white">{user.initials}</div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem className="text-secondary hover:text-black">
+                    <Link href="/user-settings" className="text-secondary hover:text-beige">
+                      Mi Perfil
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="text-secondary hover:text-black">
+                    <Link href="/orders" className="text-secondary hover:text-beige">
+                      Mis Compras
+                    </Link>
+                  </DropdownMenuItem>
                   {user.isAdmin && (
                     <>
-                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/admin/productos" className="text-secondary hover:text-beige">
-                        Productos
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/" className="text-secondary hover:text-beige">
-                        Reportes
-                      </Link>
-                    </DropdownMenuItem>
-                  </>
+                      <DropdownMenuItem className="text-secondary hover:text-beige">
+                        <Link href="/admin/productos" className="text-secondary hover:text-beige">
+                          Productos
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-secondary hover:text-beige">
+                        <Link href="/" className="text-secondary hover:text-beige">
+                          Reportes
+                        </Link>
+                      </DropdownMenuItem>
+                    </>
                   )}
-                
-                <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
-                    Cerrar Sesión
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
+                  <DropdownMenuItem className="text-secondary hover:text-beige">
+                    <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
+                      Cerrar Sesión
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
               </DropdownMenu>
-                  <Button className="bg-transparent" onClick={openCart}>
-                  <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                </Button>
+              
             </>
           )}
           {!user.isLogged && (
@@ -247,11 +274,10 @@ const Header = () => {
                               before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                               before:origin-bottom-right before:transition-transform before:duration-300 
                               hover:before:scale-x-100 hover:before:origin-bottom-left
-                              ${
-                                activeLink === "/"
-                                  ? "before:scale-x-100 before:origin-bottom-left"
-                                  : ""
-                              }`}
+                              ${activeLink === "/"
+                    ? "before:scale-x-100 before:origin-bottom-left"
+                    : ""
+                  }`}
                 onClick={() => handleLinkClick("/")}
               >
                 INICIO
@@ -268,53 +294,62 @@ const Header = () => {
             </Link>
 
             <div className="flex space-x-4 items-center">
-            {user.isLogged && (
-            <>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                  <div className="text-primary-foreground text-xl">{user.initials}</div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/user-settings" className="text-secondary hover:text-beige">
-                    <div onClick={() => handleLinkClick("/user-settings")}>Mi Perfil</div>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/orders" className="text-secondary hover:text-beige">
-                    <div onClick={() => handleLinkClick("/orders")}>Mis Compras</div>
-                  </Link>
-                </DropdownMenuItem>
-                  {user.isAdmin && (
-                    <>
-                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/admin/productos" className="text-secondary hover:text-beige">
-                        <div onClick={() => handleLinkClick("/admin/productos")}>Productos</div>
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/" className="text-secondary hover:text-beige">
-                       <div onClick={() => handleLinkClick("/")}>Reportes</div>
-                      </Link>
-                    </DropdownMenuItem>
-                  </>
-                  )}
-                
-                <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
-                    Cerrar Sesión
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-              </DropdownMenu>
+              {user.isLogged && (
+                <>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="text-beige hover:text-gray-300">
+                      <div className="text-primary-foreground text-xl">{user.initials}</div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem className="text-secondary hover:text-black">
+                        <Link href="/user-settings" className="text-secondary hover:text-beige">
+                          <div onClick={() => handleLinkClick("/user-settings")}>Mi Perfil</div>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-secondary hover:text-black">
+                        <Link href="/orders" className="text-secondary hover:text-beige">
+                          <div onClick={() => handleLinkClick("/orders")}>Mis Compras</div>
+                        </Link>
+                      </DropdownMenuItem>
+                      {user.isAdmin && (
+                        <>
+                          <DropdownMenuItem className="text-secondary hover:text-beige">
+                            <Link href="/admin/productos" className="text-secondary hover:text-beige">
+                              <div onClick={() => handleLinkClick("/admin/productos")}>Productos</div>
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="text-secondary hover:text-beige">
+                            <Link href="/" className="text-secondary hover:text-beige">
+                              <div onClick={() => handleLinkClick("/")}>Reportes</div>
+                            </Link>
+                          </DropdownMenuItem>
+                        </>
+                      )}
+
+                      <DropdownMenuItem className="text-secondary hover:text-beige">
+                        <Link href="/" className="text-secondary hover:text-beige" onClick={() => federatedLogout()}>
+                          Cerrar Sesión
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                   <Button className="bg-transparent" onClick={openCart}>
-                    <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" onClick={() => handleLinkClick("/")}/>
+                    <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                    {cartItemCount > 0 && (
+                      <span className="inline-flex items-center justify-center w-1 h-1 p-2.5 ml-1 text-sm font-semibold text-violeta bg-white rounded-full dark:bg-blue-900 dark:text-blue-300">{cartItemCount}</span>
+                    )}
                   </Button>
-            </>
-          )}
-          {!user.isLogged && (
-            <FaUser onClick={() => signIn("keycloak")} className="text-white text-2xl cursor-pointer hover:text-gray-300" />   
-          )}
+                  {/* <Button className="bg-transparent" onClick={openCart}>
+                <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                {cartItemCount > 0 && (
+                  <p className="text-md text-white ml-1.5 font-semibold">{cartItemCount}</p>
+                )}
+              </Button> */}
+                </>
+              )}
+              {!user.isLogged && (
+                <FaUser onClick={() => signIn("keycloak")} className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+              )}
 
             </div>
           </div>

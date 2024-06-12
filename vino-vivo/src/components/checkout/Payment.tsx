@@ -13,7 +13,7 @@ export interface ValidationErrors {
 }
 
 const PaymentPage = () => {
-    const { cartItems } = useCart();
+    const { cartItems, clearCart } = useCart();
     const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
@@ -98,6 +98,8 @@ const PaymentPage = () => {
             setTimeout(() => {
                 window.location.href = '/';
             }, 3000);
+
+            clearCart();
 
         } catch (error) {
             console.error('Error:', error);
