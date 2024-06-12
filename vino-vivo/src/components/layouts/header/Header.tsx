@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaUser, FaShoppingCart, FaBars } from "react-icons/fa";
@@ -11,45 +11,45 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
-import Login from "@/components/Login";
-import Logout from "@/components/Logout";
-import { useSession,signIn } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { jwtDecode } from "jwt-decode";
 import federatedLogout from "@/app/api/auth/federated-logout/utils";
 import Image from "next/image";
-
-interface RealmAccess {
-  roles: string[];
-}
-
-interface DecodedToken {
-  exp?: number;
-  iat?: number;
-  realm_access?: RealmAccess;
-  name?: string;
-  preferred_username?: string;
-  email?: string;
-}
+import { DecodedToken } from "@/types/user/user.type";
 
 const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(pathname);
-  const { openCart, clearCart } = useCart();
+  const { openCart, cartItems, clearCart } = useCart();
+
+  // Contador para el número de productos en el carrito
+  const [cartItemCount, setCartItemCount] = useState<number>(0);
+
+  // Actualizar el contador cuando cambie el carrito
+  useEffect(() => {
+    const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    setCartItemCount(itemCount);
+  }, [cartItems]);
+
+  const handleLinkClick = (link: string) => {
+    setActiveLink(link);
+  };
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleLinkClick = (link: string) => {
+  /* const handleLinkClick = (link: string) => {
     setActiveLink(link);
     isMenuOpen && setIsMenuOpen(false);
-  };
-  function getInitials(name:string){
-    if (name != null && name != '' && name != undefined){
+  }; */
+  function getInitials(name: string) {
+    if (name != null && name != '' && name != undefined) {
       let nameArray = name.split(' ');
-      let initials ='';
-      nameArray.forEach((data, index) =>{
-        initials += data.slice(0,1);
+      let initials = '';
+      nameArray.forEach((data, index) => {
+        initials += data.slice(0, 1);
       })
       return initials.toUpperCase();
     }
@@ -73,17 +73,25 @@ const Header = () => {
     await federatedLogout();
   };
 
+  // Obtener la cantidad de productos del carrito desde localStorage
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cartItems");
+    const cartItems = storedCart ? JSON.parse(storedCart) : [];
+    const itemCount = cartItems.reduce((total: any, item: { quantity: any; }) => total + item.quantity, 0);
+    setCartItemCount(itemCount);
+  }, []);
+
   return (
     <header className="bg-violeta fixed top-0 w-full z-50">
       <div className="container mx-auto flex justify-between items-center h-full py-4 px-4 md:px-28">
         <div className="flex items-center">
           <Link href="/">
             <img
-                src="/logo-vinovivo.png"
-                alt="logo"
-                className="h-12 md:h-24"
-                onClick={() => handleLinkClick("/")}
-              />
+              src="/logo-vinovivo.png"
+              alt="logo"
+              className="h-12 md:h-24"
+              onClick={() => handleLinkClick("/")}
+            />
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-8">
@@ -95,11 +103,10 @@ const Header = () => {
                             before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left
-                            ${
-                              activeLink === "/"
-                                ? "before:scale-x-100 before:origin-bottom-left"
-                                : ""
-                            }`}
+                            ${activeLink === "/"
+                  ? "before:scale-x-100 before:origin-bottom-left"
+                  : ""
+                }`}
               onClick={() => handleLinkClick("/")}
             >
               INICIO
@@ -115,7 +122,7 @@ const Header = () => {
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left hs-dropdown-toggle inline-flex items-center text-md text-primary-foreground font-lg disabled:opacity-50 disabled:pointer-events-none
                             ${activeLink?.includes('/type/') || activeLink === '/products' ? 'before:scale-x-100 before:origin-bottom-left' : ''}`}
-                            
+
             >
               PRODUCTOS
             </button>
@@ -155,38 +162,6 @@ const Header = () => {
               </Link>
             </div>
           </div>
-          {/* <DropdownMenu>
-                        <DropdownMenuTrigger>
-                            <span className={`relative
-                            text-primary-foreground hover:text-gray-300
-                            before:content-[''] before:absolute before:w-full before:scale-x-0 
-                            before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
-                            before:origin-bottom-right before:transition-transform before:duration-300 
-                            hover:before:scale-x-100 hover:before:origin-bottom-left
-                            ${activeLink?.includes('/type/') || activeLink === '/products' ? 'before:scale-x-100 before:origin-bottom-left' : ''}`}
-                            >PRODUCTOS
-                            </span>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuLabel>Categorías</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-secondary hover:text-beige">
-                                <Link href="/type/3" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/3')}>Vino Tinto</span></Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="text-secondary hover:text-black">
-                                <Link href="/type/2" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/2')}>Vino Blanco</span></Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="text-secondary hover:text-black">
-                                <Link href="/type/1" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/1')}>Vino Rosado</span></Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Link href="/" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/type/?')}>Vino Espumoso</span></Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Link href="/products" className="text-secondary hover:text-beige"><span onClick={() => handleLinkClick('/products')}>Ver Todos</span></Link>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu> */}
           <Link href="/concept">
             <span
               className={`relative
@@ -195,11 +170,10 @@ const Header = () => {
                             before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left
-                            ${
-                              activeLink === "/concept"
-                                ? "before:scale-x-100 before:origin-bottom-left"
-                                : ""
-                            }`}
+                            ${activeLink === "/concept"
+                  ? "before:scale-x-100 before:origin-bottom-left"
+                  : ""
+                }`}
               onClick={() => handleLinkClick("/concept")}
             >
               CONCEPTO
@@ -213,11 +187,10 @@ const Header = () => {
                             before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                             before:origin-bottom-right before:transition-transform before:duration-300 
                             hover:before:scale-x-100 hover:before:origin-bottom-left
-                            ${
-                              activeLink === "/contact"
-                                ? "before:scale-x-100 before:origin-bottom-left"
-                                : ""
-                            }`}
+                            ${activeLink === "/contact"
+                  ? "before:scale-x-100 before:origin-bottom-left"
+                  : ""
+                }`}
               onClick={() => handleLinkClick("/contact")}
             >
               CONTACTO
@@ -227,38 +200,46 @@ const Header = () => {
         <div className="hidden md:flex space-x-4 items-center">
           {user.isLogged && (
             <>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                {user.isLogged ? (
-                  <span className="text-primary-foreground text-xl">{user.initials}</span>
-                ) : (
-                  <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+            <Button className="bg-transparent" onClick={openCart}>
+                <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                {cartItemCount > 0 && (
+                  <span className="inline-flex items-center justify-center w-1 h-1 p-2.5 ml-1 text-sm font-semibold text-violeta bg-white rounded-full dark:bg-blue-900 dark:text-blue-300">{cartItemCount}</span>
                 )}
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/user-settings" className="text-secondary hover:text-beige">
-                    Mi Perfil
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/orders" className="text-secondary hover:text-beige">
-                    Mis Compras
-                  </Link>
-                </DropdownMenuItem>
+              </Button>
+              {/* <Button className="bg-transparent" onClick={openCart}>
+                <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                {cartItemCount > 0 && (
+                  <p className="text-md text-white ml-1.5 font-semibold">{cartItemCount}</p>
+                )}
+              </Button> */}
+              <DropdownMenu>
+                <DropdownMenuTrigger className="text-beige hover:text-gray-300">
+                  <div className=" text-2xl inline-flex items-center justify-center w-6 h-6 p-6 font-normal text-violeta rounded-full bg-white">{user.initials}</div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem className="text-secondary hover:text-black">
+                    <Link href="/user-settings" className="text-secondary hover:text-beige">
+                      Mi Perfil
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="text-secondary hover:text-black">
+                    <Link href="/orders" className="text-secondary hover:text-beige">
+                      Mis Compras
+                    </Link>
+                  </DropdownMenuItem>
                   {user.isAdmin && (
                     <>
-                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/" className="text-secondary hover:text-beige">
-                        Mis productos
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/" className="text-secondary hover:text-beige">
-                        Reportes
-                      </Link>
-                    </DropdownMenuItem>
-                  </>
+                      <DropdownMenuItem className="text-secondary hover:text-beige">
+                        <Link href="/admin/productos" className="text-secondary hover:text-beige">
+                          Productos
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-secondary hover:text-beige">
+                        <Link href="/" className="text-secondary hover:text-beige">
+                          Reportes
+                        </Link>
+                      </DropdownMenuItem>
+                    </>
                   )}
                 
                 <DropdownMenuItem className="text-secondary hover:text-beige">
@@ -268,9 +249,7 @@ const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
               </DropdownMenu>
-                  <Button className="bg-transparent" onClick={openCart}>
-                  <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                </Button>
+              
             </>
           )}
           {!user.isLogged && (
@@ -300,85 +279,82 @@ const Header = () => {
                               before:h-[2px] before:bottom-0 before:left-0 before:bg-beige 
                               before:origin-bottom-right before:transition-transform before:duration-300 
                               hover:before:scale-x-100 hover:before:origin-bottom-left
-                              ${
-                                activeLink === "/"
-                                  ? "before:scale-x-100 before:origin-bottom-left"
-                                  : ""
-                              }`}
+                              ${activeLink === "/"
+                    ? "before:scale-x-100 before:origin-bottom-left"
+                    : ""
+                  }`}
                 onClick={() => handleLinkClick("/")}
               >
                 INICIO
               </span>
             </Link>
             <Link href="/products">
-              <span className="text-beige hover:text-gray-300">PRODUCTOS</span>
+              <div className="text-beige hover:text-gray-300" onClick={() => handleLinkClick("/products")}>PRODUCTOS</div>
             </Link>
             <Link href="/concept">
-              <span className="text-beige hover:text-gray-300">CONCEPTO</span>
+              <div className="text-beige hover:text-gray-300" onClick={() => handleLinkClick("/concept")}>CONCEPTO</div>
             </Link>
             <Link href="/contact">
-              <span className="text-beige hover:text-gray-300">CONTACTO</span>
+              <div className="text-beige hover:text-gray-300" onClick={() => handleLinkClick("/contact")}>CONTACTO</div>
             </Link>
 
             <div className="flex space-x-4 items-center">
-            {user.isLogged && (
-            <>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                {user.isLogged ? (
-                  <span className="text-primary-foreground text-xl">{user.initials}</span>
-                ) : (
-                  <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                )}
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/" className="text-secondary hover:text-beige">
-                    Mi Perfil
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-secondary hover:text-black">
-                  <Link href="/" className="text-secondary hover:text-beige">
-                    Mis Compras
-                  </Link>
-                </DropdownMenuItem>
-                  {user.isAdmin && (
-                    <>
-                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/" className="text-secondary hover:text-beige">
-                        Mis productos
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-secondary hover:text-beige">
-                      <Link href="/" className="text-secondary hover:text-beige">
-                       Reportes
-                      </Link>
-                    </DropdownMenuItem>
-                  </>
-                  )}
-                
-                <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Logout />
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-              </DropdownMenu>
+              {user.isLogged && (
+                <>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="text-beige hover:text-gray-300">
+                      <div className="text-primary-foreground text-xl">{user.initials}</div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem className="text-secondary hover:text-black">
+                        <Link href="/user-settings" className="text-secondary hover:text-beige">
+                          <div onClick={() => handleLinkClick("/user-settings")}>Mi Perfil</div>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-secondary hover:text-black">
+                        <Link href="/orders" className="text-secondary hover:text-beige">
+                          <div onClick={() => handleLinkClick("/orders")}>Mis Compras</div>
+                        </Link>
+                      </DropdownMenuItem>
+                      {user.isAdmin && (
+                        <>
+                          <DropdownMenuItem className="text-secondary hover:text-beige">
+                            <Link href="/admin/productos" className="text-secondary hover:text-beige">
+                              <div onClick={() => handleLinkClick("/admin/productos")}>Productos</div>
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="text-secondary hover:text-beige">
+                            <Link href="/" className="text-secondary hover:text-beige">
+                              <div onClick={() => handleLinkClick("/")}>Reportes</div>
+                            </Link>
+                          </DropdownMenuItem>
+                        </>
+                      )}
+
+                      <DropdownMenuItem className="text-secondary hover:text-beige">
+                        <Link href="/" className="text-secondary hover:text-beige" onClick={() => handleLogout()}>
+                          Cerrar Sesión
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                   <Button className="bg-transparent" onClick={openCart}>
-                  <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-                </Button>
-            </>
-          )}
-          {!user.isLogged && (
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                <FaUser className="text-white text-2xl cursor-pointer hover:text-gray-300" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Login />
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
+                    <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                    {cartItemCount > 0 && (
+                      <span className="inline-flex items-center justify-center w-1 h-1 p-2.5 ml-1 text-sm font-semibold text-violeta bg-white rounded-full dark:bg-blue-900 dark:text-blue-300">{cartItemCount}</span>
+                    )}
+                  </Button>
+                  {/* <Button className="bg-transparent" onClick={openCart}>
+                <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+                {cartItemCount > 0 && (
+                  <p className="text-md text-white ml-1.5 font-semibold">{cartItemCount}</p>
+                )}
+              </Button> */}
+                </>
+              )}
+              {!user.isLogged && (
+                <FaUser onClick={() => signIn("keycloak")} className="text-white text-2xl cursor-pointer hover:text-gray-300" />
+              )}
 
             </div>
           </div>

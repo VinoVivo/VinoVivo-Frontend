@@ -7,11 +7,11 @@ import DialogeMessage from '../product/register/DialogeMessage';
 
 const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, deleteProduct}) => {
   const [dialogMessage, setDialogMessage] = useState("");
-  const [dialogType, setDialogType] = useState<"Éxito" | "Error" | "Alerta">('Alerta');
+  const [dialogType, setDialogType] = useState<"Success" | "Error" | "Alert">('Alert');
   const [alert, setAlert]=useState(false)
  
   const handelAlert = ()=>{
-    setDialogType('Alerta');
+    setDialogType('Alert');
 
      setAlert(true)
       setDialogMessage(`¿Seguro quiere eliminar ${product?.name}?`);
@@ -50,7 +50,7 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
       </Link>
       <div className="flex w-20 gap-2">
 
-   <DialogeMessage open={alert}  onOpenChange={setAlert} type={dialogType} message={dialogMessage} textButtonOne="Cancelar" textButtonTwo="Eliminar" onClick={handleDelete} styleButton2='bg-destructive hover:bg-violeta   border-2 '/>
+   <DialogeMessage open={alert}  onOpenChange={setAlert} type={dialogType} message={dialogMessage} textButtonOne="Cancelar" textButtonThree="Eliminar" onClick={handleDelete} styleButton3='bg-destructive hover:bg-violeta   border-2 '/>
    </div>
     </div>
   )

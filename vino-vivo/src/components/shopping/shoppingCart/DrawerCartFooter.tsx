@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 
 const DrawerCartFooter = () => {
-
   const { closeCart, cartItems } = useCart();
   const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const isCartEmpty = cartItems.length === 0;
 
   return (
     <DrawerFooter className="flex flex-col space-y-4">
@@ -16,9 +16,12 @@ const DrawerCartFooter = () => {
         <p className="font-bold mr-2 text-xl">Total: </p>
         <p className="text-primary font-bold text-base">$ {total.toFixed(2)}</p>
       </div>
-      <Button className="bg-violeta text-white hover:bg-white hover:border hover:border-violeta hover:text-violeta">
-        <Link href={"/checkout"}>Comprar ahora</Link>
+      <Button onClick={closeCart} className="bg-violeta text-white hover:bg-white hover:border hover:border-violeta hover:text-violeta">
+        <Link href={isCartEmpty ? "#" : "/checkout"}>Comprar ahora</Link>
       </Button>
+      {isCartEmpty && (
+        <p className="text-red-500 text-center text-sm">El carrito está vacío.</p>
+      )}
       <div className="flex justify-center mt-2">
         <DrawerClose asChild>
           <button
