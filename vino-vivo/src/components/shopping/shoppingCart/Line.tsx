@@ -13,7 +13,7 @@ const Line: React.FC<LineProps> = ({
     margin= 'mt-0'
 }) => {
     return (
-        <div className={`flex`}>XXXXX
+        <div className={`flex`}>
             <hr className={`border-liza ${color} ${width} ${thickness} ${margin}`} />
         </div>
     );
