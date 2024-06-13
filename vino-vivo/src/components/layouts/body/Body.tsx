@@ -9,6 +9,7 @@ import { Product } from "@/types/products/products.types";
 import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
 import DialogeMessage from "@/components/product/register/DialogeMessage";
+import ProductCard from "@/components/product/ProductCard";
 
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -18,6 +19,22 @@ const Body = () => {
     const { addToCart, openCart} = useCart();
     const { data: session } = useSession();
     const [showAlert, setShowAlert] = useState(false);
+
+    const images: string[] = [
+        '/maridaje.jpg',
+        '/bodega.jpg',
+    ];
+    const images2: string[] = [
+        '/enoteca.jpg',
+        '/catavinos.jpg',
+    ];
+    const images3: string[] = [
+        '/maridaje.jpg',
+        '/bodega.jpg',
+        '/enoteca.jpg',
+        '/catavinos.jpg',
+    ];
+    const isMobile = useMediaQuery("(max-width: 768px)");
 
     useEffect(() => {
         setLoading(true);
@@ -33,23 +50,6 @@ const Body = () => {
         };
         fetchProducts();
     }, [showMore]);
-
-    const images: string[] = [
-        '/maridaje.jpg',
-        '/bodega.jpg',
-    ];
-    const images2: string[] = [
-        '/enoteca.jpg',
-        '/catavinos.jpg',
-    ];
-    const images3: string[] = [
-        '/maridaje.jpg',
-        '/bodega.jpg',
-        '/enoteca.jpg',
-        '/catavinos.jpg',
-    ]
-
-    const isMobile = useMediaQuery("(max-width: 768px)");
 
     const handleBuyButtonClick = (product: Product) => {
         if (!session) {
@@ -67,7 +67,7 @@ const Body = () => {
         addToCart(item);
         openCart();
     };
-
+    
     const handleCloseAlert = () => {
         setShowAlert(false);
     };
@@ -103,19 +103,11 @@ const Body = () => {
             <div className="flex justify-center">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {visibleProducts.map(product => (
-                        <div key={product.id} className="bg-white rounded-lg border border-gray-200 p-6 w-full sm:w-64">
-                            <Link href={`/detail/${product.id}`}>
-                                <img src={product.image} alt={product.name} className="w-full h-auto transform transition-transform duration-300 hover:scale-105" />
-                            </Link>
-                            <div className="flex flex-col items-center mt-2">
-                                <p className="text-md font-bold text-black h-12 text-center">{product.name}</p>
-                                <p className="text-sm text-black mt-2">{product.nameVariety}</p>
-                                <p className="text-md font-semibold text-black">${product.price}</p>
-                            </div>
-                            <button onClick={() => handleBuyButtonClick(product)} className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-2 py-1.5 px-4 rounded w-full">
-                                COMPRAR
-                            </button>
-                        </div>
+                        <ProductCard
+                        key={product.id}
+                        product={product}
+                        onBuyClick={() => handleBuyButtonClick(product)}
+                        />
                     ))}
                 </div>
             </div>

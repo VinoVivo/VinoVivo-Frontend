@@ -3,7 +3,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Title } from "@/components/Title/Title";
-import Link from "next/link";
 import {
     Pagination,
     PaginationContent,
@@ -16,6 +15,9 @@ import { IwineDetail } from "@/types/detail/detail.types";
 import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
 import DialogeMessage from "@/components/product/register/DialogeMessage";
+import ProductCard from "@/components/product/ProductCard";
+import { Product } from "@/types/products/products.types";
+import PaginationComponent from "@/components/pagination/PaginationComponent";
 
 interface WineType {
   id: number;
@@ -23,7 +25,7 @@ interface WineType {
 }
 
 export default function TypePage() {
-  const [products, setProducts] = useState<IwineDetail[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [wineTypes, setWineTypes] = useState<WineType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(8); 
@@ -48,7 +50,7 @@ export default function TypePage() {
 
         if (response) {
           const productData = await Promise.all(
-            response.data.map(async (product: IwineDetail) => {
+            response.data.map(async (product: Product) => {
               try {
                 const varietyResponse = await axios.get(
                   `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/id/${product.nameVariety}`
@@ -101,7 +103,7 @@ export default function TypePage() {
 
     const totalPages = Math.ceil(products.length / pageSize);
 
-const handleBuyButtonClick = (product: IwineDetail) => {
+const handleBuyButtonClick = (product: Product) => {
     if (!session) {
       setShowAlert(true);
       return;
@@ -130,62 +132,20 @@ const handleBuyButtonClick = (product: IwineDetail) => {
         </div>
         <div className="flex justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {currentProducts.map((product) => (
-              <div
+          {currentProducts.map((product) => (
+              <ProductCard
                 key={product.id}
-                className="bg-white rounded-lg border border-gray-200 p-6 w-64"
-              >
-                <Link href={`/detail/${product.id}`}>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="transform transition-transform duration-300 hover:cursor-pointer"
-                  />
-                </Link>
-                <div className="flex flex-col items-center mt-2">
-                  <p className="text-md font-bold text-black h-12">
-                    {product.name}
-                  </p>
-                  <p className="text-sm text-black">{product.nameVariety}</p>
-                  <p className="text-lg font-semibold text-black mt-2">
-                    ${product.price}
-                  </p>
-                </div>
-                <button onClick={()=>handleBuyButtonClick(product)} className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded w-full">
-                  COMPRAR
-                </button>
-              </div>
+                product={product}
+                onBuyClick={() => handleBuyButtonClick(product)}
+              />
             ))}
           </div>
         </div>
-        <Pagination className="mt-2">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href="#"
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              />
-            </PaginationItem>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <PaginationItem key={index}>
-                <PaginationLink
-                  href="#"
-                  onClick={() => setCurrentPage(index + 1)}
-                >
-                  {index + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-            <PaginationItem>
-              <PaginationNext
-                href="#"
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
       <DialogeMessage
         open={showAlert}
