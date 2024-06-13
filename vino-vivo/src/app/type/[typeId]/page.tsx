@@ -26,7 +26,7 @@ export default function TypePage() {
   const [products, setProducts] = useState<IwineDetail[]>([]);
   const [wineTypes, setWineTypes] = useState<WineType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(8); // Cambia el tamaño de la página según sea necesario
+  const [pageSize] = useState(8); 
   const path = usePathname();
   const isAllPath = path.endsWith("/all");
   const id = RegExp(/\d+$/).exec(path)?.[0];
