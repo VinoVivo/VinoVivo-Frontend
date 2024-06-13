@@ -68,7 +68,7 @@ const Header = () => {
     isAdmin: decodedToken?.realm_access?.roles.includes('admin')
   }
   const handleLogout = async () => {
-    clearCart(); 
+    clearCart();
     await federatedLogout();
   };
 
@@ -199,7 +199,7 @@ const Header = () => {
         <div className="hidden md:flex space-x-4 items-center">
           {user.isLogged && (
             <>
-            <Button className="bg-transparent" onClick={openCart}>
+              <Button className="bg-transparent" onClick={openCart}>
                 <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
                 {cartItemCount > 0 && (
                   <span className="inline-flex items-center justify-center w-1 h-1 p-2.5 ml-1 text-sm font-semibold text-violeta bg-white rounded-full dark:bg-blue-900 dark:text-blue-300">{cartItemCount}</span>
@@ -211,9 +211,11 @@ const Header = () => {
                   <p className="text-md text-white ml-1.5 font-semibold">{cartItemCount}</p>
                 )}
               </Button> */}
-              <DropdownMenu>
+
+              {/* AVATAR VIEJO */}
+              {/* <DropdownMenu>
                 <DropdownMenuTrigger className="text-beige hover:text-gray-300">
-                  <div className=" text-2xl inline-flex items-center justify-center w-6 h-6 p-6 font-normal text-violeta rounded-full bg-white">{user.initials}</div>
+                  <div className="text-2xl inline-flex items-center justify-center w-6 h-6 p-6 font-normal text-violeta rounded-full bg-white">{user.initials}</div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem className="text-secondary hover:text-black">
@@ -240,15 +242,72 @@ const Header = () => {
                       </DropdownMenuItem>
                     </>
                   )}
-                
-                <DropdownMenuItem className="text-secondary hover:text-beige">
-                  <Link href="/" className="text-secondary hover:text-beige" onClick={() => handleLogout()}>
-                    Cerrar Sesión
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-              </DropdownMenu>
-              
+
+                  <DropdownMenuItem className="text-secondary hover:text-beige">
+                    <Link href="/" className="text-secondary hover:text-beige" onClick={() => handleLogout()}>
+                      Cerrar Sesión
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu> */}
+
+              {/* AVATAR NUEVO */}
+              <div className="m-1 hs-dropdown [--trigger:click] relative inline-flex">
+                <button
+                  id="hs-dropdown-hover-event"
+                  type="button"
+                  className="
+                            before:content-[''] before:absolute before:w-full before:scale-x-0 
+                            before:h-[2px] before:bottom-0 before:left-0 
+                            before:origin-bottom-right before:transition-transform before:duration-300 
+                            hover:before:scale-x-100 hover:before:origin-bottom-left hs-dropdown-toggle 
+                            inline-flex items-center 
+                            text-md
+                            font-lg disabled:opacity-50 disabled:pointer-events-none
+                            text-2xl justify-center w-6 h-6 p-6 font-normal text-violeta rounded-full bg-white
+                            "
+                >
+                  {user.initials}
+                </button>
+                <div
+                  className="hs-dropdown-menu transition-[opacity,margin] 
+                  duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-30
+                bg-white shadow-md rounded-sm p-4 mt-2 after:h-4 after:absolute after:-bottom-4 
+                  after:start-0 after:w-full before:h-4 before:absolute before:-top-4 
+                  before:start-0 before:w-full"
+                  aria-labelledby="hs-dropdown-hover-event"
+                >
+                  <div className="text-secondary hover:text-black p-1">
+                    <Link href="/user-settings" className="text-secondary hover:text-beige text-sm">
+                      Mi Perfil
+                    </Link>
+                  </div>
+                  <div className="text-secondary hover:text-black p-1 ">
+                    <Link href="/orders" className="text-secondary hover:text-beige text-sm">
+                      Mis Compras
+                    </Link>
+                  </div>
+                  {user.isAdmin && (
+                    <>
+                      <div className="text-secondary hover:text-beige  p-1">
+                        <Link href="/admin/productos" className="text-secondary hover:text-beige text-sm">
+                          Productos
+                        </Link>
+                      </div>
+                      <div className="text-secondary hover:text-beige  p-1">
+                        <Link href="/" className="text-secondary hover:text-beige text-sm">
+                          Reportes
+                        </Link>
+                      </div>
+                    </>
+                  )}
+                  <div className="text-secondary hover:text-beige border-t p-1">
+                    <Link href="/" className="text-violeta font-medium hover:text-beige text-sm" onClick={() => handleLogout()}>
+                      Cerrar Sesión
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </>
           )}
           {!user.isLogged && (
