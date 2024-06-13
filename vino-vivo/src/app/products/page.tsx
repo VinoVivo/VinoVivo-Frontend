@@ -1,16 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { getProductList } from "@/lib/utils";
-import Link from "next/link";
-import Loader from "@/components/loader/page";
-import { FaSearch } from "react-icons/fa";
-import { Title } from "@/components/Title/Title";
-import Accordion from "@/components/accordion/page";
 import { Product } from "@/types/products/products.types";
 import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
 import DialogeMessage from "@/components/product/register/DialogeMessage";
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import ProductCard from "@/components/product/ProductCard";
+import ProductFilters from "@/components/product/ProductsFilter";
+import PaginationComponent from "@/components/pagination/PaginationComponent";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -28,6 +25,9 @@ const ProductsPage = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(8);
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentProducts = filteredProducts.slice(startIndex, startIndex + pageSize);
+  const totalPages = Math.ceil(products.length / pageSize);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -92,38 +92,6 @@ const ProductsPage = () => {
     maxPrice,
   ]);
 
-  const handleVarietyChange = (variety: string) => {
-    if (selectedVarieties.includes(variety)) {
-      setSelectedVarieties(selectedVarieties.filter((v) => v !== variety));
-    } else {
-      setSelectedVarieties([...selectedVarieties, variety]);
-    }
-  };
-
-  const handleTypeChange = (type: string) => {
-    if (selectedTypes.includes(type)) {
-      setSelectedTypes(selectedTypes.filter((t) => t !== type));
-    } else {
-      setSelectedTypes([...selectedTypes, type]);
-    }
-  };
-
-  const handleWineryChange = (winery: string) => {
-    if (selectedWineries.includes(winery)) {
-      setSelectedWineries(selectedWineries.filter((w) => w !== winery));
-    } else {
-      setSelectedWineries([...selectedWineries, winery]);
-    }
-  };
-
-  const handleYearChange = (year: string) => {
-    if (selectedYears.includes(year)) {
-      setSelectedYears(selectedYears.filter((y) => y !== year));
-    } else {
-      setSelectedYears([...selectedYears, year]);
-    }
-  };
-
   const handleBuyButtonClick = (product: Product) => {
     if (!session) {
       setShowAlert(true);
@@ -145,215 +113,43 @@ const ProductsPage = () => {
     setShowAlert(false);
   };
 
-      // Calcular los productos a mostrar en la página actual
-      const startIndex = (currentPage - 1) * pageSize;
-      const currentProducts = filteredProducts.slice(startIndex, startIndex + pageSize);
-  
-      const totalPages = Math.ceil(products.length / pageSize);
-
   return (
     <>
       <div className="mt-20 sm:mt-40 mb-6 flex flex-col sm:flex-row">
         {/* Filtros */}
-        <div className="w-full sm:w-72 p-3 mt-4 sm:mt-0">
-          <Title title="Filtros" color="beige" />
-          <div className="mt-4">
-            <Accordion title="Tipo">
-              <ul>
-                {Array.from(
-                  new Set(products.map((product) => product.nameType))
-                ).map((type) => (
-                  <li key={type} className="mb-2">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={selectedTypes.includes(type)}
-                        onChange={() => handleTypeChange(type)}
-                        className="mr-2 accent-violeta"
-                      />
-                      <span>{type === "Todos" ? "Todos" : type}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </Accordion>
-
-            <Accordion title="Variedad">
-              <ul>
-                {Array.from(
-                  new Set(products.map((product) => product.nameVariety))
-                ).map((variety) => (
-                  <li key={variety} className="mb-2">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={selectedVarieties.includes(variety)}
-                        onChange={() => handleVarietyChange(variety)}
-                        className="mr-2 accent-violeta"
-                      />
-                      <span>{variety === "Todas" ? "Todas" : variety}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </Accordion>
-
-            <Accordion title="Bodega">
-              <ul>
-                {Array.from(
-                  new Set(products.map((product) => product.nameWinery))
-                ).map((winery) => (
-                  <li key={winery} className="mb-2">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={selectedWineries.includes(winery)}
-                        onChange={() => handleWineryChange(winery)}
-                        className="mr-2 accent-violeta"
-                      />
-                      <span>{winery === "Todas" ? "Todas" : winery}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </Accordion>
-
-            <Accordion title="Año">
-              <ul>
-                {Array.from(
-                  new Set(products.map((product) => product.year))
-                ).map((year) => (
-                  <li key={year} className="mb-2">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={selectedYears.includes(year)}
-                        onChange={() => handleYearChange(year)}
-                        className="mr-2 accent-violeta"
-                      />
-                      <span>{year === "Todas" ? "Todas" : year}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </Accordion>
-
-            <Accordion title="Precio">
-              <div>
-                <input
-                  type="number"
-                  placeholder="Mínimo"
-                  value={minPrice ?? ""}
-                  onChange={(e) =>
-                    setMinPrice(
-                      e.target.value !== "" ? parseFloat(e.target.value) : null
-                    )
-                  }
-                  className="border border-gray-200 rounded-lg w-full px-2 py-1 shadow-sm h-8 mb-2"
-                />
-                <input
-                  type="number"
-                  placeholder="Máximo"
-                  value={maxPrice ?? ""}
-                  onChange={(e) =>
-                    setMaxPrice(
-                      e.target.value !== "" ? parseFloat(e.target.value) : null
-                    )
-                  }
-                  className="border border-gray-200 rounded-lg w-full px-2 py-1 shadow-sm h-8"
-                />
-              </div>
-            </Accordion>
-          </div>
-        </div>
+        <ProductFilters
+          products={products}
+          selectedTypes={selectedTypes}
+          selectedVarieties={selectedVarieties}
+          selectedWineries={selectedWineries}
+          selectedYears={selectedYears}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          setSearchTerm={setSearchTerm}
+          setSelectedTypes={setSelectedTypes}
+          setSelectedVarieties={setSelectedVarieties}
+          setSelectedWineries={setSelectedWineries}
+          setSelectedYears={setSelectedYears}
+          setMinPrice={setMinPrice}
+          setMaxPrice={setMaxPrice}
+        />
 
         {/* Productos */}
-        <div className="flex-1 border-l border-gray-200 p-3">
-          <Title title="Todos los Productos" color="beige" />
-          <div className="flex justify-center items-center space-x-1 mb-4 mt-4">
-            <input
-              className="text-violeta px-2 py-1 border border-gray-300 rounded-lg shadow-sm w-full sm:w-2/3 md:w-1/2 lg:w-1/3"
-              type="text"
-              placeholder="Buscar por nombre"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+          {currentProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onBuyClick={() => handleBuyButtonClick(product)}
             />
-            <FaSearch className="text-violeta text-xl" />
-          </div>
-          {loading && <Loader />}
-          <div className="flex justify-center">
-            {filteredProducts.length === 0 && !loading ? (
-              <div className="flex items-start justify-center min-h-screen">
-                <p className="text-violeta text-xl font-semibold">
-                  No se encontraron productos
-                </p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 3xl:grid-cols-5 gap-10">
-                {currentProducts.map((product) => (
-                  <div
-                    key={product.id}
-                    className="bg-white rounded-lg border border-gray-200 p-6 w-full sm:w-64"
-                  >
-                    <Link href={`/detail/${product.id}`}>
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-auto transform transition-transform duration-300 hover:scale-105"
-                      />
-                    </Link>
-                    <div className="flex flex-col items-center mt-2">
-                      <p className="text-md font-bold text-black h-12 text-center">
-                        {product.name}
-                      </p>
-                      <p className="text-sm text-black mt-2">
-                        {product.nameVariety}
-                      </p>
-                      <p className="text-md font-semibold text-black">
-                        ${product.price}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => handleBuyButtonClick(product)}
-                      className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-2 py-1.5 px-4 rounded w-full"
-                    >
-                      COMPRAR
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          ))}
         </div>
       </div>
-      <Pagination className="mt-2">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href="#"
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              />
-            </PaginationItem>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <PaginationItem key={index}>
-                <PaginationLink
-                  href="#"
-                  onClick={() => setCurrentPage(index + 1)}
-                >
-                  {index + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-            <PaginationItem>
-              <PaginationNext
-                href="#"
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+      <PaginationComponent
+        currentPage={currentPage}
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
+      />
       <DialogeMessage
         open={showAlert}
         onOpenChange={handleCloseAlert}

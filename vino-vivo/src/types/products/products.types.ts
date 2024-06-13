@@ -11,8 +11,6 @@ export interface Product {
     nameType: string,
     stock?:number
   }
-
-
 export interface ProductFormValues {
   name: string;
   description: string;
@@ -24,16 +22,10 @@ export interface ProductFormValues {
   idVariety: number;
   idType: number;
 }
-
-
-
 export interface ICardProduct {
   product: Product, 
   textButton: string, 
   icon: React.ReactNode, 
   href: string, 
   deleteProduct: (id:number) => void
- 
-
-
 }

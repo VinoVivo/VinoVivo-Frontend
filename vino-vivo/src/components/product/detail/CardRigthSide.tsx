@@ -16,6 +16,7 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
     const { addToCart, openCart } = useCart();
     const { data: session } = useSession();
     const [showAlert, setShowAlert] = useState(false);
+    const isOutOfStock = wine.stock === 0;
 
     const handleAddToCart = () => {
         if (!session) {
@@ -59,13 +60,19 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
                         <p className="mb-1">{wine.year}</p>
                         <p className="mb-1">{wine.nameWinery}</p>
                         <p className="mb-1">{wine.nameVariety}</p>
-                        <p className="mb-1">{wine.stock}</p>
+                        <p className={`mb-1 ${isOutOfStock ? 'text-red-500' : 'text-green-500'}`}>
+                            {isOutOfStock ? 'Agotado' : `Disponible (${wine.stock} disponibles)`}
+                        </p>
                         <p className="mb-1 font-bold">{wine.price}</p>
                         <p className="mb-1 text-justify">{wine.description}</p>
                     </div>                
                 </div>
                 <div className="flex flex-row justify-between mt-4">
-                    <Button className="bg-violeta hover:bg-fuchsia-950" onClick={handleAddToCart}>
+                    <Button 
+                        className={`bg-violeta hover:bg-fuchsia-950 ${isOutOfStock ? 'bg-gray-400 cursor-not-allowed' : ''}`}
+                        onClick={handleAddToCart}
+                        disabled={isOutOfStock}
+                    >
                             <div className="flex items-center">
                                 <span>Agregar</span>
                                 <span className="ml-2"><FaCartPlus /></span>
