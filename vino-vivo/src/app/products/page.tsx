@@ -10,6 +10,7 @@ import { Product } from "@/types/products/products.types";
 import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
 import DialogeMessage from "@/components/product/register/DialogeMessage";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -25,6 +26,8 @@ const ProductsPage = () => {
   const { openCart, addToCart } = useCart();
   const { data: session } = useSession();
   const [showAlert, setShowAlert] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(8);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -141,6 +144,13 @@ const ProductsPage = () => {
   const handleCloseAlert = () => {
     setShowAlert(false);
   };
+
+      // Calcular los productos a mostrar en la página actual
+      const startIndex = (currentPage - 1) * pageSize;
+      const currentProducts = filteredProducts.slice(startIndex, startIndex + pageSize);
+  
+      const totalPages = Math.ceil(products.length / pageSize);
+
   return (
     <>
       <div className="mt-20 sm:mt-40 mb-6 flex flex-col sm:flex-row">
@@ -280,7 +290,7 @@ const ProductsPage = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 3xl:grid-cols-5 gap-10">
-                {filteredProducts.map((product) => (
+                {currentProducts.map((product) => (
                   <div
                     key={product.id}
                     className="bg-white rounded-lg border border-gray-200 p-6 w-full sm:w-64"
@@ -316,6 +326,34 @@ const ProductsPage = () => {
           </div>
         </div>
       </div>
+      <Pagination className="mt-2">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              />
+            </PaginationItem>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <PaginationItem key={index}>
+                <PaginationLink
+                  href="#"
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       <DialogeMessage
         open={showAlert}
         onOpenChange={handleCloseAlert}

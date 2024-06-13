@@ -1,15 +1,12 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getProductsType, getTypes } from '@/lib/utils';
-import Loader from '@/components/loader/page';
 import { usePathname } from "next/navigation";
 import { Title } from "@/components/Title/Title";
 import Link from "next/link";
 import {
     Pagination,
     PaginationContent,
-    PaginationEllipsis,
     PaginationItem,
     PaginationLink,
     PaginationNext,
@@ -27,12 +24,12 @@ interface WineType {
 
 export default function TypePage() {
   const [products, setProducts] = useState<IwineDetail[]>([]);
-  const [wineTypes, setWineType] = useState<WineType[]>([]);
+  const [wineTypes, setWineTypes] = useState<WineType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(8); // Cambia el tamaño de la página según sea necesario
   const path = usePathname();
   const isAllPath = path.endsWith("/all");
-  const id = path.match(/\d+$/)?.[0];
+  const id = RegExp(/\d+$/).exec(path)?.[0];
   const {addToCart, openCart} = useCart();
   const { data: session } = useSession();
   const [showAlert, setShowAlert] = useState(false);
@@ -78,7 +75,7 @@ export default function TypePage() {
       .get(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/type/all`)
       .then((response) => {
         const productData = response.data;
-        setWineType(productData);
+        setWineTypes(productData);
       })
       .catch((error) => {
         console.error(
