@@ -7,7 +7,7 @@ const TitleSection = () => {
             <h2 className="text-lg font-semibold">PRODUCTOS</h2>
             <h2 className="text-lg font-semibold">SUBTOTAL</h2>
         </div>
-        <Line />
+        <Line/>
         </div>
     );
 };

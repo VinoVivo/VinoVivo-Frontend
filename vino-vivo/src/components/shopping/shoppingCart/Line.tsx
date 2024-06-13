@@ -7,14 +7,14 @@ interface LineProps {
 }
 
 const Line: React.FC<LineProps> = ({
-    color = 'bg-black',
+    color = "border-line",
     width = 'w-full',
     thickness = 'border-2',
     margin= 'mt-0'
 }) => {
     return (
         <div className={`flex`}>
-            <hr className={`border-liza ${color} ${width} ${thickness} ${margin}`} />
+            <hr className={`border-solid ${color} ${width} ${thickness} ${margin}`} />
         </div>
     );
 };

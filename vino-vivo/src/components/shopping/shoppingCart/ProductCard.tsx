@@ -21,7 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
     const { incrementQuantity, decrementQuantity } = useCart();
 
     return (
-        <div className="flex flex-col px-4 justify-between bg-backgroundCart">
+        <div className="flex flex-col px-4 justify-between">
             <div className="flex flex-row p-4 mx-2 justify-between bg-backgroundCart">
                 <div className="flex items-center justify-around space-x-1">
                     <div className="w-[60px] h-[100px] relative">
