@@ -8,8 +8,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-
-
 export const getProductList = async (): Promise<Product[]> => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/type/all`;
 
@@ -28,8 +26,6 @@ export const getProductList = async (): Promise<Product[]> => {
     throw error; // Lanzar el error para que pueda ser manejado por el código que llama a esta función
   }
 };
-
-
 
 export const getProduct = async (id:number) => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${id}`
@@ -84,8 +80,6 @@ export const getTypes = async (): Promise<WineType[]> => {
 }
 
 // -------------------------------------
-
-
 
 export const getVariety = async (): Promise<IIdName[]> => {
   const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/variety/all`

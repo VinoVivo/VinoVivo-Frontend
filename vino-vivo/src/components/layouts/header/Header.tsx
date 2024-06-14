@@ -295,7 +295,7 @@ const Header = () => {
                         </Link>
                       </div>
                       <div className="text-secondary hover:text-beige  p-1">
-                        <Link href="/" className="text-secondary hover:text-beige text-sm">
+                        <Link href="/admin/reports" className="text-secondary hover:text-beige text-sm">
                           Reportes
                         </Link>
                       </div>
