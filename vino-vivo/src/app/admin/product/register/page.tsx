@@ -9,7 +9,7 @@ export default async function ProductRegister() {
   const session = await getServerSession(authOptions);
   let decodedToken: DecodedToken | null = null;
   if (session?.accessToken) {
-    decodedToken = await jwtDecode<DecodedToken>(session.accessToken);
+    decodedToken = jwtDecode<DecodedToken>(session.accessToken);
   }
   const isAdmin = decodedToken?.realm_access?.roles.includes("admin");
   return isAdmin ? <Register /> : <div>{redirect("/")}</div>;
