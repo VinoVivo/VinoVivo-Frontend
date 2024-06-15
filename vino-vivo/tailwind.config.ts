@@ -81,6 +81,7 @@ const config = {
         textTypograph: "hsl(var(--textTypograph))", // Color de texto de tipografía
         backgroundCart: "hsl(var(--backgroundCart))",
         line:"hsl(var(--line))",
+        backgroundForms:"hsl(var(--backgroundForms))"
   
       },
       borderRadius: {

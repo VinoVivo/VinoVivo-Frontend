@@ -19,7 +19,6 @@ const DrawerCartHeader = () => {
             <IoMdClose />
           </button>
         </DrawerClose>
-        <DrawerTitle>Carrito</DrawerTitle>
       </div>
       <Line />
     </div>
