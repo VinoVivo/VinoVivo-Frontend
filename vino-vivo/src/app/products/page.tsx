@@ -8,6 +8,8 @@ import DialogeMessage from "@/components/product/register/DialogeMessage";
 import ProductCard from "@/components/product/ProductCard";
 import ProductFilters from "@/components/product/ProductsFilter";
 import PaginationComponent from "@/components/pagination/PaginationComponent";
+import { FaSearch } from "react-icons/fa";
+import { Title } from "@/components/Title/Title";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -118,31 +120,43 @@ const ProductsPage = () => {
       <div className="mt-20 sm:mt-40 mb-6 flex flex-col sm:flex-row">
         {/* Filtros */}
         <ProductFilters
-          products={products}
-          selectedTypes={selectedTypes}
-          selectedVarieties={selectedVarieties}
-          selectedWineries={selectedWineries}
-          selectedYears={selectedYears}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-          setSearchTerm={setSearchTerm}
-          setSelectedTypes={setSelectedTypes}
-          setSelectedVarieties={setSelectedVarieties}
-          setSelectedWineries={setSelectedWineries}
-          setSelectedYears={setSelectedYears}
-          setMinPrice={setMinPrice}
-          setMaxPrice={setMaxPrice}
+            products={products}
+            selectedTypes={selectedTypes}
+            selectedVarieties={selectedVarieties}
+            selectedWineries={selectedWineries}
+            selectedYears={selectedYears}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            setSearchTerm={setSearchTerm}
+            setSelectedTypes={setSelectedTypes}
+            setSelectedVarieties={setSelectedVarieties}
+            setSelectedWineries={setSelectedWineries}
+            setSelectedYears={setSelectedYears}
+            setMinPrice={setMinPrice}
+            setMaxPrice={setMaxPrice}
         />
-
-        {/* Productos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-          {currentProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onBuyClick={() => handleBuyButtonClick(product)}
+      <div className="flex-1 border-l border-gray-200 p-3">
+          <Title title="Todos los Productos" color="beige" />
+          <div className="flex justify-center items-center space-x-1 mb-4 mt-4">
+            <input
+              className="text-violeta px-2 py-1 border border-gray-300 rounded-lg shadow-sm w-full sm:w-2/3 md:w-1/2 lg:w-1/3"
+              type="text"
+              placeholder="Buscar por nombre"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-          ))}
+            <FaSearch className="text-violeta text-xl" />
+          </div>
+          {/* Productos */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+            {currentProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onBuyClick={() => handleBuyButtonClick(product)}
+              />
+            ))}
+          </div>
         </div>
       </div>
       <PaginationComponent
