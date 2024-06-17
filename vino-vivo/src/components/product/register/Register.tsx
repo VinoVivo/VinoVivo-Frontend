@@ -37,7 +37,6 @@ export default function Register() {
                 <span className="ml-2 sm:mt-0"><BackButton/></span>
             </div>            
             <ProductForm  wineries={wineries} types={types} varieties={varieties}/>
-        
         </div>
     );
 }

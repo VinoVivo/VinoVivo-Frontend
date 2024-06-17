@@ -34,15 +34,11 @@ const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties})
         }
     };
 
-  
-
     const handleNumberInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!/^\d*\.?\d*$/.test(e.key) && e.key !== 'Backspace') {
             e.preventDefault();
         }
     };
-    
- 
 
     const createProduct = async (data: object) => {
         try {
