@@ -10,6 +10,7 @@ import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
 import DialogeMessage from "@/components/product/register/DialogeMessage";
 import ProductCard from "@/components/product/ProductCard";
+import { Title } from "@/components/Title/Title";
 
 const Body = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -73,8 +74,8 @@ const Body = () => {
     };
 
     return (
-        <div className="mt-40">
-            <div className="border-b border-gray-300 mb-5">
+        <div className={isMobile ? "mt-24" : "mt-40"}>
+            <div className={isMobile ? "flex flex-col-reverse mb-6 p-2" : "border-b border-gray-300 mb-5"}>
                 <div className="flex flex-col md:flex-row items-center justify-center space-y-5 md:space-y-0 md:space-x-10">
                     {isMobile ? (
                         <Carousel images={images3} />
@@ -85,7 +86,6 @@ const Body = () => {
                         </>
                     )}
                 </div>
-
                 <div className="flex justify-center items-center mb-6">
                     <p className="font-light italic mt-5 text-neutral-500 text-center text-lg">
                         <a className="font-bold italic text-xl">"</a>
@@ -96,12 +96,15 @@ const Body = () => {
                     </p>
                 </div>
             </div>
-            <p className="text-fuchsia-900 text-center text-2xl font-semibold mb-2">NUESTRA PROPUESTA</p>
+            {/* <p className="text-fuchsia-900 text-center text-2xl font-semibold mb-2">NUESTRA PROPUESTA</p> */}
+            <div className="mb-6">
+            <Title title="NUESTRA PROPUESTA" color="beige" />
+            </div>
 
             {loading && <Loader />}
 
             <div className="flex justify-center">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {visibleProducts.map(product => (
                         <ProductCard
                         key={product.id}

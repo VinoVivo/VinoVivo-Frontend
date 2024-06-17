@@ -13,7 +13,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ onValidationError }) => {
         expiry: '',
         cvc: '',
         name: '',
-        focus: undefined as string | undefined, // Definir focus como string o undefined,
+        focus: undefined as string | undefined,
         errors: {
             name: '',
             expiry: '',
@@ -21,12 +21,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ onValidationError }) => {
         }
     });
 
-    const handleInputChange = (evt: { target: { name: string; value: string; }; }) => {
+    const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = evt.target;
         setState((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleInputFocus = (evt: { target: { name: string; }; }) => {
+    const handleInputFocus = (evt: React.FocusEvent<HTMLInputElement>) => {
         setState((prev) => ({ ...prev, focus: evt.target.name }));
     };
 
@@ -52,11 +52,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ onValidationError }) => {
         const currentMonth = new Date().getMonth() + 1;
     
         if (year < currentYear || (year === currentYear && month < currentMonth)) {
-            return "Tarjeta con vencimiento";
+            return "Tarjeta vencida.";
         }
         return "";
     };
-    
 
     const validateCVC = (cvc: string) => {
         const regex = /^[0-9]{3}$/;
@@ -91,7 +90,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ onValidationError }) => {
             }
         }));
 
-        // Propagar los errores al componente PaymentPage
         onValidationError({
             ...state.errors,
             [name]: error
@@ -99,24 +97,28 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ onValidationError }) => {
     };
 
     return (
-        <div className='flex space-x-4'>
-            <Cards
-                number={state.number}
-                expiry={state.expiry}
-                cvc={state.cvc}
-                name={state.name}
-                focused={state.focus as Focused | undefined}
-            />
-            <form className='flex flex-col gap-2 justify-center items-center mt-4'>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="flex justify-center lg:justify-end">
+                <Cards
+                    number={state.number}
+                    expiry={state.expiry}
+                    cvc={state.cvc}
+                    name={state.name}
+                    focused={state.focus as Focused | undefined}
+                />
+            </div>
+            <form className="flex flex-col gap-2">
                 <input
                     type="text"
                     name="number"
-                    placeholder="Número de tarjeta "
+                    placeholder="Número de tarjeta"
                     value={state.number}
                     onChange={handleInputChange}
                     onFocus={handleInputFocus}
                     onBlur={handleValidation}
+                    className="border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:border-primary"
                 />
+                {/* {state.errors.number && <p className="text-red-500 text-xs">{state.errors.number}</p>} */}
                 <input
                     type="text"
                     name="name"
@@ -125,28 +127,31 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ onValidationError }) => {
                     onChange={handleInputChange}
                     onFocus={handleInputFocus}
                     onBlur={handleValidation}
+                    className="border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:border-primary"
                 />
                 {state.errors.name && <p className="text-red-500 text-xs">{state.errors.name}</p>}
-                <input
-                    type="text"
-                    name="expiry"
-                    placeholder="Vencimiento (MM/YY)"
-                    value={state.expiry}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                    onBlur={handleValidation}
-                />
-                {state.errors.expiry && <p className="text-red-500 text-xs">{state.errors.expiry}</p>}
-                <input
-                    type="text"
-                    name="cvc"
-                    placeholder="CVC"
-                    value={state.cvc}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                    onBlur={handleValidation}
-                />
-                {state.errors.cvc && <p className="text-red-500 text-xs">{state.errors.cvc}</p>}
+                    <input
+                        type="text"
+                        name="expiry"
+                        placeholder="Vencimiento (MM/YY)"
+                        value={state.expiry}
+                        onChange={handleInputChange}
+                        onFocus={handleInputFocus}
+                        onBlur={handleValidation}
+                        className="border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:border-primary flex-1"
+                    />
+                    {state.errors.expiry && <p className="text-red-500 text-xs">{state.errors.expiry}</p>}
+                    <input
+                        type="text"
+                        name="cvc"
+                        placeholder="CVC"
+                        value={state.cvc}
+                        onChange={handleInputChange}
+                        onFocus={handleInputFocus}
+                        onBlur={handleValidation}
+                        className="border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:border-primary w-1/2"
+                    />
+                    {state.errors.cvc && <p className="text-red-500 text-xs">{state.errors.cvc}</p>}
             </form>
         </div>
     );
