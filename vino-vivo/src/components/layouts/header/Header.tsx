@@ -34,16 +34,13 @@ const Header = () => {
 
   const handleLinkClick = (link: string) => {
     setActiveLink(link);
+    isMenuOpen && setIsMenuOpen(false);
   };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  /* const handleLinkClick = (link: string) => {
-    setActiveLink(link);
-    isMenuOpen && setIsMenuOpen(false);
-  }; */
   function getInitials(name: string) {
     if (name != null && name != '' && name != undefined) {
       let nameArray = name.split(' ');
