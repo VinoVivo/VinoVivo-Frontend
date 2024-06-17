@@ -15,6 +15,7 @@ import { useSession, signIn } from "next-auth/react";
 import { jwtDecode } from "jwt-decode";
 import federatedLogout from "@/app/api/auth/federated-logout/utils";
 import { DecodedToken } from "@/types/user/user.type";
+import { useMediaQuery } from "@react-hook/media-query";
 
 const Header = () => {
   const pathname = usePathname();
@@ -80,17 +81,26 @@ const Header = () => {
     setCartItemCount(itemCount);
   }, []);
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <header className="bg-violeta fixed top-0 w-full z-50">
       <div className="container mx-auto flex justify-between items-center h-full py-4 px-4 md:px-28">
         <div className="flex items-center">
-          <Link href="/">
-            <img
-              src="/logo-vinovivo.png"
-              alt="logo"
-              className="h-12 md:h-24"
-              onClick={() => handleLinkClick("/")}
-            />
+          <Link href="/" passHref>
+            {isMobile ? (
+              <img
+                src="/logo-mobile.png"
+                alt="logo"
+                className="h-12 md:h-24"
+              />
+            ) : (
+              <img
+                src="/logo-vinovivo.png"
+                alt="logo"
+                className="h-12 md:h-24"
+              />
+            )}
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-8">
@@ -252,7 +262,7 @@ const Header = () => {
               </DropdownMenu> */}
 
               {/* AVATAR NUEVO */}
-              <div className="m-1 hs-dropdown [--trigger:click] relative inline-flex">
+              <div className="m-1 hs-dropdown relative inline-flex">
                 <button
                   id="hs-dropdown-hover-event"
                   type="button"
@@ -374,6 +384,7 @@ const Header = () => {
                           <div onClick={() => handleLinkClick("/orders")}>Mis Compras</div>
                         </Link>
                       </DropdownMenuItem>
+
                       {user.isAdmin && (
                         <>
                           <DropdownMenuItem className="text-secondary hover:text-beige">
@@ -396,12 +407,14 @@ const Header = () => {
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
+
                   <Button className="bg-transparent" onClick={openCart}>
                     <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
                     {cartItemCount > 0 && (
                       <span className="inline-flex items-center justify-center w-1 h-1 p-2.5 ml-1 text-sm font-semibold text-violeta bg-white rounded-full dark:bg-blue-900 dark:text-blue-300">{cartItemCount}</span>
                     )}
                   </Button>
+
                   {/* <Button className="bg-transparent" onClick={openCart}>
                 <FaShoppingCart className="text-white text-2xl cursor-pointer hover:text-gray-300" />
                 {cartItemCount > 0 && (
@@ -416,7 +429,7 @@ const Header = () => {
 
             </div>
           </div>
-        </div>
+        </div>      
       )}
     </header>
   );

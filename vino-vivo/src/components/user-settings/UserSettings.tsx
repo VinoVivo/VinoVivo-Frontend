@@ -1,5 +1,6 @@
 'use client';
 import federatedLogout from '@/app/api/auth/federated-logout/utils';
+import { useMediaQuery } from '@react-hook/media-query';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -60,7 +61,6 @@ const UserSettings = () => {
                 const orders = await response.json();
                 setOrders(orders);
                 setOrderCount(orders.length);
-                console.log(orders.length);
             } catch (error) {
                 console.error('Error getting orders:', error);
             }
@@ -68,10 +68,12 @@ const UserSettings = () => {
         fetchOrders();
     }, []);
 
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
     return (
-        <div className="flex flex-col mt-32 h-screen">
-            <div className="flex flex-1">
-                <aside className="w-64 h-full">
+        <div className={isMobile ? "mt-20" : "flex flex-col mt-32 min-h-screen"}>
+            <div className="flex flex-1 flex-col md:flex-row">
+                <aside className="w-full md:w-64">
                     <div className="h-full px-3 py-4 overflow-y-auto bg-gray-200">
                         <ul className="space-y-2 font-medium">
                             <li>
@@ -103,17 +105,17 @@ const UserSettings = () => {
                     </div>
                 </aside>
 
-                <div className="flex-1 p-10">
-                    <div className="container flex flex-col border border-gray-200 rounded-lg shadow p-10 w-3/4 bg-gray-100">
-                        <h1 className="text-start text-2xl font-bold mb-4">Mi Perfil</h1>
-                        <div className="flex flex-col justify-evenly md:flex-row items-center md:items-center md:space-x-6">
-                            <div className="flex flex-col justify-center border border-gray-100 p-6 rounded-lg shadow pt-4 pb-4 pl-10 pr-10 bg-white">
-                                <img src={photo} alt="" className="w-36 h-36 mb-4 bg-violeta object-cover rounded" />
+                <div className="flex-1 p-4 md:p-10">
+                    <div className="container flex flex-col border border-gray-200 rounded-lg shadow p-4 md:p-10 w-full md:w-3/4 bg-gray-100">
+                        <h1 className="text-start text-xl md:text-2xl font-bold mb-4">Mi Perfil</h1>
+                        <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-6">
+                            <div className="flex flex-col items-center md:items-start border border-gray-100 p-4 md:p-6 rounded-lg shadow bg-white">
+                                <img src={photo} alt="" className="w-24 h-24 md:w-44 md:h-36 mb-4 bg-violeta object-cover rounded" />
                                 <div>
                                     <p className="text-lg font-semibold mb-1 text-center text-violeta">{userName}</p>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full">
                                 <div>
                                     <label className="block text-black font-semibold">Nombre</label>
                                     <p>{firstName}</p>
@@ -152,7 +154,7 @@ const UserSettings = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default UserSettings;

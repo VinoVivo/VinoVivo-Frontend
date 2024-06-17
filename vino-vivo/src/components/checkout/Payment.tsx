@@ -5,6 +5,7 @@ import { AlertDialogAction, AlertDialogDescription, AlertDialogFooter, AlertDial
 import { AlertDialog, AlertDialogContent } from '@radix-ui/react-alert-dialog';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { MdReportGmailerrorred } from 'react-icons/md';
+import { useMediaQuery } from '@react-hook/media-query';
 
 export interface ValidationErrors {
     name: string;
@@ -109,67 +110,67 @@ const PaymentPage = () => {
         }
     };
 
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
     return (
-        <div className='flex flex-col items-center'>
-            
-            <div className='mb-10 flex just flex-col'>
-                <div className='flex space-x-1'>
-                    <p className='font-bold text-lg'>Hola </p> <p className='font-bold text-primary text-lg'>{firstName}</p> <p className='font-bold text-lg'>!</p> <p className='text-lg'> Tu compra será enviada a tu dirección</p><p className='text-primary font-bold text-lg'>{address}</p>
-                </div>
-                <div className='flex space-x-1'>
-                    <p className='text-lg'>Completa debajo con tus</p> <p className='font-bold text-lg'>datos de pago</p> <p className='text-lg'>y procede a</p> <p className='font-bold text-lg'>finalizar la compra</p>
-                </div>
+        <div className='container mx-auto p-4'>
+            <div className='mb-10'>
+                <p className='font-bold text-lg'>Hola <span className='text-primary'>{firstName}</span>! Tu compra será enviada a tu dirección <span className='text-primary'>{address}</span>.</p>
+                <p className='text-lg'>Completa debajo con tus datos de pago y procede a finalizar la compra.</p>
                 {/* <p className='font-medium'>Le enviaremos un email a {email}, con sus datos de compra.</p> */}
             </div>
-            
-            <div className='flex justify-evenly'>
-                <div className='border border-gray-200 rounded-md p-4'>
-                    <h2 className="text-lg font-bold mb-4">Datos de pago</h2>
-                    <PaymentForm onValidationError={handleValidationError} />
-                </div>
-                <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                    <AlertDialogContent className="fixed inset-0 flex items-center justify-center z-50">
-                        <div className="bg-white rounded-lg p-10 shadow-lg justify-between border-primary border-2">
-                            <AlertDialogHeader className="flex flex-col items-center">
-                                <AlertDialogTitle className='mt-2 mb-2 text-3xl'>
-                                    {dialogType === "Éxito" ? "Éxito" : "Error"}
-                                </AlertDialogTitle>
-                                {dialogType === "Éxito" ? (
-                                    <FaRegCircleCheck className="h-12 w-12 text-success mb-2" />
-                                ) : (
-                                    <MdReportGmailerrorred className="h-12 w-12 text-destructive mb-2" />
-                                )}
-                                <AlertDialogDescription className='text-base'>
-                                    {dialogMessage}
-                                </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter className='mt-4'>
-                                <AlertDialogAction onClick={() => setDialogOpen(false)}>
-                                    Cerrar
-                                </AlertDialogAction>
-                            </AlertDialogFooter>
-                        </div>
-                    </AlertDialogContent>
-                </AlertDialog>
-                <div className="w-1/4 ml-8 border border-gray-200 rounded-md p-4 flex flex-col">
-                    <div className='border-b border-gray-200'>
-                        <h2 className="text-lg font-bold mb-4">Resumen de Compra</h2>
+
+            <div className='flex flex-col lg:flex-row justify-center gap-4'>
+                <div className='flex-1'>
+                    <div className={isMobile ? "flex flex-col" : 'border border-gray-200 rounded-md p-4'}>
+                        <h2 className="text-lg font-bold mb-4">Datos de pago</h2>
+                        <PaymentForm onValidationError={handleValidationError} />
                     </div>
+                </div>
+
+                <div className='lg:w-1/4 border border-gray-200 rounded-md p-4'>
+                    <h2 className="text-lg font-bold mb-4">Resumen de Compra</h2>
                     <p className='font-medium mt-2'>Productos ({totalItems})</p>
                     {updatedCartItems.map((item) => (
                         <div className='flex justify-between' key={item.id}>
-                            <p className='text-sm p-2'>{item.name}</p><p className='text-sm p-2 text-violeta font-medium'>x{item.quantity}</p>
+                            <p className='text-sm'>{item.name}</p>
+                            <p className='text-sm text-violeta font-medium'>x{item.quantity}</p>
                         </div>
                     ))}
-                    <div className='flex flex-row justify-between mt-5 border-t border-gray-200'>
-                        <p className='font-medium mt-2'>Total</p><p className='font-medium mt-2'>${totalPrice.toFixed(2)}</p>
+                    <div className='flex flex-row justify-between mt-5 border-t border-gray-200 pt-2'>
+                        <p className='font-medium'>Total</p>
+                        <p className='font-medium'>${totalPrice.toFixed(2)}</p>
                     </div>
-                    <div className='flex justify-center'>
-                        <button className='bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-2 py-1.5 px-4 rounded' onClick={handlePayment}>Finalizar Compra</button>
+                    <div className='flex justify-center mt-4'>
+                        <button className='bg-violeta hover:bg-fuchsia-950 text-white font-bold py-1.5 px-4 rounded' onClick={handlePayment}>Finalizar Compra</button>
                     </div>
                 </div>
             </div>
 
+            <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                <AlertDialogContent className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-10 shadow-lg justify-between border-primary border-2">
+                        <AlertDialogHeader className="flex flex-col items-center">
+                            <AlertDialogTitle className='mt-2 mb-2 text-3xl'>
+                                {dialogType === "Éxito" ? "Éxito" : "Error"}
+                            </AlertDialogTitle>
+                            {dialogType === "Éxito" ? (
+                                <FaRegCircleCheck className="h-12 w-12 text-success mb-2" />
+                            ) : (
+                                <MdReportGmailerrorred className="h-12 w-12 text-destructive mb-2" />
+                            )}
+                            <AlertDialogDescription className='text-base'>
+                                {dialogMessage}
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter className='mt-4'>
+                            <AlertDialogAction onClick={() => setDialogOpen(false)}>
+                                Cerrar
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </div>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     );
 };
