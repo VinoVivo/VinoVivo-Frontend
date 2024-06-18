@@ -3,9 +3,10 @@ import Link from "next/link";
 import { TableAddress } from "./TableAddres";
 import { userData } from "@/types/user/userprofile.types";
 import { useEffect, useState } from "react";
+import { Title } from "../Title/Title";
 
 export const AddressExist = () => {
-  const url = `https://vinovivo-production.up.railway.app/realms/vino-vivo/account/`; //UpdateUrl(`${process.env.NEXTAUTH_URL}/`);
+  const url = `https://vinovivo-production.up.railway.app/realms/vino-vivo/account`;
   console.log(url);
 
   const [user, setUser] = useState<userData>();
@@ -32,31 +33,40 @@ export const AddressExist = () => {
     fetchUserProfile();
   }, []);
 
-  const body = user?.address ? (
-    <main className="mt-40 mx-auto">
-      <TableAddress {...user} />
-      <Link
-        href={url || "/products"}
-        className="border-solid border-violeta bg-violeta border-2 block w-full mt-4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta hover:bg-violeta-foreground"
-      >
-        Modificar direccion
-      </Link>
-      <Link className="flex justify-center" href="/checkout/buy/payment">
-        <button className="border-solid border-violeta bg-violeta border-2 block w-full mt-4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta hover:bg-violeta-foreground">
-          Seguir con la compra
-        </button>
-      </Link>
-    </main>
-  ) : (
-    <main className="mt-40 mx-auto">
-      <Link
-        href={url || "/products"}
-        className="border-solid border-violeta bg-violeta border-2 block w-full mt-4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta hover:bg-violeta-foreground"
-      >
-        Agregar direccion
-      </Link>
-    </main>
+  return (
+    <>
+      <Title color="beige" title="Datos de envio" />
+      {user?.address ? (
+        <main>
+          <TableAddress {...user} />
+          <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+            <Link
+              href={url || "/products"}
+              className="border-solid border-violeta bg-violeta border-2 rounded-md text-center text-white text-sm content-center p-1.5 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta hover:bg-violeta-foreground"
+            >
+              MODIFICAR DIRECCION
+            </Link>
+            <Link
+              href="/checkout/buy/payment"
+              className="border-solid border-violeta bg-violeta border-2 rounded-md text-center text-white text-sm content-center p-1.5 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta hover:bg-violeta-foreground"
+            >
+              SEGUIR CON LA COMPRA
+            </Link>
+          </div>
+        </main>
+      ) : (
+        <div className="my-5 mx-auto w-4/5 text-center">
+          <h2 className="font-lg .text-neutral-500">
+            Aun no se ha registrado dirección alguna.
+          </h2>
+          <Link
+            href={url || "/products"}
+            className="border-solid border-violeta bg-violeta border-2 block w-3/4 rounded-md text-center text-white text-sm content-center p-1.5 my-8 mx-auto shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta hover:bg-violeta-foreground"
+          >
+            AGREGAR DIRECCION
+          </Link>
+        </div>
+      )}
+    </>
   );
-
-  return body;
 };
