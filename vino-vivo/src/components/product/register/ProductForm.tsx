@@ -6,6 +6,8 @@ import SelectInput from './inputs/SelectInput';
 import TextAreaInput from './inputs/TextAreaInput';
 import { useState } from 'react';
 import DialogeMessage from './DialogeMessage';
+import BackButton from '@/components/ui/BackButton';
+import BackText from '@/components/ui/BackText';
 
 interface ProductFormProps {
     // onSubmit: SubmitHandler<ProductFormValues>;
@@ -181,20 +183,31 @@ const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties})
                     error={errors.description?.message}
                 />
                 {/* Button */}
-                <div className="flex justify-center col-span-full ">
-                    <Button
-                        className=" 
-                            bg-primary 
-                            text-white
-                            hover: hover:bg-white 
-                            hover:text-primary 
-                            hover:border-primary    
-                            border-2   
-                            w-1/2 "
-                        type="submit"
-                    >
-                        Crear Producto
-                    </Button>
+                <div className="flex flex-col col-span-full">
+                    <div className="flex justify-center">
+                        <Button
+                            className="
+                                bg-primary
+                                text-white
+                                hover:bg-white
+                                hover:text-primary
+                                hover:border-primary
+                                border-2
+                                w-1/2
+                                mb-4"
+                            type="submit"
+                        >
+                            Crear Producto
+                        </Button>
+                    </div>
+                    <div className="flex justify-center">
+                        <BackText
+                            color="text-gray-700"
+                            fontSize="text-lg"
+                            fontWeight="font-semibold"
+                            underlineWidth="border-b-2"
+                        />
+                    </div>
                 </div>
             </form>
                 <DialogeMessage 

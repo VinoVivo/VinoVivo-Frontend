@@ -13,7 +13,7 @@ const DrawerCartHeader = () => {
       <div className="flex flex-row justify-start mb-4">
         <DrawerClose asChild>
           <button
-            className="stroke-white-700 mr-4 h-5 w-5 border border-textTypograph rounded-sm"
+            className="stroke-white-700 mr-4 h-5 w-5 border border-textTypograph rounded-sm hover:bg-textTypograph hover:text-white"
             onClick={closeCart}
           >
             <IoMdClose />
