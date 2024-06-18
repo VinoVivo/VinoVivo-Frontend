@@ -24,6 +24,11 @@ const PaymentPage = () => {
     const [dialogType, setDialogType] = useState<"Éxito" | "Error">("Éxito");
     const [validationErrors, setValidationErrors] = useState<ValidationErrors>({ name: '', expiry: '', cvc: '' });
     const [updatedCartItems, setUpdatedCartItems] = useState<CartItem[]>(cartItems);
+
+    // Nuevos estados para la dirección de envío
+    const [useDefaultAddress, setUseDefaultAddress] = useState(true);
+    const [newAddress, setNewAddress] = useState('');
+
     const totalPrice = updatedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const totalItems = updatedCartItems.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -50,7 +55,7 @@ const PaymentPage = () => {
             } catch (error) {
                 console.error('Error fetching user profile:', error);
                 setDialogType("Error");
-                setDialogMessage('Su compra no se ha podido realizar corretamente');
+                setDialogMessage('Su compra no se ha podido realizar correctamente');
             }
         };
         fetchUserProfile();
@@ -74,8 +79,11 @@ const PaymentPage = () => {
                 quantity: item.quantity
             }));
 
+            // Utiliza la dirección seleccionada (predeterminada o nueva)
+            const shippingAddress = useDefaultAddress ? address : newAddress;
+
             const orderData = {
-                shippingAddress: address,
+                shippingAddress: shippingAddress,
                 orderEmail: email,
                 orderDetailsDTORequests: orderDetailsDTORequests
             };
@@ -105,7 +113,7 @@ const PaymentPage = () => {
         } catch (error) {
             console.error('Error:', error);
             setDialogType("Error");
-            setDialogMessage('Su compra no se ha podido realizar corretamente');
+            setDialogMessage('Su compra no se ha podido realizar correctamente');
             setDialogOpen(true);
         }
     };
@@ -114,12 +122,55 @@ const PaymentPage = () => {
 
     return (
         <div className='container mx-auto p-4'>
-            <div className='mb-10'>
-                <p className='font-bold text-lg'>Hola <span className='text-primary'>{firstName}</span>! Tu compra será enviada a tu dirección <span className='text-primary'>{address}</span>.</p>
+            {/* <div className='mb-10'>
+                <p className='font-bold text-lg'>
+                    Hola <span className='text-primary'>{firstName}</span>! Tu compra será enviada a tu dirección <span className='text-primary'>{address}</span>.
+                </p>
                 <p className='text-lg'>Completa debajo con tus datos de pago y procede a finalizar la compra.</p>
-                {/* <p className='font-medium'>Le enviaremos un email a {email}, con sus datos de compra.</p> */}
-            </div>
+            </div> */}
 
+            <div className='mb-4 border border-gray-200 rounded-md p-4'>
+                <h2 className='text-lg font-bold mb-2 border-b'>Dirección de Envío</h2>
+                <div className='flex flex-col'>
+                    <label className='mb-2 border-b'>
+                        <input
+                            type='radio'
+                            checked={useDefaultAddress}
+                            onChange={() => setUseDefaultAddress(true)}
+                            className='accent-violeta'
+                        />
+                        <span className='ml-2'>Dirección predeterminada</span>
+                        <p className='font-semibold ml-5 mb-2'>{address}</p>
+                    </label>
+                    <div>
+                    </div>
+                    <label className='mb-2'>
+                    </label>
+                    <label className='mb-2'>
+                        <input
+                            type='radio'
+                            checked={!useDefaultAddress}
+                            onChange={() => setUseDefaultAddress(false)}
+                            className='accent-violeta'
+                        />
+                        <span className='ml-2'>Usar una nueva dirección</span>
+                    </label>
+                    <div
+                        className={`transition-opacity duration-500 ${useDefaultAddress ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100 h-auto'
+                            }`}
+                    >
+                        {!useDefaultAddress && (
+                            <input
+                                type='text'
+                                value={newAddress}
+                                onChange={(e) => setNewAddress(e.target.value)}
+                                placeholder='Ingrese la nueva dirección'
+                                className="border border-gray-200 rounded-md px-3 py-1 focus:outline-none focus:border-primary mt-2"
+                            />
+                        )}
+                    </div>
+                </div>
+            </div>
             <div className='flex flex-col lg:flex-row justify-center gap-4'>
                 <div className='flex-1'>
                     <div className={isMobile ? "flex flex-col" : 'border border-gray-200 rounded-md p-4'}>
@@ -127,7 +178,6 @@ const PaymentPage = () => {
                         <PaymentForm onValidationError={handleValidationError} />
                     </div>
                 </div>
-
                 <div className='lg:w-1/4 border border-gray-200 rounded-md p-4'>
                     <h2 className="text-lg font-bold mb-4">Resumen de Compra</h2>
                     <p className='font-medium mt-2'>Productos ({totalItems})</p>
