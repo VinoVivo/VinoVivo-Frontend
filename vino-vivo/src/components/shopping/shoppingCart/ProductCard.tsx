@@ -21,9 +21,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
     const { incrementQuantity, decrementQuantity } = useCart();
 
     return (
-        <div className="flex flex-col px-4 justify-between">
-            <div className="flex flex-row p-4 mx-2 justify-between bg-backgroundCart">
-                <div className="flex items-center justify-around space-x-1">
+        <div className="flex flex-col justify-between">
+            <div className="flex flex-row p-2 mx-2 justify-between bg-backgroundCart">
+                <div className="flex items-center justify-between space-x-4">
                     <div className="w-[60px] h-[100px] relative">
                         <Image src={item.image} alt={item.name} layout="fill" objectFit="cover"/>
                     </div>
@@ -34,20 +34,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
                         <Button
                             variant="outline"
                             size="icon"
-                            className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
+                            className="h-6 w-6 rounded-l-full border border-textTypograph"
                             onClick={() => decrementQuantity(item.id)}
                             disabled={item.quantity <= 0}
                         >
-                            <MinusIcon className="h-4 w-4" />
+                            <MinusIcon className="h-4 w-4 m-0" />
                             <span className="sr-only ">Decrease</span>
                         </Button>
-                        <div className="border border-textTypograph rounded-sm flex items-center justify-center h-5 w-5 mx-2">
+                        <div className="border border-textTypograph flex items-center justify-center h-6 w-6 mx-0 bg-white">
                             <p className="font-bold">{item.quantity}</p>
                         </div>
                         <Button
                             variant="outline"
                             size="icon"
-                            className="h-5 w-5 shrink-0 rounded-full border border-textTypograph rounded-sm"
+                            className="h-6 w-6 rounded-r-full border border-textTypograph"
                             onClick={() => incrementQuantity(item.id)}
                         >
                             <PlusIcon className="h-4 w-4" />
@@ -56,7 +56,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item }) => {
                     </div>
                 </div>
                 </div>
-                <div>
+                <div className="mr-5">
                     <p className="text-primary font-bold">${item.price}</p>
                 </div>
             </div>

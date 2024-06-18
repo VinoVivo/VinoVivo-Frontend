@@ -1,8 +1,6 @@
 'use client'
 import { Title } from '@/components/Title/Title';
-import BackButton from '@/components/ui/BackButton';
 import { useEffect, useState } from 'react';
-import DialogeMessage from './DialogeMessage';
 import ProductForm from './ProductForm';
 
 export default function Register() {
@@ -34,7 +32,6 @@ export default function Register() {
         <div className="max-w-4xl mx-8 my-40 lg:mx-auto">
             <div className="flex  flex-col sm:flex-row justify-between items-center mb-4">
                 <Title title="REGISTRO DE PRODUCTO" color="labelAdminColor" letterSpacing='widest'/>
-                <span className="ml-2 sm:mt-0"><BackButton/></span>
             </div>            
             <ProductForm  wineries={wineries} types={types} varieties={varieties}/>
         </div>
