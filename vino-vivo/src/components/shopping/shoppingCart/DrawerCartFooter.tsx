@@ -17,7 +17,7 @@ const DrawerCartFooter = () => {
         <p className="text-primary font-bold text-base">$ {total.toFixed(2)}</p>
       </div>
       <Button onClick={closeCart} className="bg-violeta text-white hover:bg-white hover:border hover:border-violeta hover:text-violeta">
-        <Link href={isCartEmpty ? "#" : "/checkout"}>Comprar ahora</Link>
+        <Link href={isCartEmpty ? "#" : "/checkout"}>COMPRAR AHORA</Link>
       </Button>
       {isCartEmpty && (
         <p className="text-red-500 text-center text-sm">El carrito está vacío.</p>
