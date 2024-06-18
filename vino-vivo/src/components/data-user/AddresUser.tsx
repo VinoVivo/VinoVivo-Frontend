@@ -1,40 +1,62 @@
-// // import { GetDataUser } from "@/app/api/users/getDataUser";
-// // import { UpdateUrl } from "@/app/api/users/updateUser";
+"use client";
+import Link from "next/link";
+import { TableAddress } from "./TableAddres";
+import { userData } from "@/types/user/userprofile.types";
+import { useEffect, useState } from "react";
 
-// import { useSession } from "next-auth/react";
-// import Link from "next/link";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "@/lib/auth";
-// import { TableAddress } from "./TableAddres";
+export const AddressExist = () => {
+  const url = `https://vinovivo-production.up.railway.app/realms/vino-vivo/account/`; //UpdateUrl(`${process.env.NEXTAUTH_URL}/`);
+  console.log(url);
 
-// export const AddressExist = async () => {
-//   const data = await getServerSession(authOptions);
+  const [user, setUser] = useState<userData>();
 
-//   if (data?.accessToken) {
-//     // const response = await GetDataUser(data.accessToken);
-//     // const user = await response.json();
-//     // if (!response.ok) {
-//     //   throw new Error("Error al obtener el perfil de usuario");
-//     // }
-//     if (user.address) {
-//       return (
-//         <main className="mt-40 mx-auto">
-//           <TableAddress {...user} />
-//           <Link className="flex justify-center" href="/checkout/buy/payment">
-//             <button className=" mt-4 px-3 py-2 bg-violeta font-medium text-white text-sm rounded-md">
-//               Siguiente
-//             </button>
-//           </Link>
-//         </main>
-//       );
-//     } else {
-//       const url = UpdateUrl(`${process.env.NEXTAUTH_URL}/`);
-//       return (
-//         <main className="mt-40 mx-auto">
-//           <Link href={url || "/products"}>Agregar direccion</Link>
-//         </main>
-//       );
-//     }
-//   }
-//   return <div>Error al obtener el perfil de usuario</div>;
-// };
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch("/api/user", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const user = await response.json();
+          setUser(user);
+        } else {
+          throw new Error("Failed to fetch user profile");
+        }
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+    fetchUserProfile();
+  }, []);
+
+  const body = user?.address ? (
+    <main className="mt-40 mx-auto">
+      <TableAddress {...user} />
+      <Link
+        href={url || "/products"}
+        className="border-solid border-violeta bg-violeta border-2 block w-full mt-4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta hover:bg-violeta-foreground"
+      >
+        Modificar direccion
+      </Link>
+      <Link className="flex justify-center" href="/checkout/buy/payment">
+        <button className="border-solid border-violeta bg-violeta border-2 block w-full mt-4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta hover:bg-violeta-foreground">
+          Seguir con la compra
+        </button>
+      </Link>
+    </main>
+  ) : (
+    <main className="mt-40 mx-auto">
+      <Link
+        href={url || "/products"}
+        className="border-solid border-violeta bg-violeta border-2 block w-full mt-4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta hover:bg-violeta-foreground"
+      >
+        Agregar direccion
+      </Link>
+    </main>
+  );
+
+  return body;
+};

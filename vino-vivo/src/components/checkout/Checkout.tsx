@@ -13,7 +13,8 @@ interface CheckoutProps {
 
 const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
   const { removeFromCart, incrementQuantity, decrementQuantity } = useCart();
-  const [updatedCartItems, setUpdatedCartItems] = useState<CartItem[]>(cartItems);
+  const [updatedCartItems, setUpdatedCartItems] =
+    useState<CartItem[]>(cartItems);
 
   const totalPrice = updatedCartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -47,9 +48,15 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <div className={isMobile ? "mt-24" : "container mx-auto p-4 mt-32 flex flex-col lg:flex-row"}>
+    <div
+      className={
+        isMobile
+          ? "mt-24"
+          : "container mx-auto p-4 mt-32 flex flex-col lg:flex-row"
+      }
+    >
       <div className="flex-grow grid grid-cols-1 gap-4">
-      <Title title="Productos" color="beige" />
+        <Title title="Productos" color="beige" />
         {updatedCartItems.map((item) => (
           <div
             key={item.id}
@@ -119,7 +126,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
           <p className="font-medium">Total</p>
           <p className="font-medium">${totalPrice.toFixed(2)}</p>
         </div>
-        <Link className="flex justify-center" href="/checkout/buy/payment">
+        <Link className="flex justify-center" href="/checkout/address/payment">
           <button className="mt-4 px-3 py-2 bg-violeta font-medium text-white text-sm rounded-md">
             CONFIRMAR COMPRA
           </button>
