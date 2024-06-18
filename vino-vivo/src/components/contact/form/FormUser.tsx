@@ -145,7 +145,7 @@ export const DataContact: FC= () => {
               type="submit"
               className="border-solid border-violeta bg-violeta border-2 block w-full mt-4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta"
             >
-              Enviar
+              ENVIAR
             </Button>
           </div>
         </div>

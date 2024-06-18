@@ -4,16 +4,29 @@ import styles from "./title.module.css";
 
 interface TitleProps {
   title: string;
-  color: "violeta" | "beige";
+  color: "violeta" | "beige" | "labelAdminColor";
+  letterSpacing?: string;
 }
-export const Title: FC<TitleProps> = ({ title, color }) => {
-  let bgColor =
-    color == "violeta"
-      ? "after:bg-violeta before:bg-violeta"
-      : "after:bg-beige before:bg-beige";
+export const Title: FC<TitleProps> = ({ title, color, letterSpacing = "normal" }) => {
+  let bgColor;
+  switch (color) {
+    case "violeta":
+      bgColor = "after:bg-violeta before:bg-violeta";
+      break;
+    case "beige":
+      bgColor = "after:bg-beige before:bg-beige";
+      break;
+    case "labelAdminColor":
+      bgColor = "after:bg-labelAdminColor before:bg-labelAdminColor";
+      break;
+    default:
+      bgColor = "after:bg-beige before:bg-beige";
+  }
+  const titleStyle = `${styles.typography_title} text-${color} ${bgColor} tracking-${letterSpacing}`;
+
   return (
-      <h2 className={`${styles.typography_title} text-${color} ${bgColor}`}>
-        {title}
-      </h2>
+    <h2 className={titleStyle}>
+      {title}
+    </h2>
   );
 };

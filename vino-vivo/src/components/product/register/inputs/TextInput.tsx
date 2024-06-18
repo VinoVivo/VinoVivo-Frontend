@@ -10,12 +10,12 @@ interface TextInputProps {
 
 const TextInput: React.FC<TextInputProps> = ({ label, placeholder, register, error, onKeyDown }) => (
     <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={register.name}>
+        <label className="block text-labelAdminColor text-md font-bold mb-2" htmlFor={register.name}>
             {label}
         </label>
         <input
             {...register}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
             placeholder={placeholder}
             onKeyDown={onKeyDown}
