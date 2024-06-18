@@ -10,7 +10,7 @@ export const TableAddress = ({
   cellphone,
 }: userData) => {
   return (
-    <div className="border border-gray-200 rounded-md p-4 w-full mt-40 mx-auto">
+    <div className="border border-gray-200 rounded-md p-4 w-full my-5 mx-auto">
       <div className="border-b border-gray-200">
         <h2 className="text-lg font-bold mb-2"> Domicilio de envio:</h2>
       </div>
