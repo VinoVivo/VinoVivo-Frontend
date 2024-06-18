@@ -81,8 +81,8 @@ const config = {
         textTypograph: "hsl(var(--textTypograph))", // Color de texto de tipografía
         backgroundCart: "hsl(var(--backgroundCart))",
         line:"hsl(var(--line))",
-        backgroundForms:"hsl(var(--backgroundForms))"
-  
+        backgroundForms:"hsl(var(--backgroundForms))",
+        labelAdminColor:"hsl(var(--labelAdmin-color))",
       },
       borderRadius: {
         lg: "var(--radius)",

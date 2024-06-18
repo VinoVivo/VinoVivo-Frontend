@@ -26,8 +26,7 @@
       --accent-foreground: 220, 39,10;
 
       --destructive: 354, 32%, 61% ;
-      --destructive-foreground: 8, 38%, 87 ;
-      
+      --destructive-foreground: 8, 38%, 87 ;      
 
       --success: 96, 19%, 56%;
       --success-foreground: 96, 35%, 91%;
@@ -39,12 +38,12 @@
       --beige-foreground: 220, 39,10;
 
       --under: 0, 0%, 34%, 1;
-
       
       --textTypograph: 0, 0%, 19%, 1;
       --backgroundCart: 0, 3%, 68%, 0.25;
       --line:25, 22%, 29%, 1;
       --backgroundForms:38, 20%, 92%, 0.95;
+      --labelAdmin-color: 351, 61%, 28%;
 
       --input: 220, 14%, 95%;
       --ring: 354, 32.6%, 61%;

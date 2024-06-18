@@ -78,7 +78,7 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
                                 <span className="ml-2"><FaCartPlus /></span>
                             </div>
                     </Button>
-                    <BackButton/>
+                    <BackButton color="beige"/>
                 </div>
             </CardContent>
             <DialogeMessage

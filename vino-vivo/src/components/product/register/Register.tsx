@@ -31,9 +31,9 @@ export default function Register() {
    
 
     return (
-        <div className="max-w-4xl mx-4 my-40 lg:mx-auto">
+        <div className="max-w-4xl mx-8 my-40 lg:mx-auto">
             <div className="flex  flex-col sm:flex-row justify-between items-center mb-4">
-                <Title title="Registro de Producto" color="beige"/>
+                <Title title="REGISTRO DE PRODUCTO" color="labelAdminColor" letterSpacing='widest'/>
                 <span className="ml-2 sm:mt-0"><BackButton/></span>
             </div>            
             <ProductForm  wineries={wineries} types={types} varieties={varieties}/>
