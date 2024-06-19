@@ -10,9 +10,9 @@ interface DetailPageProps {
 
 async function fetchProductData(productId: string): Promise<IwineDetail | null> {
     try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${productId}`, {
-      cache: 'no-store', // Esto asegura que se obtengan datos frescos en cada solicitud.
-    });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/id/${productId}`, {
+            cache: 'no-store', // Esto asegura que se obtengan datos frescos en cada solicitud.
+        });
 
     if (!response.ok) {
         return null;
@@ -37,7 +37,7 @@ async function fetchProductData(productId: string): Promise<IwineDetail | null> 
         console.error('Error al obtener los detalles del producto:', error);
         return null;
     }
-}
+};
 
 export default async function DetailPageId({ params }: Readonly<DetailPageProps>) {
     const wine = await fetchProductData(params.productId);

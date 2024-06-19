@@ -70,120 +70,120 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
 
     return (
         <div className="w-full sm:w-72 p-3 mt-4 sm:mt-0">
-        <Title title="Filtros" color="beige" />
-        <div className="mt-4">
-            {/* Accordion para Tipo */}
-            <Accordion title="Tipo">
-            <ul>
-                {Array.from(new Set(products.map((product) => product.nameType))).map(
-                (type) => (
-                    <li key={type} className="mb-2">
-                    <label className="flex items-center">
-                        <input
-                        type="checkbox"
-                        checked={selectedTypes.includes(type)}
-                        onChange={() => handleTypeChange(type)}
-                        className="mr-2 accent-violeta"
-                        />
-                        <span>{type === "Todos" ? "Todos" : type}</span>
-                    </label>
-                    </li>
-                )
-                )}
-            </ul>
-            </Accordion>
+            <Title title="Filtros" color="beige" />
+            <div className="mt-4">
+                {/* Accordion para Tipo */}
+                <Accordion title="Tipo">
+                <ul>
+                    {Array.from(new Set(products.map((product) => product.nameType))).map(
+                    (type) => (
+                        <li key={type} className="mb-2">
+                        <label className="flex items-center">
+                            <input
+                            type="checkbox"
+                            checked={selectedTypes.includes(type)}
+                            onChange={() => handleTypeChange(type)}
+                            className="mr-2 accent-violeta"
+                            />
+                            <span>{type === "Todos" ? "Todos" : type}</span>
+                        </label>
+                        </li>
+                    )
+                    )}
+                </ul>
+                </Accordion>
 
-            {/* Accordion para Variedad */}
-            <Accordion title="Variedad">
-            <ul>
-                {Array.from(
-                new Set(products.map((product) => product.nameVariety))
-                ).map((variety) => (
-                <li key={variety} className="mb-2">
-                    <label className="flex items-center">
+                {/* Accordion para Variedad */}
+                <Accordion title="Variedad">
+                <ul>
+                    {Array.from(
+                    new Set(products.map((product) => product.nameVariety))
+                    ).map((variety) => (
+                    <li key={variety} className="mb-2">
+                        <label className="flex items-center">
+                        <input
+                            type="checkbox"
+                            checked={selectedVarieties.includes(variety)}
+                            onChange={() => handleVarietyChange(variety)}
+                            className="mr-2 accent-violeta"
+                        />
+                        <span>{variety === "Todas" ? "Todas" : variety}</span>
+                        </label>
+                    </li>
+                    ))}
+                </ul>
+                </Accordion>
+
+                {/* Accordion para Bodega */}
+                <Accordion title="Bodega">
+                <ul>
+                    {Array.from(new Set(products.map((product) => product.nameWinery))).map(
+                    (winery) => (
+                        <li key={winery} className="mb-2">
+                        <label className="flex items-center">
+                            <input
+                            type="checkbox"
+                            checked={selectedWineries.includes(winery)}
+                            onChange={() => handleWineryChange(winery)}
+                            className="mr-2 accent-violeta"
+                            />
+                            <span>{winery === "Todas" ? "Todas" : winery}</span>
+                        </label>
+                        </li>
+                    )
+                    )}
+                </ul>
+                </Accordion>
+
+                {/* Accordion para Año */}
+                <Accordion title="Año">
+                <ul>
+                    {Array.from(new Set(products.map((product) => product.year))).map(
+                    (year) => (
+                        <li key={year} className="mb-2">
+                        <label className="flex items-center">
+                            <input
+                            type="checkbox"
+                            checked={selectedYears.includes(year)}
+                            onChange={() => handleYearChange(year)}
+                            className="mr-2 accent-violeta"
+                            />
+                            <span>{year === "Todas" ? "Todas" : year}</span>
+                        </label>
+                        </li>
+                    )
+                    )}
+                </ul>
+                </Accordion>
+
+                {/* Input para Precio Mínimo y Máximo */}
+                <Accordion title="Precio">
+                <div>
                     <input
-                        type="checkbox"
-                        checked={selectedVarieties.includes(variety)}
-                        onChange={() => handleVarietyChange(variety)}
-                        className="mr-2 accent-violeta"
+                    type="number"
+                    placeholder="Mínimo"
+                    value={minPrice ?? ""}
+                    onChange={(e) =>
+                        setMinPrice(
+                        e.target.value !== "" ? parseFloat(e.target.value) : null
+                        )
+                    }
+                    className="border border-gray-200 rounded-lg w-full px-2 py-1 shadow-sm h-8 mb-2"
                     />
-                    <span>{variety === "Todas" ? "Todas" : variety}</span>
-                    </label>
-                </li>
-                ))}
-            </ul>
-            </Accordion>
-
-            {/* Accordion para Bodega */}
-            <Accordion title="Bodega">
-            <ul>
-                {Array.from(new Set(products.map((product) => product.nameWinery))).map(
-                (winery) => (
-                    <li key={winery} className="mb-2">
-                    <label className="flex items-center">
-                        <input
-                        type="checkbox"
-                        checked={selectedWineries.includes(winery)}
-                        onChange={() => handleWineryChange(winery)}
-                        className="mr-2 accent-violeta"
-                        />
-                        <span>{winery === "Todas" ? "Todas" : winery}</span>
-                    </label>
-                    </li>
-                )
-                )}
-            </ul>
-            </Accordion>
-
-            {/* Accordion para Año */}
-            <Accordion title="Año">
-            <ul>
-                {Array.from(new Set(products.map((product) => product.year))).map(
-                (year) => (
-                    <li key={year} className="mb-2">
-                    <label className="flex items-center">
-                        <input
-                        type="checkbox"
-                        checked={selectedYears.includes(year)}
-                        onChange={() => handleYearChange(year)}
-                        className="mr-2 accent-violeta"
-                        />
-                        <span>{year === "Todas" ? "Todas" : year}</span>
-                    </label>
-                    </li>
-                )
-                )}
-            </ul>
-            </Accordion>
-
-            {/* Input para Precio Mínimo y Máximo */}
-            <Accordion title="Precio">
-            <div>
-                <input
-                type="number"
-                placeholder="Mínimo"
-                value={minPrice ?? ""}
-                onChange={(e) =>
-                    setMinPrice(
-                    e.target.value !== "" ? parseFloat(e.target.value) : null
-                    )
-                }
-                className="border border-gray-200 rounded-lg w-full px-2 py-1 shadow-sm h-8 mb-2"
-                />
-                <input
-                type="number"
-                placeholder="Máximo"
-                value={maxPrice ?? ""}
-                onChange={(e) =>
-                    setMaxPrice(
-                    e.target.value !== "" ? parseFloat(e.target.value) : null
-                    )
-                }
-                className="border border-gray-200 rounded-lg w-full px-2 py-1 shadow-sm h-8"
-                />
+                    <input
+                    type="number"
+                    placeholder="Máximo"
+                    value={maxPrice ?? ""}
+                    onChange={(e) =>
+                        setMaxPrice(
+                        e.target.value !== "" ? parseFloat(e.target.value) : null
+                        )
+                    }
+                    className="border border-gray-200 rounded-lg w-full px-2 py-1 shadow-sm h-8"
+                    />
+                </div>
+                </Accordion>
             </div>
-            </Accordion>
-        </div>
         </div>
     );
 };

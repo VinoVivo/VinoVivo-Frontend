@@ -86,12 +86,14 @@ const config = {
           DEFAULT: "hsl(var(--gris))",
           foreground: "hsl(var(--gris-foreground))",
         },
-        textTypograph: "hsl(var(--textTypograph))", // Color de texto de tipografía
-        backgroundCart: "hsl(var(--backgroundCart))",
-        line: "hsl(var(--line))",
-        backgroundForms: "hsl(var(--backgroundForms))",
-        labelAdminColor: "hsl(var(--labelAdmin-color))",
-        grisCarbon: "hsl(var(--grisCarbon))",
+        textTypograph: "hsl(var(--textTypograph))", // Color de texto de tipografía en carrito
+        backgroundCart: "hsl(var(--backgroundCart))", //color de fondo de la card de carrito, la màs oscurita
+        line: "hsl(var(--line))", //color de linea que separa los productos del carrito
+        backgroundForms: "hsl(var(--backgroundForms))", //color para el fondo de todos los formularios
+        labelAdminColor: "hsl(var(--labelAdmin-color))", //rojo de admin
+        graySubtittle: "hsl(var(--graySubtittle))", //gris de "seguir comprando" en carrito y "atràs" en detail
+        grisCarbon: "hsl(var(--grisCarbon))", //color del botón de cerrar del carrito
+        whiteTypograph: "hsl(var(--whiteTypograph))", //blanco de letra que usé en botón de visualizar en reportes
       },
       borderRadius: {
         lg: "var(--radius)",
