@@ -15,7 +15,7 @@ interface ReportModuleProps {
 const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
 
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOption, setSelectedOption] = useState<string>("");
   const [selectedFilters, setSelectedFilters] = useState<{ type?: string; year?: string }>({ type: "", year: "" });
 
   useEffect(() => {
@@ -24,17 +24,17 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
 
   useEffect(() => {
     let filtered = products.filter((product) => {
-      const { type, year } = selectedFilters;
-      if (type && !product.nameType.includes(type)) {
-        return false;
-      }
-      if (year && !product.year.includes(year)) {
-        return false;
-      }
-      return true;
+        const { type, year } = selectedFilters;
+        if (type && type !== "0" && product.nameType !== type) {
+            return false;
+        }
+        if (year && year !== "0" && product.year.toString() !== year) {
+            return false;
+        }
+        return true;
     });
     setFilteredProducts(filtered);
-  }, [products, selectedFilters]);
+}, [products, selectedFilters]);
 
   const handleFilterChange = (filterType: "type" | "year", value: string) => {
     setSelectedFilters((prevFilters) => ({
@@ -42,14 +42,9 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
       [filterType]: value,
     }));
   };
-
-  const handleCheckboxChange = (option: string) => {
-    setSelectedOptions((prevOptions) =>
-      prevOptions.includes(option)
-        ? prevOptions.filter((item) => item !== option)
-        : [...prevOptions, option]
-    );
-  };
+  const handleOptionChange = (option: string) => {
+    setSelectedOption(option);
+};
 
   return (
     <div className="flex flex-col items-center justify-center h-screen mb-10">
@@ -66,8 +61,8 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
             setSelectedYear={(year) => handleFilterChange("year", year)} 
           />
           <ReportOptions
-            selectedOptions={selectedOptions}
-            handleCheckboxChange={handleCheckboxChange}
+            selectedOption={selectedOption}
+            handleOptionChange={handleOptionChange}
           />
         </div>
         <div className="flex flex-row mt-8 justify-between ">
