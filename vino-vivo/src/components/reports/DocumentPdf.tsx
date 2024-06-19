@@ -1,6 +1,9 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-
+import { ProductSaleData } from '@/types/reports/reports.types';
+interface MyDocumentProps {
+    data: ProductSaleData[];
+}
 const styles = StyleSheet.create({
     page: {
         padding: 30,
@@ -10,21 +13,14 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     table: {
-        display: "table",
+        marginVertical: 10,
         width: "auto",
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderColor: '#bfbfbf',
-        margin: "10px 0",
     },
     tableRow: {
         flexDirection: "row",
     },
     tableCol: {
         width: "25%",
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderColor: '#bfbfbf',
         padding: 5,
     },
     tableCell: {
@@ -34,7 +30,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const MyDocument = ({ data }) => (
+const MyDocument : React.FC<MyDocumentProps>= ({ data }) => (
     <Document>
         <Page size="A4" style={styles.page}>
         <View style={styles.section}>
