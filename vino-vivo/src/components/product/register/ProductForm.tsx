@@ -197,7 +197,7 @@ const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties})
                                 mb-4"
                             type="submit"
                         >
-                            Crear Producto
+                            CREAR PRODUCTO
                         </Button>
                     </div>
                     <div className="flex justify-center">
@@ -215,8 +215,8 @@ const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties})
             onOpenChange={setDialogOpen} 
             type={dialogType} 
             message={dialogMessage}
-            textButtonOne="Seguir creando"
-            textButtonTwo="Volver a productos"
+            textButtonOne="SEGUIR CREANDO"
+            textButtonTwo="VOLVER A PRODUCTOS"
             buttonTwoHref="/admin/productos"
             />
         </>
