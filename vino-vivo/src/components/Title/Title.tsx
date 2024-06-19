@@ -7,7 +7,11 @@ interface TitleProps {
   color: "violeta" | "beige" | "labelAdminColor";
   letterSpacing?: string;
 }
-export const Title: FC<TitleProps> = ({ title, color, letterSpacing = "normal" }) => {
+export const Title: FC<TitleProps> = ({
+  title,
+  color,
+  letterSpacing = "normal",
+}) => {
   let bgColor;
   switch (color) {
     case "violeta":
@@ -24,9 +28,5 @@ export const Title: FC<TitleProps> = ({ title, color, letterSpacing = "normal" }
   }
   const titleStyle = `${styles.typography_title} text-${color} ${bgColor} tracking-${letterSpacing}`;
 
-  return (
-    <h2 className={titleStyle}>
-      {title}
-    </h2>
-  );
+  return <h1 className={titleStyle}>{title}</h1>;
 };

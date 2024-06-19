@@ -1,36 +1,36 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-    'node_modules/preline/dist/*.js',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "node_modules/preline/dist/*.js",
+  ],
   prefix: "",
   theme: {
     container: {
       center: true,
       padding: "2rem",
       screens: {
-        "sm": "380px",
-        "md": "650px",
-        "lg": "1024px",
-        "xl": "1280px",
+        sm: "380px",
+        md: "650px",
+        lg: "1024px",
+        xl: "1280px",
         "2xl": "1400px",
       },
     },
     extend: {
       borderWidth: {
-        '1': '1px',
-        '2': '2px',
-        '4': '4px',
-        '8': '8px',
+        "1": "1px",
+        "2": "2px",
+        "4": "4px",
+        "8": "8px",
       },
       screens: {
-        '3xl': '1700px',
+        "3xl": "1700px",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -78,13 +78,21 @@ const config = {
           DEFAULT: "hsl(var(--beige))",
           foreground: "hsl(var(--beige-foreground))",
         },
+        violetaDos: {
+          DEFAULT: "hsl(var(--violeta-dos))",
+          foreground: "hsl(var(--violeta-dos-foreground))",
+        },
+        gris: {
+          DEFAULT: "hsl(var(--gris))",
+          foreground: "hsl(var(--gris-foreground))",
+        },
         textTypograph: "hsl(var(--textTypograph))", // Color de texto de tipografía en carrito
         backgroundCart: "hsl(var(--backgroundCart))", //color de fondo de la card de carrito, la màs oscurita
-        line:"hsl(var(--line))", //color de linea que separa los productos del carrito
-        backgroundForms:"hsl(var(--backgroundForms))", //color para el fondo de todos los formularios
-        labelAdminColor:"hsl(var(--labelAdmin-color))", //rojo de admin 
-        graySubtittle:"hsl(var(--graySubtittle))", //gris de "seguir comprando" en carrito y "atràs" en detail
-        grisCarbon:"hsl(var(--grisCarbon))", //color del botón de cerrar del carrito
+        line: "hsl(var(--line))", //color de linea que separa los productos del carrito
+        backgroundForms: "hsl(var(--backgroundForms))", //color para el fondo de todos los formularios
+        labelAdminColor: "hsl(var(--labelAdmin-color))", //rojo de admin
+        graySubtittle: "hsl(var(--graySubtittle))", //gris de "seguir comprando" en carrito y "atràs" en detail
+        grisCarbon: "hsl(var(--grisCarbon))", //color del botón de cerrar del carrito
         whiteTypograph: "hsl(var(--whiteTypograph))", //blanco de letra que usé en botón de visualizar en reportes
       },
       borderRadius: {
@@ -108,10 +116,7 @@ const config = {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require('preline/plugin'),
-  ],
-} satisfies Config
+  plugins: [require("tailwindcss-animate"), require("preline/plugin")],
+} satisfies Config;
 
-export default config
+export default config;
