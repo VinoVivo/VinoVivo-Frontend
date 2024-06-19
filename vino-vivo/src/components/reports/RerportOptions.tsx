@@ -8,7 +8,7 @@ interface ReportOptionsProps {
 const ReportOptions: React.FC<ReportOptionsProps> = ({ selectedOptions, handleCheckboxChange }) => {
     return (
         <div className="mb-4">
-            <p className="block mb-2 font-bold text-labelAdminColor">Selecciona una o más opciones:</p>
+            <p className="block mb-2 font-bold text-labelAdminColor">2- Selecciona una o más opciones:</p>
             <Line width="w-64"  color="border-labelAdminColor"/>
             <div className="flex flex-col items-start mt-6">
                 <label htmlFor="ventas_totales" className="inline-flex items-center mb-2">
@@ -18,9 +18,9 @@ const ReportOptions: React.FC<ReportOptionsProps> = ({ selectedOptions, handleCh
                     value="ventas_totales"
                     checked={selectedOptions.includes("ventas_totales")}
                     onChange={() => handleCheckboxChange("ventas_totales")}
-                    className="form-checkbox h-5 w-5 text-violeta"
+                    className="form-checkbox h-5 w-5 accent-labelAdminColor"
                 />
-                <span className="ml-2">Ventas Totales</span>
+                <span className="ml-2 font-bold">Ventas Totales</span>
                 </label>
                 <label htmlFor="productos_mas_vendidos" className="inline-flex items-center mb-2">
                 <input
@@ -29,9 +29,9 @@ const ReportOptions: React.FC<ReportOptionsProps> = ({ selectedOptions, handleCh
                     value="productos_mas_vendidos"
                     checked={selectedOptions.includes("productos_mas_vendidos")}
                     onChange={() => handleCheckboxChange("productos_mas_vendidos")}
-                    className="form-checkbox h-5 w-5 text-violeta"
+                    className="form-checkbox h-5 w-5 accent-labelAdminColor"
                 />
-                <span className="ml-2">Top 10: Productos Más Vendidos</span>
+                <span className="ml-2 font-bold">Productos Más Vendidos</span>
                 </label>
                 <label htmlFor="ingresos_por_categoria" className="inline-flex items-center mb-2">
                 <input
@@ -40,9 +40,9 @@ const ReportOptions: React.FC<ReportOptionsProps> = ({ selectedOptions, handleCh
                     value="ingresos_por_categoria"
                     checked={selectedOptions.includes("ingresos_por_categoria")}
                     onChange={() => handleCheckboxChange("ingresos_por_categoria")}
-                    className="form-checkbox h-5 w-5 text-violeta"
+                    className="form-checkbox h-5 w-5 accent-labelAdminColor"
                 />
-                <span className="ml-2">Ingresos Totales</span>
+                <span className="ml-2 font-bold">Ingresos Totales</span>
                 </label>
                 <label htmlFor="stock_productos" className="inline-flex items-center mb-2">
                 <input
@@ -51,9 +51,9 @@ const ReportOptions: React.FC<ReportOptionsProps> = ({ selectedOptions, handleCh
                     value="stock_productos"
                     checked={selectedOptions.includes("stock_productos")}
                     onChange={() => handleCheckboxChange("stock_productos")}
-                    className="form-checkbox h-5 w-5 text-violeta"
+                    className="form-checkbox h-5 w-5 accent-labelAdminColor"
                 />
-                <span className="ml-2">Stock de Productos</span>
+                <span className="ml-2 font-bold">Stock de Productos</span>
                 </label>
             </div>
         </div>
