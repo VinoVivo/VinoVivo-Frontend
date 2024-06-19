@@ -11,23 +11,27 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export function DialogDemo() {
+interface OrderDetailDialogProps {
+    id: number;
+}
+
+const OrderDetailDialog: React.FC<OrderDetailDialogProps> = ({ id }) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="outline">Edit Profile</Button>
+                <Button className='bg-violeta hover:bg-primary w-32 m-1'>Ver Pedido</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogTitle>Pedido #{id}</DialogTitle>
                     <DialogDescription>
-                        Make changes to your profile here. Click save when you're done.
+                        Haz cambios en tu perfil aquí. Haz clic en guardar cuando hayas terminado.
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="name" className="text-right">
-                            Name
+                            Nombre
                         </Label>
                         <Input
                             id="name"
@@ -37,7 +41,7 @@ export function DialogDemo() {
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="username" className="text-right">
-                            Username
+                            Usuario
                         </Label>
                         <Input
                             id="username"
@@ -47,9 +51,12 @@ export function DialogDemo() {
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit">Save changes</Button>
+                    <Button type="submit">Guardar cambios</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
     )
 }
+
+export default OrderDetailDialog;
+

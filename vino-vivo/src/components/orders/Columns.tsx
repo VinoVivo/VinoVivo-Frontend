@@ -1,6 +1,7 @@
 import { IwineDetail } from "@/types/detail/detail.types";
 import { OrderDetailType, OrderType } from "@/types/orders/orders.types";
 import Image from 'next/image';
+import OrderDetailDialog from "@/components/orders/OrderDetailDialog"
 
 import {
     ColumnDef,
@@ -106,7 +107,7 @@ export const columns: ColumnDef<OrderWithProductsType>[] = [
         id: "actions",
         cell: ({ row }) => (
             <div className="flex flex-col items-center" >
-                <Button className='bg-violeta hover:bg-primary w-32 m-1'>Ver Pedido</Button>
+                <OrderDetailDialog id={Number(row.getValue("id"))}/>
                 <Button className='bg-violeta hover:bg-primary w-32 m-1'>Volver a Comprar</Button>
             </div>
         ),

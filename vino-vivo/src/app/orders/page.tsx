@@ -247,6 +247,7 @@ export default function TypePage() {
             </Table>
             </div>
         </div>
+
         <Pagination>
             <PaginationPrevious
             onClick={() =>
