@@ -15,7 +15,7 @@ export const getProductList = async (): Promise<Product[]> => {
     const response = await fetch(url, { cache: 'no-store' });
     
     if (!response.ok) {
-      throw new Error("Error fetching products"); // Lanzar un error si la solicitud no es exitosa
+      throw new Error("Error fetching products"); 
     }
 
     const data: Product[] = await response.json();
@@ -23,7 +23,7 @@ export const getProductList = async (): Promise<Product[]> => {
     return data;
   } catch (error) {
     console.error("Error:", error);
-    throw error; // Lanzar el error para que pueda ser manejado por el código que llama a esta función
+    throw error;
   }
 };
 
@@ -101,6 +101,23 @@ export const getType = async (): Promise<IIdName[]> => {
   }
   const type:IIdName[] = await response.json();
   return type;
+};
+export const getTypeRe = async (): Promise<WineType[]> => {
+  const url: string = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/type/all`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Error fetching types");
+    }
+
+    const data: WineType[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
 };
 
 export const getWinery = async (): Promise<IIdName[]> => {
