@@ -83,6 +83,7 @@ const config = {
         line:"hsl(var(--line))",
         backgroundForms:"hsl(var(--backgroundForms))",
         labelAdminColor:"hsl(var(--labelAdmin-color))",
+        graySubtittle:"hsl(var(--graySubtittle))",
       },
       borderRadius: {
         lg: "var(--radius)",
