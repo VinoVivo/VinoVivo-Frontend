@@ -4,7 +4,17 @@ import { Button } from '../ui/button'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
 import { Title } from '../Title/Title'
 
+const imageCarrusel = {
+ image: [
+"/concepto-img-carrousel_1.png",
+"/concepto-img-carrousel_2.png",
+"/concepto-img-carrousel_3.png",
+"/concepto-img-carrousel_4.png",
+"/concepto-img-carrousel_5.png",
+"/concepto-img-carrousel_6.png"
+]
 
+}
 
 const Concept = () => {
   return (
@@ -30,27 +40,20 @@ const Concept = () => {
       <section className='w-9/12 mt-10 '>
       <Title title='Las Catas' color='beige'/>
      
-          <Carousel className='lg:min-w-[900px] mt-10'>
-            <CarouselContent>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">
-            <Image src='/cata-explicacion 1.png' alt='imagen de cata' width={300} height={260} className='object-cover rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">   
-              <Image src='/serviciodecata-y-bodega 1.png' alt='imagen de cata' width={300} height={260} className='object-cover    rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">
-                <Image src='/serviciodecata-y-bodega 1.png' alt='imagen de cata' width={300} height={260} className='object-cover  rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">        
-              <Image src='/bodega 2.png' alt='imagen de cata' width={300} height={260} className='object-cover  rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">
-            <Image src='/cata-explicacion 1.png' alt='imagen de cata' width={300} height={260} className='object-cover   rounded-md'/></CarouselItem>
-            <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">        
-              <Image src='/bodega 2.png' alt='imagen de cata' width={300} height={260} className='object-cover   rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">        
-              <Image src='/bodega 2.png' alt='imagen de cata' width={300} height={260} className='object-cover   rounded-md'/></CarouselItem>
-            </CarouselContent>
-            
-               <CarouselPrevious />
-                <CarouselNext />
-          </Carousel>
+      <Carousel className='lg:min-w-[900px] mt-10'>
+  <CarouselContent>
+
+    {imageCarrusel.image.map((image, index) => (
+      <CarouselItem key={index} className="basis-1/1 md:basis-1/4 sm:basis-1/2">
+        <Image src={image} alt='imagen de cata' width={300} height={260} className='object-cover rounded-md'/>
+      </CarouselItem>
+    ))}
+ 
+  </CarouselContent>
+  
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
       
         <div className='flex justify-between'>       
        
