@@ -6,11 +6,33 @@ import { Product } from "@/types/products/products.types";
 import { WineType } from "@/types/detail/detail.types";
 import FiltersReport from "./FiltersReport";
 import ReportOptions from "./RerportOptions";
+import MyDocument  from "./DocumentPdf";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 
 interface ReportModuleProps {
     products: Product[];
     types: WineType[];
 }
+const fakeData = [
+  {
+      productName: "Vino Rosado",
+      productPrice: "$15",
+      saleDate: "2023-06-15",
+      quantitySold: 20,
+  },
+  {
+      productName: "Vino Tinto",
+      productPrice: "$25",
+      saleDate: "2023-06-16",
+      quantitySold: 30,
+  },
+  {
+      productName: "Vino Blanco",
+      productPrice: "$20",
+      saleDate: "2023-06-17",
+      quantitySold: 25,
+  },
+];
 
 const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
 
@@ -46,12 +68,12 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
     const handleOptionChange = (option: string) => {
         setSelectedOption(option);
     };
-
+   
     return (
       <div className="flex flex-col items-center justify-center mb-10 mt-40">
         <Title title="MÓDULO DE REPORTES" color="labelAdminColor" letterSpacing="widest"/>
         <h3 className="my-6 font-bold text-graySubtittle text-xl">GENERACIÓN DE INFORMES</h3>
-        <div className=" border  border-labelAdminColor p-10 w-full max-w-screen-lg bg-backgroundForms">
+        <div className=" border rounded-md  border-labelAdminColor p-10 w-full max-w-screen-lg bg-backgroundForms">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 ">
                 {/* Left Column */}
                 <div className="flex flex-col space-y-4 items-center ">
@@ -66,14 +88,23 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
                     <ReportOptions
                         selectedOption={selectedOption}
                         handleOptionChange={handleOptionChange}
-
                     />
-                    <Button className="bg-gray-400 mt-4 w-72 self-center">VISUALIZAR</Button>
+                    <Button className="w-72 font-bold bg-graySubtittle text-whiteTypograph py-2 px-4 rounded-sm mt-4 transition-colors duration-300 hover:bg-backgroundForms hover:text-graySubtittle  hover:border hover:border-graySubtittle text-center">VISUALIZAR</Button>
                 </div>
                 {/* Right Column */}
-                <div className="flex flex-col items-center">
-                    <h5 className="border border-labelAdminColor rounded-md px-14 py-10 h-80 w-full">Pre-Visualización del pdf</h5>
-                    <Button className="bg-labelAdminColor mt-10 w-72">DESCARGAR PDF</Button>
+                <div className="flex flex-col items-center h-90">
+                  <div className="border border-labelAdminColor rounded-md px-4 py-2 w-full h-90 max-h-96 overflow-y-auto">
+                    <PDFViewer style={{ width: '100%', height: 'calc(100vh - 200px)' }}>
+                            <MyDocument data={fakeData } />
+                      </PDFViewer>
+                  </div>
+                  <PDFDownloadLink
+                            document={<MyDocument data={fakeData } />}
+                            fileName="report.pdf"
+                            className="w-72 bg-labelAdminColor text-white font-bold py-2 px-4 rounded-sm mt-4 transition-colors duration-300 hover:bg-backgroundForms hover:text-labelAdminColor  hover:border hover:border-labelAdminColor text-center"
+                        >
+                            {({ blob, url, loading, error }) => (loading ? 'Cargando documento...' : 'DESCARGAR PDF')}
+                  </PDFDownloadLink>
                 </div>
             </div>
         </div>

@@ -85,6 +85,7 @@ const config = {
         labelAdminColor:"hsl(var(--labelAdmin-color))",
         graySubtittle:"hsl(var(--graySubtittle))",
         grisCarbon:"hsl(var(--grisCarbon))",
+        whiteTypograph: "hsl(var(--whiteTypograph))",
       },
       borderRadius: {
         lg: "var(--radius)",
