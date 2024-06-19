@@ -6,6 +6,7 @@ import { Product } from "@/types/products/products.types";
 import { WineType } from "@/types/detail/detail.types";
 import FiltersReport from "./FiltersReport";
 import ReportOptions from "./RerportOptions";
+import { MyDocument } from "./DocumentPdf";
 
 interface ReportModuleProps {
     products: Product[];
@@ -71,9 +72,11 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
                     <Button className="bg-gray-400 mt-4 w-72 self-center">VISUALIZAR</Button>
                 </div>
                 {/* Right Column */}
-                <div className="flex flex-col items-center">
-                    <h5 className="border border-labelAdminColor rounded-md px-14 py-10 h-80 w-full">Pre-Visualización del pdf</h5>
-                    <Button className="bg-labelAdminColor mt-10 w-72">DESCARGAR PDF</Button>
+                <div className="flex flex-col items-center h-90">
+                  <div className="border border-labelAdminColor rounded-md px-4 py-2 w-full h-80 max-h-96 overflow-y-auto">
+                    <MyDocument />
+                  </div>
+                  <Button className="bg-labelAdminColor mt-4 w-72">DESCARGAR PDF</Button>
                 </div>
             </div>
         </div>
