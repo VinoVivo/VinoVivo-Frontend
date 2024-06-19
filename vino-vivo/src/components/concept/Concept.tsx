@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Button } from '../ui/button'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
 import { Title } from '../Title/Title'
+import Link from 'next/link'
 
 const imageCarrusel = {
  image: [
@@ -73,7 +74,9 @@ const Concept = () => {
             </p>
             <div className="border-b-4 border-b-violeta w-full" />
             <p className='text-violeta text-md font-bold my-10 text-center'>¿QUERÉS RESEVAR UNA CATA?</p>
-            <Button className='bg-violeta hover:bg-primary  self-center '>CONTACTANOS</Button>
+            <Link href="/contact">
+               <Button className='bg-violeta hover:bg-primary  self-center '>CONTACTANOS</Button>
+            </Link>
         </div>
         </div>
       </section>
