@@ -25,10 +25,8 @@ const ReportOptions: React.FC<ReportOptionsProps> = ({
     };
 
     return (
-        <div className="mt-6">
-            <p className="block mb-2 font-bold text-labelAdminColor">
-                2- Selecciona una opción:
-            </p>
+        <div className="w-full sm:w-72 mt-4 sm:mt-0">
+            <p className="block mb-2 font-bold text-labelAdminColor">2- Selecciona una opción:</p>
             <Line width="w-64" color="border-labelAdminColor" />
             <div className="flex flex-col items-start mt-6">
                 <SelectWithIcon
