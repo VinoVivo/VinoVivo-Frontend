@@ -121,7 +121,7 @@ const PaymentPage = () => {
     const isMobile = useMediaQuery("(max-width: 768px)");
 
     return (
-        <div className='container mx-auto p-4'>
+        <div className={isMobile ? "mt-[-60px]" : 'container mx-auto p-4'}>
             {/* <div className='mb-10'>
                 <p className='font-bold text-lg'>
                     Hola <span className='text-primary'>{firstName}</span>! Tu compra será enviada a tu dirección <span className='text-primary'>{address}</span>.
