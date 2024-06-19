@@ -74,7 +74,7 @@ const Body = () => {
     };
 
     return (
-        <div className={isMobile ? "mt-24" : "mt-40"}>
+        <div className={isMobile ? "mt-20" : "mt-40"}>
             <div className={isMobile ? "flex flex-col-reverse mb-6 p-2" : "border-b border-gray-300 mb-5"}>
                 <div className="flex flex-col md:flex-row items-center justify-center space-y-5 md:space-y-0 md:space-x-10">
                     {isMobile ? (

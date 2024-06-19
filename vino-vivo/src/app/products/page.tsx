@@ -36,7 +36,7 @@ const ProductsPage = () => {
       try {
         const productList = await getProductList();
         setProducts(productList);
-        setFilteredProducts(productList);
+        setFilteredProducts(productList);       
       } catch (error) {
         console.error("Error fetching products:", error);
       }
