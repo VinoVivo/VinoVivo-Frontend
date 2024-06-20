@@ -137,7 +137,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
     return (
         <div className="max-w-4xl mx-auto my-40 sm:mx-auto">
         <div className="flex direction-row">
-            <Title title="Actualizar Producto" color="beige" />
+            <Title title="ACTUALIZAR PRODUCTO" color="beige" />
             <span className="ml-2 ">
             <BackButton />
             </span>

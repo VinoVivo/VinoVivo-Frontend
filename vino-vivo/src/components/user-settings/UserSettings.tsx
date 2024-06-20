@@ -89,7 +89,7 @@ const UserSettings = () => {
         <div className={isMobile ? "mt-20" : "flex flex-col mt-32 min-h-screen"}>
             <div className="flex flex-1 flex-col md:flex-row">
                 <aside className="w-full md:w-64">
-                    <div className="h-full px-3 py-4 overflow-y-auto bg-gray-200">
+                    <div className="h-full px-3 py-4 overflow-y-auto bg-[#8482824D]">
                         <ul className="space-y-2 font-medium">
                             <li>
                                 <Link href="/orders" className="flex items-center p-2 text-violeta rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

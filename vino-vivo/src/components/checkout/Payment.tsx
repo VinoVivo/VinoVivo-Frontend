@@ -178,8 +178,8 @@ const PaymentPage = () => {
                         <PaymentForm onValidationError={handleValidationError} />
                     </div>
                 </div>
-                <div className='lg:w-1/4 border border-gray-200 rounded-md p-4'>
-                    <h2 className="text-lg font-bold mb-4">Resumen de Compra</h2>
+                <div className='lg:w-1/4 p-4'>
+                    <h2 className="text-lg font-bold mb-4 border-t border-b border-[#5B483A] p-2">Resumen de Compra</h2>
                     <p className='font-medium mt-2'>Productos ({totalItems})</p>
                     {updatedCartItems.map((item) => (
                         <div className='flex justify-between' key={item.id}>
@@ -187,7 +187,7 @@ const PaymentPage = () => {
                             <p className='text-sm text-violeta font-medium'>x{item.quantity}</p>
                         </div>
                     ))}
-                    <div className='flex flex-row justify-between mt-5 border-t border-gray-200 pt-2'>
+                    <div className='flex flex-row justify-between mt-5 border-t border-[#5B483A] pt-2'>
                         <p className='font-medium'>Total</p>
                         <p className='font-medium'>${totalPrice.toFixed(2)}</p>
                     </div>

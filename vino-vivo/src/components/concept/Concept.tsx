@@ -21,7 +21,7 @@ const Concept = () => {
   return (
     <div className='flex flex-col justify-center items-center mt-40 gap-6  '>
       <section className='flex flex-col w-9/12 gap-4  '>
-        <Title title='Nuestra Historia' color='beige'/>
+        <Title title='NUESTRA HISTORIA' color='beige'/>
         <div className='w-full '>
          <div className='flex flex-col justify-between items-center  md:flex-row w-full  gap-4 '>
             <Image src='/image 37.png' alt='imagen de cata' width={230} height={400} className='object-cover w-[300px] h-[300px] lg:w-[200px] lg:h-[350px] rounded-md '/>
