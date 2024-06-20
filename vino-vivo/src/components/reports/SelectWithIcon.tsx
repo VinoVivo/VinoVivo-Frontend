@@ -3,7 +3,7 @@ import { MdExpandMore } from 'react-icons/md';
 import clsx from 'clsx';
 
 interface SelectWithIconProps {
-    label: string;
+    label?: string;
     value: string;
     options: { id: string; name: string }[];
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;

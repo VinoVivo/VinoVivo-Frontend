@@ -13,7 +13,6 @@ const ReportOptions: React.FC<ReportOptionsProps> = ({
 }) => {
 
     const options = [
-        { id: "", name: "Selecciona una opción" },
         { id: "ventas_totales", name: "Ventas Totales" },
         { id: "productos_mas_vendidos", name: "Productos Más Vendidos" },
         { id: "ingresos_por_categoria", name: "Ingresos Totales" },
@@ -30,13 +29,14 @@ const ReportOptions: React.FC<ReportOptionsProps> = ({
             <Line width="w-64" color="border-labelAdminColor" />
             <div className="flex flex-col items-start mt-6">
                 <SelectWithIcon
-                    label="Opciones"
+                    label="Tipo de reporte"
                     value={selectedOption}
                     options={options}
                     onChange={handleChange}
                     iconColor="labelAdminColor"
                     iconSize="h-7 w-7"
                     customStyles={{ select: 'pr-10' }}
+                
                 />
             </div>
         </div>
