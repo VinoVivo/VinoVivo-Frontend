@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import styles from "./title.module.css";
 
 interface TitleProps {
@@ -7,6 +6,7 @@ interface TitleProps {
   color: "violeta" | "beige" | "labelAdminColor";
   letterSpacing?: string;
 }
+
 export const Title: FC<TitleProps> = ({ title, color, letterSpacing = "widest" }) => {
   let bgColor;
   switch (color) {
@@ -22,7 +22,8 @@ export const Title: FC<TitleProps> = ({ title, color, letterSpacing = "widest" }
     default:
       bgColor = "after:bg-beige before:bg-beige";
   }
-  const titleStyle = `${styles.typography_title} text-${color} ${bgColor} tracking-${letterSpacing}`;
+
+  const titleStyle = `${styles.typography_title} text-${color} ${bgColor} tracking-${letterSpacing} uppercase`;
 
   return (
     <h2 className={titleStyle}>
