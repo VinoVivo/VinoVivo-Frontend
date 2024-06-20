@@ -76,14 +76,11 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
     return (
         <div className="flex flex-col items-center justify-center mb-10 mt-40">
         <Title
-            title="MÓDULO DE REPORTES"
+            title="GENERACIÓN DE INFORMES"
             color="labelAdminColor"
             letterSpacing="widest"
         />
-        <h3 className="my-6 font-bold text-graySubtittle text-xl">
-            GENERACIÓN DE INFORMES
-        </h3>
-        <div className="grid border rounded-md  border-labelAdminColor p-10 w-full max-w-screen-lg bg-backgroundForms">
+        <div className="grid border rounded-md  border-labelAdminColor p-10 w-full max-w-screen-lg bg-backgroundForms mt-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 ">
             {/* Left Column */}
             <div className="flex flex-col space-y-4 items-center ">
@@ -100,14 +97,14 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
                 handleOptionChange={handleOptionChange}
                 />
                 <DinamicButton
-                    bgColor="bg-graySubtittle"
+                    bgColor="bg-grisCarbon"
                     textColor="text-whiteTypograph"
-                    width="W-[300px]"
+                    width="w-[300px]"
                     hoverBgColor="hover:bg-backgroundForms"
-                    hoverBorderColor="hover:border-graySubtittle"
-                    hoverTextColor="hover:text-graySubtittle"
+                    hoverBorderColor="hover:border-grisCarbon"
+                    hoverTextColor="hover:text-grisCarbon"
                     hoverShadow={false}
-                    activeBgColor="active:bg-graySubtittle"
+                    activeBgColor="active:bg-grisCarbon"
                     activeTextColor="active:text-whiteTypograph"
                     changeBgOnClick={false}
                     onClick={() => alert("Button clicked!")}
@@ -128,7 +125,7 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
                 <PDFDownloadLink
                     document={<MyDocument data={fakeData} />}
                     fileName="report.pdf"
-                    className="W-[300px] bg-labelAdminColor text-white font-bold py-2 px-4 rounded-sm mt-4 transition-colors duration-300 hover:bg-backgroundForms hover:text-labelAdminColor  hover:border hover:border-labelAdminColor text-center"
+                    className="w-[300px] bg-labelAdminColor text-white font-bold py-2 px-4 rounded-[1px] mt-4 transition-colors duration-300 hover:bg-backgroundForms hover:text-labelAdminColor  hover:border hover:border-labelAdminColor text-center"
                 >
                 {({ blob, url, loading, error }) =>
                     loading ? "Cargando documento..." : "DESCARGAR PDF"

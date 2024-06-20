@@ -39,7 +39,7 @@ const FiltersReport: React.FC<FiltersReportProps> = ({
             <Line width="w-48" color="border-labelAdminColor" />
             <div className="mt-4">
                 <SelectWithIcon
-                    label="Tipo"
+                    label="Tipo de vino"
                     value={selectedType}
                     options={allTypes}
                     onChange={handleTypeChange}
@@ -48,7 +48,7 @@ const FiltersReport: React.FC<FiltersReportProps> = ({
                     customStyles={{ select: 'pr-10' }}
                 />
                 <SelectWithIcon
-                    label="Año"
+                    label="Año de envasado"
                     value={selectedYear}
                     options={[{ id: "0", name: "Todos" }, ...years.map(year => ({ id: year, name: year }))]}
                     onChange={handleYearChange}
