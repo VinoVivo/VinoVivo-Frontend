@@ -17,7 +17,7 @@ export default async function AdminProducts() {
   const isAdmin = decodedToken?.realm_access?.roles.includes("admin");
   return isAdmin ? (
     <div className="flex flex-col justify-center items-center mt-40 ">
-      <Title title="Productos" color="beige" />
+      <Title title="PRODUCTOS" color="beige" />
       <Link
         className="bg-violeta hover:bg-fuchsia-950 text-white font-bold py-1.5 px-4 my-6  rounded "
         href={"product/register"}

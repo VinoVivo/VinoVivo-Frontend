@@ -109,7 +109,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ onValidationError }) => {
             </div>
             <form className="flex flex-col gap-2">
                 <input
-                    type="text"
+                    type="number"
                     name="number"
                     placeholder="Número de tarjeta"
                     value={state.number}

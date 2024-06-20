@@ -70,7 +70,7 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
 
     return (
         <div className="w-full sm:w-72 p-3 mt-4 sm:mt-0">
-            <Title title="Filtros" color="beige" />
+            <Title title="FILTROS" color="beige" />
             <div className="mt-4">
                 {/* Accordion para Tipo */}
                 <Accordion title="Tipo">

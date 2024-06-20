@@ -181,7 +181,7 @@ export default function TypePage() {
     return (
         <div className="grid mb-10 mt-40 mx-5 sm:mx-10 lg:mx-20">
         <div className="mb-10 mt-5">
-            <Title title="Mis Pedidos" color="beige" />
+            <Title title="MIS PEDIDOS" color="beige" />
         </div>
         {loading && <Loader />}
 

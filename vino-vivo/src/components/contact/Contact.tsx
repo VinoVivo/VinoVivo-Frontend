@@ -13,7 +13,7 @@ export const Contact = () => {
           <DataContact />
         </div>
         <div>
-          <Title title="Donde estamos" color="violeta" />
+          <Title title="¿DÓNDE ESTAMOS?" color="violeta" />
           <Location />
         </div>
       </div>

@@ -1,5 +1,5 @@
 'use client';
-import {  CardContent} from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FaCartPlus } from "react-icons/fa";
 import { IwineDetail } from "@/types/detail/detail.types";
@@ -12,7 +12,8 @@ import DialogeMessage from "../register/DialogeMessage";
 interface CardRigthSideProps {
     wine: IwineDetail;
 }
-export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
+
+export default function CardRigthSide({ wine }: Readonly<CardRigthSideProps>) {
     const { addToCart, openCart } = useCart();
     const { data: session } = useSession();
     const [showAlert, setShowAlert] = useState(false);
@@ -34,60 +35,49 @@ export default function CardRigthSide({wine}: Readonly<CardRigthSideProps>) {
         addToCart(item);
         openCart();
     };
+
     const handleCloseAlert = () => {
         setShowAlert(false);
     };
 
-    return(       
+    return (
         <>
-            <CardContent className="flex flex-col">
-                <div className="flex justify-between mb-4 border-b">
-                    <h1 className="text-2xl font-semibold mb-1">{wine.name}</h1>
-                    {/* <span className="ml-2">Icon</span> */}
-                </div>            
-                <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 mb-4">
-                    {/* <div className="text-left font-bold max-w-xs">
-                        <p className="mb-1">Tipo de vino: </p>                
-                        <p className="mb-1">Año: </p>
-                        <p className="mb-1">Bodega: </p>
-                        <p className="mb-1">Variedad de uva: </p>
-                        <p className="mb-1">Stock disponible: </p>
-                        <p className="mb-1">Precio: </p>
-                        <p className="mb-1">Descripción: </p>
-                    </div> */}
-                    <div className="text-left">{/* 
-                        <p className="mb-1">{wine.nameType}</p>                    
-                        <p className="mb-1">{wine.year}</p>
-                        <p className="mb-1">{wine.nameWinery}</p>
-                        <p className="mb-1">{wine.nameVariety}</p> */}
-                        <p className="mb-1 font-bold text-2xl mt-2">${wine.price}</p>
-                        <p className={`mb-1 ${isOutOfStock ? 'text-red-500' : 'text-green-500'}`}>
-                            {isOutOfStock ? 'Agotado' : `En stock (${wine.stock} disponibles)`}
-                        </p>
-                        <p className="mb-1 text-justify text-gray-500 h-[200px]">{wine.description}</p>
-                    </div>                
+            <CardContent className="flex flex-col items-center">
+                <div className="flex justify-between mb-4 w-full">
+                    <h1 className="text-2xl font-normal border-b-2 border-t-2 border-[#5B483A] pt-2 pb-2 w-full text-center">{wine.name}</h1>
                 </div>
-                <div className="flex flex-row justify-end mt-4">
-                    <Button 
-                        className={`bg-violeta hover:bg-fuchsia-950 ${isOutOfStock ? 'bg-gray-400 cursor-not-allowed' : ''}`}
+                <div className="grid grid-cols-[auto_1fr] gap-y-2 mb-4 w-full">
+                    <div className="text-left w-full mt-4">
+                        <p className="mb-1 text-justify h-[200px] font-light">{wine.description}</p>
+                    </div>
+                </div>
+                <div className="flex flex-col items-center justify-center mt-4 space-y-4 w-full px-6">
+                    <div className="flex justify-between items-center w-3/4">
+                        <p className="flex mb-1 text-lg font-light text-violeta">
+                            {isOutOfStock ? 'Agotado' : 'En stock'}
+                        </p>
+                        <p className="flex mb-1 font-semibold text-lg text-[#70054C]">
+                            ${wine.price}
+                        </p>
+                    </div>
+                    <Button
+                        className={`bg-[#70054C] rounded-sm w-4/5 hover:bg-fuchsia-950 ${isOutOfStock ? 'bg-gray-400 cursor-not-allowed' : ''} mx-auto`}
                         onClick={handleAddToCart}
                         disabled={isOutOfStock}
                     >
-                            <div className="flex items-center">
-                                <span>Agregar</span>
-                                <span className="ml-2"><FaCartPlus /></span>
-                            </div>
+                        <div className="flex items-center justify-center">
+                            <span>COMPRAR AHORA</span>
+                        </div>
                     </Button>
-                    {/* <BackButton color="beige"/> */}
                 </div>
             </CardContent>
             <DialogeMessage
-                open={showAlert} 
-                onOpenChange={handleCloseAlert} 
-                type="Alert" 
-                message="Debe estar logeado para agregar productos al carrito" 
+                open={showAlert}
+                onOpenChange={handleCloseAlert}
+                type="Alert"
+                message="Debe estar logeado para agregar productos al carrito"
                 textButtonOne="Cerrar"
             />
-        </> 
+        </>
     );
 };

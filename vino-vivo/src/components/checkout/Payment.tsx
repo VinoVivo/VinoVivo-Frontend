@@ -129,10 +129,10 @@ const PaymentPage = () => {
                 <p className='text-lg'>Completa debajo con tus datos de pago y procede a finalizar la compra.</p>
             </div> */}
 
-            <div className='mb-4 border border-gray-200 rounded-md p-4'>
-                <h2 className='text-lg font-bold mb-2 border-b'>Dirección de Envío</h2>
+            <div className='mb-4 border rounded-md p-4 bg-backgroundCart'>
+                <h2 className='text-lg font-bold mb-2'>Dirección de Envío</h2>
                 <div className='flex flex-col'>
-                    <label className='mb-2 border-b'>
+                    <label className='mb-2'>
                         <input
                             type='radio'
                             checked={useDefaultAddress}
@@ -171,15 +171,15 @@ const PaymentPage = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col lg:flex-row justify-center gap-4'>
+            <div className='flex flex-col lg:flex-row justify-center gap-4 '>
                 <div className='flex-1'>
-                    <div className={isMobile ? "flex flex-col" : 'border border-gray-200 rounded-md p-4'}>
+                    <div className={isMobile ? "flex flex-col bg-backgroundCart border border-gray-200 rounded-md p-4" : 'border border-gray-200 rounded-md p-4 bg-backgroundCart'}>
                         <h2 className="text-lg font-bold mb-4">Datos de pago</h2>
                         <PaymentForm onValidationError={handleValidationError} />
                     </div>
                 </div>
-                <div className='lg:w-1/4 border border-gray-200 rounded-md p-4'>
-                    <h2 className="text-lg font-bold mb-4">Resumen de Compra</h2>
+                <div className='lg:w-1/4 p-4'>
+                    <h2 className="text-lg font-bold mb-4 border-t border-b border-[#5B483A] p-2">Resumen de Compra</h2>
                     <p className='font-medium mt-2'>Productos ({totalItems})</p>
                     {updatedCartItems.map((item) => (
                         <div className='flex justify-between' key={item.id}>
@@ -187,12 +187,12 @@ const PaymentPage = () => {
                             <p className='text-sm text-violeta font-medium'>x{item.quantity}</p>
                         </div>
                     ))}
-                    <div className='flex flex-row justify-between mt-5 border-t border-gray-200 pt-2'>
+                    <div className='flex flex-row justify-between mt-5 border-t border-[#5B483A] pt-2'>
                         <p className='font-medium'>Total</p>
                         <p className='font-medium'>${totalPrice.toFixed(2)}</p>
                     </div>
                     <div className='flex justify-center mt-4'>
-                        <button className='bg-violeta hover:bg-fuchsia-950 text-white font-bold py-1.5 px-4 rounded' onClick={handlePayment}>Finalizar Compra</button>
+                        <button className='bg-violeta hover:bg-fuchsia-950 text-white font-medium text-sm py-1.5 px-4 rounded-sm' onClick={handlePayment}>FINALIZAR COMPRA</button>
                     </div>
                 </div>
             </div>
