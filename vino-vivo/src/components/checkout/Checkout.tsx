@@ -52,7 +52,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
 
   useEffect(() => {
     if (updatedCartItems.length === 0) {
-      redirect("/");
+        redirect("/");
     }
   }, [updatedCartItems]);
 
