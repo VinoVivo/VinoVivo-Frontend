@@ -78,12 +78,13 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
     const handleVisualizeClick = async () => {
         
         setLoading(true);    
-        console.log({reportData});
+        console.log({reportData}); //borrrar luego
         try {
             const year = selectedFilters.year ?? "0";
-            const typeId = types.find(t => t.name === selectedFilters.type)?.id ?? "0";
+            const typeId = types.find(t => t.name === selectedFilters.type)?.id.toString() ?? "0";
             const data = await fetchReportData(selectedOption, year, typeId.toString());
-            console.log({year, typeId, data});
+            
+            console.log({year, typeId, data}); //borrrar luego
             
             setReportData(data);
         } catch (error) {
