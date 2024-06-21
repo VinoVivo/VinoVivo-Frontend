@@ -37,11 +37,11 @@ const reportColumns: Record<string, { title: string; key: string }[]> = {
 const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
     
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-    const [selectedOption, setSelectedOption] = useState<string>("");
+    const [selectedOption, setSelectedOption] = useState<string>("ventas_totales");
     const [selectedFilters, setSelectedFilters] = useState<{
         type?: string;
         year?: string;
-    }>({ type: "", year: "" });
+    }>({ type: "0", year: "0" });
     const [reportData, setReportData] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -66,8 +66,8 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
 
     const handleFilterChange = (filterType: "type" | "year", value: string) => {
         setSelectedFilters((prevFilters) => ({
-        ...prevFilters,
-        [filterType]: value,
+            ...prevFilters,
+            [filterType]: value,
         }));
     };
 
@@ -76,15 +76,15 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
     };
 
     const handleVisualizeClick = async () => {
-        if (!selectedOption) {
-            alert("Por favor selecciona una opción de reporte.");
-            return;
-        }    
+        
         setLoading(true);    
+        console.log({reportData});
         try {
             const year = selectedFilters.year ?? "0";
             const typeId = types.find(t => t.name === selectedFilters.type)?.id ?? "0";
             const data = await fetchReportData(selectedOption, year, typeId.toString());
+            console.log({year, typeId, data});
+            
             setReportData(data);
         } catch (error) {
             console.error("Error fetching report data:", error);

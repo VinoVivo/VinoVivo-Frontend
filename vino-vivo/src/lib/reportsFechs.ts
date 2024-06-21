@@ -3,6 +3,7 @@ import { QuantitySoldData, TypeSalesData, StockData, TotalRevenueData } from "@/
 
 const fetchData = async <T>(endpoint: string, year: string, typeId: string, orderBy?: string): Promise<T[]> => {
     let url = `${process.env.NEXT_ADMIN_GET_BASE_URL}/product/${endpoint}/${year}/${typeId}`;
+    // let url = `http://localhost:3000/admin/reports/product/${endpoint}/${year}/${typeId}`;
     if (orderBy) {
         url += `/${orderBy}`;
     }
