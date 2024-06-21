@@ -91,6 +91,8 @@ export const columns: ColumnDef<OrderWithProductsType>[] = [
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
+                minimumFractionDigits: 0, 
+                maximumFractionDigits: 0, 
             }).format(amount)
 
             return <div className="text-right font-medium">{formatted}</div>
@@ -107,7 +109,7 @@ export const columns: ColumnDef<OrderWithProductsType>[] = [
         id: "actions",
         cell: ({ row }) => (
             <div className="flex flex-col items-center" >
-                <OrderDetailDialog id={Number(row.getValue("id"))}/>
+                <OrderDetailDialog id={Number(row.getValue("id"))} productos={row.original.products} valorFinal={Number(row.getValue("totalPrice"))}/>
                 <Button className='bg-violeta hover:bg-primary w-32 m-1'>Volver a Comprar</Button>
             </div>
         ),

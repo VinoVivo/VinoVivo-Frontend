@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button"
+// OrderDetailDialog.tsx
+import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
@@ -7,15 +8,25 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/dialog";
+import { OrderDetailType } from "@/types/orders/orders.types";
+import { Product } from "@/types/products/products.types";
+import { string } from "zod";
 
 interface OrderDetailDialogProps {
     id: number;
+    productos: (OrderDetailType & { product: Product })[];
+    valorFinal: number
 }
 
-const OrderDetailDialog: React.FC<OrderDetailDialogProps> = ({ id }) => {
+const OrderDetailDialog: React.FC<OrderDetailDialogProps> = ({ id, productos, valorFinal }) => {
+    const formattedPrice = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 0, 
+        maximumFractionDigits: 0, 
+    }).format(valorFinal);
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -23,40 +34,39 @@ const OrderDetailDialog: React.FC<OrderDetailDialogProps> = ({ id }) => {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Pedido #{id}</DialogTitle>
+                    <DialogTitle>Pedido #{id}: {formattedPrice}</DialogTitle>
                     <DialogDescription>
-                        Haz cambios en tu perfil aquí. Haz clic en guardar cuando hayas terminado.
+                        Tu pedido contiene los siguientes productos:
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                            Nombre
-                        </Label>
-                        <Input
-                            id="name"
-                            defaultValue="Pedro Duarte"
-                            className="col-span-3"
-                        />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="username" className="text-right">
-                            Usuario
-                        </Label>
-                        <Input
-                            id="username"
-                            defaultValue="@peduarte"
-                            className="col-span-3"
-                        />
-                    </div>
+                    {productos.map((item) => (
+                        <div key={item.id} className="border p-2 rounded-md">
+                            <div className="flex items-center gap-2">
+                                <img
+                                    src={item.product.image}
+                                    alt={item.product.name}
+                                    width={50}
+                                    height={75}
+                                    className="border rounded-md"
+                                    style={{ objectFit: "cover" }}
+                                />
+                                <div>
+                                    <div className="font-bold">{item.product.name}</div>
+                                    <div>Variedad: {item.product.nameVariety}</div>
+                                    <div>Precio: ${item.price}</div>
+                                    <div>Cantidad: {item.quantity}</div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
                 <DialogFooter>
-                    <Button type="submit">Guardar cambios</Button>
+                    <Button className='bg-violeta hover:bg-primary w-32 m-1'>Volver a Comprar</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
-    )
+    );
 }
 
 export default OrderDetailDialog;
-
