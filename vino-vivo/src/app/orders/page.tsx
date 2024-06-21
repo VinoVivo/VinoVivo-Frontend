@@ -2,16 +2,6 @@
 import { useEffect, useState } from "react";
 import Loader from "@/components/loader/page";
 import { Title } from "@/components/Title/Title";
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination";
-import { IwineDetail, WineType } from "@/types/detail/detail.types";
 import { OrderDetailType, OrderType } from "@/types/orders/orders.types";
 import * as React from "react";
 import {
@@ -36,6 +26,7 @@ import {
 import { columns } from "@/components/orders/Columns";
 import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
+import PaginationComponent from "@/components/pagination/PaginationComponent";
 
 //Type para la combinacion de "ordenes" con "orderDetail" con la info de "products"
 type OrderWithProductsType = OrderType & {
@@ -107,7 +98,7 @@ export default function TypePage() {
             throw new Error("Error al obtener detalles de las órdenes");
             }
             const orderDetails = await response.json(); // Aquí transformas la respuesta a JSON
-            //console.log("Detaller está arrojando:");
+            //console.log("Detalle está arrojando:");
             //console.log(orderDetails);
             setOrderDetail(orderDetails);
         } catch (error) {
@@ -164,11 +155,12 @@ export default function TypePage() {
             );
             return { ...detail, product: product! }; // El ! asume que el producto siempre existe
             });
-
         return { ...order, products: details };
         });
 
         setOrderWithProducts(combinedData);
+        //console.log("la data combinada es:");
+        //console.log(combinedData);
     };
 
     useEffect(() => {
@@ -248,30 +240,12 @@ export default function TypePage() {
             </div>
         </div>
 
-        <Pagination>
-            <PaginationPrevious
-            onClick={() =>
-                setCurrentPage(currentPage > 1 ? currentPage - 1 : currentPage)
-            }
+        <PaginationComponent
+                currentPage={currentPage}
+                totalPages={Math.ceil(orderWithProducts.length / pageSize)}
+                setCurrentPage={setCurrentPage}
             />
-            {Array.from({ length: table.getPageCount() }, (_, i) => (
-            <PaginationItem key={i}>
-                <PaginationLink
-                onClick={() => setCurrentPage(i + 1)}
-                isActive={i + 1 === currentPage}
-                >
-                {i + 1}
-                </PaginationLink>
-            </PaginationItem>
-            ))}
-            <PaginationNext
-            onClick={() =>
-                setCurrentPage(
-                currentPage < table.getPageCount() ? currentPage + 1 : currentPage
-                )
-            }
-            />
-        </Pagination>
+
         </div>
     );
 }
