@@ -1,7 +1,6 @@
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-
 type Params = {
     reportType: string;
     year: string;
@@ -12,8 +11,16 @@ const BASE_URL = process.env.NEXT_ADMIN_GET_BASE_URL ?? "";
 
 const fetchData = async (endpoint: string, year: string, typeId: string, orderBy?: string) => {
 
+    const session = await getServerSession({...authOptions });
+
+    if (!session) {
+        return NextResponse.json(
+            { message: "Debes iniciar sesión como administrador" },
+            { status: 401 }
+        );
+    }
     let url = `${BASE_URL}/product/${endpoint}/${year}/${typeId}`;
-    console.log(BASE_URL);
+    
     
     if (orderBy) {
         url += `/${orderBy}`;
@@ -22,14 +29,17 @@ const fetchData = async (endpoint: string, year: string, typeId: string, orderBy
     const response = await fetch(url, {
         headers: {
             "Content-Type": "application/json",
-        },
+            Authorization: `Bearer ${session.accessToken}`,
+        },               
     });
+    
 
     if (!response.ok) {
         throw new Error(`Error fetching ${endpoint} data`);
     }
-
-    return response.json();
+    const responseApi = response.json();
+    console.log(responseApi);
+    return responseApi;
 };
 
 export async function GET(request: NextRequest, context: { params: Params }) {

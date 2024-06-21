@@ -16,8 +16,8 @@ export interface QuantitySoldData {
 }
 
 export interface TypeSalesData {
-    "Type ID": number;
     "Product Type": string;
+    "Type ID": number;    
     "Units sold": number;
 }
 

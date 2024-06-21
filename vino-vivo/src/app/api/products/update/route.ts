@@ -21,8 +21,6 @@ export async function PUT(req: NextRequest, id: { id: number }) {
     }
 
     const payload = await req.json();
-    console.log(payload);
-
     const url = `${process.env.NEXT_PUBLIC_GET_BASE_URL}/ms-commerce/product/update`;
 
     const response = await fetch(url, {
