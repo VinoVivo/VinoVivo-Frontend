@@ -12,8 +12,10 @@ interface DecodedToken {
     };
 }
 export default async function AdminReports() {
+
     const session = await getServerSession(authOptions);
     let decodedToken: DecodedToken | null = null;
+    
     if (session?.accessToken) {
         decodedToken = jwtDecode<DecodedToken>(session.accessToken);
     }
