@@ -159,8 +159,8 @@ export default function TypePage() {
         });
 
         setOrderWithProducts(combinedData);
-        //console.log("la data combinada es:");
-        //console.log(combinedData);
+        console.log("la data combinada es:");
+        console.log(combinedData);
     };
 
     useEffect(() => {

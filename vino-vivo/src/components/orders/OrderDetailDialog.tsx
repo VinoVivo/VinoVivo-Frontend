@@ -9,9 +9,9 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { useCart } from "@/context/CartContext";
 import { OrderDetailType } from "@/types/orders/orders.types";
 import { Product } from "@/types/products/products.types";
-import { string } from "zod";
 
 interface OrderDetailDialogProps {
     id: number;
@@ -20,11 +20,27 @@ interface OrderDetailDialogProps {
 }
 
 const OrderDetailDialog: React.FC<OrderDetailDialogProps> = ({ id, productos, valorFinal }) => {
+    const { addToCart, openCart } = useCart();
+
+    const handleBuyAgain = () => {
+        productos.forEach((item) => {
+            addToCart({
+                id: item.product.id,
+                name: item.product.name,
+                variety: item.product.nameVariety,
+                price: item.price,
+                image: item.product.image,
+                quantity: item.quantity,
+            });
+        });
+        openCart();
+    };
+
     const formattedPrice = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-        minimumFractionDigits: 0, 
-        maximumFractionDigits: 0, 
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
     }).format(valorFinal);
 
     return (
@@ -62,7 +78,12 @@ const OrderDetailDialog: React.FC<OrderDetailDialogProps> = ({ id, productos, va
                     ))}
                 </div>
                 <DialogFooter>
-                    <Button className='bg-violeta hover:bg-primary w-32 m-1'>Volver a Comprar</Button>
+                    <Button 
+                        className='bg-violeta hover:bg-primary w-32 m-1' 
+                        onClick={handleBuyAgain}
+                    >
+                        Volver a Comprar
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
