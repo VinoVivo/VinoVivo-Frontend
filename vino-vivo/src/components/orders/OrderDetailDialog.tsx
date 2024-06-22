@@ -30,7 +30,7 @@ const OrderDetailDialog: React.FC<OrderDetailDialogProps> = ({ id, productos, va
                 variety: item.product.nameVariety,
                 price: item.price,
                 image: item.product.image,
-                quantity: item.quantity,
+                quantity: item.quantity, // Use the quantity from the order
             });
         });
         openCart();

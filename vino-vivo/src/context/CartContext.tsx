@@ -54,10 +54,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             const existingItem = prevItems.find((cartItem) => cartItem.id === item.id);
             if (existingItem) {
                 return prevItems.map((cartItem) =>
-                    cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+                    cartItem.id === item.id
+                        ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+                        : cartItem
                 );
             }
-            return [...prevItems, { ...item, quantity: 1 }];
+            return [...prevItems, item];
         });
     };
 
