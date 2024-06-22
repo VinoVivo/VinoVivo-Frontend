@@ -1,59 +1,44 @@
+import React from 'react';
+import Line from "../shopping/shoppingCart/Line";
+import SelectWithIcon from "./SelectWithIcon";
 
 interface ReportOptionsProps {
-    selectedOptions: string[];
-    handleCheckboxChange: (option: string) => void;
+    selectedOption?: string; 
+    handleOptionChange: (option: string) => void; 
 }
 
-const ReportOptions: React.FC<ReportOptionsProps> = ({ selectedOptions, handleCheckboxChange }) => {
+const ReportOptions: React.FC<ReportOptionsProps> = ({
+    selectedOption = "",
+    handleOptionChange,
+}) => {
+
+    const options = [
+        { id: "ventas_totales", name: "Ventas Totales" },
+        { id: "productos_mas_vendidos", name: "Productos Más Vendidos" },
+        { id: "ingresos_por_categoria", name: "Ingresos Totales" },
+        { id: "stock_productos", name: "Stock de Productos" }
+    ];
+
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        handleOptionChange(event.target.value);
+    };
+
     return (
-        <div className="mb-4">
-        <label className="block mb-2 font-bold">Selecciona lo que quieres incluir en el informe:</label>
-        <div className="flex flex-col items-start">
-            <label htmlFor="ventas_totales" className="inline-flex items-center mb-2">
-            <input
-                id="ventas_totales"
-                type="checkbox"
-                value="ventas_totales"
-                checked={selectedOptions.includes("ventas_totales")}
-                onChange={() => handleCheckboxChange("ventas_totales")}
-                className="form-checkbox h-5 w-5 text-violeta"
-            />
-            <span className="ml-2">Ventas Totales</span>
-            </label>
-            <label htmlFor="productos_mas_vendidos" className="inline-flex items-center mb-2">
-            <input
-                id="productos_mas_vendidos"
-                type="checkbox"
-                value="productos_mas_vendidos"
-                checked={selectedOptions.includes("productos_mas_vendidos")}
-                onChange={() => handleCheckboxChange("productos_mas_vendidos")}
-                className="form-checkbox h-5 w-5 text-violeta"
-            />
-            <span className="ml-2">Productos Más Vendidos</span>
-            </label>
-            <label htmlFor="ingresos_por_categoria" className="inline-flex items-center mb-2">
-            <input
-                id="ingresos_por_categoria"
-                type="checkbox"
-                value="ingresos_por_categoria"
-                checked={selectedOptions.includes("ingresos_por_categoria")}
-                onChange={() => handleCheckboxChange("ingresos_por_categoria")}
-                className="form-checkbox h-5 w-5 text-violeta"
-            />
-            <span className="ml-2">Ingresos por Categorías</span>
-            </label>
-            <label htmlFor="stock_productos" className="inline-flex items-center mb-2">
-            <input
-                id="stock_productos"
-                type="checkbox"
-                value="stock_productos"
-                checked={selectedOptions.includes("stock_productos")}
-                onChange={() => handleCheckboxChange("stock_productos")}
-                className="form-checkbox h-5 w-5 text-violeta"
-            />
-            <span className="ml-2">Stock de Productos</span>
-            </label>
-        </div>
+        <div className="w-full sm:w-72 mt-4 sm:mt-0">
+            <p className="block mb-2 font-bold text-labelAdminColor">2- Selecciona una opción:</p>
+            <Line width="w-64" color="border-labelAdminColor" />
+            <div className="flex flex-col items-start mt-6">
+                <SelectWithIcon
+                    label="Tipo de reporte"
+                    value={selectedOption}
+                    options={options}
+                    onChange={handleChange}
+                    iconColor="labelAdminColor"
+                    iconSize="h-7 w-7"
+                    customStyles={{ select: 'pr-10' }}
+                
+                />
+            </div>
         </div>
     );
 };

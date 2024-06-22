@@ -36,7 +36,7 @@ const ProductsPage = () => {
       try {
         const productList = await getProductList();
         setProducts(productList);
-        setFilteredProducts(productList);
+        setFilteredProducts(productList);       
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -136,7 +136,7 @@ const ProductsPage = () => {
             setMaxPrice={setMaxPrice}
         />
       <div className="flex-1 border-l border-gray-200 p-3">
-          <Title title="Todos los Productos" color="beige" />
+          <Title title="TODOS LOS PRODUCTOS" color="beige" />
           <div className="flex justify-center items-center space-x-1 mb-4 mt-4">
             <input
               className="text-violeta px-2 py-1 border border-gray-300 rounded-lg shadow-sm w-full sm:w-2/3 md:w-1/2 lg:w-1/3"

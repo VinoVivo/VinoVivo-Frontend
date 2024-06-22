@@ -3,14 +3,25 @@ import Image from 'next/image'
 import { Button } from '../ui/button'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
 import { Title } from '../Title/Title'
+import Link from 'next/link'
 
+const imageCarrusel = {
+ image: [
+"/concepto-img-carrousel_1.png",
+"/concepto-img-carrousel_2.png",
+"/concepto-img-carrousel_3.png",
+"/concepto-img-carrousel_4.png",
+"/concepto-img-carrousel_5.png",
+"/concepto-img-carrousel_6.png"
+]
 
+}
 
 const Concept = () => {
   return (
     <div className='flex flex-col justify-center items-center mt-40 gap-6  '>
       <section className='flex flex-col w-9/12 gap-4  '>
-        <Title title='Nuestra Historia' color='beige'/>
+        <Title title='NUESTRA HISTORIA' color='beige'/>
         <div className='w-full '>
          <div className='flex flex-col justify-between items-center  md:flex-row w-full  gap-4 '>
             <Image src='/image 37.png' alt='imagen de cata' width={230} height={400} className='object-cover w-[300px] h-[300px] lg:w-[200px] lg:h-[350px] rounded-md '/>
@@ -30,27 +41,20 @@ const Concept = () => {
       <section className='w-9/12 mt-10 '>
       <Title title='Las Catas' color='beige'/>
      
-          <Carousel className='lg:min-w-[900px] mt-10'>
-            <CarouselContent>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">
-            <Image src='/cata-explicacion 1.png' alt='imagen de cata' width={300} height={260} className='object-cover rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">   
-              <Image src='/serviciodecata-y-bodega 1.png' alt='imagen de cata' width={300} height={260} className='object-cover    rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">
-                <Image src='/serviciodecata-y-bodega 1.png' alt='imagen de cata' width={300} height={260} className='object-cover  rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">        
-              <Image src='/bodega 2.png' alt='imagen de cata' width={300} height={260} className='object-cover  rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">
-            <Image src='/cata-explicacion 1.png' alt='imagen de cata' width={300} height={260} className='object-cover   rounded-md'/></CarouselItem>
-            <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">        
-              <Image src='/bodega 2.png' alt='imagen de cata' width={300} height={260} className='object-cover   rounded-md'/></CarouselItem>
-              <CarouselItem className="basis-1/1 md:basis-1/4 sm:basis-1/2">        
-              <Image src='/bodega 2.png' alt='imagen de cata' width={300} height={260} className='object-cover   rounded-md'/></CarouselItem>
-            </CarouselContent>
-            
-               <CarouselPrevious />
-                <CarouselNext />
-          </Carousel>
+      <Carousel className='lg:min-w-[900px] mt-10'>
+  <CarouselContent>
+
+    {imageCarrusel.image.map((image, index) => (
+      <CarouselItem key={index} className="basis-1/1 md:basis-1/4 sm:basis-1/2">
+        <Image src={image} alt='imagen de cata' width={300} height={260} className='object-cover rounded-md'/>
+      </CarouselItem>
+    ))}
+ 
+  </CarouselContent>
+  
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
       
         <div className='flex justify-between'>       
        
@@ -70,7 +74,9 @@ const Concept = () => {
             </p>
             <div className="border-b-4 border-b-violeta w-full" />
             <p className='text-violeta text-md font-bold my-10 text-center'>¿QUERÉS RESEVAR UNA CATA?</p>
-            <Button className='bg-violeta hover:bg-primary  self-center '>CONTACTANOS</Button>
+            <Link href="/contact">
+               <Button className='bg-violeta hover:bg-primary  self-center '>CONTACTANOS</Button>
+            </Link>
         </div>
         </div>
       </section>

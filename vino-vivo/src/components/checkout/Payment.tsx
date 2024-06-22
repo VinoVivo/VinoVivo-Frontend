@@ -6,6 +6,7 @@ import { AlertDialog, AlertDialogContent } from '@radix-ui/react-alert-dialog';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { MdReportGmailerrorred } from 'react-icons/md';
 import { useMediaQuery } from '@react-hook/media-query';
+import { redirect } from 'next/navigation';
 
 export interface ValidationErrors {
     name: string;
@@ -31,6 +32,12 @@ const PaymentPage = () => {
 
     const totalPrice = updatedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const totalItems = updatedCartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+    useEffect(() => {
+        if (cartItems.length === 0) {
+            redirect("/")
+        }
+    }, [cartItems])
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -121,7 +128,7 @@ const PaymentPage = () => {
     const isMobile = useMediaQuery("(max-width: 768px)");
 
     return (
-        <div className='container mx-auto p-4'>
+        <div className={isMobile ? "mt-[-60px]" : 'container mx-auto p-4'}>
             {/* <div className='mb-10'>
                 <p className='font-bold text-lg'>
                     Hola <span className='text-primary'>{firstName}</span>! Tu compra será enviada a tu dirección <span className='text-primary'>{address}</span>.
@@ -129,10 +136,10 @@ const PaymentPage = () => {
                 <p className='text-lg'>Completa debajo con tus datos de pago y procede a finalizar la compra.</p>
             </div> */}
 
-            <div className='mb-4 border border-gray-200 rounded-md p-4'>
-                <h2 className='text-lg font-bold mb-2 border-b'>Dirección de Envío</h2>
+            <div className='mb-4 border rounded-md p-4 bg-backgroundCart'>
+                <h2 className='text-lg font-bold mb-2'>Dirección de Envío</h2>
                 <div className='flex flex-col'>
-                    <label className='mb-2 border-b'>
+                    <label className='mb-2'>
                         <input
                             type='radio'
                             checked={useDefaultAddress}
@@ -171,15 +178,15 @@ const PaymentPage = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col lg:flex-row justify-center gap-4'>
+            <div className='flex flex-col lg:flex-row justify-center gap-4 '>
                 <div className='flex-1'>
-                    <div className={isMobile ? "flex flex-col" : 'border border-gray-200 rounded-md p-4'}>
+                    <div className={isMobile ? "flex flex-col bg-backgroundCart border border-gray-200 rounded-md p-4" : 'border border-gray-200 rounded-md p-4 bg-backgroundCart'}>
                         <h2 className="text-lg font-bold mb-4">Datos de pago</h2>
                         <PaymentForm onValidationError={handleValidationError} />
                     </div>
                 </div>
-                <div className='lg:w-1/4 border border-gray-200 rounded-md p-4'>
-                    <h2 className="text-lg font-bold mb-4">Resumen de Compra</h2>
+                <div className='lg:w-1/4 p-4'>
+                    <h2 className="text-lg font-bold mb-4 border-t border-b border-[#5B483A] p-2">Resumen de Compra</h2>
                     <p className='font-medium mt-2'>Productos ({totalItems})</p>
                     {updatedCartItems.map((item) => (
                         <div className='flex justify-between' key={item.id}>
@@ -187,12 +194,12 @@ const PaymentPage = () => {
                             <p className='text-sm text-violeta font-medium'>x{item.quantity}</p>
                         </div>
                     ))}
-                    <div className='flex flex-row justify-between mt-5 border-t border-gray-200 pt-2'>
+                    <div className='flex flex-row justify-between mt-5 border-t border-[#5B483A] pt-2'>
                         <p className='font-medium'>Total</p>
                         <p className='font-medium'>${totalPrice.toFixed(2)}</p>
                     </div>
                     <div className='flex justify-center mt-4'>
-                        <button className='bg-violeta hover:bg-fuchsia-950 text-white font-bold py-1.5 px-4 rounded' onClick={handlePayment}>Finalizar Compra</button>
+                        <button className='bg-violeta hover:bg-fuchsia-950 text-white font-medium text-sm py-1.5 px-4 rounded-sm' onClick={handlePayment}>FINALIZAR COMPRA</button>
                     </div>
                 </div>
             </div>

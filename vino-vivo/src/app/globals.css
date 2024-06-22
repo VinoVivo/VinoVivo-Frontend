@@ -4,16 +4,16 @@
 
   @layer base {
     :root {
-      --background:  29, 21%, 98%;
+      --background: 29, 21%, 98%;
       --foreground: 0, 0%, 19%;
 
       --card: 0, 0%, 100%;
       --card-foreground: 0, 0%, 19%;
 
-      --popover: 38, 20%, 92% ;
+      --popover: 38, 20%, 92%;
       --popover-foreground: 0, 0%, 19%;
 
-      --primary:  351, 61%, 28%; 
+      --primary: 351, 61%, 28%;
       --primary-foreground: 38, 20%, 92%;
 
       --secondary: 220, 39%, 10%;
@@ -23,28 +23,38 @@
       --muted-foreground: 215.4 16.3% 46.9%;
 
       --accent: 38, 20%, 92%, 1;
-      --accent-foreground: 220, 39,10;
+      --accent-foreground: 220, 39, 10;
 
-      --destructive: 354, 32%, 61% ;
-      --destructive-foreground: 8, 38%, 87 ;      
+      --destructive: 354, 32%, 61%;
+      --destructive-foreground: 8, 38%, 87;
 
       --success: 96, 19%, 56%;
       --success-foreground: 96, 35%, 91%;
 
-      --violeta:  316, 39%, 26%;
-      --violeta-foreground: 38, 20%, 92% ;
+      --violeta: 316, 39%, 26%;
+      --violeta-foreground: 38, 20%, 92%;
 
-      --beige: 29, 17%, 60% ;
-      --beige-foreground: 220, 39,10;
+      --gris: 165, 2%, 36%, 1;
+      --gris-foreground: 0, 0%, 19%, 1;
+
+      --violeta-dos: 320, 91%, 23%, 1;
+      --violeta-dos-foreground: 316, 39%, 26%, 1;
+
+
+
+      --beige: 29, 17%, 60%;
+      --beige-foreground: 220, 39, 10;
 
       --under: 0, 0%, 34%, 1;
-      
+
       --textTypograph: 0, 0%, 19%, 1;
       --backgroundCart: 0, 3%, 68%, 0.25;
-      --line:25, 22%, 29%, 1;
-      --backgroundForms:38, 20%, 92%, 0.95;
+      --line: 25, 22%, 29%, 1;
+      --backgroundForms: 38, 20%, 92%, 0.95;
       --labelAdmin-color: 351, 61%, 28%;
-      --grisCarbon:210, 4%, 24%, 1;
+      --graySubtittle: 165, 2%, 36%, 1;
+      --grisCarbon: 210, 4%, 24%, 1;
+      --whiteTypograph: 60, 24%, 96%, 1;
 
       --input: 220, 14%, 95%;
       --ring: 354, 32.6%, 61%;
@@ -56,45 +66,47 @@
       --background: 0, 0%, 19%;
       --foreground: 0, 0%, 100%;
 
-      --card:0, 0%, 19%;
+      --card: 0, 0%, 19%;
       --card-foreground: 0, 0%, 100%;
 
       --popover: 0, 0%, 19%;
       --popover-foreground: 38, 20%, 92%;
 
-      --primary: 38, 20%, 92% ;
-      --primary-foreground: 351, 61%, 28%; 
+      --primary: 38, 20%, 92%;
+      --primary-foreground: 351, 61%, 28%;
 
       --secondary: 216, 12%, 83%;
-      --secondary-foreground: 220, 39,10;
+      --secondary-foreground: 220, 39, 10;
 
       --muted: 217.2 32.6% 17.5%;
       --muted-foreground: 215 20.2% 65.1%;
 
-      --accent: 220, 39,10;
+      --accent: 220, 39, 10;
       --accent-foreground: 38, 20%, 92%, 1;
 
       --destructive: 0 62.8% 30.6%;
       --destructive-foreground: 210 40% 98%;
 
-      --success:  96, 35%, 91%; 
+      --success: 96, 35%, 91%;
       --success-foreground: 96, 19%, 56%;
 
-      --violeta:  38, 20%, 92% ;
+      --violeta: 38, 20%, 92%;
       --violeta-foreground: 316, 39%, 26%;
 
-      --beige:220, 39,10; 
-      --beige-foreground: 29, 17%, 60% ;
+      --beige: 220, 39, 10;
+      --beige-foreground: 29, 17%, 60%;
 
       --border: 220, 14%, 95%;
       --input: 220, 14%, 95%;
       --ring: 354, 32.6%, 61%;
     }
   }
+
   @layer base {
     * {
       @apply border-border;
     }
+
     body {
       @apply bg-background text-foreground;
     }
