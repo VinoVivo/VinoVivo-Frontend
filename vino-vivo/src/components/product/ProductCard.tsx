@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuyClick }) => {
     const isMobile = useMediaQuery("(max-width: 768px)");
 
     return (
-        <div className="bg-white bg-opacity-75 rounded-lg border border-gray-200 p-6 w-full sm:w-64">
+        <div className="bg-white bg-opacity-75 rounded-lg border border-gray-200 p-6 w-full sm:w-64 flex flex-col">
             <Link href={`/detail/${product.id}`}>
                 <img
                 src={product.image}
@@ -47,7 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuyClick }) => {
                 product.stock && product.stock > 0
                     ? "bg-violeta hover:bg-fuchsia-950"
                     : "bg-gray-500 cursor-not-allowed"
-                } text-white font-bold mt-2 py-1.5 px-4 rounded w-full`}
+                } text-white text-xs font-medium mt-2 py-1.5 px-4 rounded-sm flex justify-center`}
                 disabled={!product.stock || product.stock <= 0}
             >
                 COMPRAR
