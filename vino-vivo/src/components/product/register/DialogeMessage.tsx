@@ -14,7 +14,7 @@ import { MdReportGmailerrorred, MdWarning } from "react-icons/md";
 interface DialogProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    type: "Success" | "Error" | "Alert";
+    type: "ÉXITO" | "ERROR" | "ALERTA";
     message: string;
     styleButton1?: string;
     styleButton2?: string;
@@ -25,17 +25,6 @@ interface DialogProps {
     buttonTwoHref?: string;
     onClick?: (arg: any) => Promise<void>;
 }
-// const initialValues: ProductFormValues = {
-//     name: '',
-//     image: '',
-//     idType: 0,
-//     idWinery: 0,
-//     idVariety: 0,
-//     stock: 0,
-//     price: 0,
-//     year: 0,
-//     description: ''
-// };
 
 const DialogeMessage: React.FC<DialogProps> = ({
     open,
@@ -54,11 +43,11 @@ const DialogeMessage: React.FC<DialogProps> = ({
     // const { reset } = useForm<ProductFormValues>();
     const getIcon = () => {
         switch (type) {
-            case "Success":
+            case "ÉXITO":
                 return <FaRegCircleCheck className="h-12 w-12 text-green-500 mb-4" />;
-            case "Error":
+            case "ERROR":
                 return <MdReportGmailerrorred className="h-12 w-12 text-red-500 mb-4" />;
-            case "Alert":
+            case "ALERTA":
                 return <MdWarning className="h-12 w-12 text-destructive mb-4" />;
             default:
                 return null;
@@ -100,7 +89,7 @@ const DialogeMessage: React.FC<DialogProps> = ({
                         </AlertDialogAction>
                 </Link>
             )}
-             {textButtonThree && (
+            {textButtonThree && (
                 <AlertDialogAction
                     onClick={onClick}
                     className={

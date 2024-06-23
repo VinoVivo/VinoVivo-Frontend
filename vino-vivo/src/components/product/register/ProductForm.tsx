@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { ProductFormValues } from '@/types/products/products.types';
 import { useForm } from 'react-hook-form';
 import TextInput from './inputs/TextInput';
@@ -6,11 +5,10 @@ import SelectInput from './inputs/SelectInput';
 import TextAreaInput from './inputs/TextAreaInput';
 import { useState } from 'react';
 import DialogeMessage from './DialogeMessage';
-import BackButton from '@/components/ui/BackButton';
 import BackText from '@/components/ui/BackText';
+import DinamicButton from '@/components/ui/DinamicButton';
 
 interface ProductFormProps {
-    // onSubmit: SubmitHandler<ProductFormValues>;
     wineries: { id: number, name: string }[];
     types: { id: number, name: string }[];
     varieties: { id: number, name: string }[];
@@ -19,15 +17,9 @@ interface ProductFormProps {
 const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties}) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
-    const [dialogType, setDialogType] = useState<"Success" | "Error">("Success");
-    
+    const [dialogType, setDialogType] = useState<"ÉXITO" | "ERROR">("ÉXITO");    
     const { register, handleSubmit, formState: { errors }, reset } = useForm<ProductFormValues>();
     
-    // const handleTextInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    //     if (!/^[A-Za-z\s]*$/.test(e.key) && e.key !== 'Backspace') {
-    //         e.preventDefault();
-    //     }
-    // };
     const handleTextAndNumberInput = (
         e: React.KeyboardEvent<HTMLInputElement>
     ) => {
@@ -55,12 +47,12 @@ const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties})
             if (!response.ok) {
                 throw new Error('Error en la respuesta del servidor');
             }
-            setDialogType("Success");
+            setDialogType("ÉXITO");
             setDialogMessage('Su producto ha sido creado exitosamente');
             const responseData = await response.json();
             return responseData;
         } catch (error) {
-            setDialogType("Error");
+            setDialogType("ERROR");
             setDialogMessage('Su producto no ha podido ser creado, por favor revise los datos e intente nuevamente');
             console.error('Error al crear el producto:', error);
             throw error;
@@ -82,7 +74,6 @@ const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties})
         // }        
         // setDialogOpen(true);
     };
-
 
     return (
         <>
@@ -185,20 +176,18 @@ const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties})
                 {/* Button */}
                 <div className="flex flex-col col-span-full">
                     <div className="flex justify-center">
-                        <Button
-                            className="
-                                bg-primary
-                                text-white
-                                hover:bg-white
-                                hover:text-primary
-                                hover:border-primary
-                                border-2
-                                w-1/2
-                                mb-4"
-                            type="submit"
+                        <DinamicButton
+                            bgColor="bg-primary"
+                            textColor="text-white"
+                            width="w-1/2"
+                            borderRadius="rounded-md"
+                            hoverBgColor="hover:bg-white"
+                            hoverTextColor="hover:text-primary"
+                            hoverBorderColor="hover:border-primary"
+                            className="mb-4 border-2"
                         >
                             CREAR PRODUCTO
-                        </Button>
+                        </DinamicButton>
                     </div>
                     <div className="flex justify-center">
                         <BackText
@@ -210,14 +199,14 @@ const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties})
                     </div>
                 </div>
             </form>
-                <DialogeMessage 
+            <DialogeMessage 
                 open={dialogOpen} 
-            onOpenChange={setDialogOpen} 
-            type={dialogType} 
-            message={dialogMessage}
-            textButtonOne="SEGUIR CREANDO"
-            textButtonTwo="VOLVER A PRODUCTOS"
-            buttonTwoHref="/admin/productos"
+                onOpenChange={setDialogOpen} 
+                type={dialogType} 
+                message={dialogMessage}
+                textButtonOne="SEGUIR CREANDO"
+                textButtonTwo="VOLVER A PRODUCTOS"
+                buttonTwoHref="/admin/productos"
             />
         </>
     );
