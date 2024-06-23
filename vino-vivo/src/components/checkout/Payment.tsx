@@ -6,6 +6,7 @@ import { AlertDialog, AlertDialogContent } from '@radix-ui/react-alert-dialog';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { MdReportGmailerrorred } from 'react-icons/md';
 import { useMediaQuery } from '@react-hook/media-query';
+import { redirect } from 'next/navigation';
 
 export interface ValidationErrors {
     name: string;
@@ -31,6 +32,12 @@ const PaymentPage = () => {
 
     const totalPrice = updatedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const totalItems = updatedCartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+    useEffect(() => {
+        if (cartItems.length === 0) {
+            redirect("/")
+        }
+    }, [cartItems])
 
     useEffect(() => {
         const fetchUserProfile = async () => {
