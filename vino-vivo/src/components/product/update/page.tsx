@@ -12,7 +12,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
     const [product, setProduct] = useState<Product>();
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState("");
-    const [dialogType, setDialogType] = useState<"Success" | "Error" | "Alert">("Success");
+    const [dialogType, setDialogType] = useState<"ÉXITO" | "ERROR" | "ALERTA">("ÉXITO");
     const [wineries, setWineries] = useState<IIdName[]>([]);
     const [types, setTypes] = useState<IIdName[]>([]);
     const [varieties, setVarieties] = useState<IIdName[]>([]);
@@ -107,11 +107,11 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
 
         const responseData = await response.json();
         console.log("Producto actualizado:", responseData);
-        setDialogType("Success");
+        setDialogType("ÉXITO");
         setDialogMessage("Su producto ha sido actualizado exitosamente");
         } catch (error) {
         console.error("Error al actualizar el producto:", error);
-        setDialogType("Error");
+        setDialogType("ERROR");
         setDialogMessage(
             "Su producto no ha podido ser actualizado, por favor revise los datos e intente nuevamente"
         );

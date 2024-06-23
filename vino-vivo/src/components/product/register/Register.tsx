@@ -26,8 +26,6 @@ export default function Register() {
         fetchData();
     }, []);
 
-   
-
     return (
         <div className="max-w-4xl mx-8 my-40 lg:mx-auto">
             <div className="flex  flex-col sm:flex-row justify-between items-center mb-4">
