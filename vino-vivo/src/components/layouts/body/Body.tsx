@@ -116,15 +116,9 @@ const Body = () => {
             </div>
 
             <div className="flex justify-center mb-5 gap-4">
-                {/* <button
-                    className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded"
-                    onClick={() => setShowMore(!showMore)}
-                >
-                    {showMore ? 'MOSTRAR MENOS' : 'MOSTRAR MÁS'}
-                </button> */}
                 <Link href="/products">
                     <button
-                        className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-6 py-1.5 px-4 rounded"
+                        className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-10 py-1.5 px-80 rounded"
                     >
                         VER TODOS
                     </button>

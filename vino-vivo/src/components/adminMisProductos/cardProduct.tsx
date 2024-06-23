@@ -39,8 +39,8 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
         <img src={product.image} alt="no Image" width={200} height={200} className="w-full h-auto transform transition-transform duration-300 hover:scale-105" />
       </Link>
       <div className="flex flex-col items-center mt-2">
-        <p className="text-md font-bold text-black h-12 text-center">{product.name}</p>
-        <p className="text-sm text-black mt-2">{product.nameVariety}</p>
+        <p className="text-md font-bold text-grisCarbon h-12 text-center">{product.name}</p>
+        {/* <p className="text-sm text-black mt-2">{product.nameVariety}</p> */}
         <p className="text-md font-semibold text-black">${product.price}</p>
       </div>
       <Link href={`/${href}/${product.id}`}>
