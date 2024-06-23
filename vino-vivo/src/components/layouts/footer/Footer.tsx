@@ -9,8 +9,8 @@ function Footer() {
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 py-7 ">
 
                     <div className="m-2 space-y-2 flex flex-col justify-center items-center sm:col-start-1 sm:col-span-2">
-                        <p className="text-secondary text-sm">Virtual Trends @Copyright</p>
-                        <p className=" text-secondary text-sm">Desarrollo por Día365</p>
+                        <p className="text-secondary text-sm">Vino Vivo @Copyright</p>
+                        <p className=" text-secondary text-sm">Desarrollo por Grupo4_DH</p>
                         <p className="text-secondary text-sm">Diseño gráfico por CA</p>
                     </div>
 
@@ -27,7 +27,7 @@ function Footer() {
                                 placeholder="Ingresá aquí tu email"
                             />
 
-                            <Button className='bg-violeta hover:bg-primary w-full '>SUSCRIBETE</Button>
+                            <Button className='bg-grisCarbon active:bg-gray-250 hover:bg-gris w-full '>SUSCRIBETE</Button>
                         </div>
 
                         <div className="flex items-center justify-between mt-3">
@@ -63,9 +63,9 @@ function Footer() {
                     </div>
 
                     <div className="m-2 flex flex-col justify-center items-center space-y-2 h-full sm:col-start-5 sm:col-span-2">
-                        <a href="#" className="text-primary text-sm transition-colors duration-300 dark:text-gray-300 hover:underline">Políticas de privacidad</a>
-                        <a href="#" className="text-primary text-sm transition-colors duration-300 dark:text-gray-300 hover:underline">Términos y condiciones</a>
-                        <a href="#" className="text-primary text-sm transition-colors duration-300 dark:text-gray-300 hover:underline">Prensa</a>
+                        <a href="#" className="text-sm transition-colors duration-300 dark:text-gray-300 hover:underline">Políticas de privacidad</a>
+                        <a href="#" className="text-sm transition-colors duration-300 dark:text-gray-300 hover:underline">Términos y condiciones</a>
+                        <a href="#" className="text-sm transition-colors duration-300 dark:text-gray-300 hover:underline">Prensa</a>
                     </div>
 
                 </div>
