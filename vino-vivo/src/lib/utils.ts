@@ -3,6 +3,7 @@ import { Product} from "@/types/products/products.types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { IwineDetail, WineType } from "@/types/detail/detail.types";
+import { QuantitySoldData, StockData, TypeSalesData } from "@/types/reports/reports.types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
