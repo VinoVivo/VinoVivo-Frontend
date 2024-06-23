@@ -29,9 +29,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuyClick }) => {
                 <p className={isMobile ? "text-sm font-bold text-black h-12 text-center" : "text-md font-bold text-black h-12 text-center"}>
                 {product.name}
                 </p>
-                <p className="text-sm text-black mt-2">{product.nameVariety}</p>
-                <p className="text-md font-semibold text-black">${product.price}</p>
-                <p
+                {/* <p className="text-sm text-black mt-2">{product.nameVariety}</p> */}
+                <p className="text-md font-semibold text-black mt-4">${product.price}</p>
+                {/* <p
                 className={`text-xs ${
                     product.stock && product.stock > 0
                     ? "text-green-500"
@@ -39,7 +39,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuyClick }) => {
                 }`}
                 >
                 {product.stock && product.stock > 0 ? "En stock" : "Agotado"}
-                </p>
+                </p> */}
             </div>
             <button
                 onClick={handleBuyButtonClick}
