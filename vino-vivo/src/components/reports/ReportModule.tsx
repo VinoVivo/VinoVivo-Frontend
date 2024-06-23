@@ -90,9 +90,6 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
         }
     };
     
-        // console.log("Report Data in Component:", reportData);
-        // console.log(products);        
-        // console.log("columnas: " , reportColumns[selectedOption])
     return (
         <div className="flex flex-col items-center justify-center mb-10 mt-5">
             <Title
@@ -141,7 +138,6 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
                         >
                             <MyDocument data={reportData} title={selectedOption} columns={reportColumns[selectedOption]} />
                         </PDFViewer>
-                        {/* <TablePreview data={reportData} columns={reportColumns[selectedOption]} title={selectedOption}/> */}
                     </div>
                     <PDFDownloadLink
                         document={<MyDocument data={reportData} title={selectedOption} columns={reportColumns[selectedOption]} />}

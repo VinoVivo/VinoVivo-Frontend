@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     width: "auto",
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "#bfbfbf",
+    borderColor: "#000",
     borderRightWidth: 0,
     borderBottomWidth: 0,
   },
@@ -36,15 +36,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tableColHeader: {
+    width: `${100 / 3}%`, 
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "#bfbfbf",
+    borderColor: "#000",
     backgroundColor: "#f2f2f2",
   },
   tableCol: {
+    width: `${100 / 3}%`, 
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "#bfbfbf",
+    borderColor: "#000",
   },
   tableCellHeader: {
     margin: 5,
@@ -69,8 +71,6 @@ const styles = StyleSheet.create({
 });
 
 const MyDocument: React.FC<ReportDocumentProps> = ({ data, title, columns }) => {
-  const numColumns = columns.length;
-  const columnWidth = `${100 / numColumns}%`;
 
   return (
     <Document>
@@ -80,7 +80,7 @@ const MyDocument: React.FC<ReportDocumentProps> = ({ data, title, columns }) => 
           <View style={styles.table}>
             <View style={styles.tableRow}>
               {columns?.map((column, index) => (
-                <View key={index} style={[styles.tableColHeader, { width: columnWidth }]}>
+                <View key={index} style={styles.tableColHeader}>
                   <Text style={styles.tableCellHeader}>{column.title}</Text>
                 </View>
               ))}
@@ -88,7 +88,7 @@ const MyDocument: React.FC<ReportDocumentProps> = ({ data, title, columns }) => 
             {data.map((item, index) => (
               <View key={index} style={styles.tableRow}>
                 {columns?.map((column, colIndex) => (
-                  <View key={colIndex} style={[styles.tableCol, { width: columnWidth }]}>
+                  <View key={colIndex} style={styles.tableCol}>
                     <Text style={styles.tableCell}>{item[column.key]}</Text>
                   </View>
                 ))}
