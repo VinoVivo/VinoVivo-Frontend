@@ -1,44 +1,42 @@
-
-export interface ReportColumns {
-    [key: string]: { title: string; key: string }[];
-}
+//prodcutos más vendidos
 export interface QuantitySoldData {
+    "Description": string;
+    "Price": number;
     "Product ID": number;
     "Product Name": string;
-    "Description": string;
-    "Year": number;
-    "Price": number;
     "Stock": number;
-    "Winery": string;
-    "Variety": string;
     "Type": string;
     "Units sold": number;
+    "Variety": string;    
+    "Winery": string;
+    "Year": number;
 }
-
+//ventas totales
 export interface TypeSalesData {
     "Product Type": string;
     "Type ID": number;    
     "Units sold": number;
 }
 
+// Stock de productos
 export interface StockData {
+    "Description": string;
+    "Price": number;
     "Product ID": number;
     "Product Name": string;
-    "Description": string;
-    "Year": number;
-    "Price": number;
     "Stock": number;
-    "Winery": string;
-    "Variety": string;
     "Type": string;
+    "Variety": string;    
+    "Winery": string;
+    "Year": number;
 }
-
+//Ingresos totales
 export interface TotalRevenueData {
     "Product ID": number;
     "Product Name": string;
     "Description": string;
     "Year": number;
-    "Price": number;
+    "Price": number;  
     "Stock": number;
     "Winery": string;
     "Variety": string;

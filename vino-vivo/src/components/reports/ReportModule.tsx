@@ -16,20 +16,20 @@ interface ReportModuleProps {
 }
 const reportColumns: Record<string, { title: string; key: string }[]> = {
     ventas_totales: [
-        { title: "Nombre del Producto", key: "ProductType" },
-        { title: "Unidades Vendidas", key: "UnitsSold" },
+        { title: "Tipo de Producto", key: "Product Type" },
+        { title: "Unidades Vendidas", key: "Units sold" },
     ],
     productos_mas_vendidos: [
-        { title: "Nombre del Producto", key: "ProductName" },
-        { title: "Unidades Vendidas", key: "UnitsSold" },
+        { title: "Nombre del Producto", key: "Product Name" },
+        { title: "Unidades Vendidas", key: "Units sold" },
     ],
     ingresos_por_categoria: [
-        { title: "Nombre del Producto", key: "ProductName" },
-        { title: "Ingresos Totales", key: "TotalRevenue" },
+        { title: "Nombre del Producto", key: "Product Name" },
+        { title: "Ingresos Totales", key: "Total Revenue" },
         { title: "Año de Venta", key: "Year" },
     ],
     stock_productos: [
-        { title: "Nombre del Producto", key: "ProductName" },
+        { title: "Nombre del Producto", key: "Product Name" },
         { title: "Stock Disponible", key: "Stock" },
     ],
 };
@@ -60,6 +60,7 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
         }
         return true;
         });
+        console.log("Filtered Products:", filtered); 
         setFilteredProducts(filtered);
     }, [products, selectedFilters]);
 
@@ -76,12 +77,11 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
     };
 
     const handleVisualizeClick = async () => {
-        setLoading(true);    
+        setLoading(true);
         try {
             const year = selectedFilters.year ?? "0";
             const typeId = types.find(t => t.name === selectedFilters.type)?.id.toString() ?? "0";
             const data = await fetchReportData(selectedOption, year, typeId);
-            console.log({data});
             setReportData(data);
         } catch (error) {
             console.error("Error fetching report data:", error);
@@ -89,9 +89,9 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
             setLoading(false);
         }
     };
-
+    
     return (
-        <div className="flex flex-col items-center justify-center mb-10 mt-40">
+        <div className="flex flex-col items-center justify-center mb-10 mt-5">
             <Title
                 title="GENERACIÓN DE INFORMES"
                 color="labelAdminColor"
