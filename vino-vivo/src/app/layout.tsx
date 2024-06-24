@@ -26,7 +26,7 @@ export default function RootLayout({
     <NextAuthProvider>
       <ContextProvider>
         <CartProvider>
-          <html lang="es">
+          <html lang="es" >
           <meta
               name="description"
               content="En vino vivo podrás encontrar además de una gran variedad de exquisitos vinos, la posibilidad de contactarnos para visitar el establecimiento físico y disfrutar de las experiencias que ofrecemos, como cata personalizada, entre otras."

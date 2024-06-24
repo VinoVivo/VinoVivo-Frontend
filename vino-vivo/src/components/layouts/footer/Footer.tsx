@@ -7,9 +7,8 @@ import { FaLinkedinIn } from "react-icons/fa6";
 
 function Footer() {
     return (
-        <footer className="bg-card border-t-2 border-primary mt-4 py-2">
-
-            
+        <footer className="bg-card border-t-2 border-primary mt-4 py-2 w-full">
+           
                 <div className="flex flex-col justify-center items-center md:flex-row md:justify-evenly md:py-[8px]">
 
                     <div className="m-2 space-y-2 flex flex-col justify-center items-center sm:col-start-1 sm:col-span-2">

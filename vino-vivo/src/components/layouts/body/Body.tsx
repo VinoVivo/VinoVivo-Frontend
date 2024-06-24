@@ -104,7 +104,7 @@ const Body = () => {
             {loading && <Loader />}
 
             <div className="flex justify-center">
-                <div className="grid grid-cols-2  lg:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2  l:grid-cols-4 gap-3">
                     {visibleProducts.map(product => (
                         <ProductCard
                         key={product.id}
