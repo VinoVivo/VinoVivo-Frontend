@@ -7,11 +7,11 @@ import DialogeMessage from '../product/register/DialogeMessage';
 
 const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, deleteProduct}) => {
   const [dialogMessage, setDialogMessage] = useState("");
-  const [dialogType, setDialogType] = useState<"Success" | "Error" | "Alert">('Alert');
+  const [dialogType, setDialogType] = useState<"ÉXITO" | "ERROR" | "ALERTA">('ALERTA');
   const [alert, setAlert]=useState(false)
  
   const handelAlert = ()=>{
-    setDialogType('Alert');
+    setDialogType('ALERTA');
 
      setAlert(true)
       setDialogMessage(`¿Seguro quiere eliminar ${product?.name}?`);
