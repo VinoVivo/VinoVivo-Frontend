@@ -37,17 +37,17 @@ function Footer() {
                         <div className="self-center flex items-center justify-between mt-3">
                             <div className="flex -mx-2">
                            
-                                <a href="#" className="mx-2 text-grisCarbon transition-colors duration-300 " aria-label="Facebook">
-                                 <IoLogoFacebook className='text-grisCarbon text-[30px]'/>
+                                <a href="#" className="mx-2" aria-label="Facebook">
+                                 <IoLogoFacebook className='text-grisCarbon text-[30px] hover:text-gris '/>
                                 </a>
-                                <a href="#" className="mx-2 text-grisCarbon transition-colors duration-300 " aria-label="Facebook">
-                                 <FaLinkedinIn className='text-grisCarbon text-[30px]'/>
+                                <a href="#" className="mx-2" aria-label="Facebook">
+                                 <FaLinkedinIn className='text-grisCarbon text-[30px] hover:text-gris'/>
                                 </a>
-                                <a href="#" className="mx-2 text-grisCarbon transition-colors duration-300 " aria-label="Facebook">
-                                 <IoLogoTwitter className='text-grisCarbon text-[30px]'/>
+                                <a href="#" className="mx-2" aria-label="Facebook">
+                                 <IoLogoTwitter className='text-grisCarbon text-[30px]  hover:text-gris'/>
                                 </a>
-                                <a href="#" className="mx-2 text-grisCarbon transition-colors duration-300 " aria-label="Github">
-                                 <IoLogoInstagram className='text-grisCarbon text-[30px]' />
+                                <a href="#" className="mx-2" aria-label="Github">
+                                 <IoLogoInstagram className='text-grisCarbon text-[30px] hover:text-gris' />
                                 </a>
                              
                             </div>
