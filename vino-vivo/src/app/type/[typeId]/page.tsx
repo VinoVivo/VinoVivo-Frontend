@@ -150,8 +150,8 @@ const handleBuyButtonClick = (product: Product) => {
       <DialogeMessage
         open={showAlert}
         onOpenChange={handleCloseAlert}
-        type="Alert"
-        message="Debe estar logeado para comprar productos"
+        type="ALERTA"
+        message="Debe estar logueado para comprar productos"
         textButtonOne="Cerrar"
       />
     </>

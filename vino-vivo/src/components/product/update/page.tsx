@@ -7,6 +7,8 @@ import { Product, ProductFormValues } from "@/types/products/products.types";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import DialogeMessage from "../register/DialogeMessage";
+import DinamicButton from "@/components/ui/DinamicButton";
+import BackText from "@/components/ui/BackText";
 
 export default function UpdateProductForm({ id }: Readonly<{ id: number | undefined }>) {
     const [product, setProduct] = useState<Product>();
@@ -137,14 +139,12 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
     return (
         <div className="max-w-4xl mx-auto my-40 sm:mx-auto">
         <div className="flex direction-row">
-            <Title title="ACTUALIZAR PRODUCTO" color="beige" />
-            <span className="ml-2 ">
-            <BackButton />
-            </span>
+        <Title title="ACTUALIZAR PRODUCTO" color="labelAdminColor" letterSpacing='widest'/>
+        
         </div>
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className=" shadow-md rounded px-8 pt-6 pb-8 my-6 grid gap-4 sm:grid-cols-2 border-primary border-2"
+            className="shadow-md rounded px-20 py-10 my-8 grid gap-4 sm:grid-cols-2 border-primary border-2 bg-backgroundForms"
         >
             {/* name */}
             <div className="mb-4">
@@ -166,7 +166,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
                     message: "Solo se permiten letras, números y espacios",
                 },
                 })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 defaultValue={product?.name}
                 onKeyDown={handleTextAndNumberInput}
@@ -191,7 +191,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
                     message: "Debe tener al menos 5 caracteres",
                 },
                 })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 defaultValue={product?.image ?? ""}
             />
@@ -211,7 +211,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
             </label>
             <select
                 {...register("idType", { required: "Este campo es requerido" })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
                 defaultValue={defaultTypeId ?? ""}
             >
                 <option value="">Seleciona un tipo</option>
@@ -241,7 +241,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
                 required: "Este campo es requerido",
                 })}
                 defaultValue={defaultWineryId}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
             >
                 <option value="">Seleciona una bodega</option>
                 {wineries.map((winery) => (
@@ -267,7 +267,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
             </label>
             <select
                 {...register("idVariety", { required: "Este campo es requerido" })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
                 defaultValue={defaultVarietyId}
             >
                 <option value="">Seleciona un variedad</option>
@@ -301,7 +301,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
                 },
                 pattern: { value: /^\d+$/, message: "Solo se permiten números" },
                 })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number"
                 defaultValue={product?.stock ?? ""}
                 onKeyDown={handleNumberInput}
@@ -333,7 +333,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
                     message: "Debe ser un número válido",
                 },
                 })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 defaultValue={product?.price ?? ""}
                 onKeyDown={handleNumberInput}
@@ -362,7 +362,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
                 },
                 pattern: { value: /^\d+$/, message: "Solo se permiten números" },
                 })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="number"
                 defaultValue={product?.year ?? ""}
                 onKeyDown={handleNumberInput}
@@ -391,7 +391,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
                     message: "Debe tener hasta 200 caracteres",
                 },
                 })}
-                className=" h-30 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="h-30 shadow appearance-none border border-line rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 defaultValue={product?.description ?? ""}
             />
             {errors.description && (
@@ -401,21 +401,30 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
             )}
             </div>
             {/* botón */}
-            <div className="flex justify-end col-span-full ">
-            <Button
-                className=" 
-                                bg-primary 
-                                text-white
-                                hover: hover:bg-white 
-                                hover:text-primary 
-                                hover:border-primary    
-                                border-2   
-                                w-full "
-                type="submit"
-            >
-                Actualizar Producto
-            </Button>
-            </div>
+            <div className="flex flex-col col-span-full">
+                    <div className="flex justify-center">
+                        <DinamicButton
+                            bgColor="bg-primary"
+                            textColor="text-white"
+                            width="w-1/2"
+                            borderRadius="rounded-md"
+                            hoverBgColor="hover:bg-white"
+                            hoverTextColor="hover:text-primary"
+                            hoverBorderColor="hover:border-primary"
+                            className="mb-4 border-2"
+                        >
+                            ACTUALIZAR PRODUCTO
+                        </DinamicButton>
+                    </div>
+                    <div className="flex justify-center">
+                        <BackText
+                            color="text-gray-700"
+                            fontSize="text-lg"
+                            fontWeight="font-semibold"
+                            underlineWidth="border-b-2"
+                        />
+                    </div>
+                </div>
         </form>
         <DialogeMessage
                 open={dialogOpen} 
@@ -425,33 +434,7 @@ export default function UpdateProductForm({ id }: Readonly<{ id: number | undefi
                 textButtonTwo="Volver a productos"
                 buttonTwoHref="/admin/productos"
             />
-        {/* <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
-            <AlertDialogContent className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-10 shadow-lg justify-between border-primary border-2">
-                <AlertDialogHeader className="flex flex-col items-center">
-                <AlertDialogTitle className="mt-2 mb-2 text-3xl">
-                    {dialogType === "Éxito" ? "Éxito" : "Error"}
-                </AlertDialogTitle>
-                {dialogType === "Éxito" ? (
-                    <FaRegCircleCheck className="h-12 w-12 text-success mb-2" />
-                ) : (
-                    <MdReportGmailerrorred className="h-12 w-12 text-destructive mb-2" />
-                )}
-                <AlertDialogDescription className="text-base">
-                    {dialogMessage}
-                </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter className="mt-4">
-                <AlertDialogAction
-                    className="hover:border-primary hover:border-2 hover:text-primary"
-                    onClick={() => setDialogOpen(false)}
-                >
-                    Cerrar
-                </AlertDialogAction>
-                </AlertDialogFooter>
-            </div>
-            </AlertDialogContent>
-        </AlertDialog> */}
+ 
         </div>
     );
 }

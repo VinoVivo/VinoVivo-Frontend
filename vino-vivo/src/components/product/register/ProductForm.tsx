@@ -79,7 +79,7 @@ const ProductForm: React.FC<ProductFormProps> = ({  wineries, types, varieties})
         <>
             <form
                 onSubmit={handleSubmit(createProduct)} 
-                className="shadow-md rounded rounded-md px-20 py-10 my-8 grid gap-4 sm:grid-cols-2 border-primary border-2 bg-backgroundForms">
+                className="shadow-md rounded px-20 py-10 my-8 grid gap-4 sm:grid-cols-2 border-primary border-2 bg-backgroundForms">
                 {/* name */}
                 <TextInput 
                     label={'Nombre del vino'} 

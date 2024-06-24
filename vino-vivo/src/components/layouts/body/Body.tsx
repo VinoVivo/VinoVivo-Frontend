@@ -127,7 +127,7 @@ const Body = () => {
             <DialogeMessage
                 open={showAlert}
                 onOpenChange={handleCloseAlert}
-                type="Alert"
+                type="ALERTA"
                 message="Debe estar logeado para comprar productos"
                 textButtonOne="Cerrar"
             />
