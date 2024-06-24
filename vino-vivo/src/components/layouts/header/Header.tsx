@@ -392,8 +392,8 @@ const Header = () => {
                             </Link>
                           </DropdownMenuItem>
                           <DropdownMenuItem className="text-secondary hover:text-beige">
-                            <Link href="/" className="text-secondary hover:text-beige">
-                              <div onClick={() => handleLinkClick("/")}>Reportes</div>
+                            <Link href="/admin/reports" className="text-secondary hover:text-beige">
+                              <div onClick={() => handleLinkClick("/admin/reports")}>Reportes</div>
                             </Link>
                           </DropdownMenuItem>
                         </>
