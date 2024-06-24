@@ -3,7 +3,6 @@
     font-weight: 600;
     font-size: x-large;
     line-height: 2rem;
-    text-align: center;
     width: 100%;
     margin: 0;
 }
@@ -30,18 +29,12 @@
 
 @media screen and (max-width: 750px) {
     .typography_title {
-
         font-size: larger;
-
     }
-
 }
 
 @media screen and (max-width: 500px) {
     .typography_title {
-
         font-size: initial;
-
     }
-
 }

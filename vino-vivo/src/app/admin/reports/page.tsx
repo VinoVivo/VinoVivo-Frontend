@@ -34,13 +34,12 @@ export default async function AdminReports() {
     } catch (error) {
         console.error("Error fetching data:", error);
     }
-  
+
     return isAdmin ? (
-        <div className="flex flex-col justify-center items-center mt-40">
+        <div className="flex flex-col justify-center items-center mt-28 sm:mt-40 px-4">
             <ReportModule products={products} types={types} />
         </div>
     ):(
         <div>{redirect("/")}</div>
-      );
-    
+    );
 }

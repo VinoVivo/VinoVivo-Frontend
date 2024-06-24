@@ -60,7 +60,6 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
         }
         return true;
         });
-        console.log("Filtered Products:", filtered); 
         setFilteredProducts(filtered);
     }, [products, selectedFilters]);
 
@@ -91,7 +90,7 @@ const ReportModule: React.FC<ReportModuleProps> = ({ products, types }) => {
     };
     
     return (
-        <div className="flex flex-col items-center justify-center mb-10 mt-5">
+        <div className="flex flex-col items-center justify-center mb-10  sm:px-8">
             <Title
                 title="GENERACIÓN DE INFORMES"
                 color="labelAdminColor"
