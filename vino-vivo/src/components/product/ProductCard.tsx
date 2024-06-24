@@ -26,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuyClick }) => {
                 />
             </Link>
             <div className="flex flex-col items-center mt-2">
-                <p className={isMobile ? "text-sm font-bold text-black h-12 text-center" : "text-md font-bold text-black h-12 text-center"}>
+                <p className={isMobile ? "text-sm font-bold text-black h-16 text-center" : "text-md font-bold text-black h-12 text-center"}>
                 {product.name}
                 </p>
                 {/* <p className="text-sm text-black mt-2">{product.nameVariety}</p> */}

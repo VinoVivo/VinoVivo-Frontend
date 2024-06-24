@@ -46,7 +46,7 @@ const OrderDetailDialog: React.FC<OrderDetailDialogProps> = ({ id, productos, va
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className='bg-violeta hover:bg-primary w-32 m-1'>Ver Pedido</Button>
+                <Button size="sm" className='bg-violeta text-sm hover:bg-primary w-32 m-1'>Ver Pedido</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -78,8 +78,9 @@ const OrderDetailDialog: React.FC<OrderDetailDialogProps> = ({ id, productos, va
                     ))}
                 </div>
                 <DialogFooter>
-                    <Button 
-                        className='bg-violeta hover:bg-primary w-32 m-1' 
+                    <Button
+                        size="sm"
+                        className='bg-violeta hover:bg-primary w-32 m-1 text-sm'
                         onClick={handleBuyAgain}
                     >
                         Volver a Comprar
