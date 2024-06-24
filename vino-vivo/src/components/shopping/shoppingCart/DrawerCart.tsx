@@ -12,7 +12,7 @@ export default function DrawerCart() {
 
     return (
         <Drawer open={isOpen} onOpenChange={(isOpen) => !isOpen && closeCart()} direction="right">
-            <DrawerContent className="h-screen top-0 right-0 left-auto mt-0 w-[440px] rounded-none flex flex-col">
+            <DrawerContent className="h-screen top-0 right-0 left-auto mt-0 sm:w-[440px] w-[400px] rounded-none flex flex-col">
                 <DrawerCartHeader />
                 <div className="flex-grow overflow-y-auto mx-auto w-full max-w-sm">
                     <TitleSection />
