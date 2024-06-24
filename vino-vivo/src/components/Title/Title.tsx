@@ -23,7 +23,7 @@ export const Title: FC<TitleProps> = ({ title, color, letterSpacing = "widest" }
       bgColor = "after:bg-beige before:bg-beige";
   }
 
-  const titleStyle = `${styles.typography_title} text-${color} ${bgColor} tracking-${letterSpacing} uppercase`;
+  const titleStyle = `${styles.typography_title} text-${color} ${bgColor} tracking-${letterSpacing} uppercase `;
 
   return (
     <h2 className={titleStyle}>

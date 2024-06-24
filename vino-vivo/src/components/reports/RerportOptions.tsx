@@ -35,8 +35,7 @@ const ReportOptions: React.FC<ReportOptionsProps> = ({
                     onChange={handleChange}
                     iconColor="labelAdminColor"
                     iconSize="h-7 w-7"
-                    customStyles={{ select: 'pr-10' }}
-                
+                    customStyles={{ select: 'pr-10' }}                
                 />
             </div>
         </div>
