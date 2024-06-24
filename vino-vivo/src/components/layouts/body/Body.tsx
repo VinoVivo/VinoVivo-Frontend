@@ -104,7 +104,7 @@ const Body = () => {
             {loading && <Loader />}
 
             <div className="flex justify-center">
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2  lg:grid-cols-4 gap-3">
                     {visibleProducts.map(product => (
                         <ProductCard
                         key={product.id}
@@ -118,7 +118,7 @@ const Body = () => {
             <div className="flex justify-center mb-5 gap-4">
                 <Link href="/products">
                     <button
-                        className="bg-violeta hover:bg-violetaDos text-white font-bold mt-10 py-1.5 px-16 rounded sm:px-40 md:px-60 lg:px-80"
+                        className="bg-violeta hover:bg-violetaDos text-white font-bold mt-10 py-1.5 px-16 rounded sm:px-36 lg:px-80"
                     >
                         VER TODOS
                     </button>

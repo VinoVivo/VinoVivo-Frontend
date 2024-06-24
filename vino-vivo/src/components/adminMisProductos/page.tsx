@@ -13,6 +13,7 @@ import {
   PaginationPrevious,
 } from "../ui/pagination";
 import DialogeMessage from "../product/register/DialogeMessage";
+import Link from "next/link";
 
 const ProductGrid = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -68,7 +69,7 @@ const ProductGrid = () => {
   }, [flag]);
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-[30px] ">
         {currentProducts.map((product: Product, index: number) => (
           <CardProduct
@@ -81,6 +82,11 @@ const ProductGrid = () => {
           />
         ))}
       </div>
+      <Link href={'product/register'} className="my-6">
+      <button className="bg-primary text-white  font-bold mt-2 py-1.5 px-16 rounded-md  border-2 hover:bg-white hover:text-primary hover:border-primary sm:px-36 lg:px-80">
+        REGISTRAR PRODUCTO
+      </button>
+      </Link>
       <Pagination className="mt-2">
         <PaginationContent>
           <PaginationItem>
