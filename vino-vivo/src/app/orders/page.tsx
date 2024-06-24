@@ -27,6 +27,8 @@ import { columns } from "@/components/orders/Columns";
 import { getProductList } from "@/lib/utils";
 import { Product } from "@/types/products/products.types";
 import PaginationComponent from "@/components/pagination/PaginationComponent";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 //Type para la combinacion de "ordenes" con "orderDetail" con la info de "products"
 type OrderWithProductsType = OrderType & {
@@ -46,6 +48,10 @@ export default function TypePage() {
     const [pageSize, setPageSize] = useState(4);
     const [columnVisibility, setColumnVisibility] =
         React.useState<VisibilityState>({});
+    const { data: session } = useSession();
+    if(session === null){
+        redirect('/');
+    }
 
     //Lo siguiente es un renderizado para ocultar columnas en formato mobile
     useEffect(() => {

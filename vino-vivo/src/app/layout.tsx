@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 import Header from "@/components/layouts/header/Header";
 import Footer from "@/components/layouts/footer/Footer";
 import ContextProvider from "@/context/page";
@@ -27,11 +28,14 @@ export default function RootLayout({
       <ContextProvider>
         <CartProvider>
           <html lang="es" >
-          <meta
-              name="description"
-              content="En vino vivo podrás encontrar además de una gran variedad de exquisitos vinos, la posibilidad de contactarnos para visitar el establecimiento físico y disfrutar de las experiencias que ofrecemos, como cata personalizada, entre otras."
-            >
-            </meta>
+            <Head>
+              <link rel="icon" href="./VinoVivo_dark-isotipo-con-fondo-en-jpg.ico" />
+              <meta
+                  name="description"
+                  content="En vino vivo podrás encontrar además de una gran variedad de exquisitos vinos, la posibilidad de contactarnos para visitar el establecimiento físico y disfrutar de las experiencias que ofrecemos, como cata personalizada, entre otras."
+                  >
+                </meta>
+            </Head>
           <body className={inter.className}>
             <div className="flex flex-col min-h-screen">
               <Header />
