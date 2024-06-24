@@ -45,7 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuyClick }) => {
                 onClick={handleBuyButtonClick}
                 className={`${
                 product.stock && product.stock > 0
-                    ? "bg-violeta hover:bg-fuchsia-950"
+                    ? "bg-violeta hover:bg-violetaDos"
                     : "bg-gray-500 cursor-not-allowed"
                 } text-white text-xs font-medium mt-2 py-1.5 px-4 rounded-sm flex justify-center`}
                 disabled={!product.stock || product.stock <= 0}

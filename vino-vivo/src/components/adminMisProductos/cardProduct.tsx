@@ -15,9 +15,7 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
 
      setAlert(true)
       setDialogMessage(`¿Seguro quiere eliminar ${product?.name}?`);
- 
    
-  
     }
 
 
@@ -44,7 +42,7 @@ const CardProduct: FC<ICardProduct> = ({ product, textButton, icon, href, delete
         <p className="text-md font-semibold text-black">${product.price}</p>
       </div>
       <Link href={`/${href}/${product.id}`}>
-      <button className="bg-violeta hover:bg-fuchsia-950 text-white font-bold mt-2 py-1.5 px-4 rounded w-full">
+      <button className="bg-primary text-white font-bold mt-2 py-1.5 px-4 rounded-md w-full border-2 hover:bg-white hover:text-primary hover:border-primary">
         {textButton}
       </button>
       </Link>

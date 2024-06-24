@@ -87,8 +87,8 @@ const UserSettings = () => {
 
     return (
         <div className={isMobile ? "mt-20" : "flex flex-col mt-32 min-h-screen"}>
-            <div className="flex flex-1 flex-col md:flex-row">
-                <aside className="w-full md:w-64">
+            <div className="flex flex-1 flex-col sm:flex-row">
+                <aside className="w-full sm:w-64">
                     <div className="h-full px-3 py-4 overflow-y-auto bg-[#8482824D]">
                         <ul className="space-y-2 font-medium">
                             <li>
@@ -121,10 +121,10 @@ const UserSettings = () => {
                 </aside>
                 <div className='flex-1 mt-10'>
                     <Title title='MI PERFIL' color='violeta' />
-                    <div className="p-4 md:p-10">
-                        <div className="container flex flex-col border-2 border-violeta rounded-lg shadow p-4 md:p-12 w-full md:w-3/4 bg-[#EFECE7F2]">
+                    <div className="p-4 lg:p-10">
+                        <div className="container flex flex-col border-2 border-violeta rounded-lg shadow p-4 lg:p-12 w-full lg:w-10/12 bg-[#EFECE7F2]">
                             <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-20">
-                                <div className="flex justify-center flex-col items-center border border-violeta p-4 md:p-6 rounded-lg shadow bg-white">
+                                <div className="flex justify-center flex-col items-center border border-violeta p-4 lg:p-6 rounded-lg shadow bg-white">
                                     <img 
                                         src={photo || defaultAvatar}
                                         className="w-24 h-24 md:w-48 md:h-36 mb-4 bg-violeta object-cover rounded" 
@@ -133,7 +133,7 @@ const UserSettings = () => {
                                         <p className="text-md font-medium mb-1 text-center text-violeta">{userName}</p>
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full">
+                                <div className="grid grid-cols-1 gap-y-4 gap-x-8 xl:grid-cols-2 w-full">
                                     <div>
                                         <label className="block text-[#70054C] font-semibold">Nombre</label>
                                         <p>{firstName}</p>
