@@ -27,11 +27,11 @@ function Footer() {
                         <div className="flex flex-col border border-grisCarbon  mt-1 space-y-3 md:space-y-0 md:flex-row">
                             <input id="email"
                                 type="text"
-                                className="px-2 py-1 bg-background border rounded-md text-primary  focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+                                className="px-2 py-1 bg-background border rounded-md text-primary  focus:border-gray-400 dark:focus:border-gray-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-gray-300"
                                 placeholder="Ingresá aquí tu email"
                             />
 
-                            <Button className='bg-grisCarbon active:bg-gray-250 hover:bg-gris w-full rounded-l-none'>SUSCRIBETE</Button>
+                            <Button className='bg-grisCarbon active:bg-gray-250 hover:bg-gris w-full rounded-l-none rounded-r-[1px]'>SUSCRIBETE</Button>
                         </div>
 
                         <div className="self-center flex items-center justify-between mt-3">
