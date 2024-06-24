@@ -7,7 +7,7 @@ import { FaLinkedinIn } from "react-icons/fa6";
 
 function Footer() {
     return (
-        <footer className="bg-card border-t-2 border-primary">
+        <footer className="bg-card border-t-2 border-primary mt-4 py-2">
 
             
                 <div className="flex flex-col justify-center items-center md:flex-row md:justify-evenly md:py-[8px]">
@@ -19,8 +19,8 @@ function Footer() {
                     </div>
 
                     <div className="m-2 flex flex-col ">
-                        <div >
-                            <h1 className="max-w-lg text-sm font-semibold tracking-tight text-grisCarbon ">
+                        <div className='self-center mb-2 md:self-start'>
+                            <h1 className="max-w-lg  text-sm font-semibold tracking-tight text-grisCarbon ">
                                 NEWSLETTER
                             </h1>
                         </div>

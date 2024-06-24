@@ -118,7 +118,7 @@ const Body = () => {
             <div className="flex justify-center mb-5 gap-4">
                 <Link href="/products">
                     <button
-                        className="bg-violeta hover:bg-violetaDos text-white font-bold mt-10 py-1.5 px-80 rounded"
+                        className="bg-violeta hover:bg-violetaDos text-white font-bold mt-10 py-1.5 px-16 rounded sm:px-40 md:px-60 lg:px-80"
                     >
                         VER TODOS
                     </button>
