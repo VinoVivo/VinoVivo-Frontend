@@ -18,13 +18,13 @@ function Footer() {
                         <p className="text-secondary text-sm">Diseño gráfico por CA</p>
                     </div>
 
-                    <div className="m-2 flex flex-col ">
+                    <div className="m-2 flex flex-col my-8 md:my-none">
                         <div className='self-center mb-2 md:self-start'>
                             <h1 className="max-w-lg  text-sm font-semibold tracking-tight text-grisCarbon ">
                                 NEWSLETTER
                             </h1>
                         </div>
-                        <div className="flex  ">
+                        <div className="flex ">
                             <input id="email"
                                 type="text"
                                 className="px-2 py-1 border border-grisCarbon  bg-background  rounded-md text-primary text-sm focus:border-gray-400 dark:focus:border-gray-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-gray-300"

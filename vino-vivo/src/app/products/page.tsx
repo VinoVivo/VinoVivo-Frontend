@@ -117,7 +117,7 @@ const ProductsPage = () => {
 
   return (
     <>
-      <div className="mt-20 sm:mt-40 mb-6 flex flex-col sm:flex-row">
+      <div className="mt-20 md:mt-40 mb-6 flex flex-col md:flex-row">
         {/* Filtros */}
         <ProductFilters
             products={products}
@@ -148,7 +148,7 @@ const ProductsPage = () => {
             <FaSearch className="text-violeta text-xl" />
           </div>
           {/* Productos */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 ">
             {currentProducts.map((product) => (
               <ProductCard
                 key={product.id}

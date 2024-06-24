@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuyClick }) => {
     const isMobile = useMediaQuery("(max-width: 768px)");
 
     return (
-        <div className="bg-white bg-opacity-75 rounded-lg border border-gray-200 p-6 w-full sm:w-64 flex flex-col">
+        <div className="bg-white bg-opacity-75 rounded-lg border border-gray-200 p-6 w-full md:w-64 flex flex-col">
             <Link href={`/detail/${product.id}`}>
                 <img
                 src={product.image}
