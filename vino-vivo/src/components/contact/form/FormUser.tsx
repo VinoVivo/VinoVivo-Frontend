@@ -14,8 +14,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, useState } from "react";
-import { Modal } from "@/components/modal/Modal";
 import { sendEmail } from "@/lib/send-emails";
+import DialogeMessage from "@/components/product/register/DialogeMessage";
 
 export const DataContact: FC = () => {
   const [isValid, setisValid] = useState(false);
@@ -28,12 +28,6 @@ export const DataContact: FC = () => {
       message: "",
     },
   });
-
-  // async function onSubmit(data: FormValues) {
-  //   sendEmail(data)
-  //   form.reset();
-  //   setisValid(true);
-  // }
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     sendEmail(data);
@@ -142,11 +136,12 @@ export const DataContact: FC = () => {
         </div>
       </form>
       {isValid && (
-        <Modal
-          setValid={setisValid}
-          title="Formulario enviado"
-          description="Pronto nos pondremos en contacto!"
-          condicion="success"
+        <DialogeMessage
+          open={isValid}
+          onOpenChange={setisValid}
+          type="ÉXITO"
+          message="Formulario enviado. Pronto nos pondremos en contacto!"
+          textButtonOne="Cerrar"
         />
       )}
     </Form>
