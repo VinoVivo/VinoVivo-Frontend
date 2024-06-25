@@ -28,7 +28,10 @@ const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(8);
   const startIndex = (currentPage - 1) * pageSize;
-  const currentProducts = filteredProducts.slice(startIndex, startIndex + pageSize);
+  const currentProducts = filteredProducts.slice(
+    startIndex,
+    startIndex + pageSize
+  );
   const totalPages = Math.ceil(products.length / pageSize);
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const ProductsPage = () => {
       try {
         const productList = await getProductList();
         setProducts(productList);
-        setFilteredProducts(productList);       
+        setFilteredProducts(productList);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -120,26 +123,26 @@ const ProductsPage = () => {
       <div className="mt-20 md:mt-40 mb-6 flex flex-col md:flex-row">
         {/* Filtros */}
         <ProductFilters
-            products={products}
-            selectedTypes={selectedTypes}
-            selectedVarieties={selectedVarieties}
-            selectedWineries={selectedWineries}
-            selectedYears={selectedYears}
-            minPrice={minPrice}
-            maxPrice={maxPrice}
-            setSearchTerm={setSearchTerm}
-            setSelectedTypes={setSelectedTypes}
-            setSelectedVarieties={setSelectedVarieties}
-            setSelectedWineries={setSelectedWineries}
-            setSelectedYears={setSelectedYears}
-            setMinPrice={setMinPrice}
-            setMaxPrice={setMaxPrice}
+          products={products}
+          selectedTypes={selectedTypes}
+          selectedVarieties={selectedVarieties}
+          selectedWineries={selectedWineries}
+          selectedYears={selectedYears}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          setSearchTerm={setSearchTerm}
+          setSelectedTypes={setSelectedTypes}
+          setSelectedVarieties={setSelectedVarieties}
+          setSelectedWineries={setSelectedWineries}
+          setSelectedYears={setSelectedYears}
+          setMinPrice={setMinPrice}
+          setMaxPrice={setMaxPrice}
         />
-      <div className="flex-1 border-l border-gray-200 p-3">
+        <div className="flex-1 border-l border-gray-200 p-3">
           <Title title="TODOS LOS PRODUCTOS" color="beige" />
           <div className="flex justify-center items-center space-x-1 mb-4 mt-4">
             <input
-              className="text-violeta px-2 py-1 border border-gray-300 rounded-lg shadow-sm w-full sm:w-2/3 md:w-1/2 lg:w-1/3"
+              className="text-violeta px-2 py-1 border border-gray-300 rounded-lg shadow-sm w-full sm:w-2/3 md:w-1/2 lg:w-1/3 focus:ring-violetaDos"
               type="text"
               placeholder="Buscar por nombre"
               value={searchTerm}
