@@ -138,7 +138,7 @@ const ProductsPage = () => {
           setMinPrice={setMinPrice}
           setMaxPrice={setMaxPrice}
         />
-        <div className="flex-1 border-l border-gray-200 p-3">
+        <div className="flex-1 border-l border-gray-200 xl:pr-20 xl:pl-20">
           <Title title="TODOS LOS PRODUCTOS" color="beige" />
           <div className="flex justify-center items-center space-x-1 mb-4 mt-4">
             <input
@@ -151,7 +151,7 @@ const ProductsPage = () => {
             <FaSearch className="text-violeta text-xl" />
           </div>
           {/* Productos */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 ">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 justify-items-center">
             {currentProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -160,13 +160,15 @@ const ProductsPage = () => {
               />
             ))}
           </div>
+          <div className="mt-10">
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
         </div>
       </div>
-      <PaginationComponent
-        currentPage={currentPage}
-        totalPages={totalPages}
-        setCurrentPage={setCurrentPage}
-      />
       <DialogeMessage
         open={showAlert}
         onOpenChange={handleCloseAlert}

@@ -131,7 +131,7 @@ const handleBuyButtonClick = (product: Product) => {
           <Title title={nameType} color="beige" />
         </div>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {currentProducts.map((product) => (
               <ProductCard
                 key={product.id}

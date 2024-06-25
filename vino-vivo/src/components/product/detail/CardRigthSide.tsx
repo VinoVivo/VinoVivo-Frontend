@@ -66,7 +66,7 @@ export default function CardRigthSide({ wine }: Readonly<CardRigthSideProps>) {
                         disabled={isOutOfStock}
                     >
                         <div className="flex items-center justify-center">
-                            <span>COMPRAR AHORA</span>
+                            <span>COMPRAR</span>
                         </div>
                     </Button>
                 </div>
