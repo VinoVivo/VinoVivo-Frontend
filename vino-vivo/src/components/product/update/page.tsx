@@ -1,7 +1,5 @@
 "use client";
 import { Title } from "@/components/Title/Title";
-import BackButton from "@/components/ui/BackButton";
-import { Button } from "@/components/ui/button";
 import { IIdName } from "@/types/idName/idName.types";
 import { Product, ProductFormValues } from "@/types/products/products.types";
 import { useEffect, useState } from "react";
@@ -156,7 +154,7 @@ export default function UpdateProductForm({
         {/* name */}
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-labelAdminColor text-md font-bold mb-2"
             htmlFor="name"
           >
             Nombre del Vino
@@ -185,7 +183,7 @@ export default function UpdateProductForm({
         {/* image */}
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-labelAdminColor text-md font-bold mb-2"
             htmlFor="image"
           >
             Imagen del producto
@@ -211,7 +209,7 @@ export default function UpdateProductForm({
         {/* wine type */}
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-labelAdminColor text-md font-bold mb-2"
             htmlFor="idType"
           >
             Tipo de Vino
@@ -238,7 +236,7 @@ export default function UpdateProductForm({
         {/* wine winnery */}
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-labelAdminColor text-md font-bold mb-2"
             htmlFor="idWinery"
           >
             Bodega del Vino
@@ -267,7 +265,7 @@ export default function UpdateProductForm({
         {/* grape variety */}
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-labelAdminColor text-md font-bold mb-2"
             htmlFor="idVariety"
           >
             Variedad de uva
@@ -293,7 +291,7 @@ export default function UpdateProductForm({
         {/* stock */}
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-labelAdminColor text-md font-bold mb-2"
             htmlFor="stock"
           >
             Stock
@@ -322,7 +320,7 @@ export default function UpdateProductForm({
         {/* price */}
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-labelAdminColor text-md font-bold mb-2"
             htmlFor="price"
           >
             Precio
@@ -354,7 +352,7 @@ export default function UpdateProductForm({
         {/* year */}
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-labelAdminColor text-md font-bold mb-2"
             htmlFor="year"
           >
             Año
@@ -381,7 +379,7 @@ export default function UpdateProductForm({
         {/* description */}
         <div className="mb-4 col-span-full">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-labelAdminColor text-md font-bold mb-2"
             htmlFor="description"
           >
             Descripción

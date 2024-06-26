@@ -17,8 +17,11 @@ import { FC, useState } from "react";
 import { sendEmail } from "@/lib/send-emails";
 import DialogeMessage from "@/components/product/register/DialogeMessage";
 
-export const DataContact: FC = () => {
-  const [isValid, setisValid] = useState(false);
+
+export const DataContact: FC= () => {
+    const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState("");
+  const [dialogType, setDialogType] = useState<"ÉXITO" | "ERROR">("ÉXITO");  
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -30,9 +33,11 @@ export const DataContact: FC = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    sendEmail(data);
+    sendEmail(data)
     form.reset();
-    setisValid(true);
+    setDialogType("ÉXITO");
+    setDialogMessage('Su mensaje ha sido enviado exitosamente');
+    setDialogOpen(true);
   };
 
   return (
@@ -135,15 +140,15 @@ export const DataContact: FC = () => {
           </div>
         </div>
       </form>
-      {isValid && (
-        <DialogeMessage
-          open={isValid}
-          onOpenChange={setisValid}
-          type="ÉXITO"
-          message="Formulario enviado. Pronto nos pondremos en contacto!"
-          textButtonOne="Cerrar"
-        />
-      )}
+      <DialogeMessage
+                open={dialogOpen} 
+                onOpenChange={setDialogOpen} 
+                type={dialogType} 
+                message={dialogMessage}
+                textButtonOne="CERRAR"
+                textButtonTwo="VOLVER A INICIO"
+                buttonTwoHref="/"
+            />
     </Form>
   );
 };

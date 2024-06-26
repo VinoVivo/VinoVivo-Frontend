@@ -26,12 +26,9 @@ const ProductsPage = () => {
   const { data: session } = useSession();
   const [showAlert, setShowAlert] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(8);
+  const [pageSize] = useState(6);
   const startIndex = (currentPage - 1) * pageSize;
-  const currentProducts = filteredProducts.slice(
-    startIndex,
-    startIndex + pageSize
-  );
+  const currentProducts = filteredProducts.slice(startIndex, startIndex + pageSize);
   const totalPages = Math.ceil(products.length / pageSize);
 
   useEffect(() => {
@@ -120,8 +117,9 @@ const ProductsPage = () => {
 
   return (
     <>
-      <div className="mt-20 md:mt-40 mb-6 flex flex-col md:flex-row">
+      <div className="mt-[40px] md:mt-[120px] mb-6 flex flex-col md:flex-row">
         {/* Filtros */}
+        <div className="flex-none w-full md:flex md:w-72 ">
         <ProductFilters
           products={products}
           selectedTypes={selectedTypes}
@@ -138,11 +136,14 @@ const ProductsPage = () => {
           setMinPrice={setMinPrice}
           setMaxPrice={setMaxPrice}
         />
-        <div className="flex-1 border-l border-gray-200 xl:pr-20 xl:pl-20">
-          <Title title="TODOS LOS PRODUCTOS" color="beige" />
-          <div className="flex justify-center items-center space-x-1 mb-4 mt-4">
+        </div>
+        <div className="mt-10 flex-1 border-l border-gray-200 xl:pr-20 xl:pl-20">
+          <div className="flex mx-auto  w-2/3 lg:w-full">
+            <Title title="TODOS LOS PRODUCTOS" color="beige" />
+          </div>
+          <div className="flex justify-center items-center space-x-1 mb-12 mt-12">
             <input
-              className="text-violeta px-2 py-1 border border-gray-300 rounded-lg shadow-sm w-full sm:w-2/3 md:w-1/2 lg:w-1/3 focus:ring-violetaDos"
+              className="text-violeta px-2 py-1 border border-gray-300 rounded-lg shadow-sm w-2/3  md:w-1/2 lg:w-1/3"
               type="text"
               placeholder="Buscar por nombre"
               value={searchTerm}
@@ -151,7 +152,7 @@ const ProductsPage = () => {
             <FaSearch className="text-violeta text-xl" />
           </div>
           {/* Productos */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 justify-items-center">
+          <div className="grid grid-cols-2 lg:grid-cols-3  gap-4 mt-4 justify-items-center ">
             {currentProducts.map((product) => (
               <ProductCard
                 key={product.id}

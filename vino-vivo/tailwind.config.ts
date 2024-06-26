@@ -94,6 +94,7 @@ const config = {
         graySubtittle: "hsl(var(--graySubtittle))", //gris de "seguir comprando" en carrito y "atràs" en detail
         grisCarbon: "hsl(var(--grisCarbon))", //color del botón de cerrar del carrito
         whiteTypograph: "hsl(var(--whiteTypograph))", //blanco de letra que usé en botón de visualizar en reportes
+        greenMent: "hsl(var(--greenMent))", // color de alerta -verde menta
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -40,36 +40,33 @@ const DialogeMessage: React.FC<DialogProps> = ({
   buttonTwoHref,
   onClick,
 }) => {
-  // const { reset } = useForm<ProductFormValues>();
-  const getIcon = () => {
-    switch (type) {
-      case "ÉXITO":
-        return <FaRegCircleCheck className="h-12 w-12 text-success mb-4" />;
-      case "ERROR":
-        return (
-          <MdReportGmailerrorred className="h-12 w-12 text-red-500 mb-4" />
-        );
-      case "ALERTA":
-        return <MdWarning className="h-12 w-12 text-destructive mb-4" />;
-      default:
-        return null;
-    }
-  };
-
-  return (
-    <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent className="fixed flex items-center justify-center z-50">
-        <div className="rounded-lg p-10 shadow-lg justify-between border-primary border-2">
-          <AlertDialogHeader className="flex flex-col items-center">
-            <AlertDialogTitle className="mb-2 text-3xl">
-              {type}
-            </AlertDialogTitle>
-            {getIcon()}
-            <AlertDialogDescription className="text-base mt-6">
-              {message}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter className="mt-6">
+    const getIcon = () => {
+        switch (type) {
+            case "ÉXITO":
+                return <FaRegCircleCheck className="h-12 w-12 text-success mb-4" />;
+            case "ERROR":
+                return <MdReportGmailerrorred className="h-12 w-12 text-destructive mb-4" />;
+            case "ALERTA":
+                return <MdWarning className="h-12 w-12 text-greenMent mb-4" />;
+            default:
+                return null;
+        }
+    };
+    
+    return (
+        <AlertDialog open={open} onOpenChange={onOpenChange}>
+        <AlertDialogContent className="fixed flex items-center justify-center z-50">
+            <div className="rounded-lg p-10 shadow-lg justify-between border-primary border-2">
+            <AlertDialogHeader className="flex flex-col items-center">
+                <AlertDialogTitle className="mb-2 text-3xl">
+                {type}
+                </AlertDialogTitle>
+                {getIcon()}
+                <AlertDialogDescription className="text-base mt-6">
+                {message}
+                </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="mt-6">
             {textButtonOne && (
               <AlertDialogAction
                 onClick={() => onOpenChange(false)}

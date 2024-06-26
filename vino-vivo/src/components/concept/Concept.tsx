@@ -74,8 +74,8 @@ const Concept = () => {
             </p>
             <div className="border-b-4 border-b-violeta w-full" />
             <p className='text-violeta text-md font-bold my-10 text-center'>¿QUERÉS RESEVAR UNA CATA?</p>
-            <Link href="/contact">
-               <Button className='bg-violeta hover:bg-primary  self-center '>CONTACTANOS</Button>
+            <Link href="/contact" className='self-center'>
+                <Button className='bg-violeta hover:bg-primary'>CONTACTANOS</Button>
             </Link>
         </div>
         </div>
