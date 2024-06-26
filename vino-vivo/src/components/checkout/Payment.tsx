@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { CartItem, useCart } from '../../context/CartContext';
 import PaymentForm from './PaymentForm';
-import { AlertDialogAction, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
-import { AlertDialog, AlertDialogContent } from '@radix-ui/react-alert-dialog';
-import { FaRegCircleCheck } from 'react-icons/fa6';
-import { MdReportGmailerrorred } from 'react-icons/md';
 import { useMediaQuery } from '@react-hook/media-query';
 import { redirect } from 'next/navigation';
+import DialogeMessage from '../product/register/DialogeMessage';
+import BackText from '../ui/BackText';
 
 export interface ValidationErrors {
     name: string;
@@ -18,11 +16,6 @@ const PaymentPage = () => {
     const { cartItems, clearCart } = useCart();
     const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
-    const [userName, setUserName] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [dialogMessage, setDialogMessage] = useState("");
-    const [dialogType, setDialogType] = useState<"Éxito" | "Error">("Éxito");
     const [validationErrors, setValidationErrors] = useState<ValidationErrors>({ name: '', expiry: '', cvc: '' });
     const [updatedCartItems, setUpdatedCartItems] = useState<CartItem[]>(cartItems);
 
@@ -30,14 +23,14 @@ const PaymentPage = () => {
     const [useDefaultAddress, setUseDefaultAddress] = useState(true);
     const [newAddress, setNewAddress] = useState('');
 
+    // Estado para el diálogo
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogType, setDialogType] = useState<'ÉXITO' | 'ERROR' | 'ALERTA'>('ÉXITO');
+    const [dialogMessage, setDialogMessage] = useState('');
+
     const totalPrice = updatedCartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const totalItems = updatedCartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-    useEffect(() => {
-        if (cartItems.length === 0) {
-            redirect("/")
-        }
-    }, [cartItems])
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -52,17 +45,14 @@ const PaymentPage = () => {
                     const userData = await response.json();
                     setAddress(userData.address);
                     setEmail(userData.email);
-                    setUserName(userData.userName);
-                    setFirstName(userData.firstName);
-                    setDialogType("Éxito");
-                    setDialogMessage('Su compra ha sido realizada correctamente');
                 } else {
                     throw new Error('Failed to fetch user profile');
                 }
             } catch (error) {
                 console.error('Error fetching user profile:', error);
-                setDialogType("Error");
-                setDialogMessage('Su compra no se ha podido realizar correctamente');
+                setDialogType("ERROR");
+                setDialogMessage('No se pudo obtener el perfil del usuario.');
+                setDialogOpen(true);
             }
         };
         fetchUserProfile();
@@ -74,7 +64,7 @@ const PaymentPage = () => {
 
     const handlePayment = async () => {
         if (Object.values(validationErrors).some(error => error !== '')) {
-            setDialogType("Error");
+            setDialogType("ERROR");
             setDialogMessage("Hay errores en los datos de la tarjeta. Por favor, intente de nuevo.");
             setDialogOpen(true);
             return;
@@ -104,23 +94,19 @@ const PaymentPage = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed');
+                throw new Error('Failed to process the order');
             }
 
-            const responseData = await response.json();
-            setDialogType("Éxito");
+            await response.json();
+            setDialogType("ÉXITO");
             setDialogMessage("Su compra ha sido realizada correctamente.");
             setDialogOpen(true);
-            setTimeout(() => {
-                window.location.href = '/';
-            }, 3000);
-
-            clearCart();
+            clearCart();        
 
         } catch (error) {
             console.error('Error:', error);
-            setDialogType("Error");
-            setDialogMessage('Su compra no se ha podido realizar correctamente');
+            setDialogType("ERROR");
+            setDialogMessage('Su compra no se ha podido realizar correctamente.');
             setDialogOpen(true);
         }
     };
@@ -129,13 +115,6 @@ const PaymentPage = () => {
 
     return (
         <div className={isMobile ? "mt-[-60px]" : 'container mx-auto p-4'}>
-            {/* <div className='mb-10'>
-                <p className='font-bold text-lg'>
-                    Hola <span className='text-primary'>{firstName}</span>! Tu compra será enviada a tu dirección <span className='text-primary'>{address}</span>.
-                </p>
-                <p className='text-lg'>Completa debajo con tus datos de pago y procede a finalizar la compra.</p>
-            </div> */}
-
             <div className='mb-4 border rounded-md p-4 bg-backgroundCart'>
                 <h2 className='text-lg font-bold mb-2'>Dirección de Envío</h2>
                 <div className='flex flex-col'>
@@ -198,36 +177,20 @@ const PaymentPage = () => {
                         <p className='font-medium'>Total</p>
                         <p className='font-medium'>${totalPrice.toFixed(2)}</p>
                     </div>
-                    <div className='flex justify-center mt-4'>
-                        <button className='bg-violeta hover:bg-fuchsia-950 text-white font-medium text-sm py-1.5 px-4 rounded-sm' onClick={handlePayment}>FINALIZAR COMPRA</button>
+                    <div className='flex justify-center mt-4 flex-col'>
+                        <button className='bg-violeta hover:bg-fuchsia-950 text-white font-medium text-sm py-1.5 px-4 rounded-sm mb-3' onClick={handlePayment}>FINALIZAR COMPRA</button>
+                        <BackText/>
                     </div>
                 </div>
             </div>
-
-            <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                <AlertDialogContent className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-lg p-10 shadow-lg justify-between border-primary border-2">
-                        <AlertDialogHeader className="flex flex-col items-center">
-                            <AlertDialogTitle className='mt-2 mb-2 text-3xl'>
-                                {dialogType === "Éxito" ? "Éxito" : "Error"}
-                            </AlertDialogTitle>
-                            {dialogType === "Éxito" ? (
-                                <FaRegCircleCheck className="h-12 w-12 text-success mb-2" />
-                            ) : (
-                                <MdReportGmailerrorred className="h-12 w-12 text-destructive mb-2" />
-                            )}
-                            <AlertDialogDescription className='text-base'>
-                                {dialogMessage}
-                            </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter className='mt-4'>
-                            <AlertDialogAction onClick={() => setDialogOpen(false)}>
-                                Cerrar
-                            </AlertDialogAction>
-                        </AlertDialogFooter>
-                    </div>
-                </AlertDialogContent>
-            </AlertDialog>
+            <DialogeMessage
+                open={dialogOpen}
+                onOpenChange={setDialogOpen}
+                type={dialogType}
+                message={dialogMessage}
+                textButtonTwo="CERRAR"
+                buttonTwoHref="/"
+            />
         </div>
     );
 };

@@ -1,9 +1,7 @@
 'use client';
 import { CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FaCartPlus } from "react-icons/fa";
 import { IwineDetail } from "@/types/detail/detail.types";
-import BackButton from "@/components/ui/BackButton";
 import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
@@ -75,7 +73,7 @@ export default function CardRigthSide({ wine }: Readonly<CardRigthSideProps>) {
                 open={showAlert}
                 onOpenChange={handleCloseAlert}
                 type="ALERTA"
-                message="Debe estar logeado para agregar productos al carrito"
+                message="Debe estar logueado para agregar productos al carrito"
                 textButtonOne="Cerrar"
             />
         </>

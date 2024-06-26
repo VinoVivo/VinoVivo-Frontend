@@ -22,7 +22,7 @@ const BackText: React.FC<BackTextProps> = ({
             className={`focus:outline-none ${color} ${fontSize} ${fontWeight} ${underlineWidth} border-gray-600`}
             onClick={() => back()}
         >
-            Atrás
+            Volver Atrás
         </button>
     );
 };

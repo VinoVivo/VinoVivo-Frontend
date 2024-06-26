@@ -8,6 +8,7 @@ import { useMediaQuery } from "@react-hook/media-query";
 import { Button } from "../ui/button";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import BackText from "../ui/BackText";
 
 interface CheckoutProps {
   cartItems: CartItem[];
@@ -137,11 +138,15 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
             <p className="font-medium">Total</p>
             <p className="font-medium">${totalPrice.toFixed(2)}</p>
           </div>
-          <Link className="flex justify-center" href="/checkout/buy/payment">
-            <button className="mt-4 px-3 py-2 bg-violeta font-medium text-white text-sm rounded-md">
-              CONFIRMAR COMPRA
-            </button>
-          </Link>
+          <div className="flex flex-col">
+            <Link className="flex justify-center" href="/checkout/buy/payment">
+              <button className="mt-4 px-3 py-2 bg-violeta font-medium text-white text-sm rounded-md mb-3">
+                CONFIRMAR COMPRA
+              </button>
+            </Link>
+            <BackText/>
+          </div>
+          
         </div>
       </div>
     </div>
