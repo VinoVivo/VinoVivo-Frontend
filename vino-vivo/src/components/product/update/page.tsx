@@ -1,7 +1,5 @@
 "use client";
 import { Title } from "@/components/Title/Title";
-import BackButton from "@/components/ui/BackButton";
-import { Button } from "@/components/ui/button";
 import { IIdName } from "@/types/idName/idName.types";
 import { Product, ProductFormValues } from "@/types/products/products.types";
 import { useEffect, useState } from "react";
