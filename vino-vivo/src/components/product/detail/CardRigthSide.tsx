@@ -6,6 +6,7 @@ import { useCart } from "@/context/CartContext";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import DialogeMessage from "../register/DialogeMessage";
+import BackText from "@/components/ui/BackText";
 
 interface CardRigthSideProps {
     wine: IwineDetail;
@@ -58,15 +59,16 @@ export default function CardRigthSide({ wine }: Readonly<CardRigthSideProps>) {
                             ${wine.price}
                         </p>
                     </div>
-                    <Button
-                        className={`bg-[#70054C] rounded-sm w-4/5 hover:bg-fuchsia-950 ${isOutOfStock ? 'bg-gray-400 cursor-not-allowed' : ''} mx-auto`}
-                        onClick={handleAddToCart}
-                        disabled={isOutOfStock}
-                    >
-                        <div className="flex items-center justify-center">
-                            <span>COMPRAR</span>
-                        </div>
-                    </Button>
+                    <div className="flex w-full flex-col">
+                        <Button
+                            className={`bg-[#70054C] rounded-sm w-4/5 hover:bg-fuchsia-950 ${isOutOfStock ? 'bg-gray-400 cursor-not-allowed' : ''} mx-auto`}
+                            onClick={handleAddToCart}
+                            disabled={isOutOfStock}
+                        >
+                            COMPRAR                            
+                        </Button>                        
+                    </div>
+                    <BackText />
                 </div>
             </CardContent>
             <DialogeMessage

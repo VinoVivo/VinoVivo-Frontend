@@ -86,8 +86,6 @@ export default function TypePage() {
             throw new Error("Error al obtener las órdenes");
             }
             const orders = await response.json(); // Aquí transformas la respuesta a JSON
-            //console.log("ordenes está arrojando:");
-            //console.log(orders);
             setOrders(orders);
         } catch (error) {
             console.error("Error getting orders:", error);
@@ -104,8 +102,6 @@ export default function TypePage() {
             throw new Error("Error al obtener detalles de las órdenes");
             }
             const orderDetails = await response.json(); // Aquí transformas la respuesta a JSON
-            //console.log("Detalle está arrojando:");
-            //console.log(orderDetails);
             setOrderDetail(orderDetails);
         } catch (error) {
             console.error("Error getting orders:", error);
@@ -165,8 +161,6 @@ export default function TypePage() {
         });
 
         setOrderWithProducts(combinedData);
-        console.log("la data combinada es:");
-        console.log(combinedData);
     };
 
     useEffect(() => {
