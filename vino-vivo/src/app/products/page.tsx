@@ -26,7 +26,7 @@ const ProductsPage = () => {
   const { data: session } = useSession();
   const [showAlert, setShowAlert] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(6);
+  const [pageSize, setPageSize] = useState(6);
   const startIndex = (currentPage - 1) * pageSize;
   const currentProducts = filteredProducts.slice(startIndex, startIndex + pageSize);
   const totalPages = Math.ceil(products.length / pageSize);
@@ -94,6 +94,21 @@ const ProductsPage = () => {
     maxPrice,
   ]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1920) {
+        setPageSize(8); // Cambiar a 8 productos por página 
+      } else {
+        setPageSize(6); // Cambiar a 6 productos por página
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleBuyButtonClick = (product: Product) => {
     if (!session) {
       setShowAlert(true);
@@ -152,7 +167,7 @@ const ProductsPage = () => {
             <FaSearch className="text-violeta text-xl" />
           </div>
           {/* Productos */}
-          <div className="grid grid-cols-2 lg:grid-cols-3  gap-4 mt-4 justify-items-center ">
+          <div className="grid grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4 gap-4 mt-4 justify-items-center ">
             {currentProducts.map((product) => (
               <ProductCard
                 key={product.id}
