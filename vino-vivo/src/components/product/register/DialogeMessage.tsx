@@ -1,44 +1,44 @@
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import Link from "next/link";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { MdReportGmailerrorred, MdWarning } from "react-icons/md";
 
 interface DialogProps {
-    open: boolean;
-    onOpenChange: (open: boolean) => void;
-    type: "ÉXITO" | "ERROR" | "ALERTA";
-    message: string;
-    styleButton1?: string;
-    styleButton2?: string;
-    styleButton3?: string;
-    textButtonOne?: string;
-    textButtonTwo?: string;
-    textButtonThree?: string;
-    buttonTwoHref?: string;
-    onClick?: (arg: any) => Promise<void>;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  type: "ÉXITO" | "ERROR" | "ALERTA";
+  message: string;
+  styleButton1?: string;
+  styleButton2?: string;
+  styleButton3?: string;
+  textButtonOne?: string;
+  textButtonTwo?: string;
+  textButtonThree?: string;
+  buttonTwoHref?: string;
+  onClick?: (arg: any) => Promise<void>;
 }
 
 const DialogeMessage: React.FC<DialogProps> = ({
-    open,
-    onOpenChange,
-    type,
-    message,
-    textButtonOne,
-    textButtonTwo,
-    textButtonThree, 
-    styleButton1,
-    styleButton2,
-    styleButton3,
-    buttonTwoHref,
-    onClick,
+  open,
+  onOpenChange,
+  type,
+  message,
+  textButtonOne,
+  textButtonTwo,
+  textButtonThree,
+  styleButton1,
+  styleButton2,
+  styleButton3,
+  buttonTwoHref,
+  onClick,
 }) => {
     const getIcon = () => {
         switch (type) {
@@ -68,41 +68,44 @@ const DialogeMessage: React.FC<DialogProps> = ({
             </AlertDialogHeader>
             <AlertDialogFooter className="mt-6">
             {textButtonOne && (
-                <AlertDialogAction
-                    onClick={() => onOpenChange(false)}
-                    className={
-                        styleButton1 ?? "hover:bg-white hover:text-primary hover:border-primary border-2"
-                    }
-                >
-                    {textButtonOne}
-                </AlertDialogAction>
+              <AlertDialogAction
+                onClick={() => onOpenChange(false)}
+                className={
+                  styleButton1 ??
+                  "hover:bg-white hover:text-primary hover:border-primary border-2"
+                }
+              >
+                {textButtonOne}
+              </AlertDialogAction>
             )}
-            {textButtonTwo && buttonTwoHref &&(
-                <Link href={buttonTwoHref} passHref>
-                    <AlertDialogAction
-                        className={
-                            styleButton2 ?? "hover:bg-white hover:text-primary hover:border-primary border-2"
-                        }
-                    >
-                        {textButtonTwo}
-                        </AlertDialogAction>
-                </Link>
+            {textButtonTwo && buttonTwoHref && (
+              <Link href={buttonTwoHref} passHref>
+                <AlertDialogAction
+                  className={
+                    styleButton2 ??
+                    "hover:bg-white hover:text-primary hover:border-primary border-2"
+                  }
+                >
+                  {textButtonTwo}
+                </AlertDialogAction>
+              </Link>
             )}
             {textButtonThree && (
-                <AlertDialogAction
-                    onClick={onClick}
-                    className={
-                        styleButton3 ?? "hover:bg-white hover:text-primary hover:border-primary border-2"
-                    }
-                >
-                    {textButtonThree}
-                </AlertDialogAction>
+              <AlertDialogAction
+                onClick={onClick}
+                className={
+                  styleButton3 ??
+                  "hover:bg-white hover:text-primary hover:border-primary border-2"
+                }
+              >
+                {textButtonThree}
+              </AlertDialogAction>
             )}
-            </AlertDialogFooter>
-            </div>
-        </AlertDialogContent>
-        </AlertDialog>
-    );
+          </AlertDialogFooter>
+        </div>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
 };
 
 export default DialogeMessage;

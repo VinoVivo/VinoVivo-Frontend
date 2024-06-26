@@ -42,10 +42,7 @@ export const DataContact: FC= () => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="shadow-lg rounded-md bg-background p-4"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className=" p-4">
         <div className="grid grid-rows-4 ">
           <FormField
             control={form.control}
@@ -62,10 +59,10 @@ export const DataContact: FC= () => {
                     id="name"
                     maxLength={50}
                     placeholder="Carlos Retamoso"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violetaDos sm:text-sm sm:leading-6"
                   />
                 </FormControl>
-                <FormMessage className="text-[#700515]" />
+                <FormMessage className="text-red-500 text-xs italic" />
               </FormItem>
             )}
           />
@@ -73,31 +70,29 @@ export const DataContact: FC= () => {
             control={form.control}
             name="usercellphone"
             render={({ field }) => (
-              <div>
+              <FormItem>
                 <FormLabel className="block text-sm font-semibold leading-6 text-gray-600">
                   Celular
                 </FormLabel>
-                <FormItem>
-                  <FormControl>
-                    <input
-                      type="text"
-                      {...field}
-                      maxLength={20}
-                      placeholder="54 9 3456895"
-                      id="number"
-                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </FormControl>
-                </FormItem>
-                <FormMessage className="text-[#700515]" />
-              </div>
+                <FormControl>
+                  <input
+                    type="text"
+                    {...field}
+                    maxLength={20}
+                    placeholder="54 9 3456895"
+                    id="number"
+                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violetaDos sm:text-sm sm:leading-6"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 text-xs italic" />
+              </FormItem>
             )}
           />
           <FormField
             control={form.control}
             name="useremail"
             render={({ field }) => (
-              <div>
+              <FormItem>
                 <FormLabel className="block text-sm font-semibold leading-6 text-gray-600">
                   Email
                 </FormLabel>
@@ -107,11 +102,11 @@ export const DataContact: FC= () => {
                     type="text"
                     {...field}
                     placeholder="carlos@gmail.com"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violetaDos sm:text-sm sm:leading-6"
                   />
                 </FormControl>
-                <FormMessage className="text-[#700515]" />
-              </div>
+                <FormMessage className="text-red-500 text-xs italic" />
+              </FormItem>
             )}
           />
           <FormField
@@ -128,17 +123,17 @@ export const DataContact: FC= () => {
                     id="message-user"
                     maxLength={300}
                     placeholder="Me gustaria..."
-                    className="block w-full h-full rounded-md border-0 px-3.5 py-2  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-violetaDos sm:text-sm sm:leading-6"
                   />
                 </FormControl>
-                <FormMessage className="text-[#700515]" />
+                <FormMessage className="text-red-500 text-xs italic" />
               </FormItem>
             )}
           />
           <div className="mt-6">
             <Button
               type="submit"
-              className="border-solid border-violeta bg-violeta border-2 block w-full mt-4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:text-violeta"
+              className="border-solid border-violeta bg-violeta border-2 block w-full mt-4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violetaDos hover:text-violeta"
             >
               ENVIAR
             </Button>

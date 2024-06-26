@@ -164,7 +164,7 @@ const Header = () => {
                 href="/products"
                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-sm text-sm hover:bg-gray-100 text-violeta hover:text-violeta focus:outline-none focus:bg-gray-100"
               >
-                <span onClick={() => handleLinkClick('/products')}>Todos</span>
+                <span onClick={() => handleLinkClick('/products')}>Ver todos</span>
               </Link>
             </div>
           </div>

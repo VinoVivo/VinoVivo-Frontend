@@ -20,18 +20,20 @@ export default function CardDetail({ wine }: Readonly<WineProps>) {
 
     const firstWord = getFirstWord(wine.name);
     return (
-        <div className="grid justify-center mb-10 mt-40">
+        <div className="grid justify-center mb-10 mt-28 sm:mt-40">
             <Title title="DETALLES" color="beige" />
             <div className="flex flex-col md:flex-row md:space-x-2">
                 <Card className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl px-6 py-4 mt-6">
                     <CardContent className="flex justify-center items-center">
+                        <div className="p-6 bg-white rounded-sm">
                             <Image
                                 src={wine.image}
                                 alt={wine.name}
-                                width={300}
+                                width={270}
                                 height={400}
                                 className={`transform transition-transform duration-300 hover:scale-105 rounded-sm `}
                             />
+                        </div>
                     </CardContent>
                     <CardRigthSide wine={wine} />
                 </Card>
